@@ -1,0 +1,20 @@
+{
+  "construction": "Frozen before credit-based candidate experiments; follows the first negative confirmation. No new-case model outcomes used.",
+  "cases": [
+    {
+      "key": "beacon_museum",
+      "path": "data/cases/beacon_museum.json",
+      "role": "host",
+      "primary": true,
+      "status": "fresh_test"
+    }
+  ],
+  "case_sha256": "d4221d8bf6412a5fbd9439ddeabe91e4fa30090d94c28a30dc409bb510f19b1c",
+  "packages": 729,
+  "legal_packages": 324,
+  "mutually_acceptable_packages": 224,
+  "feasible_best": [
+    490.0,
+    550.0
+  ]
+}

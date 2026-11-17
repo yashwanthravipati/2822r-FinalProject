@@ -229,3 +229,50 @@ known refusal may be resumed once from the identical checkpoint with its cost re
   improvement spending $81.667637. Remaining caps: development $43.755811, final $24.279171.
   The goal of better demonstrated transfer remains unmet; proceed to the credit-based
   example-selection hypothesis without overwriting or relabeling this confirmation.
+
+## Credit-based follow-up, specified before new candidate calls
+
+Change example selection to the existing disjoint-rollout estimate of terminal surplus
+improvement, not the largest immediate concession. Prefer positive lower bounds, then
+positive means; retain uncertainty and the distinction between modeled alternatives and
+observed outcomes. Choose at most two different practice sessions. If evidence is weak,
+the coach must preserve that uncertainty and avoid inventing a better action. Keep the
+fixed procedure, own-visible history, original personas, models and five common reports
+rehearsals. No assessment feedback enters coaching.
+
+Develop the new credit memory on the same 0–3 and 4–7 cohorts, reusing exact v1 baseline,
+reports and procedure controls with hashes. Only one new memory arm is run: 48 additional
+assessment episodes plus eight coaching calls, forecast $8–12. Existing development cap
+remains $100, with $43.755811 available at the start. Preserve complete cohort outcomes.
+
+If development justifies a follow-up, assess the candidate on the newly frozen original
+Beacon Museum case, SHA256 d4221d8bf6412a5fbd9439ddeabe91e4fa30090d94c28a30dc409bb510f19b1c.
+It has 729 packages, 324 legal, 224 mutually acceptable; assumed feasible maxima 490/550.
+It was authored AFTER the first confirmation and BEFORE credit-candidate experiments.
+Use all seven existing confirmation personas and their unchanged common practice histories;
+these are not new people, but the case and credit-memory outcomes are unseen. Compare
+credit memory with reports and the fixed procedure, tiers 1/3/5, 84 episodes plus seven
+coaching calls. Primary contrast: credit memory minus reports on this one case, paired
+by persona. This is an additional prospective follow-up after a failed primary study,
+not a replacement or independent replication of its personas. Any favorable result needs
+broader replication; report the earlier failed primary result alongside it.
+
+Forecast follow-up final cost $11–15, leaving room for conservative request reservations
+within the remaining $24.279171 of the existing final cap. No new Sim3 training is charged
+or claimed: the same saved five-rehearsal histories are reused. No final calls occur until
+the candidate is frozen after development. The original two fresh cases are now known and
+are not silently reused as untouched tests.
+
+Before running this candidate, set the decision rule: proceed to the Beacon follow-up
+only if credit memory's paired mean exceeds reports both in the pooled eight-person
+development comparison (cases averaged within persona) and in the separate 4–7 cohort.
+This is a candidate-screening rule, not a significance claim. Preserve all eight users,
+both cases and the earlier methods regardless of this decision. Forecast roughly 700–900
+requests for development, 4–6M input tokens with ~80% reads and 0.3–0.45M output; final
+roughly 1,200–1,500 requests, 7–10M input and 0.5–0.65M output at the observed model mix.
+The dollar forecasts above include margin over these approximate volumes.
+
+- Credit implementation validated before paid calls: 180 offline tests pass, one live
+  test deselected; lint/format and all 40 task files pass. Tests cover paired rollout
+  completeness, uncertainty-aware selection, distinct sessions, information boundaries,
+  feedback alignment, empty-evidence fallback and exact saved-plan resumption.

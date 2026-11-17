@@ -1,0 +1,216 @@
+{
+  "id": "beacon_museum",
+  "title": "Beacon Museum Exhibition Loan",
+  "source": "Original synthetic follow-up case, authored after the first confirmation and frozen before credit-based candidate experiments. Free to use and commit; utilities are experimental assumptions.",
+  "public_brief": "A regional museum is arranging a temporary exhibition loan with a collection lender. Agree on all six listed terms as a complete package. Each organization has an alternative. All listed combinations are available except explicit role constraints. No unlisted promises change the contract.",
+  "issues": [
+    {
+      "id": "fee",
+      "name": "Loan fee",
+      "options": [
+        {
+          "id": "fee_0",
+          "label": "$30,000"
+        },
+        {
+          "id": "fee_1",
+          "label": "$45,000"
+        },
+        {
+          "id": "fee_2",
+          "label": "$60,000"
+        }
+      ]
+    },
+    {
+      "id": "duration",
+      "name": "Exhibition duration",
+      "options": [
+        {
+          "id": "duration_0",
+          "label": "8 weeks"
+        },
+        {
+          "id": "duration_1",
+          "label": "12 weeks"
+        },
+        {
+          "id": "duration_2",
+          "label": "16 weeks"
+        }
+      ]
+    },
+    {
+      "id": "transport",
+      "name": "Transport",
+      "options": [
+        {
+          "id": "transport_0",
+          "label": "Shared museum courier"
+        },
+        {
+          "id": "transport_1",
+          "label": "Specialist art courier"
+        },
+        {
+          "id": "transport_2",
+          "label": "Host museum staff"
+        }
+      ]
+    },
+    {
+      "id": "insurance",
+      "name": "Insurance",
+      "options": [
+        {
+          "id": "insurance_0",
+          "label": "Basic listed coverage"
+        },
+        {
+          "id": "insurance_1",
+          "label": "Enhanced shared coverage"
+        },
+        {
+          "id": "insurance_2",
+          "label": "Full lender coverage"
+        }
+      ]
+    },
+    {
+      "id": "publicity",
+      "name": "Exhibition credit",
+      "options": [
+        {
+          "id": "publicity_0",
+          "label": "Host-led credit"
+        },
+        {
+          "id": "publicity_1",
+          "label": "Joint host and lender credit"
+        },
+        {
+          "id": "publicity_2",
+          "label": "Lender-led credit"
+        }
+      ]
+    },
+    {
+      "id": "opening",
+      "name": "Opening date",
+      "options": [
+        {
+          "id": "opening_0",
+          "label": "Early season"
+        },
+        {
+          "id": "opening_1",
+          "label": "Peak season"
+        },
+        {
+          "id": "opening_2",
+          "label": "Late season"
+        }
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "id": "host",
+      "name": "Host museum curator",
+      "confidential_brief": "Your exhibition grant cannot fund a late-season opening. A peak-season opening reaches the intended audience. You value an affordable fee, twelve weeks on display, specialist transport, and joint credit. Basic insurance is cheaper for your budget; enhanced coverage is a possible trade. Sixteen weeks is less useful than twelve because the next exhibition needs the space. Your alternative is a smaller local exhibition worth the stated walk-away value.",
+      "reservation_value": 230,
+      "points": {
+        "fee": {
+          "fee_0": 100,
+          "fee_1": 55,
+          "fee_2": 0
+        },
+        "duration": {
+          "duration_0": 20,
+          "duration_1": 80,
+          "duration_2": 60
+        },
+        "transport": {
+          "transport_0": 55,
+          "transport_1": 85,
+          "transport_2": 25
+        },
+        "insurance": {
+          "insurance_0": 70,
+          "insurance_1": 50,
+          "insurance_2": 20
+        },
+        "publicity": {
+          "publicity_0": 55,
+          "publicity_1": 85,
+          "publicity_2": 20
+        },
+        "opening": {
+          "opening_0": 45,
+          "opening_1": 90,
+          "opening_2": 0
+        }
+      },
+      "constraints": [
+        {
+          "description": "The grant excludes a late-season opening.",
+          "hard": true,
+          "disallowed": {
+            "opening": [
+              "opening_2"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "lender",
+      "name": "Collection lending director",
+      "confidential_brief": "Loan revenue, insurance and short time away from the collection matter most. Specialist transport and joint credit are valuable. Host staff cannot transport the collection under your policy. Early-season opening best matches your schedule; late season is more convenient than peak season. Your alternative is a different loan worth the stated walk-away value.",
+      "reservation_value": 280,
+      "points": {
+        "fee": {
+          "fee_0": 0,
+          "fee_1": 60,
+          "fee_2": 120
+        },
+        "duration": {
+          "duration_0": 90,
+          "duration_1": 45,
+          "duration_2": 0
+        },
+        "transport": {
+          "transport_0": 40,
+          "transport_1": 85,
+          "transport_2": 0
+        },
+        "insurance": {
+          "insurance_0": 0,
+          "insurance_1": 45,
+          "insurance_2": 95
+        },
+        "publicity": {
+          "publicity_0": 15,
+          "publicity_1": 80,
+          "publicity_2": 65
+        },
+        "opening": {
+          "opening_0": 80,
+          "opening_1": 45,
+          "opening_2": 60
+        }
+      },
+      "constraints": [
+        {
+          "description": "The collection must use an approved courier.",
+          "hard": true,
+          "disallowed": {
+            "transport": [
+              "transport_2"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

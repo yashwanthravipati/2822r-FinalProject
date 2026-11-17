@@ -133,6 +133,15 @@ def main():
     ]
     source = hashlib.sha256(b"".join(p.read_bytes() for p in paths)).hexdigest()
     check(source == protocol["source_sha256"], "source changed")
+    if "credit_source_sha256" in protocol:
+        check(
+            digest(Path("scripts/credit_evaluate.py")) == protocol["credit_source_sha256"],
+            "credit runner changed",
+        )
+        check(
+            digest(Path("scripts/credit_memory.py")) == protocol["credit_memory_sha256"],
+            "credit memory source changed",
+        )
     if "final_source_sha256" in protocol:
         check(
             digest(Path("scripts/consolidation_final.py")) == protocol["final_source_sha256"],
