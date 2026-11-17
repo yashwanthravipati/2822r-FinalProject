@@ -37,7 +37,13 @@ Sim4 has now been examined and is a revisited benchmark, not an untouched test s
   only +0.004579 over reports on unused Beacon, 95% interval [-0.043956,+0.043956], n=7.
   All planned outcomes retained and independently audited; no reliable superiority claim.
   One development truncation recovered with the unchanged protocol; no final failures.
-  185 offline tests pass. Code/numeric results pushed on ckpt3; user report edits preserved.
+  185 offline tests pass. Earlier code/numeric results pushed on ckpt3; final summary commit
+  ef550f9 remains local because automatic review blocked publication. User edits preserved.
   Current goal API cost $121.775492; checkpoint-3 ledgers total $172.072873, no unresolved
   calls, original separate $100 caps intact. Research result ready for review, while the
   substantive reliable-improvement objective remains unmet. Status awaits user acceptance.
+- 2026-11-17: User explicitly raised both cumulative caps to $110. Audited the change without
+  releasing charges. Preregistered one arithmetic teach-back plus full-reports candidate,
+  48 new development episodes and gated 63-episode Cedar follow-up. Related prior generic
+  application/correction failure remains acknowledged. Case and implementation frozen before
+  outcomes; detailed costs, exact source histories and advance rule in improvement log.

@@ -1,0 +1,20 @@
+{
+  "construction": "Frozen before any teach-back candidate outcomes. Prior Beacon, Harbor, Maple and Sim4 are known; this case has no model outcomes.",
+  "cases": [
+    {
+      "key": "cedar_warehouse",
+      "path": "data/cases/cedar_warehouse.json",
+      "role": "owner",
+      "primary": true,
+      "status": "fresh_test"
+    }
+  ],
+  "case_sha256": "eff48d0a6692478be150c5675de508c45e85b7b2138c2a6661e702ebf3069ab3",
+  "packages": 729,
+  "legal_packages": 324,
+  "mutually_acceptable_packages": 258,
+  "feasible_best": [
+    470.0,
+    530.0
+  ]
+}

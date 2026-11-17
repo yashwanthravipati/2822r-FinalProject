@@ -439,3 +439,53 @@ d4221d8bf6412a5fbd9439ddeabe91e4fa30090d94c28a30dc409bb510f19b1c.
   reserve, leaving under $5 for additional realized cost, insufficient for another
   comparison of the planned size at the observed $6.54 assessment cost. Preserve funds
   and the full evidence rather than repeatedly testing until a favorable result appears.
+
+## Authorized $110 caps and one arithmetic teach-back follow-up
+
+The user subsequently authorized "Bump to $110 each." Both cumulative ledgers were
+raised through `set_authorized_limit`, with the reason recorded, preserving all charges.
+Development remains $84.990738, final $87.082135; remaining $25.009262/$22.917865.
+This supersedes the earlier $100 caps, not the historical cost snapshots. No other
+ledger changed. Commit ef550f9 is local: automatic review blocked the GitHub push,
+pending explicit destination/payload approval. Do not treat the budget increase as push approval.
+
+Offline diagnostic motivation: on Harbor, dominated offers were 16/159 opportunities
+with reports versus 7/167 with varied practice; on Beacon they were 5/118 versus 10/121.
+Beacon unreciprocated concessions were 18/41 versus 27/49. These are exploratory pooled
+opportunity counts, not independent samples or causal evidence. Anchoring errors were
+zero in all conditions; missing opportunities must not count as successful behavior.
+
+Test one new bounded variant, `teachback_reports`. This is related to the earlier failed
+application/correction arm, not a wholly new mechanism. The differences are explicit:
+identical five-session report-guided histories, two actual own-history comparisons,
+code-corrected arithmetic (rather than model-graded hypothetical answers), ONE short
+conditional reminder, and retention of all five original reports. It neither replaces
+the reports with a compact card nor manually changes actor tendencies or weights.
+Choose comparisons by the existing deterministic own-value loss rule, before assessment.
+The unchanged learner model explains them; the coach gets its answers plus exact own
+point changes and surplus, then writes the reminder. Two extra calls per persona. The
+coach sees no future case, hidden opponent sheet, or planted persona parameters.
+
+Development reuses the original 8 personas (seed 28221117, cohorts 0–3 and 4–7) and
+all exact baseline/reports controls on hiring and revisited Sim4. Candidate assessment
+adds 48 episodes; preparation adds 16 calls. Forecast 650–850 requests including
+assessment, about 5–7 million input tokens with ~80% cache reads and 250–350k output,
+approximately $8–11 using the gateway's recorded model prices. One candidate only;
+no prompt edits after outcomes. Primary paired difference averages the two cases within
+persona. Advance only if mean candidate-minus-reports is positive both pooled and in
+cohort 4–7, the same screening rule as earlier. This is not a significance claim.
+
+Before any candidate outcomes, froze original Cedar Cold-Storage Lease, owner role,
+SHA256 eff48d0a6692478be150c5675de508c45e85b7b2138c2a6661e702ebf3069ab3.
+Independent enumeration: 729 packages, 324 legal, 258 mutually acceptable; feasible
+maxima 470/530, walk-away 235/230. Utilities are modeling assumptions. Cedar is unused;
+Beacon, Harbor, Maple and Sim4 are known. If the development gate passes, prepare
+memories for all seven existing confirmation personas (seed 28221129), using their
+original five Sim3 sessions and no assessment feedback. Freeze before Cedar baseline,
+reports and candidate, each at tiers 1/3/5: 63 new assessment episodes, 14 prep calls,
+roughly $7–10, leaving the conservative request reserve within the $110 cap. Personas
+are reused, so this is a new-case follow-up, not fresh-persona replication. Retain all
+outcomes and compare within persona; no superiority claim unless evidence warrants it.
+If the gate fails, do not use the fresh case or final-budget calls for this candidate.
+Do not change frozen core source or previous runners. New runners open the existing
+ledger without a lower cap; explicitly require the newly authorized $110 limit.

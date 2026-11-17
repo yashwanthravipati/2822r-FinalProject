@@ -1,0 +1,216 @@
+{
+  "id": "cedar_warehouse",
+  "title": "Cedar Cold-Storage Lease",
+  "source": "Original synthetic case frozen before arithmetic teach-back development; utilities are experimental assumptions. Free to use and commit.",
+  "public_brief": "A cold-storage owner and a produce distributor are negotiating a lease. Agree on all six listed terms as one package. Both have alternatives. All options are available except explicit hard constraints. Unlisted promises do not change the listed contract.",
+  "issues": [
+    {
+      "id": "rent",
+      "name": "Monthly rent",
+      "options": [
+        {
+          "id": "rent_0",
+          "label": "$18,000"
+        },
+        {
+          "id": "rent_1",
+          "label": "$23,000"
+        },
+        {
+          "id": "rent_2",
+          "label": "$28,000"
+        }
+      ]
+    },
+    {
+      "id": "term",
+      "name": "Lease term",
+      "options": [
+        {
+          "id": "term_0",
+          "label": "12 months"
+        },
+        {
+          "id": "term_1",
+          "label": "24 months"
+        },
+        {
+          "id": "term_2",
+          "label": "36 months"
+        }
+      ]
+    },
+    {
+      "id": "capacity",
+      "name": "Reserved capacity",
+      "options": [
+        {
+          "id": "capacity_0",
+          "label": "Half warehouse"
+        },
+        {
+          "id": "capacity_1",
+          "label": "Three quarters"
+        },
+        {
+          "id": "capacity_2",
+          "label": "Whole warehouse"
+        }
+      ]
+    },
+    {
+      "id": "maintenance",
+      "name": "Maintenance coverage",
+      "options": [
+        {
+          "id": "maintenance_0",
+          "label": "Tenant handles routine work"
+        },
+        {
+          "id": "maintenance_1",
+          "label": "Shared scheduled service"
+        },
+        {
+          "id": "maintenance_2",
+          "label": "Owner handles all routine work"
+        }
+      ]
+    },
+    {
+      "id": "access",
+      "name": "Delivery access",
+      "options": [
+        {
+          "id": "access_0",
+          "label": "Business hours"
+        },
+        {
+          "id": "access_1",
+          "label": "Extended weekdays"
+        },
+        {
+          "id": "access_2",
+          "label": "Around the clock"
+        }
+      ]
+    },
+    {
+      "id": "start",
+      "name": "Lease commencement",
+      "options": [
+        {
+          "id": "start_0",
+          "label": "Immediate"
+        },
+        {
+          "id": "start_1",
+          "label": "In six weeks"
+        },
+        {
+          "id": "start_2",
+          "label": "In twelve weeks"
+        }
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "id": "owner",
+      "name": "Cedar warehouse owner",
+      "confidential_brief": "A longer lease and dependable rental revenue support planned upgrades. Shared maintenance and extended weekday access are affordable concessions compared with full coverage or round-the-clock access. You prefer leasing only part of the building because you have another tenant prospect. A twelve-week delay is unavailable because of your financing deadline. Your alternative is another tenant worth your stated walk-away value.",
+      "reservation_value": 235,
+      "points": {
+        "rent": {
+          "rent_0": 0,
+          "rent_1": 55,
+          "rent_2": 110
+        },
+        "term": {
+          "term_0": 0,
+          "term_1": 65,
+          "term_2": 95
+        },
+        "capacity": {
+          "capacity_0": 70,
+          "capacity_1": 50,
+          "capacity_2": 10
+        },
+        "maintenance": {
+          "maintenance_0": 85,
+          "maintenance_1": 65,
+          "maintenance_2": 10
+        },
+        "access": {
+          "access_0": 75,
+          "access_1": 60,
+          "access_2": 10
+        },
+        "start": {
+          "start_0": 90,
+          "start_1": 55,
+          "start_2": 0
+        }
+      },
+      "constraints": [
+        {
+          "description": "Unavailable under this role's operating commitments.",
+          "hard": true,
+          "disallowed": {
+            "start": [
+              "start_2"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "tenant",
+      "name": "Orchard distribution manager",
+      "confidential_brief": "You need at least three quarters of the building. A six-week start and extended weekday deliveries fit your operations; round-the-clock access adds little. A shorter commitment preserves flexibility, though two years is workable. Shared scheduled maintenance is valuable. Your alternative is another warehouse worth the stated walk-away value.",
+      "reservation_value": 230,
+      "points": {
+        "rent": {
+          "rent_0": 110,
+          "rent_1": 50,
+          "rent_2": 0
+        },
+        "term": {
+          "term_0": 85,
+          "term_1": 70,
+          "term_2": 15
+        },
+        "capacity": {
+          "capacity_0": 0,
+          "capacity_1": 80,
+          "capacity_2": 105
+        },
+        "maintenance": {
+          "maintenance_0": 0,
+          "maintenance_1": 65,
+          "maintenance_2": 95
+        },
+        "access": {
+          "access_0": 5,
+          "access_1": 85,
+          "access_2": 95
+        },
+        "start": {
+          "start_0": 25,
+          "start_1": 90,
+          "start_2": 65
+        }
+      },
+      "constraints": [
+        {
+          "description": "Unavailable under this role's operating commitments.",
+          "hard": true,
+          "disallowed": {
+            "capacity": [
+              "capacity_0"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
