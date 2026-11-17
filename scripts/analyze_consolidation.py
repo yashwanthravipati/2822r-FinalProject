@@ -197,6 +197,18 @@ def main():
         if entry["primary"]:
             primary.append(rows)
     result["primary"] = aggregate(primary, protocol["users"], protocol["methods"])
+    if "primary_method" in protocol:
+        method, comparator = protocol["primary_method"], protocol["primary_comparison"]
+        values = {(r["user"], r["method"]): r["gain"] for r in result["primary"]["rows"]}
+        result["primary_test"] = {
+            "method": method,
+            "comparator": comparator,
+            "contrast": "candidate minus comparator, averaging primary cases within each persona",
+            "estimate": interval(
+                [values[u, method] - values[u, comparator] for u in protocol["users"]]
+            ),
+            "cases": len(primary),
+        }
     result["reused_episode_count"] = len(frozen.get("reused_episodes", {}))
     result["new_assessment_episode_count"] = (
         sum(c["episodes"] for c in result["cases"].values()) - result["reused_episode_count"]
@@ -258,6 +270,22 @@ def main():
         str(p.relative_to(root)): run_usage(p)
         for p in sorted({p.parent for p in root.rglob("usage_*.json")})
     }
+    fields = (
+        "calls",
+        "total_input_tokens",
+        "output_tokens",
+        "cache_read_input_tokens",
+        "estimated_usd",
+        "estimated_uncached_usd",
+    )
+    total = {k: sum(v[k] for v in result["run_usage_by_phase"].values()) for k in fields}
+    total["cache_read_fraction"] = (
+        total["cache_read_input_tokens"] / total["total_input_tokens"]
+        if total["total_input_tokens"]
+        else 0
+    )
+    total["estimated_savings_usd"] = total["estimated_uncached_usd"] - total["estimated_usd"]
+    result["run_usage_total"] = total
     result["cumulative_budget"] = ledger_report(
         Path(f".api-budget.sqlite3.ckpt3-{protocol['budget']}")
     )
