@@ -322,3 +322,47 @@ candidates and the failed first prospective confirmation in all reporting.
   package checks verify the loss identity with negative point tables; changing the hidden
   opponent sheet cannot change the aid. Per-case projection exposes only the current
   worksheet and rejects modified cached projections. No actor or scoring source changed.
+
+- Worksheet development completed: 48 new episodes, 144 exact reused controls, zero
+  coaching-generation calls. Pooled worksheet-minus-reports -0.006770833, 95% interval
+  [-0.031892528, +0.030232873], n=8. Validation -0.023277244, interval
+  [-0.037900641, -0.008653846], n=4. Advancement rule failed; no final calls. Exact
+  incremental ledger cost $7.083665 (704 calls), usage estimate $7.083354. Development
+  cumulative $70.754874, remaining $29.245126; final unchanged $75.720829, remaining
+  $24.279171. No unresolved charges. Checkpoint-3 total $146.475703; new improvement
+  goal $96.178322. Full results, including failed outcomes, remain versioned.
+
+## Varied-practice hypothesis, specified before its calls
+
+Report-based coaching has held up better than compact reflection, selected examples or
+the arithmetic aid. The remaining hypothesis changes the practice distribution rather
+than the memory wording: five repetitions of one case may transfer poorly. Compare the
+same five-session budget with a three-case curriculum. Reuse the first two exact Sim3
+reports-guided sessions (tiers 2,2), then rehearse hiring, Sim4, hiring at tiers 4,4,4.
+Carry the accumulated reports into each practice and preserve all five reports for the
+assessment. The control is the existing five-Sim3 reports branch. This is a curriculum
+comparison, NOT matched-five-history prompt refinement. Only the first two histories are
+shared; no persona changes, weights, hidden sheets, or assessment feedback are used.
+
+Development uses the original users 0–3 and 4–7, seed 28221117. Assess both groups on
+Harbor Analytics, which was seen in the first confirmation and is now explicitly a
+revisited development case. It is not one of the practice cases. These eight personas
+have not previously been assessed on Harbor; run new baseline/reports/diverse-reports
+episodes at tiers 1/3/5, 72 total, plus 24 new practice sessions and 24 ordinary debriefs.
+This preserves session count while testing different practice content. It does not isolate
+diversity from which cases, role changes, order or report lengths were used.
+
+Forecast 1,100–1,500 requests, 8–10M input (~80% reads), 0.5–0.7M output, $12–18
+development. Existing development allowance is $29.245126 with no cap increase/reset.
+Freeze this single curriculum before outcomes. Advance only if diverse reports beat
+reports in both the pooled eight-person mean and the separate users 4–7 mean. Keep all
+cases/personas/failures; this screening rule does not establish significance.
+
+If it advances, use the still-unused frozen Beacon Museum case and all seven existing
+confirmation personas, seed 28221129. Reuse their two-session Sim3 prefixes; generate
+21 new curriculum sessions/debriefs. Assess baseline, reports and diverse reports only,
+63 new test episodes. Omit the procedure arm prospectively to preserve the existing
+final-budget allowance. Total 84 new episodes, forecast $12–16, leaving at least ~$8
+for conservative live reservations within the unchanged final $100 cap. A fresh case
+does not make these seven personas fresh, and this follows multiple failed candidates.
+Report the whole sequence regardless of the outcome. Beacon's case bytes remain frozen.

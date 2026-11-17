@@ -1,0 +1,14 @@
+[
+{"baseline_G": 0.1987179487179487, "final_G": 0.1987179487179487, "gain": 0.0, "method": "procedure_only", "user": 0},
+{"baseline_G": 0.1987179487179487, "final_G": 0.1987179487179487, "gain": 0.0, "method": "reports", "user": 0},
+{"baseline_G": 0.1987179487179487, "final_G": 0.3269230769230769, "gain": 0.12820512820512822, "method": "worksheet_reports", "user": 0},
+{"baseline_G": 0.3269230769230769, "final_G": 0.23076923076923075, "gain": -0.09615384615384617, "method": "procedure_only", "user": 1},
+{"baseline_G": 0.3269230769230769, "final_G": 0.21794871794871795, "gain": -0.10897435897435898, "method": "reports", "user": 1},
+{"baseline_G": 0.3269230769230769, "final_G": 0.16666666666666666, "gain": -0.16025641025641027, "method": "worksheet_reports", "user": 1},
+{"baseline_G": 0.16666666666666666, "final_G": 0.26282051282051283, "gain": 0.09615384615384617, "method": "procedure_only", "user": 2},
+{"baseline_G": 0.16666666666666666, "final_G": 0.26282051282051283, "gain": 0.09615384615384617, "method": "reports", "user": 2},
+{"baseline_G": 0.16666666666666666, "final_G": 0.2948717948717949, "gain": 0.12820512820512822, "method": "worksheet_reports", "user": 2},
+{"baseline_G": 0.25, "final_G": 0.26282051282051283, "gain": 0.01282051282051283, "method": "procedure_only", "user": 3},
+{"baseline_G": 0.25, "final_G": 0.2948717948717949, "gain": 0.04487179487179488, "method": "reports", "user": 3},
+{"baseline_G": 0.25, "final_G": 0.21794871794871795, "gain": -0.03205128205128205, "method": "worksheet_reports", "user": 3}
+]

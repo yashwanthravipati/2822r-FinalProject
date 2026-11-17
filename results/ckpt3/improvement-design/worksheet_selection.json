@@ -1,0 +1,313 @@
+{
+  "calls": 704.0,
+  "candidate": "worksheet_reports",
+  "comparator": "reports",
+  "estimated_usd": 7.083354399999999,
+  "new_assessment_episodes": 48,
+  "pooled": {
+    "cases": 2,
+    "rows": [
+      {
+        "baseline_G": 0.4118589743589743,
+        "final_G": 0.44102564102564096,
+        "gain": 0.029166666666666674,
+        "method": "procedure_only",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.4118589743589743,
+        "final_G": 0.384775641025641,
+        "gain": -0.027083333333333293,
+        "method": "reports",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.4118589743589743,
+        "final_G": 0.4967948717948718,
+        "gain": 0.08493589743589748,
+        "method": "worksheet_reports",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.4197115384615384,
+        "final_G": 0.3737179487179487,
+        "gain": -0.045993589743589705,
+        "method": "procedure_only",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.4197115384615384,
+        "final_G": 0.44439102564102567,
+        "gain": 0.02467948717948723,
+        "method": "reports",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.4197115384615384,
+        "final_G": 0.4270833333333333,
+        "gain": 0.007371794871794887,
+        "method": "worksheet_reports",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.28958333333333336,
+        "final_G": 0.4439102564102564,
+        "gain": 0.15432692307692308,
+        "method": "procedure_only",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.28958333333333336,
+        "final_G": 0.4584935897435898,
+        "gain": 0.16891025641025642,
+        "method": "reports",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.28958333333333336,
+        "final_G": 0.4474358974358974,
+        "gain": 0.1578525641025641,
+        "method": "worksheet_reports",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.40833333333333327,
+        "final_G": 0.43141025641025643,
+        "gain": 0.023076923076923134,
+        "method": "procedure_only",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.40833333333333327,
+        "final_G": 0.3932692307692308,
+        "gain": -0.015064102564102483,
+        "method": "reports",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.40833333333333327,
+        "final_G": 0.3485576923076923,
+        "gain": -0.05977564102564095,
+        "method": "worksheet_reports",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.3296474358974359,
+        "final_G": 0.3104166666666666,
+        "gain": -0.01923076923076926,
+        "method": "procedure_only",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.3296474358974359,
+        "final_G": 0.42291666666666666,
+        "gain": 0.09326923076923077,
+        "method": "reports",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.3296474358974359,
+        "final_G": 0.3826923076923076,
+        "gain": 0.05304487179487173,
+        "method": "worksheet_reports",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.4326923076923077,
+        "final_G": 0.45993589743589747,
+        "gain": 0.02724358974358973,
+        "method": "procedure_only",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.4326923076923077,
+        "final_G": 0.4423076923076923,
+        "gain": 0.009615384615384595,
+        "method": "reports",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.4326923076923077,
+        "final_G": 0.4307692307692307,
+        "gain": -0.0019230769230769995,
+        "method": "worksheet_reports",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.37163461538461534,
+        "final_G": 0.3368589743589744,
+        "gain": -0.034775641025640985,
+        "method": "procedure_only",
+        "user": 6
+      },
+      {
+        "baseline_G": 0.37163461538461534,
+        "final_G": 0.3897435897435897,
+        "gain": 0.018108974358974364,
+        "method": "reports",
+        "user": 6
+      },
+      {
+        "baseline_G": 0.37163461538461534,
+        "final_G": 0.38397435897435894,
+        "gain": 0.012339743589743588,
+        "method": "worksheet_reports",
+        "user": 6
+      },
+      {
+        "baseline_G": 0.3310897435897436,
+        "final_G": 0.45993589743589747,
+        "gain": 0.12884615384615386,
+        "method": "procedure_only",
+        "user": 7
+      },
+      {
+        "baseline_G": 0.3310897435897436,
+        "final_G": 0.41442307692307695,
+        "gain": 0.08333333333333336,
+        "method": "reports",
+        "user": 7
+      },
+      {
+        "baseline_G": 0.3310897435897436,
+        "final_G": 0.37884615384615383,
+        "gain": 0.04775641025641027,
+        "method": "worksheet_reports",
+        "user": 7
+      }
+    ],
+    "summary": {
+      "procedure_only": {
+        "baseline_G": {
+          "ci95": [
+            0.3401642628205128,
+            0.40460086137820506
+          ],
+          "mean": 0.37431891025641023,
+          "n": 8
+        },
+        "final_G": {
+          "ci95": [
+            0.3692708333333334,
+            0.4421935096153846
+          ],
+          "mean": 0.4071514423076923,
+          "n": 8
+        },
+        "gain": {
+          "ci95": [
+            -0.01050230368589742,
+            0.08046123798076918
+          ],
+          "mean": 0.032832532051282066,
+          "n": 8
+        }
+      },
+      "procedure_only_minus_worksheet_reports": {
+        "ci95": [
+          -0.043452023237179456,
+          0.03868589743589742
+        ],
+        "mean": -0.004867788461538446,
+        "n": 8
+      },
+      "reports": {
+        "baseline_G": {
+          "ci95": [
+            0.3401642628205128,
+            0.40460086137820506
+          ],
+          "mean": 0.37431891025641023,
+          "n": 8
+        },
+        "final_G": {
+          "ci95": [
+            0.40167968749999994,
+            0.4361177884615385
+          ],
+          "mean": 0.41879006410256414,
+          "n": 8
+        },
+        "gain": {
+          "ci95": [
+            0.006606069711538494,
+            0.08782051282051284
+          ],
+          "mean": 0.04447115384615387,
+          "n": 8
+        }
+      },
+      "reports_minus_procedure_only": {
+        "ci95": [
+          -0.02667017227564101,
+          0.05466846955128206
+        ],
+        "mean": 0.011638621794871804,
+        "n": 8
+      },
+      "reports_minus_worksheet_reports": {
+        "ci95": [
+          -0.030232872596153836,
+          0.031892528044871825
+        ],
+        "mean": 0.006770833333333358,
+        "n": 8
+      },
+      "worksheet_reports": {
+        "baseline_G": {
+          "ci95": [
+            0.3401642628205128,
+            0.40460086137820506
+          ],
+          "mean": 0.37431891025641023,
+          "n": 8
+        },
+        "final_G": {
+          "ci95": [
+            0.383330328525641,
+            0.445773737980769
+          ],
+          "mean": 0.41201923076923075,
+          "n": 8
+        },
+        "gain": {
+          "ci95": [
+            -0.000763721955128184,
+            0.08113331330128204
+          ],
+          "mean": 0.03770032051282051,
+          "n": 8
+        }
+      }
+    }
+  },
+  "pooled_contrast": {
+    "ci95": [
+      -0.03189252804487183,
+      0.03023287259615381
+    ],
+    "mean": -0.006770833333333358,
+    "n": 8
+  },
+  "proceed": false,
+  "reused_episodes": 144,
+  "rule": "Proceed only if paired candidate-minus-reports mean is positive both pooled and in the separate validation cohort; this is not a significance claim.",
+  "sources": {
+    "results/ckpt3/consolidation-worksheet-dev-v1": {
+      "protocol_sha256": "350ccd3d3655a65a132df7c21a86a0bf6baef0f6fdb2bb1f1d988ea3256477b2",
+      "verified_analysis_sha256": "e22c6e70161dcf6150fbbbaaca2f2a8a1719dc569314c0e58093538b45b3f093"
+    },
+    "results/ckpt3/consolidation-worksheet-validation-v1": {
+      "protocol_sha256": "39a7ed84308e38f96a6fc3fb3f1ce628618d7918242ca40cf5ab5bd8b78254a7",
+      "verified_analysis_sha256": "449f8e6161fc0c9d37494b97a35d4d9bc57c86fd8a4f7c87135cb9a106c09d9a"
+    }
+  },
+  "validation_contrast": {
+    "ci95": [
+      -0.037900641025641064,
+      -0.008653846153846186
+    ],
+    "mean": -0.023277243589743625,
+    "n": 4
+  }
+}

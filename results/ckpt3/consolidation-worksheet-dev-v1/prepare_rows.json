@@ -1,0 +1,10 @@
+[
+{"case": "hiring", "memory_characters": {"procedure_only": 1862, "reports": 16312, "worksheet_reports": 18325}, "user": 0},
+{"case": "sim4_revisited", "memory_characters": {"procedure_only": 1862, "reports": 16312, "worksheet_reports": 21885}, "user": 0},
+{"case": "hiring", "memory_characters": {"procedure_only": 1862, "reports": 16332, "worksheet_reports": 18345}, "user": 1},
+{"case": "sim4_revisited", "memory_characters": {"procedure_only": 1862, "reports": 16332, "worksheet_reports": 21905}, "user": 1},
+{"case": "hiring", "memory_characters": {"procedure_only": 1862, "reports": 16134, "worksheet_reports": 18147}, "user": 2},
+{"case": "sim4_revisited", "memory_characters": {"procedure_only": 1862, "reports": 16134, "worksheet_reports": 21707}, "user": 2},
+{"case": "hiring", "memory_characters": {"procedure_only": 1862, "reports": 16363, "worksheet_reports": 18376}, "user": 3},
+{"case": "sim4_revisited", "memory_characters": {"procedure_only": 1862, "reports": 16363, "worksheet_reports": 21936}, "user": 3}
+]
