@@ -207,3 +207,11 @@ known refusal may be resumed once from the identical checkpoint with its cost re
   for 748 calls. Final cumulative ledger $49.987154 after preparation, no unresolved calls.
   Fresh-case assessment began only after all memories were frozen; no primary outcomes
   have been inspected or used to alter the selected method.
+- Offline development-history diagnostic: 13 of the 16 selected large-concession examples
+  match a saved counterfactual estimate; eight have a positive estimated terminal gain
+  from the alternative (and a positive lower interval bound). Other examples have zero,
+  negative or absent estimates. Immediate loss of own offer value is not synonymous with
+  a worse eventual deal. This suggests credit-based example selection as a future
+  hypothesis, while recognizing that the rollout estimates themselves can be wrong.
+  No confirmation memory or selection rule was changed. Numeric diagnostic saved in
+  `results/ckpt3/improvement-design/example_credit_diagnostic.json`; no API calls were used.

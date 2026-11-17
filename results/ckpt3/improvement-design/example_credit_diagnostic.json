@@ -1,0 +1,192 @@
+{
+  "examples": 16,
+  "matched_counterfactual_turns": 13,
+  "positive_estimated_terminal_gain": 8,
+  "positive_lower_bound": 8,
+  "rows": [
+    {
+      "best_estimated_terminal_gain": null,
+      "best_interval": null,
+      "counterfactual_estimates_at_turn": 0,
+      "immediate_own_point_change": -50.0,
+      "session": "learner3_reports_train3",
+      "turn": 4,
+      "user": 3
+    },
+    {
+      "best_estimated_terminal_gain": null,
+      "best_interval": null,
+      "counterfactual_estimates_at_turn": 0,
+      "immediate_own_point_change": -40.0,
+      "session": "learner3_reports_train4",
+      "turn": 4,
+      "user": 3
+    },
+    {
+      "best_estimated_terminal_gain": 0.0625,
+      "best_interval": [
+        0.017045454545454544,
+        0.10227272727272728
+      ],
+      "counterfactual_estimates_at_turn": 1,
+      "immediate_own_point_change": -50.0,
+      "session": "learner0_reports_train4",
+      "turn": 2,
+      "user": 0
+    },
+    {
+      "best_estimated_terminal_gain": 0.11363636363636365,
+      "best_interval": [
+        0.11363636363636365,
+        0.11363636363636365
+      ],
+      "counterfactual_estimates_at_turn": 1,
+      "immediate_own_point_change": -30.0,
+      "session": "learner0_reports_train1",
+      "turn": 2,
+      "user": 0
+    },
+    {
+      "best_estimated_terminal_gain": -0.005681818181818177,
+      "best_interval": [
+        -0.09090909090909088,
+        0.07954545454545456
+      ],
+      "counterfactual_estimates_at_turn": 1,
+      "immediate_own_point_change": -50.0,
+      "session": "learner1_reports_train4",
+      "turn": 2,
+      "user": 1
+    },
+    {
+      "best_estimated_terminal_gain": 0.07954545454545453,
+      "best_interval": [
+        0.04545454545454547,
+        0.11363636363636365
+      ],
+      "counterfactual_estimates_at_turn": 1,
+      "immediate_own_point_change": -35.0,
+      "session": "learner1_reports_train3",
+      "turn": 2,
+      "user": 1
+    },
+    {
+      "best_estimated_terminal_gain": 0.0,
+      "best_interval": [
+        0.0,
+        0.0
+      ],
+      "counterfactual_estimates_at_turn": 1,
+      "immediate_own_point_change": -85.0,
+      "session": "learner2_reports_train0",
+      "turn": 2,
+      "user": 2
+    },
+    {
+      "best_estimated_terminal_gain": -0.028409090909090884,
+      "best_interval": [
+        -0.06818181818181818,
+        0.0
+      ],
+      "counterfactual_estimates_at_turn": 1,
+      "immediate_own_point_change": -85.0,
+      "session": "learner2_reports_train4",
+      "turn": 3,
+      "user": 2
+    },
+    {
+      "best_estimated_terminal_gain": -0.05681818181818177,
+      "best_interval": [
+        -0.13068181818181818,
+        0.07386363636363635
+      ],
+      "counterfactual_estimates_at_turn": 1,
+      "immediate_own_point_change": -80.0,
+      "session": "learner6_reports_train2",
+      "turn": 2,
+      "user": 6
+    },
+    {
+      "best_estimated_terminal_gain": 0.03977272727272724,
+      "best_interval": [
+        0.022727272727272707,
+        0.05681818181818182
+      ],
+      "counterfactual_estimates_at_turn": 1,
+      "immediate_own_point_change": -70.0,
+      "session": "learner6_reports_train4",
+      "turn": 3,
+      "user": 6
+    },
+    {
+      "best_estimated_terminal_gain": 0.062499999999999944,
+      "best_interval": [
+        0.022727272727272707,
+        0.10795454545454544
+      ],
+      "counterfactual_estimates_at_turn": 1,
+      "immediate_own_point_change": -70.0,
+      "session": "learner5_reports_train4",
+      "turn": 3,
+      "user": 5
+    },
+    {
+      "best_estimated_terminal_gain": 0.09090909090909094,
+      "best_interval": [
+        0.06818181818181823,
+        0.1363636363636364
+      ],
+      "counterfactual_estimates_at_turn": 1,
+      "immediate_own_point_change": -35.0,
+      "session": "learner5_reports_train0",
+      "turn": 3,
+      "user": 5
+    },
+    {
+      "best_estimated_terminal_gain": 0.05681818181818182,
+      "best_interval": [
+        0.02840909090909094,
+        0.0965909090909091
+      ],
+      "counterfactual_estimates_at_turn": 1,
+      "immediate_own_point_change": -65.0,
+      "session": "learner7_reports_train4",
+      "turn": 2,
+      "user": 7
+    },
+    {
+      "best_estimated_terminal_gain": 0.11363636363636365,
+      "best_interval": [
+        0.11363636363636365,
+        0.11363636363636365
+      ],
+      "counterfactual_estimates_at_turn": 1,
+      "immediate_own_point_change": -40.0,
+      "session": "learner7_reports_train1",
+      "turn": 3,
+      "user": 7
+    },
+    {
+      "best_estimated_terminal_gain": 0.0,
+      "best_interval": [
+        0.0,
+        0.0
+      ],
+      "counterfactual_estimates_at_turn": 1,
+      "immediate_own_point_change": -75.0,
+      "session": "learner4_reports_train0",
+      "turn": 2,
+      "user": 4
+    },
+    {
+      "best_estimated_terminal_gain": null,
+      "best_interval": null,
+      "counterfactual_estimates_at_turn": 0,
+      "immediate_own_point_change": -40.0,
+      "session": "learner4_reports_train3",
+      "turn": 4,
+      "user": 4
+    }
+  ],
+  "scope": "Offline development-history diagnostic only; no final assessment outcomes read; counterfactuals are model-based estimates, not observed alternative outcomes."
+}
