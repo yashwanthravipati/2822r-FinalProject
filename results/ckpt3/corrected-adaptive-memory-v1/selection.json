@@ -1,0 +1,14 @@
+{
+  "development_sha256": "b2dc4691e94428916364669ab1f6d6eeddbc65227f9e043d60b8222f89e9f1ee",
+  "frozen_sha256": "d06795cb9e985c63262fb778f0f32e1e5691c2b93b684c2b949f4b0da2554eaa",
+  "selected": {
+    "0": "generic",
+    "1": "generic",
+    "2": "personalized",
+    "3": "personalized",
+    "4": "reports",
+    "5": "personalized",
+    "6": "personalized",
+    "7": "generic"
+  }
+}

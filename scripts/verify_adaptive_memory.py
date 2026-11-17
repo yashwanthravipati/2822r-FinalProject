@@ -160,6 +160,18 @@ def main():
     )
     assert advance == summary["advance_pass"]
     usage = [json.loads(p.read_text()) for p in ROOT.glob("usage_*.json")]
+    target_counts = {}
+    for phase, rows in all_rows.items():
+        target_counts[phase] = {}
+        for arm in ARMS:
+            counts = [
+                r["counts"]["error:1" if r["user"] < 4 else "error:2"]
+                for r in rows
+                if r["arm"] == arm
+            ]
+            target_counts[phase][arm] = {
+                key: sum(c[key] for c in counts) for key in ("occurrences", "opportunities")
+            }
     result = {
         "verified_episodes": 96,
         "schedule_violations": 0,
@@ -177,6 +189,7 @@ def main():
         "advance_pass": advance,
         "ledger_cost_usd": sum(u["after"]["actual_usd"] - u["before"]["actual_usd"] for u in usage),
         "requests": sum(u["after"]["requests"] - u["before"]["requests"] for u in usage),
+        "target_counts_descriptive": target_counts,
         "diagnostics": diagnostics,
     }
     write_json(ROOT / "verification.json", result)

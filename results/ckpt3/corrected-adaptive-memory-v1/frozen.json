@@ -1,0 +1,13 @@
+{
+  "memories": {
+    "results/ckpt3/corrected-adaptive-memory-v1/raw/user0/memories.json": "835bd237afc3c73e122c45c96439bc63033ce85b4cfec578b2be434922fc34c5",
+    "results/ckpt3/corrected-adaptive-memory-v1/raw/user1/memories.json": "feb4a02f34ac4acd5f162fee05536aa98f264f28289f92ce59c14279fe53fb18",
+    "results/ckpt3/corrected-adaptive-memory-v1/raw/user2/memories.json": "f0fb3fc57e0db500f1cff0d932f0f24bfbda1bb12eba47eff6dee0282af0ef6c",
+    "results/ckpt3/corrected-adaptive-memory-v1/raw/user3/memories.json": "6e7207eb93e25b65a5ad991c9a7a8f93be5644c226bd00e91d5e5f4bed4f0e84",
+    "results/ckpt3/corrected-adaptive-memory-v1/raw/user4/memories.json": "827f98da6d2e348ee944292f3d0cfb717177584b8e65d16815b1720567f912a1",
+    "results/ckpt3/corrected-adaptive-memory-v1/raw/user5/memories.json": "ef388a7dd898965c55dfe44d499ef61190df63ccce63e58d44d3fb78e48b6bb0",
+    "results/ckpt3/corrected-adaptive-memory-v1/raw/user6/memories.json": "95033cd60242b76b4897264af9856473734e4528d27ebdadbe8819d3a189d84f",
+    "results/ckpt3/corrected-adaptive-memory-v1/raw/user7/memories.json": "dcc74c6c8a31188f10a80c2ce587722e62edc4b1040326135d52286f54f152a5"
+  },
+  "protocol_sha256": "f14b352ccb0cf4324ab38d2da7606202668e82a5d0782a8b92f33f4d90b85ced"
+}

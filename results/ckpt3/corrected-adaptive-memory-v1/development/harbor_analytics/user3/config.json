@@ -1,0 +1,23 @@
+{
+  "K": 5,
+  "case": "harbor_analytics",
+  "case_sha256": "a05b7eb213dafdddefe5cd2285f8a82005092c2b47867c874abf5bf8bf2b7380",
+  "phase": "development",
+  "probe_tiers": [
+    1,
+    3,
+    5
+  ],
+  "protocol_sha256": "f14b352ccb0cf4324ab38d2da7606202668e82a5d0782a8b92f33f4d90b85ced",
+  "reward": "surplus_share",
+  "role": "buyer",
+  "scoring": "declared numeric case utilities",
+  "training_tiers": [
+    2,
+    2,
+    4,
+    4,
+    4
+  ],
+  "user": 3
+}

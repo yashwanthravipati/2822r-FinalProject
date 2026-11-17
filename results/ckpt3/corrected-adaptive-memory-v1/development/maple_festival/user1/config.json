@@ -1,0 +1,23 @@
+{
+  "K": 5,
+  "case": "maple_festival",
+  "case_sha256": "0837cbbd1f5b6715e90328a86868a0f70a25abab104dc2dae10a87403e6236e0",
+  "phase": "development",
+  "probe_tiers": [
+    1,
+    3,
+    5
+  ],
+  "protocol_sha256": "f14b352ccb0cf4324ab38d2da7606202668e82a5d0782a8b92f33f4d90b85ced",
+  "reward": "surplus_share",
+  "role": "organizer",
+  "scoring": "declared numeric case utilities",
+  "training_tiers": [
+    2,
+    2,
+    4,
+    4,
+    4
+  ],
+  "user": 1
+}
