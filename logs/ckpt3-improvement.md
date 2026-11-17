@@ -87,3 +87,12 @@ claimed matching current-source fingerprint. Raw histories and coaching remain i
   Their already recorded combined forecast is approximately $32–56 additional development
   cost including preparation, within the existing cumulative cap; at most eight workers
   across the two processes. No fresh test outcomes are accessed.
+- Prespecified an additional per-persona prompt-selection policy before any new Sim4
+  assessment: choose the memory with highest three-tier mean G on hiring, with ties
+  favoring reports, then reflection, workbook, fixed procedure. Evaluate that choice on
+  Sim4 only, never on the selection case as evidence of transfer. This reuses the same
+  four candidate assessments and adds no API calls. `scripts/select_consolidation.py`
+  reads only selection-case outcomes and hashes them and frozen memories. All candidates
+  are evaluated regardless of selection, so generating the selection file after a target
+  run does not affect the fixed rule; no target score enters selection. This tests bounded
+  per-user prompt refinement more directly than assuming one representation suits everyone.

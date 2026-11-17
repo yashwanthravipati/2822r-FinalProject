@@ -4,6 +4,18 @@ from pathlib import Path
 import pytest
 
 
+def test_prompt_selection_uses_only_selection_scores_and_prespecified_ties():
+    path = Path(__file__).parents[1] / "scripts/select_consolidation.py"
+    spec = importlib.util.spec_from_file_location("selection", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    rows = [{"user": u, "method": m, "final_G": 0.5} for u in (0, 1) for m in module.ORDER]
+    rows[-2]["final_G"] = 0.6
+    assert module.select(rows, [0, 1]) == {"0": "reports", "1": "workbook"}
+    with pytest.raises(ValueError, match="complete"):
+        module.select(rows[:-1], [0, 1])
+
+
 def test_cases_are_averaged_within_persona_and_incomplete_cohorts_rejected(monkeypatch):
     scripts = Path(__file__).parents[1] / "scripts"
     monkeypatch.syspath_prepend(str(scripts))
