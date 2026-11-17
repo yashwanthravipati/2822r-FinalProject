@@ -157,6 +157,13 @@ case/source/history/memory hashes before assessment and rejects fresh-test cases
 development. Separate cumulative checkpoint-3 ledgers retain their authorized $100 caps.
 See `logs/ckpt3-improvement.md` for selection and transfer-test separation.
 
+`consolidation_ablate.py` reuses verified, hashed control episodes and freezes added memory
+variants; its audit distinguishes reused episodes from newly executed ones. It cannot use
+fresh-test cases. `consolidation_final.py` records the selected primary method, draws fresh
+personas, trains one common reports branch per persona, and freezes all memories before
+fresh-case assessment. It adds no actor-weight or persona updates. Source/version checks
+include the experiment extension scripts as well as the shared actor and scoring code.
+
 `results/calibration/` holds population costs and tuned lambda/kappa, matched by full case
 hash and role before the app loads them. Calibration from another upload is never reused.
 Before calibration, the app retains explicitly uncalibrated unit priors. Private raw

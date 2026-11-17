@@ -133,6 +133,11 @@ def main():
     ]
     source = hashlib.sha256(b"".join(p.read_bytes() for p in paths)).hexdigest()
     check(source == protocol["source_sha256"], "source changed")
+    if "final_source_sha256" in protocol:
+        check(
+            digest(Path("scripts/consolidation_final.py")) == protocol["final_source_sha256"],
+            "final source changed",
+        )
     if "ablation_source_sha256" in protocol:
         check(
             digest(Path("scripts/consolidation_ablate.py")) == protocol["ablation_source_sha256"],
