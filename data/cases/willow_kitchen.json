@@ -1,0 +1,191 @@
+{
+  "id": "willow_kitchen",
+  "issues": [
+    {
+      "description": "",
+      "id": "fee",
+      "name": "Monthly fee",
+      "options": [
+        {
+          "id": "fee_0",
+          "label": "$1,200"
+        },
+        {
+          "id": "fee_1",
+          "label": "$1,600"
+        },
+        {
+          "id": "fee_2",
+          "label": "$2,000"
+        },
+        {
+          "id": "fee_3",
+          "label": "$2,400"
+        }
+      ]
+    },
+    {
+      "description": "",
+      "id": "schedule",
+      "name": "Weekly cooking session",
+      "options": [
+        {
+          "id": "schedule_0",
+          "label": "Saturday morning"
+        },
+        {
+          "id": "schedule_1",
+          "label": "Saturday afternoon"
+        },
+        {
+          "id": "schedule_2",
+          "label": "Weekday evening"
+        },
+        {
+          "id": "schedule_3",
+          "label": "Weekday daytime"
+        }
+      ]
+    },
+    {
+      "description": "",
+      "id": "storage",
+      "name": "Storage access",
+      "options": [
+        {
+          "id": "storage_0",
+          "label": "None"
+        },
+        {
+          "id": "storage_1",
+          "label": "Shared refrigerator"
+        },
+        {
+          "id": "storage_2",
+          "label": "Dedicated refrigerator"
+        },
+        {
+          "id": "storage_3",
+          "label": "Refrigerator and pantry"
+        }
+      ]
+    },
+    {
+      "description": "",
+      "id": "cleanup",
+      "name": "Cleanup arrangement",
+      "options": [
+        {
+          "id": "cleanup_0",
+          "label": "Tenant handles all"
+        },
+        {
+          "id": "cleanup_1",
+          "label": "Shared tasks"
+        },
+        {
+          "id": "cleanup_2",
+          "label": "Basic service"
+        },
+        {
+          "id": "cleanup_3",
+          "label": "Full service"
+        }
+      ]
+    }
+  ],
+  "public_brief": "A nonprofit meal program and a shared-kitchen operator are arranging a monthly rental. Choose one listed option for each of four issues as one agreement. Prices cover the listed access and services. Both parties have alternatives; no custom terms.",
+  "roles": [
+    {
+      "confidential_brief": "Protect the operating budget and volunteer access. Storage and cleanup help make the program practical, but a viable schedule is essential.",
+      "constraints": [
+        {
+          "description": "Volunteers cannot use a weekday daytime session.",
+          "disallowed": {
+            "schedule": [
+              "schedule_3"
+            ]
+          },
+          "hard": true
+        }
+      ],
+      "id": "nonprofit",
+      "inferred": false,
+      "name": "Meal program",
+      "points": {
+        "cleanup": {
+          "cleanup_0": 0.0,
+          "cleanup_1": 35.0,
+          "cleanup_2": 65.0,
+          "cleanup_3": 85.0
+        },
+        "fee": {
+          "fee_0": 140.0,
+          "fee_1": 90.0,
+          "fee_2": 40.0,
+          "fee_3": 0.0
+        },
+        "schedule": {
+          "schedule_0": 90.0,
+          "schedule_1": 70.0,
+          "schedule_2": 45.0,
+          "schedule_3": 0.0
+        },
+        "storage": {
+          "storage_0": 0.0,
+          "storage_1": 40.0,
+          "storage_2": 70.0,
+          "storage_3": 95.0
+        }
+      },
+      "reservation_value": 145.0
+    },
+    {
+      "confidential_brief": "Protect revenue and staffing capacity. Weekend slots and dedicated storage displace other customers. Prefer tenants handling cleanup.",
+      "constraints": [
+        {
+          "description": "Staffing does not permit full-service cleanup.",
+          "disallowed": {
+            "cleanup": [
+              "cleanup_3"
+            ]
+          },
+          "hard": true
+        }
+      ],
+      "id": "operator",
+      "inferred": false,
+      "name": "Kitchen operator",
+      "points": {
+        "cleanup": {
+          "cleanup_0": 90.0,
+          "cleanup_1": 60.0,
+          "cleanup_2": 25.0,
+          "cleanup_3": 0.0
+        },
+        "fee": {
+          "fee_0": 0.0,
+          "fee_1": 55.0,
+          "fee_2": 105.0,
+          "fee_3": 160.0
+        },
+        "schedule": {
+          "schedule_0": 0.0,
+          "schedule_1": 25.0,
+          "schedule_2": 65.0,
+          "schedule_3": 100.0
+        },
+        "storage": {
+          "storage_0": 95.0,
+          "storage_1": 65.0,
+          "storage_2": 35.0,
+          "storage_3": 0.0
+        }
+      },
+      "reservation_value": 150.0
+    }
+  ],
+  "source": "Original fictional research case authored before residual-study development outcomes. Utilities are experimental assumptions; free to use and commit.",
+  "source_documents": [],
+  "title": "Willow Community Kitchen Rental"
+}

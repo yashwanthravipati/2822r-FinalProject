@@ -249,3 +249,20 @@ Sim4 has now been examined and is a revisited benchmark, not an untouched test s
   ceiling $140 and retain final $110 for conservative reservations. Combined $250
   ceilings minus pre-audit $178.940503 permit at most $71.059497 new spending, below
   $150; preserve all prior ledger charges and limits audit history.
+- 2026-11-17: User reiterated urgency: "What are you doing?! Have you riun the final
+  evals yet?" Prioritize closure with an unconditional final audit of the existing
+  personal-plan method. Do NOT run the proposed residual-advice development search;
+  its unexecuted candidate code was removed. Finish only the already-running forty
+  practices to supply eight additional histories, then preserve the eight old plans
+  exactly and generate eight new plans with unchanged dd19a8d build_plan logic.
+  Reallocate the never-scored Pine/Willow files to final-personal-audit-v1, recording
+  the amendment before any outcomes and retaining the original case hashes/manifest.
+  This is a new unconditional audit, not a claim that the earlier failed gate passed.
+  Fixed sixteen histories x two cases x reports/generic/personalized =96 final
+  negotiations, matched controller seeds, randomized arm order, no final feedback,
+  tuning, outcome-dependent stopping or per-user selection. Average cases within each
+  history; require positive means and exact two-sided sign-flip p<=.05 versus BOTH
+  controls. Report all outcomes even on failure. Eight reused histories/eight new,
+  two prompt profiles, synthetic assumed utilities and incomplete calibration remain
+  limitations. Estimated additional preparation+final cost $10, within existing caps
+  and the latest $150 authorization. No further development experiments are launched.

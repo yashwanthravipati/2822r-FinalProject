@@ -1,0 +1,206 @@
+{
+  "arms": [
+    "reports",
+    "generic",
+    "personalized"
+  ],
+  "case_allocation_sha256": "efd1b3b48216c19441f5a6b1f89ec909cb478c248a2180ef34f2df9aa27e2494",
+  "cases": [
+    {
+      "id": "pine_learning",
+      "path": "data/cases/pine_learning.json",
+      "role": "district",
+      "sha256": "b44abdb1693b91c70e2ac1f54c5ad727020e2a496104f0abf48bba7890db99fa"
+    },
+    {
+      "id": "willow_kitchen",
+      "path": "data/cases/willow_kitchen.json",
+      "role": "nonprofit",
+      "sha256": "2b3b8fd799dde5d5a530169aa9631bd84fdffd27904963c7c1007b3ed139d9d4"
+    }
+  ],
+  "coach": "claude-opus-5-5",
+  "cohort_protocol_sha256": "d40f8716a95fbbe09fa5256ab2d1d14fe0b625a2860eae6f64dd004236d48632",
+  "confirmation_rule": "Both means positive and both exact two-sided sign-flip p<=.05, all 96 outcomes complete and independently verified",
+  "core_sha256": "2344e86d531d8ea3ccc9e60883eafd9ea8837a9a13c87f976da1fd78276fab31",
+  "counterpart": "rule-based economic controller and templated dialogue",
+  "effort": "low",
+  "estimated_additional_api_usd": 10,
+  "exclusions": "No Sim4/Cedar or final-case dialogue, scores or utilities enter plan generation. No feedback, tuning or retries based on final outcomes.",
+  "expected_assessments": 96,
+  "expected_new_plan_calls": 8,
+  "learner": "claude-sonnet-5-5",
+  "limits": "Two synthetic cases, sixteen stochastic histories of two prompt profiles; eight histories reused, eight new; incomplete full-session calibration; no human or six-weakness claim",
+  "method": "Unchanged one-shot personal-plan generator from dd19a8d; all five reports retained, no per-user arm selector, no residual-advice amendment",
+  "old_plans": {
+    "results/ckpt3/corrected-adaptive-memory-v1/raw/user0/plan.json": "2c0dbecae6273300b1a4f9317f1113d1ff0282cb1f06d632f38852f6fbbbfa75",
+    "results/ckpt3/corrected-adaptive-memory-v1/raw/user1/plan.json": "5f55c83421b1a34cdb6694580eb3958cab225dcb2ec6d4c1cad1007b5d667f64",
+    "results/ckpt3/corrected-adaptive-memory-v1/raw/user2/plan.json": "f31afeaebdca80f6e3a05dd374c43ae61b9a6ab32d872e0763bf580a8275c6fa",
+    "results/ckpt3/corrected-adaptive-memory-v1/raw/user3/plan.json": "35380825d4ffeca9a3420c17bc5b4df5048478dc6fe26a6f0186ee650748aca5",
+    "results/ckpt3/corrected-adaptive-memory-v1/raw/user4/plan.json": "9c980809928e175184821169900ab36c3960b8c8eacc6743bcbf2f4b50f8b815",
+    "results/ckpt3/corrected-adaptive-memory-v1/raw/user5/plan.json": "03311cfca17b3c66ad1a1e67002fa79368bfe0e7edace8fc7d9c25759ff682fa",
+    "results/ckpt3/corrected-adaptive-memory-v1/raw/user6/plan.json": "355bbde28a278609c84469db35e793fb6fd91381c7e251ebbea0342a06c7f600",
+    "results/ckpt3/corrected-adaptive-memory-v1/raw/user7/plan.json": "fcc876706888f7b91f5c185c5529963b2880001a410cec26e3df7c3283682991"
+  },
+  "primary": "Personalized minus reports AND personalized minus generic; average the two cases within each of sixteen independent practice histories first",
+  "prior_evidence": "The prior selector failed its joint development gate. The personal plan had the highest secondary mean, without established superiority over generic advice. This unconditional final audit does not change that failed gate or qualify the candidate retroactively.",
+  "seed": 2822122808,
+  "sources": {
+    "adaptive_memory.py": "e99b281378baf9a74a01d37426d563eddcb6ab30124583cf04dbf8f9c28f87a1",
+    "evaluate_fresh_confirmation.py": "4755bf6ceb2cc6f2e0c1b7a07f2fa425aaef69ae28d55210ea23b2ed98bd25cf",
+    "final_personal_audit.py": "daf7b1e5eaaacb125866172ba65f7747620464dc8b1914797c1b346d651e75d8",
+    "persona_decision.py": "785ffd781a5244ea00da089641cca08973de565c421cb93bd340076fcdc3b196",
+    "persona_instructions.py": "ed2f01eee35dc244505a327fe736925d86bcc6507d0c2e880424349b1f5ddc68",
+    "probe_isolated_personas.py": "28aa1dadb3b44f14ad31cac8e2e456034e45fe49cb16140dda1c1ec4478d6fa5",
+    "train_residual_cohort.py": "934e68c031bc13b3f9bda6866ea06c9c319874a5aa53ec3d17d88f9ec7c9545d"
+  },
+  "tier": 3,
+  "traits": {
+    "0": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "1": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "10": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "11": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "12": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "13": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "14": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "15": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "2": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "3": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "4": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "5": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "6": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "7": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "8": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "9": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    }
+  },
+  "users": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ]
+}

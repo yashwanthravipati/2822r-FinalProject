@@ -1,0 +1,202 @@
+{
+  "id": "pine_learning",
+  "issues": [
+    {
+      "description": "",
+      "id": "fee",
+      "name": "Annual fee",
+      "options": [
+        {
+          "id": "fee_0",
+          "label": "$24,000"
+        },
+        {
+          "id": "fee_1",
+          "label": "$36,000"
+        },
+        {
+          "id": "fee_2",
+          "label": "$48,000"
+        },
+        {
+          "id": "fee_3",
+          "label": "$60,000"
+        }
+      ]
+    },
+    {
+      "description": "",
+      "id": "access",
+      "name": "Student access",
+      "options": [
+        {
+          "id": "access_0",
+          "label": "School hours"
+        },
+        {
+          "id": "access_1",
+          "label": "Extended weekday hours"
+        },
+        {
+          "id": "access_2",
+          "label": "Unlimited hours"
+        }
+      ]
+    },
+    {
+      "description": "",
+      "id": "training",
+      "name": "Staff training",
+      "options": [
+        {
+          "id": "training_0",
+          "label": "Self-service materials"
+        },
+        {
+          "id": "training_1",
+          "label": "Remote cohort"
+        },
+        {
+          "id": "training_2",
+          "label": "On-site workshop"
+        }
+      ]
+    },
+    {
+      "description": "",
+      "id": "telemetry",
+      "name": "Usage reporting",
+      "options": [
+        {
+          "id": "telemetry_0",
+          "label": "Aggregate only"
+        },
+        {
+          "id": "telemetry_1",
+          "label": "Opt-in individual"
+        },
+        {
+          "id": "telemetry_2",
+          "label": "Mandatory individual"
+        }
+      ]
+    },
+    {
+      "description": "",
+      "id": "term",
+      "name": "Contract duration",
+      "options": [
+        {
+          "id": "term_0",
+          "label": "One year"
+        },
+        {
+          "id": "term_1",
+          "label": "Two years"
+        },
+        {
+          "id": "term_2",
+          "label": "Three years"
+        }
+      ]
+    }
+  ],
+  "public_brief": "A school district and a software vendor are negotiating a learning-platform license. Agree on all five listed terms as a complete package. Service options are available subject to each side's stated hard constraints. Each side may use its alternative.",
+  "roles": [
+    {
+      "confidential_brief": "Budget flexibility is limited. Value access and usable staff training, while preserving student privacy and renewal flexibility.",
+      "constraints": [
+        {
+          "description": "The district cannot require individual usage reporting.",
+          "disallowed": {
+            "telemetry": [
+              "telemetry_2"
+            ]
+          },
+          "hard": true
+        }
+      ],
+      "id": "district",
+      "inferred": false,
+      "name": "School district",
+      "points": {
+        "access": {
+          "access_0": 0.0,
+          "access_1": 40.0,
+          "access_2": 90.0
+        },
+        "fee": {
+          "fee_0": 180.0,
+          "fee_1": 120.0,
+          "fee_2": 55.0,
+          "fee_3": 0.0
+        },
+        "telemetry": {
+          "telemetry_0": 80.0,
+          "telemetry_1": 40.0,
+          "telemetry_2": 0.0
+        },
+        "term": {
+          "term_0": 60.0,
+          "term_1": 35.0,
+          "term_2": 0.0
+        },
+        "training": {
+          "training_0": 0.0,
+          "training_1": 55.0,
+          "training_2": 75.0
+        }
+      },
+      "reservation_value": 200.0
+    },
+    {
+      "confidential_brief": "Recurring revenue and a stable contract matter. Support costs rise with access hours and hands-on training. Respect the price floor.",
+      "constraints": [
+        {
+          "description": "The vendor cannot license below $36,000 annually.",
+          "disallowed": {
+            "fee": [
+              "fee_0"
+            ]
+          },
+          "hard": true
+        }
+      ],
+      "id": "vendor",
+      "inferred": false,
+      "name": "Software vendor",
+      "points": {
+        "access": {
+          "access_0": 90.0,
+          "access_1": 45.0,
+          "access_2": 0.0
+        },
+        "fee": {
+          "fee_0": 0.0,
+          "fee_1": 65.0,
+          "fee_2": 125.0,
+          "fee_3": 190.0
+        },
+        "telemetry": {
+          "telemetry_0": 15.0,
+          "telemetry_1": 55.0,
+          "telemetry_2": 95.0
+        },
+        "term": {
+          "term_0": 0.0,
+          "term_1": 45.0,
+          "term_2": 85.0
+        },
+        "training": {
+          "training_0": 80.0,
+          "training_1": 50.0,
+          "training_2": 0.0
+        }
+      },
+      "reservation_value": 190.0
+    }
+  ],
+  "source": "Original fictional research case authored before residual-study development outcomes. Utilities are experimental assumptions; free to use and commit.",
+  "source_documents": [],
+  "title": "Pine Learning Software License"
+}

@@ -1,0 +1,28 @@
+{
+  "cases": [
+    {
+      "feasible_best": 345.0,
+      "id": "pine_learning",
+      "legal_packages": 162,
+      "mutually_acceptable_packages": 91,
+      "path": "data/cases/pine_learning.json",
+      "role": "district",
+      "sha256": "b44abdb1693b91c70e2ac1f54c5ad727020e2a496104f0abf48bba7890db99fa",
+      "status": "reserved_unscored"
+    },
+    {
+      "feasible_best": 290.0,
+      "id": "willow_kitchen",
+      "legal_packages": 144,
+      "mutually_acceptable_packages": 94,
+      "path": "data/cases/willow_kitchen.json",
+      "role": "nonprofit",
+      "sha256": "2b3b8fd799dde5d5a530169aa9631bd84fdffd27904963c7c1007b3ed139d9d4",
+      "status": "reserved_unscored"
+    }
+  ],
+  "original_manifest_sha256": "e06bfac0d018aa0e363a8618530600dfb8066622ab20f201a5274509ef4113cd",
+  "prior_recorded_negotiations": 0,
+  "reason": "User reiterated urgent final evaluation. Stop residual-advice development and use unchanged never-scored cases for an unconditional final audit of the original personal-plan method. The prior failed development gate remains failed; this amendment is not a promotion or retrospective success redefinition. Fixed complete outcomes, no tuning or outcome-dependent stopping.",
+  "scan_exit_code": 1
+}

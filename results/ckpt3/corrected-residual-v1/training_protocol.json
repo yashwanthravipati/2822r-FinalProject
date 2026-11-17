@@ -1,0 +1,234 @@
+{
+  "all_users": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "case_sha256": "0ea3d8144e1252b477aea3e42b267b5e873e843516b901762c16d3d22c2b7f93",
+  "coach": "claude-opus-5-5",
+  "core_sha256": "2344e86d531d8ea3ccc9e60883eafd9ea8837a9a13c87f976da1fd78276fab31",
+  "effort": "low",
+  "expected_new_practices": 40,
+  "learn_updates": false,
+  "learner": "claude-sonnet-5-5",
+  "limits": "16 stochastic histories of two concession profiles, not 16 human types",
+  "new_users": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "old_histories": {
+    "results/ckpt3/corrected-confirmation-v1/train/user0/raw/reports.json": "260a4adb9b5bfe61a164b73928bfa5ec4cfb0be79d382fe2c7c9f2fa15067cf4",
+    "results/ckpt3/corrected-confirmation-v1/train/user0/raw/user0_practice0.json": "5c33c00c6aeb245bfbebbd5fcfc34bc8e264cb7e223a558684877d6c3e37cdb5",
+    "results/ckpt3/corrected-confirmation-v1/train/user0/raw/user0_practice1.json": "dbddaf85dd8354a94d1fab068b94a28f038f607771a596de3fd0efafff01ab9c",
+    "results/ckpt3/corrected-confirmation-v1/train/user0/raw/user0_practice2.json": "90be3fa5dc477c49166563fa13a8fd7071f5c2798e1e15894fb6ae40e72a7872",
+    "results/ckpt3/corrected-confirmation-v1/train/user0/raw/user0_practice3.json": "329603d3c7610764cb8f613269bc53619999dc65941aea152e7625b8c1fc8105",
+    "results/ckpt3/corrected-confirmation-v1/train/user0/raw/user0_practice4.json": "c68ff013439fcabdfa32f101946ee0f3c933f3335931f28662dfae175bfe8ad7",
+    "results/ckpt3/corrected-confirmation-v1/train/user1/raw/reports.json": "998d4516d5672724df994748336c0ce7675cfa10f60752016615c6fee7bec80d",
+    "results/ckpt3/corrected-confirmation-v1/train/user1/raw/user1_practice0.json": "650fef3ae306be18e6487c8646c97a38ae93418da514db07b50632e465489763",
+    "results/ckpt3/corrected-confirmation-v1/train/user1/raw/user1_practice1.json": "90905ac9c331898abc69f9180c393f61e0180826d2191367b850b2d40b881911",
+    "results/ckpt3/corrected-confirmation-v1/train/user1/raw/user1_practice2.json": "145ef9c59a0cf656d2a641c89994fd2ae463954914cde7a5a686eb21af45c82a",
+    "results/ckpt3/corrected-confirmation-v1/train/user1/raw/user1_practice3.json": "7d9dd7b8410f05348db1c7dbae423b2dbb472dd821263ca24a8f281b0090a768",
+    "results/ckpt3/corrected-confirmation-v1/train/user1/raw/user1_practice4.json": "81621821bb60ff1e9487b062b3b8c62119c29c5c49da6b46803439999e06109b",
+    "results/ckpt3/corrected-confirmation-v1/train/user2/raw/reports.json": "6af995140f1fc435fe262b9dd8978c3f3ec192ee1e225f7bae026dc853306635",
+    "results/ckpt3/corrected-confirmation-v1/train/user2/raw/user2_practice0.json": "d343c0a32ec6858ecdf30a356c5400c9a14fde0cd2993ca7a96f40674c368c05",
+    "results/ckpt3/corrected-confirmation-v1/train/user2/raw/user2_practice1.json": "537f23ad04f4a4d05f64a5ec3f4fff5f7fdc7962631b4b568bb93402c2862a1e",
+    "results/ckpt3/corrected-confirmation-v1/train/user2/raw/user2_practice2.json": "e504945de3fbab622665c2bd276f13243a0840f6c8b901407610a10de36224ad",
+    "results/ckpt3/corrected-confirmation-v1/train/user2/raw/user2_practice3.json": "dc894885d9288b4b71b9dd700896546371b9bf999f034bf496115e78729682ba",
+    "results/ckpt3/corrected-confirmation-v1/train/user2/raw/user2_practice4.json": "5037f3e481121fa7e9cc42d5486edab03db3296ea1c23c0281d998dc3f4a4f18",
+    "results/ckpt3/corrected-confirmation-v1/train/user3/raw/reports.json": "da6123ad7a949492f381edb00f5b7fdd4564d0367cba78d903135b3988d84bc8",
+    "results/ckpt3/corrected-confirmation-v1/train/user3/raw/user3_practice0.json": "b5d4cac4006baa22d5c512186ba96aef70a01fad3e5e5ba8486898880896df49",
+    "results/ckpt3/corrected-confirmation-v1/train/user3/raw/user3_practice1.json": "b1eec13db437657f60cbfb48cb3d5e4ff248aadb629f9a587050fe014e73b2f1",
+    "results/ckpt3/corrected-confirmation-v1/train/user3/raw/user3_practice2.json": "36437ebdb28558269c4ec71c88d8595267de842077d8b138c3bf92022797c442",
+    "results/ckpt3/corrected-confirmation-v1/train/user3/raw/user3_practice3.json": "1abd51581e2034560f19b83af05d1c4c337618f7f761a2f8b229c9896432193f",
+    "results/ckpt3/corrected-confirmation-v1/train/user3/raw/user3_practice4.json": "61bcb7c898ab0616e63eee2e46f2bf43a18fa7672dc39b5b1b763659ec4a778d",
+    "results/ckpt3/corrected-confirmation-v1/train/user4/raw/reports.json": "ecf5b5a649ff7d9591a45c5a44a4a0c2437d5886589fb13479b846ae3497dec2",
+    "results/ckpt3/corrected-confirmation-v1/train/user4/raw/user4_practice0.json": "ef0d73f9b954a616b037a8b11a55159854291b1a1c92c2a2d77b32259279e5ee",
+    "results/ckpt3/corrected-confirmation-v1/train/user4/raw/user4_practice1.json": "98c39716cea7a3d35789ad0aad2fe7df82149eec1337e052da7aa9b3b6d9b456",
+    "results/ckpt3/corrected-confirmation-v1/train/user4/raw/user4_practice2.json": "1de207499c99e6072cdb6e55b967bbd9eb7a540ddcef0ed48a58f250cf41e0e2",
+    "results/ckpt3/corrected-confirmation-v1/train/user4/raw/user4_practice3.json": "ff36919f302252dd78aa9ab8fe7245d2dd49fcf001dcdcb52fd48223bca72ff3",
+    "results/ckpt3/corrected-confirmation-v1/train/user4/raw/user4_practice4.json": "f2ad7cf18768e558d47b45a10dc9efc36465467525d793bcc57fee3d8b282428",
+    "results/ckpt3/corrected-confirmation-v1/train/user5/raw/reports.json": "81c4823b286b6ca958ef0b4dda619b3f9061df51d777e4a6365d056568b00e33",
+    "results/ckpt3/corrected-confirmation-v1/train/user5/raw/user5_practice0.json": "e4ad279b5ec6387fbb289fcfc5cf08507f4e0215de499819ce8ec34c4bd82aff",
+    "results/ckpt3/corrected-confirmation-v1/train/user5/raw/user5_practice1.json": "0132ea867fe9a2c2d088d5cb5d62104b72a4b74e52cd6e4eaaa07257bb74eed9",
+    "results/ckpt3/corrected-confirmation-v1/train/user5/raw/user5_practice2.json": "df7e8e4345f5a0afd57466a34b9c2fd136942674b4eec622969291696c3fc206",
+    "results/ckpt3/corrected-confirmation-v1/train/user5/raw/user5_practice3.json": "6bbf381df871be55aff265b96baf72ce71a64b6b5f62e33490eacd332a19e929",
+    "results/ckpt3/corrected-confirmation-v1/train/user5/raw/user5_practice4.json": "9b71422f23e6bd15d63c1bcf6da03c4a6a0fe91f45132a7398b6a4456717559a",
+    "results/ckpt3/corrected-confirmation-v1/train/user6/raw/reports.json": "c5747ee2fd865203104f9e2f5f950aa9a9b39b40bcb592a1d3706e96f2d9ef48",
+    "results/ckpt3/corrected-confirmation-v1/train/user6/raw/user6_practice0.json": "d308e3b8a3bfca96c78628c696c35781df0c41c29905cc84d442c8aee7dc7dda",
+    "results/ckpt3/corrected-confirmation-v1/train/user6/raw/user6_practice1.json": "b9080f4afd8d466c1a83e462afec47ee060027c219ff1893d6e6a5876aa4415e",
+    "results/ckpt3/corrected-confirmation-v1/train/user6/raw/user6_practice2.json": "045ef45b4cc52d62873d0ad2f83c44186189cd04f5111e5b381a3eaa6b9a90cd",
+    "results/ckpt3/corrected-confirmation-v1/train/user6/raw/user6_practice3.json": "c96324e00245ccc4409173785cffc0a5456c4d64f305f1e8a2adb8c9cce50001",
+    "results/ckpt3/corrected-confirmation-v1/train/user6/raw/user6_practice4.json": "74be415b9b8ab8654b3cdabd2994c63312e41cdd55c7cb8dee80f6f27ae05aac",
+    "results/ckpt3/corrected-confirmation-v1/train/user7/raw/reports.json": "71882d5c6f27cd416ba91c2476758657a2468a70ebbf1afa5f92bd28314df00a",
+    "results/ckpt3/corrected-confirmation-v1/train/user7/raw/user7_practice0.json": "169ab903d2156fb5dc8d59c70310ec5a13a0af1e538df7f49adaa53fb0cdfeb4",
+    "results/ckpt3/corrected-confirmation-v1/train/user7/raw/user7_practice1.json": "11ca924cd96684da98c414a87d15b67cd5c60c73f166622dfeb0a0461da4bbb7",
+    "results/ckpt3/corrected-confirmation-v1/train/user7/raw/user7_practice2.json": "a43c4230d6f748162941a676749426390a134cfb67720537b1daf43f7c6ff1f1",
+    "results/ckpt3/corrected-confirmation-v1/train/user7/raw/user7_practice3.json": "dc2d8eafe6badee36f9de24b0fdc06c0ff59fdd288b9e70d6204df85f2bfcb91",
+    "results/ckpt3/corrected-confirmation-v1/train/user7/raw/user7_practice4.json": "9595d55abde4faf699d799c6cb543f81a3278bf9d7d2e6ca06e842796181b8d7"
+  },
+  "role": "officer",
+  "seed": 2822122807,
+  "sources": {
+    "evaluate_fresh_confirmation.py": "4755bf6ceb2cc6f2e0c1b7a07f2fa425aaef69ae28d55210ea23b2ed98bd25cf",
+    "persona_decision.py": "785ffd781a5244ea00da089641cca08973de565c421cb93bd340076fcdc3b196",
+    "persona_instructions.py": "ed2f01eee35dc244505a327fe736925d86bcc6507d0c2e880424349b1f5ddc68",
+    "probe_isolated_personas.py": "28aa1dadb3b44f14ad31cac8e2e456034e45fe49cb16140dda1c1ec4478d6fa5",
+    "train_residual_cohort.py": "934e68c031bc13b3f9bda6866ea06c9c319874a5aa53ec3d17d88f9ec7c9545d"
+  },
+  "tiers": [
+    2,
+    2,
+    4,
+    4,
+    4
+  ],
+  "traits": {
+    "0": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "1": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "10": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "11": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "12": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "13": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "14": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "15": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "2": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "3": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "4": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "5": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "6": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "7": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "8": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "9": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    }
+  }
+}

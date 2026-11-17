@@ -1,0 +1,25 @@
+{
+  "cases": [
+    {
+      "feasible_best": 345.0,
+      "id": "pine_learning",
+      "legal_packages": 162,
+      "mutually_acceptable_packages": 91,
+      "path": "data/cases/pine_learning.json",
+      "role": "district",
+      "sha256": "b44abdb1693b91c70e2ac1f54c5ad727020e2a496104f0abf48bba7890db99fa",
+      "status": "reserved_unscored"
+    },
+    {
+      "feasible_best": 290.0,
+      "id": "willow_kitchen",
+      "legal_packages": 144,
+      "mutually_acceptable_packages": 94,
+      "path": "data/cases/willow_kitchen.json",
+      "role": "nonprofit",
+      "sha256": "2b3b8fd799dde5d5a530169aa9631bd84fdffd27904963c7c1007b3ed139d9d4",
+      "status": "reserved_unscored"
+    }
+  ],
+  "policy": "No API negotiations before the complete verified residual development cohort passes its frozen advance rule. No case tuning from outcomes."
+}
