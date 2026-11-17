@@ -1,0 +1,9 @@
+[
+{"memory_characters": {"diverse_reports": 17668, "reports": 17227}, "new_practice_R": [0.038461538461538464, 0.425, 0.057692307692307696], "user": 0},
+{"memory_characters": {"diverse_reports": 17672, "reports": 16547}, "new_practice_R": [0.09615384615384616, 0.75, 0.3269230769230769], "user": 1},
+{"memory_characters": {"diverse_reports": 17612, "reports": 16116}, "new_practice_R": [0.0, 0.7, 0.09615384615384616], "user": 2},
+{"memory_characters": {"diverse_reports": 17096, "reports": 16299}, "new_practice_R": [0.0, 0.375, 0.23076923076923078], "user": 3},
+{"memory_characters": {"diverse_reports": 16753, "reports": 16226}, "new_practice_R": [0.0, 0.425, 0.0], "user": 4},
+{"memory_characters": {"diverse_reports": 16995, "reports": 16629}, "new_practice_R": [0.3269230769230769, 0.75, 0.23076923076923078], "user": 5},
+{"memory_characters": {"diverse_reports": 16798, "reports": 15878}, "new_practice_R": [0.038461538461538464, 0.425, 0.057692307692307696], "user": 6}
+]

@@ -1,0 +1,82 @@
+{
+  "K": 5,
+  "ablation_source_sha256": "274cbff2dba29045e5924446a976739fe7124dde9af21c40286de61c9ae43ef6",
+  "budget": "final",
+  "cache_ttl": "5m",
+  "case_sha256": "c97ec5569d979fad439b607647c3a62c15691509d8fd9cb54943891c3ac8d6a8",
+  "cases": [
+    {
+      "key": "beacon_museum",
+      "path": "data/cases/beacon_museum.json",
+      "primary": true,
+      "role": "host",
+      "sha256": "d4221d8bf6412a5fbd9439ddeabe91e4fa30090d94c28a30dc409bb510f19b1c",
+      "status": "fresh_test"
+    }
+  ],
+  "coach_model": "claude-opus-5-5",
+  "diverse_memory_sha256": "8ad56806e0357a4ba38d7ed0820d9ce8bb128b84260778504a371f2f0440aca3",
+  "diverse_schedule": [
+    "hiring",
+    "sim4_revisited",
+    "hiring"
+  ],
+  "diverse_source_sha256": "bd0679543cf3d8076e88d2fee337bfd09200c7e8384357de3685965ffff21ada",
+  "final_source_sha256": "5c57f3490ed18cc80c217c8fc7a38be4cf2bbc43821e8f4cef3f9ff7c6667653",
+  "instruction_sha256": "ba9a474e5c25744a66e37a3007e447193e31f7a1c96dba33bfba6c5504234e42",
+  "learner_model": "claude-sonnet-5-5",
+  "methods": [
+    "reports",
+    "diverse_reports"
+  ],
+  "practice_cases": [
+    {
+      "key": "hiring",
+      "path": "data/cases/cloudline_hiring.json",
+      "primary": true,
+      "role": "candidate",
+      "sha256": "37acbcbf6be2b9e8b2489b058e0f347f1a5007f485a945725a6d049f70976541",
+      "status": "development"
+    },
+    {
+      "key": "sim4_revisited",
+      "path": "data/cases/private/sim4_inferred.json",
+      "primary": true,
+      "role": "global_relief",
+      "sha256": "2d339ecf290bdf6d868f85f220295195b58356a9657820fb51afd7bfc70f8c9e",
+      "status": "development"
+    }
+  ],
+  "primary_comparison": "reports",
+  "primary_method": "diverse_reports",
+  "probe_tiers": [
+    1,
+    3,
+    5
+  ],
+  "reward": "surplus_share",
+  "role": "candidate",
+  "scoring": "declared numeric case utilities",
+  "seed": 28221129,
+  "source_protocol_sha256": "400ec7b56ca765ddbdc4097944d896a9e39cb513b4ba6a0a94a7f8dfe569c0a5",
+  "source_root": "results/ckpt3/consolidation-final-v1",
+  "source_sha256": "0eb60cbbfddac9c74bfdb76ce073fdb3a1c56c7624f0a1f6cf8c019e0408b457",
+  "training_case_sha256": "0ea3d8144e1252b477aea3e42b267b5e873e843516b901762c16d3d22c2b7f93",
+  "training_role": "officer",
+  "training_tiers": [
+    2,
+    2,
+    4,
+    4,
+    4
+  ],
+  "users": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ]
+}
