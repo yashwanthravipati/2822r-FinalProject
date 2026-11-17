@@ -12,6 +12,10 @@ missing counterpart sheets are labeled inferred. Private uploads, originals, tra
 and participant records stay in gitignored directories. `data/cases/sim3/` is likewise
 ignored because it contains the supplied class materials.
 
+Case loading requires nonblank IDs and exact point-table coverage: extra unlisted issues
+or options are rejected. The standalone scorer also checks the public option catalog,
+so later mutation of a role's point table cannot make an unlisted term valid.
+
 Scoring is deterministic. `cases/offers.feasible_best_points` computes the exact maximum
 user utility among packages satisfying the counterpart walk-away and hard constraints,
 using an additive Pareto frontier. `surplus_share` computes R without clipping negative

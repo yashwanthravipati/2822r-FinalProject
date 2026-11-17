@@ -34,12 +34,13 @@ def score_offer(case: Case, role_id: str, offer: Offer) -> ScoreResult:
     role = case.role(role_id)
     points = 0.0
     violations: list[str] = []
+    listed = {issue.id: set(issue.option_ids()) for issue in case.issues}
     for issue_id in offer.custom_terms:
         if issue_id not in {i.id for i in case.issues}:
             violations.append(f"unknown issue {issue_id}")
     for issue_id, option_id in offer.terms.items():
         table = role.points.get(issue_id)
-        if table is None or option_id not in table:
+        if option_id not in listed.get(issue_id, set()) or table is None or option_id not in table:
             violations.append(f"unknown term {issue_id}={option_id}")
             continue
         points += table[option_id]

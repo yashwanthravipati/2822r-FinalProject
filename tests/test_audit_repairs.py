@@ -48,7 +48,20 @@ def test_efficiency_denominator_respects_constraints_from_either_role(case):
 
 @pytest.mark.parametrize(
     "defect",
-    ["nan", "infinity", "duplicate_issue", "duplicate_option", "duplicate_role", "constraint"],
+    [
+        "nan",
+        "infinity",
+        "duplicate_issue",
+        "duplicate_option",
+        "duplicate_role",
+        "constraint",
+        "extra_issue_points",
+        "extra_option_points",
+        "blank_case",
+        "blank_issue",
+        "blank_role",
+        "blank_option",
+    ],
 )
 def test_bad_case_data_is_rejected_before_simulation(case, defect):
     data = case.model_dump()
@@ -62,7 +75,34 @@ def test_bad_case_data_is_rejected_before_simulation(case, defect):
         data["issues"][0]["options"].append(data["issues"][0]["options"][0])
     elif defect == "duplicate_role":
         data["roles"].append(data["roles"][0])
+    elif defect == "extra_issue_points":
+        data["roles"][0]["points"]["unlisted"] = {"x": 1000000}
+    elif defect == "extra_option_points":
+        data["roles"][0]["points"]["salary"]["unlisted"] = 1000000
+    elif defect == "blank_case":
+        data["id"] = " "
+    elif defect == "blank_issue":
+        data["issues"][0]["id"] = " "
+    elif defect == "blank_role":
+        data["roles"][0]["id"] = " "
+    elif defect == "blank_option":
+        data["issues"][0]["options"][0]["id"] = " "
     else:
         data["roles"][0]["constraints"] = [{"description": "bad", "disallowed": {"typo": ["x"]}}]
     with pytest.raises(ValueError):
         Case.model_validate(data)
+
+
+@pytest.mark.parametrize("extra_issue", [False, True])
+def test_scorer_rejects_unlisted_terms_even_if_point_tables_are_mutated(case, extra_issue):
+    offer = Offer(terms={i.id: i.option_ids()[0] for i in case.issues})
+    if extra_issue:
+        case.roles[0].points["unlisted_issue"] = {"unlisted": 1000000}
+        offer.terms["unlisted_issue"] = "unlisted"
+    else:
+        case.roles[0].points["salary"]["unlisted"] = 1000000
+        offer.terms["salary"] = "unlisted"
+    result = score_offer(case, case.roles[0].id, offer)
+    assert not result.valid
+    assert any("unknown term" in message for message in result.violations)
+    assert result.points < 1000000

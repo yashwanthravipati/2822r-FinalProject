@@ -86,6 +86,14 @@ class Case(BaseModel):
     def _check_points_cover_issues(self) -> Case:
         issue_ids = [issue.id for issue in self.issues]
         role_ids = [role.id for role in self.roles]
+        identifiers = [
+            self.id,
+            *issue_ids,
+            *role_ids,
+            *(option.id for issue in self.issues for option in issue.options),
+        ]
+        if any(not identifier.strip() for identifier in identifiers):
+            raise ValueError("case, issue, role and option IDs must not be blank")
         if not issue_ids or len(issue_ids) != len(set(issue_ids)):
             raise ValueError("case requires nonempty, unique issue IDs")
         if not role_ids or len(role_ids) != len(set(role_ids)):
@@ -95,6 +103,8 @@ class Case(BaseModel):
             if not options or len(options) != len(set(options)):
                 raise ValueError("issues require nonempty, unique option IDs")
         for role in self.roles:
+            if set(role.points) != set(issue_ids):
+                raise ValueError("point tables must exactly match the listed issues")
             if not math.isfinite(role.reservation_value) or any(
                 not math.isfinite(value)
                 for table in role.points.values()
@@ -113,6 +123,11 @@ class Case(BaseModel):
                 if missing:
                     raise ValueError(
                         f"role {role.id!r} issue {issue.id!r} missing options {sorted(missing)}"
+                    )
+                extra = set(table) - set(issue.option_ids())
+                if extra:
+                    raise ValueError(
+                        f"role {role.id!r} issue {issue.id!r} unlisted options {sorted(extra)}"
                     )
         return self
 
