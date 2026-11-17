@@ -161,3 +161,42 @@ remaining $56.660790 development allowance. The final budget and fresh cases sta
   +0.020833 and +0.030449. Existing reports gains remain +0.008013 and +0.044872.
   The two new hiring arms cost $4.760785 in provider-usage estimates across both cohorts.
   Sim4 outcomes are still pending. No candidate is selected from hiring alone.
+- v2 completed with 96 new episodes and 192 reused controls, costing $12.904979 in ledger
+  increments; no execution errors. Cumulative development is $56.244189, remaining
+  $43.755811. Incremental spending for this improvement goal is $47.080589. Averaging the
+  two development cases within each of eight personas gives gains: reports +0.044471,
+  workbook +0.044531, procedure +0.032833, no-example workbook +0.023498,
+  reports-plus-procedure +0.036979. The workbook's numerical lead over reports is essentially
+  zero and does not establish improvement. The ablations did not improve the overall result.
+
+## Frozen prospective confirmation, before any final calls
+
+Select **workbook** as the primary candidate against **reports**. Rationale: repeated
+positive hiring contrasts, similar aggregate development performance with substantially
+shorter retained context, and stronger performance than the two ablated variants overall.
+This is a hypothesis to test, not a claimed development victory. Fixed procedure and
+workbook-without-examples are secondary controls. Drop the unsuccessful case-based prompt
+selector from confirmation: its pooled Sim4 gain was lower than reports, despite a positive
+second-cohort result. Preserve all those results rather than selecting that favorable cohort.
+
+Use seven fresh personas, seed 28221129, five common report-guided Sim3 rehearsals, tiers
+(2,2,4,4,4), and baseline/post assessment tiers (1,3,5). The primary endpoint is workbook
+minus reports on the mean of the TWO fresh synthetic case scores within each persona.
+Bootstrap personas (2,000 draws, seed 1); n=7, not 14 independent persona-case pairs.
+Report gains, paired contrasts, failures and negative agreements for every condition.
+Only this one contrast is primary; secondary intervals are pointwise/exploratory.
+
+Budget-driven revision before test outcomes: focus confirmation on Harbor Analytics and
+Maple Festival, omitting another Sim4 rerun because it has already been examined extensively
+in development. This permits seven instead of the tentative six personas while protecting
+completion within the remaining final allowance. Case JSONs and hashes remain exactly as
+frozen before v1. See `confirmation_manifest.json`; the original tentative manifest remains
+preserved. No case or user was selected based on confirmation outcomes: none exist yet.
+
+Plan 77 training-case episodes (baseline + five practice + reports post per persona),
+210 fresh-case episodes, and seven consolidation calls: 287 episodes total, roughly
+3,600–4,400 API requests. Estimated 24–30M input at ~80% cache reads and 1.4–1.8M output,
+forecast $30–48 additional final cost using measured rates and a conservative per-episode
+upper forecast. Existing final ledger $41.133781/100; remaining $58.866219. Preserve enough
+room for the gateway's conservative live reservations; never raise/reset the cap. A single
+known refusal may be resumed once from the identical checkpoint with its cost recorded.

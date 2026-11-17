@@ -1,0 +1,1258 @@
+{
+  "cases": {
+    "hiring": {
+      "below_walkaway": 5,
+      "cases": 1,
+      "diagnostics": {
+        "agreement_rate": 1.0,
+        "below_walkaway_agreements": 5,
+        "conditions": {
+          "baseline": {
+            "agreements": 12,
+            "below_walkaway_agreements": 1,
+            "episodes": 12,
+            "mean_user_turns": 6.083333333333333
+          },
+          "procedure_only_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 2,
+            "episodes": 12,
+            "mean_user_turns": 6.0
+          },
+          "reports_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 1,
+            "episodes": 12,
+            "mean_user_turns": 6.083333333333333
+          },
+          "reports_with_procedure_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 0,
+            "episodes": 12,
+            "mean_user_turns": 6.25
+          },
+          "workbook_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 0,
+            "episodes": 12,
+            "mean_user_turns": 6.25
+          },
+          "workbook_no_examples_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 1,
+            "episodes": 12,
+            "mean_user_turns": 6.416666666666667
+          }
+        },
+        "episodes": 72,
+        "schedule_violations": 0
+      },
+      "episodes": 72,
+      "feasible_best": 8700.0,
+      "rows": [
+        {
+          "baseline_G": 0.1987179487179487,
+          "final_G": 0.1987179487179487,
+          "gain": 0.0,
+          "method": "procedure_only",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.1987179487179487,
+          "final_G": 0.1987179487179487,
+          "gain": 0.0,
+          "method": "reports",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.1987179487179487,
+          "final_G": 0.2820512820512821,
+          "gain": 0.0833333333333334,
+          "method": "reports_with_procedure",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.1987179487179487,
+          "final_G": 0.23076923076923075,
+          "gain": 0.03205128205128205,
+          "method": "workbook",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.1987179487179487,
+          "final_G": 0.26282051282051283,
+          "gain": 0.06410256410256412,
+          "method": "workbook_no_examples",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.3269230769230769,
+          "final_G": 0.23076923076923075,
+          "gain": -0.09615384615384617,
+          "method": "procedure_only",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.3269230769230769,
+          "final_G": 0.21794871794871795,
+          "gain": -0.10897435897435898,
+          "method": "reports",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.3269230769230769,
+          "final_G": 0.2948717948717949,
+          "gain": -0.03205128205128205,
+          "method": "reports_with_procedure",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.3269230769230769,
+          "final_G": 0.23076923076923075,
+          "gain": -0.09615384615384617,
+          "method": "workbook",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.3269230769230769,
+          "final_G": 0.2948717948717949,
+          "gain": -0.03205128205128205,
+          "method": "workbook_no_examples",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.26282051282051283,
+          "gain": 0.09615384615384617,
+          "method": "procedure_only",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.26282051282051283,
+          "gain": 0.09615384615384617,
+          "method": "reports",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.26282051282051283,
+          "gain": 0.09615384615384617,
+          "method": "reports_with_procedure",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.2948717948717949,
+          "gain": 0.12820512820512822,
+          "method": "workbook",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.3269230769230769,
+          "gain": 0.16025641025641027,
+          "method": "workbook_no_examples",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.25,
+          "final_G": 0.26282051282051283,
+          "gain": 0.01282051282051283,
+          "method": "procedure_only",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.25,
+          "final_G": 0.2948717948717949,
+          "gain": 0.04487179487179488,
+          "method": "reports",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.25,
+          "final_G": 0.23076923076923075,
+          "gain": -0.019230769230769246,
+          "method": "reports_with_procedure",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.25,
+          "final_G": 0.2884615384615385,
+          "gain": 0.03846153846153849,
+          "method": "workbook",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.25,
+          "final_G": 0.14102564102564105,
+          "gain": -0.10897435897435895,
+          "method": "workbook_no_examples",
+          "user": 3
+        }
+      ],
+      "status": "development",
+      "status_counts": {
+        "agreed": 72
+      },
+      "summary": {
+        "procedure_only": {
+          "baseline_G": {
+            "ci95": [
+              0.18269230769230768,
+              0.2948717948717949
+            ],
+            "mean": 0.23557692307692307,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.21474358974358973,
+              0.26282051282051283
+            ],
+            "mean": 0.23878205128205127,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.06899038461538463,
+              0.07211538461538464
+            ],
+            "mean": 0.0032051282051282076,
+            "n": 4
+          }
+        },
+        "procedure_only_minus_reports_with_procedure": {
+          "ci95": [
+            -0.07371794871794876,
+            0.016025641025641038
+          ],
+          "mean": -0.02884615384615386,
+          "n": 4
+        },
+        "procedure_only_minus_workbook_no_examples": {
+          "ci95": [
+            -0.06410256410256412,
+            0.0753205128205128
+          ],
+          "mean": -0.017628205128205142,
+          "n": 4
+        },
+        "reports": {
+          "baseline_G": {
+            "ci95": [
+              0.18269230769230768,
+              0.2948717948717949
+            ],
+            "mean": 0.23557692307692307,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.20833333333333331,
+              0.27884615384615385
+            ],
+            "mean": 0.2435897435897436,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.07079326923076922,
+              0.07211538461538464
+            ],
+            "mean": 0.008012820512820519,
+            "n": 4
+          }
+        },
+        "reports_minus_procedure_only": {
+          "ci95": [
+            -0.009615384615384602,
+            0.024038461538461536
+          ],
+          "mean": 0.004807692307692311,
+          "n": 4
+        },
+        "reports_minus_reports_with_procedure": {
+          "ci95": [
+            -0.08012820512820516,
+            0.03205128205128206
+          ],
+          "mean": -0.02403846153846155,
+          "n": 4
+        },
+        "reports_minus_workbook": {
+          "ci95": [
+            -0.03205128205128205,
+            -0.0032051282051282076
+          ],
+          "mean": -0.017628205128205128,
+          "n": 4
+        },
+        "reports_minus_workbook_no_examples": {
+          "ci95": [
+            -0.07371794871794872,
+            0.09935897435897434
+          ],
+          "mean": -0.01282051282051283,
+          "n": 4
+        },
+        "reports_with_procedure": {
+          "baseline_G": {
+            "ci95": [
+              0.18269230769230768,
+              0.2948717948717949
+            ],
+            "mean": 0.23557692307692307,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.24358974358974358,
+              0.28854166666666625
+            ],
+            "mean": 0.2676282051282052,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.025641025641025647,
+              0.08974358974358979
+            ],
+            "mean": 0.03205128205128207,
+            "n": 4
+          }
+        },
+        "workbook": {
+          "baseline_G": {
+            "ci95": [
+              0.18269230769230768,
+              0.2948717948717949
+            ],
+            "mean": 0.23557692307692307,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.23076923076923075,
+              0.2916666666666667
+            ],
+            "mean": 0.26121794871794873,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.06254006410256412,
+              0.10416666666666669
+            ],
+            "mean": 0.025641025641025647,
+            "n": 4
+          }
+        },
+        "workbook_minus_procedure_only": {
+          "ci95": [
+            0.008012820512820512,
+            0.03205128205128205
+          ],
+          "mean": 0.02243589743589744,
+          "n": 4
+        },
+        "workbook_minus_reports_with_procedure": {
+          "ci95": [
+            -0.057772435897435935,
+            0.04487179487179489
+          ],
+          "mean": -0.006410256410256422,
+          "n": 4
+        },
+        "workbook_minus_workbook_no_examples": {
+          "ci95": [
+            -0.056089743589743606,
+            0.10256410256410256
+          ],
+          "mean": 0.0048076923076922976,
+          "n": 4
+        },
+        "workbook_no_examples": {
+          "baseline_G": {
+            "ci95": [
+              0.18269230769230768,
+              0.2948717948717949
+            ],
+            "mean": 0.23557692307692307,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.17948717948717952,
+              0.3108974358974359
+            ],
+            "mean": 0.2564102564102564,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.0705128205128205,
+              0.1121794871794872
+            ],
+            "mean": 0.02083333333333335,
+            "n": 4
+          }
+        },
+        "workbook_no_examples_minus_reports_with_procedure": {
+          "ci95": [
+            -0.06730769230769228,
+            0.043269230769230754
+          ],
+          "mean": -0.01121794871794872,
+          "n": 4
+        }
+      }
+    },
+    "sim4_revisited": {
+      "below_walkaway": 0,
+      "cases": 1,
+      "diagnostics": {
+        "agreement_rate": 1.0,
+        "below_walkaway_agreements": 0,
+        "conditions": {
+          "baseline": {
+            "agreements": 12,
+            "below_walkaway_agreements": 0,
+            "episodes": 12,
+            "mean_user_turns": 7.0
+          },
+          "procedure_only_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 0,
+            "episodes": 12,
+            "mean_user_turns": 7.583333333333333
+          },
+          "reports_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 0,
+            "episodes": 12,
+            "mean_user_turns": 7.333333333333333
+          },
+          "reports_with_procedure_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 0,
+            "episodes": 12,
+            "mean_user_turns": 6.916666666666667
+          },
+          "workbook_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 0,
+            "episodes": 12,
+            "mean_user_turns": 6.75
+          },
+          "workbook_no_examples_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 0,
+            "episodes": 12,
+            "mean_user_turns": 6.75
+          }
+        },
+        "episodes": 72,
+        "schedule_violations": 0
+      },
+      "episodes": 72,
+      "feasible_best": 600.0,
+      "rows": [
+        {
+          "baseline_G": 0.6249999999999999,
+          "final_G": 0.6833333333333332,
+          "gain": 0.05833333333333335,
+          "method": "procedure_only",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.6249999999999999,
+          "final_G": 0.5708333333333333,
+          "gain": -0.054166666666666585,
+          "method": "reports",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.6249999999999999,
+          "final_G": 0.6,
+          "gain": -0.02499999999999991,
+          "method": "reports_with_procedure",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.6249999999999999,
+          "final_G": 0.39166666666666666,
+          "gain": -0.23333333333333323,
+          "method": "workbook",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.6249999999999999,
+          "final_G": 0.6083333333333334,
+          "gain": -0.016666666666666496,
+          "method": "workbook_no_examples",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.5125,
+          "final_G": 0.5166666666666667,
+          "gain": 0.004166666666666763,
+          "method": "procedure_only",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.5125,
+          "final_G": 0.6708333333333334,
+          "gain": 0.15833333333333344,
+          "method": "reports",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.5125,
+          "final_G": 0.4708333333333334,
+          "gain": -0.041666666666666574,
+          "method": "reports_with_procedure",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.5125,
+          "final_G": 0.5791666666666666,
+          "gain": 0.06666666666666665,
+          "method": "workbook",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.5125,
+          "final_G": 0.625,
+          "gain": 0.11250000000000004,
+          "method": "workbook_no_examples",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.41250000000000003,
+          "final_G": 0.625,
+          "gain": 0.21249999999999997,
+          "method": "procedure_only",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.41250000000000003,
+          "final_G": 0.6541666666666667,
+          "gain": 0.24166666666666664,
+          "method": "reports",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.41250000000000003,
+          "final_G": 0.5958333333333333,
+          "gain": 0.1833333333333333,
+          "method": "reports_with_procedure",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.41250000000000003,
+          "final_G": 0.5083333333333333,
+          "gain": 0.09583333333333327,
+          "method": "workbook",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.41250000000000003,
+          "final_G": 0.42500000000000004,
+          "gain": 0.012500000000000011,
+          "method": "workbook_no_examples",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.5666666666666665,
+          "final_G": 0.6,
+          "gain": 0.03333333333333344,
+          "method": "procedure_only",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.5666666666666665,
+          "final_G": 0.4916666666666667,
+          "gain": -0.07499999999999984,
+          "method": "reports",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.5666666666666665,
+          "final_G": 0.6583333333333333,
+          "gain": 0.09166666666666679,
+          "method": "reports_with_procedure",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.5666666666666665,
+          "final_G": 0.6208333333333333,
+          "gain": 0.05416666666666681,
+          "method": "workbook",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.5666666666666665,
+          "final_G": 0.48750000000000004,
+          "gain": -0.0791666666666665,
+          "method": "workbook_no_examples",
+          "user": 3
+        }
+      ],
+      "status": "development",
+      "status_counts": {
+        "agreed": 72
+      },
+      "summary": {
+        "procedure_only": {
+          "baseline_G": {
+            "ci95": [
+              0.4510416666666667,
+              0.5968749999999999
+            ],
+            "mean": 0.5291666666666666,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.5437500000000001,
+              0.6624999999999999
+            ],
+            "mean": 0.60625,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              0.01770833333333341,
+              0.16770833333333335
+            ],
+            "mean": 0.07708333333333338,
+            "n": 4
+          }
+        },
+        "procedure_only_minus_reports_with_procedure": {
+          "ci95": [
+            -0.03229166666666668,
+            0.06979166666666661
+          ],
+          "mean": 0.02499999999999998,
+          "n": 4
+        },
+        "procedure_only_minus_workbook_no_examples": {
+          "ci95": [
+            -0.053359374999999966,
+            0.16874999999999993
+          ],
+          "mean": 0.06979166666666661,
+          "n": 4
+        },
+        "reports": {
+          "baseline_G": {
+            "ci95": [
+              0.4510416666666667,
+              0.5968749999999999
+            ],
+            "mean": 0.5291666666666666,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.53125,
+              0.6625000000000001
+            ],
+            "mean": 0.596875,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.06458333333333321,
+              0.20000000000000007
+            ],
+            "mean": 0.06770833333333341,
+            "n": 4
+          }
+        },
+        "reports_minus_procedure_only": {
+          "ci95": [
+            -0.11041666666666661,
+            0.09166666666666667
+          ],
+          "mean": -0.009374999999999967,
+          "n": 4
+        },
+        "reports_minus_reports_with_procedure": {
+          "ci95": [
+            -0.11041666666666664,
+            0.14270833333333333
+          ],
+          "mean": 0.015625000000000014,
+          "n": 4
+        },
+        "reports_minus_workbook": {
+          "ci95": [
+            -0.060416666666666646,
+            0.1625
+          ],
+          "mean": 0.07187500000000004,
+          "n": 4
+        },
+        "reports_minus_workbook_no_examples": {
+          "ci95": [
+            -0.01666666666666672,
+            0.17291666666666664
+          ],
+          "mean": 0.060416666666666646,
+          "n": 4
+        },
+        "reports_with_procedure": {
+          "baseline_G": {
+            "ci95": [
+              0.4510416666666667,
+              0.5968749999999999
+            ],
+            "mean": 0.5291666666666666,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.503125,
+              0.6427083333333333
+            ],
+            "mean": 0.5812499999999999,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.033437499999999905,
+              0.13750000000000004
+            ],
+            "mean": 0.0520833333333334,
+            "n": 4
+          }
+        },
+        "workbook": {
+          "baseline_G": {
+            "ci95": [
+              0.4510416666666667,
+              0.5968749999999999
+            ],
+            "mean": 0.5291666666666666,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.4385416666666666,
+              0.6
+            ],
+            "mean": 0.5249999999999999,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.15833333333333327,
+              0.08541666666666665
+            ],
+            "mean": -0.004166666666666624,
+            "n": 4
+          }
+        },
+        "workbook_minus_procedure_only": {
+          "ci95": [
+            -0.21354166666666657,
+            0.04166666666666663
+          ],
+          "mean": -0.08125,
+          "n": 4
+        },
+        "workbook_minus_reports_with_procedure": {
+          "ci95": [
+            -0.16562499999999997,
+            0.059374999999999914
+          ],
+          "mean": -0.05625000000000002,
+          "n": 4
+        },
+        "workbook_minus_workbook_no_examples": {
+          "ci95": [
+            -0.14166666666666672,
+            0.10833333333333328
+          ],
+          "mean": -0.01145833333333339,
+          "n": 4
+        },
+        "workbook_no_examples": {
+          "baseline_G": {
+            "ci95": [
+              0.4510416666666667,
+              0.5968749999999999
+            ],
+            "mean": 0.5291666666666666,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.45625000000000004,
+              0.6167708333333328
+            ],
+            "mean": 0.5364583333333334,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.05624999999999987,
+              0.08020833333333341
+            ],
+            "mean": 0.007291666666666766,
+            "n": 4
+          }
+        },
+        "workbook_no_examples_minus_reports_with_procedure": {
+          "ci95": [
+            -0.17083333333333328,
+            0.08216145833332837
+          ],
+          "mean": -0.04479166666666663,
+          "n": 4
+        }
+      }
+    }
+  },
+  "common_practice_episodes_verified": 20,
+  "cumulative_budget": {
+    "accounted_usd": 56.244188999999906,
+    "known_cost_usd": 56.244188999999906,
+    "models": {
+      "claude-opus-5-5": {
+        "accounted_usd": 33.97848299999988,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 1682778.0,
+        "cache_creation_input_tokens": 1682778.0,
+        "cache_hit_calls": 2806.0,
+        "cache_read_fraction": 0.7665110397312593,
+        "cache_read_input_tokens": 10260736.0,
+        "estimated_savings_usd": 37.30680100000022,
+        "estimated_uncached_usd": 71.2852840000001,
+        "input_tokens": 1442772.0,
+        "known_cost_usd": 33.97848299999988,
+        "output_tokens": 887007.0,
+        "requests": 2831.0
+      },
+      "claude-sonnet-5-5": {
+        "accounted_usd": 22.265706000000026,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 1882046.0,
+        "cache_creation_input_tokens": 1882046.0,
+        "cache_hit_calls": 3088.0,
+        "cache_read_fraction": 0.860219385184738,
+        "cache_read_input_tokens": 19578096.0,
+        "estimated_savings_usd": 36.25600800000004,
+        "estimated_uncached_usd": 58.52171400000007,
+        "input_tokens": 1299280.0,
+        "known_cost_usd": 22.265706000000026,
+        "output_tokens": 1300287.0,
+        "requests": 3112.0
+      }
+    },
+    "states": {
+      "completed": 5943
+    }
+  },
+  "execution_errors": [],
+  "new_assessment_episode_count": 48,
+  "primary": {
+    "cases": 2,
+    "rows": [
+      {
+        "baseline_G": 0.4118589743589743,
+        "final_G": 0.44102564102564096,
+        "gain": 0.029166666666666674,
+        "method": "procedure_only",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.4118589743589743,
+        "final_G": 0.384775641025641,
+        "gain": -0.027083333333333293,
+        "method": "reports",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.4118589743589743,
+        "final_G": 0.441025641025641,
+        "gain": 0.029166666666666743,
+        "method": "reports_with_procedure",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.4118589743589743,
+        "final_G": 0.3112179487179487,
+        "gain": -0.10064102564102559,
+        "method": "workbook",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.4118589743589743,
+        "final_G": 0.4355769230769231,
+        "gain": 0.023717948717948814,
+        "method": "workbook_no_examples",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.4197115384615384,
+        "final_G": 0.3737179487179487,
+        "gain": -0.045993589743589705,
+        "method": "procedure_only",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.4197115384615384,
+        "final_G": 0.44439102564102567,
+        "gain": 0.02467948717948723,
+        "method": "reports",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.4197115384615384,
+        "final_G": 0.38285256410256413,
+        "gain": -0.03685897435897431,
+        "method": "reports_with_procedure",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.4197115384615384,
+        "final_G": 0.40496794871794867,
+        "gain": -0.01474358974358976,
+        "method": "workbook",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.4197115384615384,
+        "final_G": 0.45993589743589747,
+        "gain": 0.040224358974359,
+        "method": "workbook_no_examples",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.28958333333333336,
+        "final_G": 0.4439102564102564,
+        "gain": 0.15432692307692308,
+        "method": "procedure_only",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.28958333333333336,
+        "final_G": 0.4584935897435898,
+        "gain": 0.16891025641025642,
+        "method": "reports",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.28958333333333336,
+        "final_G": 0.4293269230769231,
+        "gain": 0.13974358974358975,
+        "method": "reports_with_procedure",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.28958333333333336,
+        "final_G": 0.4016025641025641,
+        "gain": 0.11201923076923075,
+        "method": "workbook",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.28958333333333336,
+        "final_G": 0.37596153846153846,
+        "gain": 0.08637820512820514,
+        "method": "workbook_no_examples",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.40833333333333327,
+        "final_G": 0.43141025641025643,
+        "gain": 0.023076923076923134,
+        "method": "procedure_only",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.40833333333333327,
+        "final_G": 0.3932692307692308,
+        "gain": -0.015064102564102483,
+        "method": "reports",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.40833333333333327,
+        "final_G": 0.444551282051282,
+        "gain": 0.03621794871794877,
+        "method": "reports_with_procedure",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.40833333333333327,
+        "final_G": 0.45464743589743595,
+        "gain": 0.04631410256410265,
+        "method": "workbook",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.40833333333333327,
+        "final_G": 0.31426282051282056,
+        "gain": -0.09407051282051272,
+        "method": "workbook_no_examples",
+        "user": 3
+      }
+    ],
+    "summary": {
+      "procedure_only": {
+        "baseline_G": {
+          "ci95": [
+            0.3201522435897436,
+            0.41688902243589726
+          ],
+          "mean": 0.3823717948717948,
+          "n": 4
+        },
+        "final_G": {
+          "ci95": [
+            0.3905448717948718,
+            0.4424679487179487
+          ],
+          "mean": 0.42251602564102564,
+          "n": 4
+        },
+        "gain": {
+          "ci95": [
+            -0.02720352564102561,
+            0.12151442307692309
+          ],
+          "mean": 0.0401442307692308,
+          "n": 4
+        }
+      },
+      "procedure_only_minus_reports_with_procedure": {
+        "ci95": [
+          -0.011137820512820515,
+          0.008653846153846154
+        ],
+        "mean": -0.0019230769230769405,
+        "n": 4
+      },
+      "procedure_only_minus_workbook_no_examples": {
+        "ci95": [
+          -0.048066907051282026,
+          0.0925480769230769
+        ],
+        "mean": 0.02608173076923074,
+        "n": 4
+      },
+      "reports": {
+        "baseline_G": {
+          "ci95": [
+            0.3201522435897436,
+            0.41688902243589726
+          ],
+          "mean": 0.3823717948717948,
+          "n": 4
+        },
+        "final_G": {
+          "ci95": [
+            0.3890224358974359,
+            0.45144230769230775
+          ],
+          "mean": 0.42023237179487183,
+          "n": 4
+        },
+        "gain": {
+          "ci95": [
+            -0.021073717948717888,
+            0.12291666666666669
+          ],
+          "mean": 0.03786057692307697,
+          "n": 4
+        }
+      },
+      "reports_minus_procedure_only": {
+        "ci95": [
+          -0.04719551282051279,
+          0.043469551282051294
+        ],
+        "mean": -0.0022836538461538276,
+        "n": 4
+      },
+      "reports_minus_reports_with_procedure": {
+        "ci95": [
+          -0.053766025641025644,
+          0.04535256410256411
+        ],
+        "mean": -0.004206730769230768,
+        "n": 4
+      },
+      "reports_minus_workbook": {
+        "ci95": [
+          -0.031810897435897434,
+          0.06522435897435899
+        ],
+        "mean": 0.027123397435897457,
+        "n": 4
+      },
+      "reports_minus_workbook_no_examples": {
+        "ci95": [
+          -0.03317307692307694,
+          0.08076923076923076
+        ],
+        "mean": 0.02379807692307691,
+        "n": 4
+      },
+      "reports_with_procedure": {
+        "baseline_G": {
+          "ci95": [
+            0.3201522435897436,
+            0.41688902243589726
+          ],
+          "mean": 0.3823717948717948,
+          "n": 4
+        },
+        "final_G": {
+          "ci95": [
+            0.39739583333333334,
+            0.4427884615384615
+          ],
+          "mean": 0.42443910256410255,
+          "n": 4
+        },
+        "gain": {
+          "ci95": [
+            -0.01863381410256405,
+            0.11209935897435899
+          ],
+          "mean": 0.04206730769230774,
+          "n": 4
+        }
+      },
+      "workbook": {
+        "baseline_G": {
+          "ci95": [
+            0.3201522435897436,
+            0.41688902243589726
+          ],
+          "mean": 0.3823717948717948,
+          "n": 4
+        },
+        "final_G": {
+          "ci95": [
+            0.3346554487179487,
+            0.441386217948718
+          ],
+          "mean": 0.3931089743589744,
+          "n": 4
+        },
+        "gain": {
+          "ci95": [
+            -0.06390224358974353,
+            0.08032852564102562
+          ],
+          "mean": 0.010737179487179511,
+          "n": 4
+        }
+      },
+      "workbook_minus_procedure_only": {
+        "ci95": [
+          -0.09154647435897431,
+          0.02724358974358973
+        ],
+        "mean": -0.02940705128205129,
+        "n": 4
+      },
+      "workbook_minus_reports_with_procedure": {
+        "ci95": [
+          -0.0948317307692308,
+          0.016105769230769215
+        ],
+        "mean": -0.03133012820512823,
+        "n": 4
+      },
+      "workbook_minus_workbook_no_examples": {
+        "ci95": [
+          -0.08966346153846158,
+          0.09154647435897435
+        ],
+        "mean": -0.0033253205128205426,
+        "n": 4
+      },
+      "workbook_no_examples": {
+        "baseline_G": {
+          "ci95": [
+            0.3201522435897436,
+            0.41688902243589726
+          ],
+          "mean": 0.3823717948717948,
+          "n": 4
+        },
+        "final_G": {
+          "ci95": [
+            0.3445913461538462,
+            0.447908653846153
+          ],
+          "mean": 0.39643429487179493,
+          "n": 4
+        },
+        "gain": {
+          "ci95": [
+            -0.060496794871794796,
+            0.07071314102564107
+          ],
+          "mean": 0.014062500000000058,
+          "n": 4
+        }
+      },
+      "workbook_no_examples_minus_reports_with_procedure": {
+        "ci95": [
+          -0.0990785256410256,
+          0.04477063301281886
+        ],
+        "mean": -0.02800480769230768,
+        "n": 4
+      }
+    }
+  },
+  "protocol_sha256": "2fddce34efacc1f5864d0af0fd5e8c2a2785471fced6266f666663d136d3e530",
+  "reused_episode_count": 96,
+  "run_usage_by_phase": {
+    "assessment/hiring": {
+      "cache_creation_1h_input_tokens": 0.0,
+      "cache_creation_5m_input_tokens": 181230.0,
+      "cache_creation_input_tokens": 181230.0,
+      "cache_hit_calls": 333.0,
+      "cache_read_fraction": 0.8521829268758662,
+      "cache_read_input_tokens": 1561171.0,
+      "calls": 337.0,
+      "estimated_savings_usd": 3.648818200000001,
+      "estimated_uncached_usd": 6.069342000000001,
+      "estimated_usd": 2.4205238,
+      "input_tokens": 89566.0,
+      "invocations": 1,
+      "output_tokens": 100992.0,
+      "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+      "total_input_tokens": 1831967.0
+    },
+    "assessment/sim4_revisited": {
+      "cache_creation_1h_input_tokens": 0.0,
+      "cache_creation_5m_input_tokens": 254978.0,
+      "cache_creation_input_tokens": 254978.0,
+      "cache_hit_calls": 353.0,
+      "cache_read_fraction": 0.8516597878727455,
+      "cache_read_input_tokens": 2494348.0,
+      "calls": 353.0,
+      "estimated_savings_usd": 6.034110999999999,
+      "estimated_uncached_usd": 10.020285999999999,
+      "estimated_usd": 3.986175,
+      "input_tokens": 179482.0,
+      "invocations": 1,
+      "output_tokens": 157478.0,
+      "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+      "total_input_tokens": 2928808.0
+    }
+  },
+  "source_sha256": "0eb60cbbfddac9c74bfdb76ce073fdb3a1c56c7624f0a1f6cf8c019e0408b457"
+}

@@ -1,0 +1,18 @@
+{
+  "cases": [
+    {
+      "key": "harbor_analytics",
+      "path": "data/cases/harbor_analytics.json",
+      "primary": true,
+      "role": "buyer",
+      "status": "fresh_test"
+    },
+    {
+      "key": "maple_festival",
+      "path": "data/cases/maple_festival.json",
+      "primary": true,
+      "role": "organizer",
+      "status": "fresh_test"
+    }
+  ]
+}
