@@ -1,0 +1,11 @@
+{
+  "memories": {
+    "learner0_reflection.json": "0a7a24551f22d99e457b2fe84fc58cf8f1d667c1c0e3e2d16c5a6c61239f0b02",
+    "learner0_rehearsal.json": "13691687e78bb48415bc228526142f0ab99444c64f88281201756a6a5594e2ff",
+    "learner0_reports.json": "bb77c0ca120e31fbeca91a04ca4fcfb9370643f3ba05bb4cd131afc646693c42",
+    "learner1_reflection.json": "a870f46fc217e9d2fab529f4c733e0d2bab8599fdf6c412b0d339f407c9fb97c",
+    "learner1_rehearsal.json": "1b2cd03365f98fcea4c91521b407c469ea427d2db1c9c59a50a579c7c0c21a27",
+    "learner1_reports.json": "af1a79130f96583f86ca85e89c353328dbdb6f8e61a92a56c5aee03fc46faaae"
+  },
+  "protocol_sha256": "9b29008ba58acce494a2424ccaa51519ad6aa9832f8410df2cdee84cfcc4afe0"
+}

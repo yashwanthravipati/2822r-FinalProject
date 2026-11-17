@@ -21,8 +21,10 @@ from Sim3 to the held-out Sim4 scenario under separate $100 development/final AP
 - [x] Reflective memory and learner application check preserve persona and role visibility.
 - [x] Disjoint training/assessment harness and source-visibility isolation pass offline tests.
 - [x] Sim4 projection is prepared locally, audited and frozen before final training.
-- [ ] Development smoke and final paired evaluation complete within each authorized budget.
-- [ ] Numeric results, uncertainty, costs, limitations, and reproduction instructions are logged.
+- [x] Synthetic smoke and full five-rehearsal development complete within the development budget.
+- [ ] Final paired Sim3-to-Sim4 evaluation completes within the final budget.
+- [x] Development results, costs, limitations, and reproduction instructions are logged.
+- [ ] Final results and uncertainty are logged after held-out assessment.
 - [ ] Implementation and artifacts are committed and pushed to ckpt3.
 
 ## Log
@@ -31,3 +33,5 @@ from Sim3 to the held-out Sim4 scenario under separate $100 development/final AP
 - 2026-11-17: Synthetic smoke completed: 18 episodes, $1.660015, 76.52% input cache reads. New methods did not beat reports for the one persona; no population conclusion. 165 offline tests pass. Class-material API transmission awaits explicit approval required by automatic review.
 
 - 2026-11-17: Added analogical application and domain-neutral rules; full five-rehearsal synthetic development is running on two new personas. Sim4 locally frozen and all 729 numeric packages audited without API transmission. Final API content approval remains pending.
+
+- 2026-11-17: V2 development completed: 54 episodes, $7.503585, 77.90% input cache reads. Mean gains: reports +0.09936, reflection +0.04167, application -0.04808 (n=2, no population inference). Cumulative development $9.163600; final allowance untouched. No API process remains active. Added per-run accounting and corrected future-run metadata. Final class-content approval still pending.

@@ -79,11 +79,23 @@ hashes, and cache settings are persisted. LLM sampling itself is not seedable.
 Reproduction (commands involving class data require the pending explicit external-payload
 approval; no Sim4 outcome has been inspected):
 
+The original synthetic smoke used source revision `ece6dbe`; the five-round v2 synthetic
+development used `0264028`. Restore the corresponding revision in a separate checkout
+and use a fresh output directory to repeat either study. Existing directories are frozen
+and intentionally reject source/config changes or retraining after completion. Model
+sampling can still differ. Saved numeric artifacts can be analyzed without paid calls.
+
 ```bash
 # Synthetic smoke; no class materials are sent.
 .venv/bin/python scripts/ckpt3_evaluate.py train \
   --root results/ckpt3/synthetic-smoke --budget dev --users 1 --rounds 2 \
   --workers 1 --seed 28221118 --training-case data/cases/cloudline_hiring.json \
+  --training-role candidate
+
+# Revised synthetic development (0264028); choose a fresh root for a repeat.
+.venv/bin/python scripts/ckpt3_evaluate.py train \
+  --root results/ckpt3/synthetic-development-v2 --budget dev --users 2 --rounds 5 \
+  --workers 2 --seed 28221119 --training-case data/cases/cloudline_hiring.json \
   --training-role candidate
 
 # Sim4 was constructed and audited locally; reuse the private frozen projection.

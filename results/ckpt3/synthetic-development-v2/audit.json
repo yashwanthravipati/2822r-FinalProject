@@ -1,0 +1,65 @@
+{
+  "api": {
+    "accounted_usd": 9.163599999999992,
+    "known_cost_usd": 9.163599999999992,
+    "models": {
+      "claude-opus-5-5": {
+        "accounted_usd": 5.964577999999994,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 313204.0,
+        "cache_creation_input_tokens": 313204.0,
+        "cache_hit_calls": 506.0,
+        "cache_read_fraction": 0.6859412180579394,
+        "cache_read_input_tokens": 1315638.0,
+        "estimated_savings_usd": 4.685998000000012,
+        "estimated_uncached_usd": 10.650576000000006,
+        "input_tokens": 289162.0,
+        "known_cost_usd": 5.964577999999994,
+        "output_tokens": 148928.0,
+        "requests": 516.0
+      },
+      "claude-sonnet-5-5": {
+        "accounted_usd": 3.1990219999999967,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 278716.0,
+        "cache_creation_input_tokens": 278716.0,
+        "cache_hit_calls": 538.0,
+        "cache_read_fraction": 0.8390786389150519,
+        "cache_read_input_tokens": 2335859.0,
+        "estimated_savings_usd": 4.2985340000000045,
+        "estimated_uncached_usd": 7.497556000000001,
+        "input_tokens": 169263.0,
+        "known_cost_usd": 3.1990219999999967,
+        "output_tokens": 192988.0,
+        "requests": 545.0
+      }
+    },
+    "states": {
+      "completed": 1061
+    }
+  },
+  "api_scope": "Cumulative dev ledger across all runs, including prior tests",
+  "run_api": {
+    "cache_creation_1h_input_tokens": 0.0,
+    "cache_creation_5m_input_tokens": 478978.0,
+    "cache_creation_input_tokens": 478978.0,
+    "cache_hit_calls": 832.0,
+    "cache_read_fraction": 0.7789945269428376,
+    "cache_read_input_tokens": 3029692.0,
+    "calls": 842.0,
+    "estimated_savings_usd": 7.446394599999999,
+    "estimated_uncached_usd": 14.949606,
+    "estimated_usd": 7.5032114000000005,
+    "input_tokens": 380564.0,
+    "invocations": 1,
+    "output_tokens": 278143.0,
+    "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+    "total_input_tokens": 3889234.0
+  },
+  "training": {
+    "agreement_rate": 0.9814814814814815,
+    "below_walkaway_agreements": 3,
+    "episodes": 54,
+    "schedule_violations": 0
+  }
+}

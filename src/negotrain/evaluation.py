@@ -94,11 +94,11 @@ class Experiment:
             **config,
             "case_sha256": hashlib.sha256(case.model_dump_json().encode()).hexdigest(),
             "role": role,
-            "training_tiers": TRAINING_TIERS,
+            "training_tiers": config.get("training_tiers", TRAINING_TIERS),
             "probe_tiers": PROBE_TIERS,
-            "K": 5,
+            "K": len(config.get("training_tiers", TRAINING_TIERS)),
             "reward": "surplus_share",
-            "scoring": "inferred sim3 utilities",
+            "scoring": config.get("scoring", "declared numeric case utilities"),
         }
         # JSON normalizes tuples so resumed runs compare exactly.
         config = json.loads(json.dumps(config))

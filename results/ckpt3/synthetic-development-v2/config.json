@@ -1,0 +1,39 @@
+{
+  "K": 5,
+  "budget": "dev",
+  "cache_ttl": "5m",
+  "case_sha256": "c97ec5569d979fad439b607647c3a62c15691509d8fd9cb54943891c3ac8d6a8",
+  "coach_model": "claude-opus-5-5",
+  "controller": "hybrid",
+  "heldout_role": "global_relief",
+  "learner_model": "claude-sonnet-5-5",
+  "memory_limit_rules": 5,
+  "methods": [
+    "reports",
+    "reflection",
+    "rehearsal"
+  ],
+  "phase": "train",
+  "probe_tiers": [
+    1,
+    3,
+    5
+  ],
+  "reward": "surplus_share",
+  "role": "candidate",
+  "rounds": 5,
+  "scoring": "inferred sim3 utilities",
+  "seed": 28221119,
+  "source_sha256": "8b9be320484892799f4ea38b28755fdbe69a5539c471faa2a346f6bc87a2cfef",
+  "targeting": "none",
+  "training_case_sha256": "37acbcbf6be2b9e8b2489b058e0f347f1a5007f485a945725a6d049f70976541",
+  "training_role": "candidate",
+  "training_tiers": [
+    2,
+    2,
+    4,
+    4,
+    4
+  ],
+  "users": 2
+}

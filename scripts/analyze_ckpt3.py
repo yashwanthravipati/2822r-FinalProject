@@ -13,6 +13,27 @@ from negotrain.evaluation import metrics, write_json
 from negotrain.schemas import Session
 
 
+def run_usage(root: Path):
+    """Sum successful-response usage across invocations, never cumulative ledger snapshots."""
+    files = sorted(root.glob("usage_*.json"))
+    totals = defaultdict(float)
+    for path in files:
+        value = json.loads(path.read_text())
+        for role in ("coach", "learner"):
+            for key, amount in value[role].items():
+                if not key.endswith("fraction"):
+                    totals[key] += amount
+    inputs = totals["total_input_tokens"]
+    totals["cache_read_fraction"] = totals["cache_read_input_tokens"] / inputs if inputs else 0
+    totals["estimated_savings_usd"] = totals["estimated_uncached_usd"] - totals["estimated_usd"]
+    return {
+        "scope": "Successful responses in this directory, summed across invocations; "
+        "excludes unresolved requests and per-request ledger rounding",
+        "invocations": len(files),
+        **dict(totals),
+    }
+
+
 def ledger_report(path: Path):
     totals = defaultdict(lambda: defaultdict(float))
     states = defaultdict(int)
@@ -70,6 +91,7 @@ def episode_diagnostics(root: Path, case_path: Path):
                 "tier": session.counterpart_profile.tier,
                 "R": row["R"],
                 "agreement": row["agreement"],
+                "below_walkaway": row["R"] is not None and row["R"] < 0,
                 "user_turns": row["user_turns"],
                 "schedule_violations": value["schedule_violations"],
                 "counts": row["counts"],
@@ -79,6 +101,7 @@ def episode_diagnostics(root: Path, case_path: Path):
     return {
         "episodes": len(rows),
         "agreement_rate": sum(r["agreement"] for r in rows) / len(rows) if rows else None,
+        "below_walkaway_agreements": sum(r["below_walkaway"] for r in rows),
         "schedule_violations": sum(r["schedule_violations"] for r in rows),
     }
 
@@ -96,11 +119,13 @@ def main():
     args = p.parse_args()
     result = {
         "training": episode_diagnostics(args.root, args.training_case),
+        "run_api": run_usage(args.root),
         "api": ledger_report(Path(f".api-budget.sqlite3.ckpt3-{args.budget}")),
         "api_scope": f"Cumulative {args.budget} ledger across all runs, including prior tests",
     }
     if (args.root / "heldout" / "assess_summary.json").exists():
         result["heldout"] = episode_diagnostics(args.root / "heldout", args.heldout_case)
+        result["heldout_run_api"] = run_usage(args.root / "heldout")
     write_json(args.root / "audit.json", result)
     print(json.dumps(result, indent=2))
 
