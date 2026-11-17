@@ -133,6 +133,31 @@ def main():
     ]
     source = hashlib.sha256(b"".join(p.read_bytes() for p in paths)).hexdigest()
     check(source == protocol["source_sha256"], "source changed")
+    if "worksheet_source_sha256" in protocol:
+        check(
+            digest(Path("scripts/worksheet_evaluate.py")) == protocol["worksheet_source_sha256"],
+            "worksheet runner changed",
+        )
+        check(
+            digest(Path("scripts/value_worksheet.py")) == protocol["worksheet_memory_sha256"],
+            "worksheet source changed",
+        )
+        for uid in protocol["users"]:
+            data = read(root / "raw" / f"learner{uid}.memories.json")
+            check(
+                set(data["by_case"]) == {c["key"] for c in protocol["cases"]},
+                "worksheet case set changed",
+            )
+            for entry in protocol["cases"]:
+                projected = (
+                    root
+                    / "raw"
+                    / "projected"
+                    / entry["key"]
+                    / "raw"
+                    / f"learner{uid}.memories.json"
+                )
+                check(read(projected) == data["by_case"][entry["key"]], "projection changed")
     if "credit_source_sha256" in protocol:
         check(
             digest(Path("scripts/credit_evaluate.py")) == protocol["credit_source_sha256"],

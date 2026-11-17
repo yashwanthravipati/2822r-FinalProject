@@ -317,3 +317,8 @@ If advanced, the unused Beacon case, same seven confirmation personas, reports/p
 worksheet conditions and 84 total episodes remain the final follow-up plan, $11–15
 forecast within the unchanged $24.279171 final allowance. Retain both earlier negative
 candidates and the failed first prospective confirmation in all reporting.
+
+- Worksheet implementation passes 183 offline tests, one live deselected. Exhaustive
+  package checks verify the loss identity with negative point tables; changing the hidden
+  opponent sheet cannot change the aid. Per-case projection exposes only the current
+  worksheet and rejects modified cached projections. No actor or scoring source changed.

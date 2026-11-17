@@ -173,6 +173,13 @@ using existing practice histories. It does not retrain personas or use assessmen
 The runner and memory helper have their own source hashes; the primary comparison and
 the follow-up's relationship to earlier failed studies remain explicit in the protocol/log.
 
+`value_worksheet.py` expresses each current-case own option as a loss from that issue's
+maximum. Its sum recovers exact own utility, including negative values; own constraints
+remain separate. It never reads opponent utilities. `worksheet_evaluate.py` adds this
+deterministic preparation aid to all five reports, freezes case-specific memories, and
+projects only the current case to the unchanged actor. Audits verify those projections.
+This tests an arithmetic aid, not new coaching-generation calls or persona changes.
+
 `results/calibration/` holds population costs and tuned lambda/kappa, matched by full case
 hash and role before the app loads them. Calibration from another upload is never reused.
 Before calibration, the app retains explicitly uncalibrated unit priors. Private raw
