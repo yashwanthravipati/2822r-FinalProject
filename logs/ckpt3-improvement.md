@@ -372,3 +372,11 @@ Report the whole sequence regardless of the outcome. Beacon's case bytes remain 
   total reports, uses sequential accumulated feedback, and never modifies persona traits.
   Independent audits distinguish the original control histories from the shared prefix
   and new varied-practice sessions; transfer-case overlap is rejected before API calls.
+
+- All 24 new varied-practice sessions and debriefs completed; independent audit verifies
+  report identity/order, the exact two-session prefix, seeds, tiers, complete cohorts and
+  numerical scores. All agreed above walk-away; zero schedule violations. Preparation
+  uses 449 requests, usage estimate $5.376557 and ledger increment $5.376745. Development
+  cumulative $76.131619, no unresolved charges. Both histories were frozen before Harbor
+  assessment. Use two workers per cohort to reduce contention for conservative live
+  reservations as the existing cap approaches; do not alter models, seeds or conditions.

@@ -72,13 +72,34 @@ The cumulative checkpoint-3 total is $131.965018, including earlier work. These 
 experiment usage-based estimates, not a provider invoice. No unresolved requests remain
 in these two ledgers. Older project-ledger uncertainty is separate and has not been cleared.
 
-## Next hypothesis
+## Subsequent development comparisons
 
-An offline development diagnostic found that only eight of sixteen chosen large-concession
-examples had positive counterfactual evidence of a better eventual outcome. Selecting
-examples by estimated terminal credit, with uncertainty and model limitations explicit,
-is the next hypothesis. It will use the remaining existing budgets and a newly frozen
-test case. The present negative confirmation remains the first prospective result.
+An offline diagnostic found that only eight of sixteen large-concession examples had
+positive counterfactual evidence of a better eventual outcome. A follow-up selected
+historical lessons by modeled terminal credit, retaining its uncertainty. A second added
+an exact current-case own-value worksheet to all five reports. Neither advanced under
+the rule recorded before its calls: beat reports in both pooled development and the
+separate users 4–7 validation mean. Each used 48 new assessment episodes and 144 exact
+reused controls across hiring and the revisited Sim4 benchmark.
+
+| Candidate | Paired difference from reports, n=8 | Pointwise 95% interval | Validation difference, n=4 | New ledger cost |
+|---|---:|---|---:|---:|
+| Terminal-credit memory | −0.006090 | [−0.038723, +0.024703] | −0.016787 | $7.427020 |
+| Reports + own-value worksheet | −0.006771 | [−0.031893, +0.030233] | −0.023277 | $7.083665 |
+
+Cases are averaged within persona. These are repeated exploratory comparisons on known
+cases, not independent confirmations. All failures and both cohorts are retained. The
+worksheet validation interval is [−0.037901, −0.008654], so its negative result cannot
+be dismissed by citing the positive first-cohort mean. Neither candidate used final-budget
+calls or generated Beacon Museum assessment outcomes. Their code, frozen histories,
+verified analyses and selection decisions are versioned.
+
+The next prespecified comparison keeps five practice sessions but changes their variety:
+two shared Sim3 sessions followed by hiring/Sim4/hiring, versus five Sim3 sessions. This
+tests the curriculum as a package, not prompt refinement from identical histories.
+Development assesses all eight original personas on the already-seen Harbor case; only
+an advancing candidate may use the still-unused Beacon case. See the chronological log
+for the selection rule, separate budgets and prospective follow-up limitations.
 
 Artifacts: `results/ckpt3/consolidation-final-v1/verified_analysis.json` and
 `results/ckpt3/consolidation-final-v1/paired_gains.png`. Source/protocol history and exact

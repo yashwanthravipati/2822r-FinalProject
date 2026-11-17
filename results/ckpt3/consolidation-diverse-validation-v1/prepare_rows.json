@@ -1,0 +1,6 @@
+[
+{"memory_characters": {"diverse_reports": 17655, "reports": 17199}, "new_practice_R": [0.23076923076923078, 0.4, 0.09615384615384616], "user": 4},
+{"memory_characters": {"diverse_reports": 17514, "reports": 16646}, "new_practice_R": [0.038461538461538464, 0.4, 0.1346153846153846], "user": 5},
+{"memory_characters": {"diverse_reports": 17614, "reports": 16885}, "new_practice_R": [0.09615384615384616, 0.5125, 0.15384615384615385], "user": 6},
+{"memory_characters": {"diverse_reports": 17805, "reports": 16158}, "new_practice_R": [0.0, 0.425, 0.09615384615384616], "user": 7}
+]
