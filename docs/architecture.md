@@ -164,6 +164,15 @@ personas, trains one common reports branch per persona, and freezes all memories
 fresh-case assessment. It adds no actor-weight or persona updates. Source/version checks
 include the experiment extension scripts as well as the shared actor and scoring code.
 
+`scripts/credit_memory.py` instead chooses at most two distinct practice sessions using
+paired terminal-outcome counterfactual estimates, prioritizing positive lower bounds and
+then positive means. It exposes own-visible histories and explicitly uncertain modeled
+feedback to the post-session coach. `credit_evaluate.py` freezes that compact memory,
+reuses exact verified development controls, and can evaluate a separately frozen new case
+using existing practice histories. It does not retrain personas or use assessment feedback.
+The runner and memory helper have their own source hashes; the primary comparison and
+the follow-up's relationship to earlier failed studies remain explicit in the protocol/log.
+
 `results/calibration/` holds population costs and tuned lambda/kappa, matched by full case
 hash and role before the app loads them. Calibration from another upload is never reused.
 Before calibration, the app retains explicitly uncalibrated unit priors. Private raw

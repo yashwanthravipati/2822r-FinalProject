@@ -1,0 +1,6 @@
+[
+{"credit_examples": 2, "memory_characters": {"credit_memory": 5069, "procedure_only": 1862, "reports": 16312}, "user": 0},
+{"credit_examples": 2, "memory_characters": {"credit_memory": 5054, "procedure_only": 1862, "reports": 16332}, "user": 1},
+{"credit_examples": 2, "memory_characters": {"credit_memory": 5538, "procedure_only": 1862, "reports": 16134}, "user": 2},
+{"credit_examples": 2, "memory_characters": {"credit_memory": 5548, "procedure_only": 1862, "reports": 16363}, "user": 3}
+]

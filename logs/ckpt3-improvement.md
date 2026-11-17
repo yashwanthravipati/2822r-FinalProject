@@ -276,3 +276,44 @@ The dollar forecasts above include margin over these approximate volumes.
   test deselected; lint/format and all 40 task files pass. Tests cover paired rollout
   completeness, uncertainty-aware selection, distinct sessions, information boundaries,
   feedback alignment, empty-evidence fallback and exact saved-plan resumption.
+
+- Credit development completed: 48 new assessment episodes, 144 exact reused controls,
+  eight coach calls; 675 API requests total. Pooled candidate-minus-reports mean
+  -0.006089744, 95% interval [-0.038723458, +0.024702524], n=8. Separate validation
+  mean -0.016786859, interval [-0.073637821, +0.045793269], n=4. The prespecified
+  advancement rule failed. No final-budget calls were made and Beacon remains unused.
+  All 192 assessed episodes verified; 190 agreements, two impasses, seven agreements
+  below walk-away, zero schedule violations. These totals include reused controls.
+  Exact ledger increment $7.427020, provider-usage estimate $7.426728; 4,310,734 input
+  tokens, 266,115 output, 78.80% cached reads. Same-volume uncached estimate $15.889796.
+  Development cumulative $63.671209, final $75.720829; no unresolved requests. Combined
+  checkpoint-3 cost $139.392038, of which $89.094657 belongs to this improvement goal.
+
+## Own-value worksheet candidate, specified before its calls
+
+The credit candidate also accepted a known hiring package worth 2,500 own points against
+a 3,500 walk-away. Longer advice did not ensure correct execution. Test a deterministic
+current-case preparation worksheet alongside the unchanged five reports. Re-express the
+own point table as concession costs from each issue's own best option, with the exact
+identity U = sum(issue maxima) - sum(option losses), the current walk-away and allowable
+total loss. Include own hard constraints and explain that the own upper bound is not a
+promise of a mutually feasible deal. Do not use opponent utilities, feasible-best scoring,
+assessment outcomes, or hidden schedules. Keep all formal actions chosen by the same
+learner; this is a preparation aid, not an enforced policy or live coach.
+
+This changes the hypothesis from compact memory selection to making reports easier to
+apply through exact current-case arithmetic. A gain would establish an instruction/aid
+effect for simulated learners, not personalized learning or human transfer. Full reports
+remain personalized and unchanged; combine them into one memory entry to avoid truncation.
+Generate a separate worksheet for each case using only that case's own-role information.
+
+Use the same eight development personas and two known cases; reuse exact baseline,
+reports and fixed-procedure controls. One new reports-with-worksheet arm requires 48 new
+episodes, no coaching-generation calls, roughly 650–850 requests, 4–6M input (~80% reads)
+and 0.25–0.4M output; forecast $7–11. Development remaining $36.328791, same $100 cap.
+Freeze code before running. Advance only if the paired mean exceeds reports both pooled
+and in users 4–7, using both cases within persona. This is a screening rule, not inference.
+If advanced, the unused Beacon case, same seven confirmation personas, reports/procedure/
+worksheet conditions and 84 total episodes remain the final follow-up plan, $11–15
+forecast within the unchanged $24.279171 final allowance. Retain both earlier negative
+candidates and the failed first prospective confirmation in all reporting.

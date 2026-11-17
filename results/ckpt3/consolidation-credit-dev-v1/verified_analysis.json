@@ -1,0 +1,783 @@
+{
+  "cases": {
+    "hiring": {
+      "below_walkaway": 5,
+      "cases": 1,
+      "diagnostics": {
+        "agreement_rate": 1.0,
+        "below_walkaway_agreements": 5,
+        "conditions": {
+          "baseline": {
+            "agreements": 12,
+            "below_walkaway_agreements": 1,
+            "episodes": 12,
+            "mean_user_turns": 6.083333333333333
+          },
+          "credit_memory_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 1,
+            "episodes": 12,
+            "mean_user_turns": 5.416666666666667
+          },
+          "procedure_only_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 2,
+            "episodes": 12,
+            "mean_user_turns": 6.0
+          },
+          "reports_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 1,
+            "episodes": 12,
+            "mean_user_turns": 6.083333333333333
+          }
+        },
+        "episodes": 48,
+        "schedule_violations": 0
+      },
+      "episodes": 48,
+      "feasible_best": 8700.0,
+      "rows": [
+        {
+          "baseline_G": 0.1987179487179487,
+          "final_G": 0.23076923076923075,
+          "gain": 0.03205128205128205,
+          "method": "credit_memory",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.1987179487179487,
+          "final_G": 0.1987179487179487,
+          "gain": 0.0,
+          "method": "procedure_only",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.1987179487179487,
+          "final_G": 0.1987179487179487,
+          "gain": 0.0,
+          "method": "reports",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.3269230769230769,
+          "final_G": 0.26282051282051283,
+          "gain": -0.0641025641025641,
+          "method": "credit_memory",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.3269230769230769,
+          "final_G": 0.23076923076923075,
+          "gain": -0.09615384615384617,
+          "method": "procedure_only",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.3269230769230769,
+          "final_G": 0.21794871794871795,
+          "gain": -0.10897435897435898,
+          "method": "reports",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.23076923076923075,
+          "gain": 0.0641025641025641,
+          "method": "credit_memory",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.26282051282051283,
+          "gain": 0.09615384615384617,
+          "method": "procedure_only",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.26282051282051283,
+          "gain": 0.09615384615384617,
+          "method": "reports",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.25,
+          "final_G": 0.14102564102564105,
+          "gain": -0.10897435897435895,
+          "method": "credit_memory",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.25,
+          "final_G": 0.26282051282051283,
+          "gain": 0.01282051282051283,
+          "method": "procedure_only",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.25,
+          "final_G": 0.2948717948717949,
+          "gain": 0.04487179487179488,
+          "method": "reports",
+          "user": 3
+        }
+      ],
+      "status": "development",
+      "status_counts": {
+        "agreed": 48
+      },
+      "summary": {
+        "credit_memory": {
+          "baseline_G": {
+            "ci95": [
+              0.18269230769230768,
+              0.2948717948717949
+            ],
+            "mean": 0.23557692307692307,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.1634615384615385,
+              0.2548076923076923
+            ],
+            "mean": 0.21634615384615385,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.08653846153846152,
+              0.04807692307692307
+            ],
+            "mean": -0.019230769230769225,
+            "n": 4
+          }
+        },
+        "procedure_only": {
+          "baseline_G": {
+            "ci95": [
+              0.18269230769230768,
+              0.2948717948717949
+            ],
+            "mean": 0.23557692307692307,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.21474358974358973,
+              0.26282051282051283
+            ],
+            "mean": 0.23878205128205127,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.06899038461538463,
+              0.07211538461538464
+            ],
+            "mean": 0.0032051282051282076,
+            "n": 4
+          }
+        },
+        "procedure_only_minus_credit_memory": {
+          "ci95": [
+            -0.03205128205128206,
+            0.08333333333333331
+          ],
+          "mean": 0.022435897435897433,
+          "n": 4
+        },
+        "reports": {
+          "baseline_G": {
+            "ci95": [
+              0.18269230769230768,
+              0.2948717948717949
+            ],
+            "mean": 0.23557692307692307,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.20833333333333331,
+              0.27884615384615385
+            ],
+            "mean": 0.2435897435897436,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.07079326923076922,
+              0.07211538461538464
+            ],
+            "mean": 0.008012820512820519,
+            "n": 4
+          }
+        },
+        "reports_minus_credit_memory": {
+          "ci95": [
+            -0.03854166666666666,
+            0.10737179487179485
+          ],
+          "mean": 0.027243589743589744,
+          "n": 4
+        },
+        "reports_minus_procedure_only": {
+          "ci95": [
+            -0.009615384615384602,
+            0.024038461538461536
+          ],
+          "mean": 0.004807692307692311,
+          "n": 4
+        }
+      }
+    },
+    "sim4_revisited": {
+      "below_walkaway": 0,
+      "cases": 1,
+      "diagnostics": {
+        "agreement_rate": 1.0,
+        "below_walkaway_agreements": 0,
+        "conditions": {
+          "baseline": {
+            "agreements": 12,
+            "below_walkaway_agreements": 0,
+            "episodes": 12,
+            "mean_user_turns": 7.0
+          },
+          "credit_memory_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 0,
+            "episodes": 12,
+            "mean_user_turns": 7.5
+          },
+          "procedure_only_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 0,
+            "episodes": 12,
+            "mean_user_turns": 7.583333333333333
+          },
+          "reports_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 0,
+            "episodes": 12,
+            "mean_user_turns": 7.333333333333333
+          }
+        },
+        "episodes": 48,
+        "schedule_violations": 0
+      },
+      "episodes": 48,
+      "feasible_best": 600.0,
+      "rows": [
+        {
+          "baseline_G": 0.6249999999999999,
+          "final_G": 0.5666666666666665,
+          "gain": -0.05833333333333335,
+          "method": "credit_memory",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.6249999999999999,
+          "final_G": 0.6833333333333332,
+          "gain": 0.05833333333333335,
+          "method": "procedure_only",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.6249999999999999,
+          "final_G": 0.5708333333333333,
+          "gain": -0.054166666666666585,
+          "method": "reports",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.5125,
+          "final_G": 0.5833333333333334,
+          "gain": 0.07083333333333341,
+          "method": "credit_memory",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.5125,
+          "final_G": 0.5166666666666667,
+          "gain": 0.004166666666666763,
+          "method": "procedure_only",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.5125,
+          "final_G": 0.6708333333333334,
+          "gain": 0.15833333333333344,
+          "method": "reports",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.41250000000000003,
+          "final_G": 0.7291666666666666,
+          "gain": 0.3166666666666666,
+          "method": "credit_memory",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.41250000000000003,
+          "final_G": 0.625,
+          "gain": 0.21249999999999997,
+          "method": "procedure_only",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.41250000000000003,
+          "final_G": 0.6541666666666667,
+          "gain": 0.24166666666666664,
+          "method": "reports",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.5666666666666665,
+          "final_G": 0.6541666666666667,
+          "gain": 0.08750000000000013,
+          "method": "credit_memory",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.5666666666666665,
+          "final_G": 0.6,
+          "gain": 0.03333333333333344,
+          "method": "procedure_only",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.5666666666666665,
+          "final_G": 0.4916666666666667,
+          "gain": -0.07499999999999984,
+          "method": "reports",
+          "user": 3
+        }
+      ],
+      "status": "development",
+      "status_counts": {
+        "agreed": 48
+      },
+      "summary": {
+        "credit_memory": {
+          "baseline_G": {
+            "ci95": [
+              0.4510416666666667,
+              0.5968749999999999
+            ],
+            "mean": 0.5291666666666666,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.575,
+              0.6927083333333334
+            ],
+            "mean": 0.6333333333333333,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.021874999999999978,
+              0.2552083333333333
+            ],
+            "mean": 0.1041666666666667,
+            "n": 4
+          }
+        },
+        "procedure_only": {
+          "baseline_G": {
+            "ci95": [
+              0.4510416666666667,
+              0.5968749999999999
+            ],
+            "mean": 0.5291666666666666,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.5437500000000001,
+              0.6624999999999999
+            ],
+            "mean": 0.60625,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              0.01770833333333341,
+              0.16770833333333335
+            ],
+            "mean": 0.07708333333333338,
+            "n": 4
+          }
+        },
+        "procedure_only_minus_credit_memory": {
+          "ci95": [
+            -0.09166666666666665,
+            0.07083333333333336
+          ],
+          "mean": -0.02708333333333332,
+          "n": 4
+        },
+        "reports": {
+          "baseline_G": {
+            "ci95": [
+              0.4510416666666667,
+              0.5968749999999999
+            ],
+            "mean": 0.5291666666666666,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.53125,
+              0.6625000000000001
+            ],
+            "mean": 0.596875,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.06458333333333321,
+              0.20000000000000007
+            ],
+            "mean": 0.06770833333333341,
+            "n": 4
+          }
+        },
+        "reports_minus_credit_memory": {
+          "ci95": [
+            -0.12083333333333329,
+            0.047369791666663996
+          ],
+          "mean": -0.03645833333333329,
+          "n": 4
+        },
+        "reports_minus_procedure_only": {
+          "ci95": [
+            -0.11041666666666661,
+            0.09166666666666667
+          ],
+          "mean": -0.009374999999999967,
+          "n": 4
+        }
+      }
+    }
+  },
+  "common_practice_episodes_verified": 20,
+  "cumulative_budget": {
+    "accounted_usd": 63.67120899999988,
+    "known_cost_usd": 63.67120899999988,
+    "models": {
+      "claude-opus-5-5": {
+        "accounted_usd": 38.71309999999986,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 1907315.0,
+        "cache_creation_input_tokens": 1907315.0,
+        "cache_hit_calls": 3117.0,
+        "cache_read_fraction": 0.7596207425610942,
+        "cache_read_input_tokens": 11498740.0,
+        "estimated_savings_usd": 41.786540000000265,
+        "estimated_uncached_usd": 80.49964000000013,
+        "input_tokens": 1731420.0,
+        "known_cost_usd": 38.71309999999986,
+        "output_tokens": 997487.0,
+        "requests": 3152.0
+      },
+      "claude-sonnet-5-5": {
+        "accounted_usd": 24.95810900000001,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 2119060.0,
+        "cache_creation_input_tokens": 2119060.0,
+        "cache_hit_calls": 3434.0,
+        "cache_read_fraction": 0.858521755646666,
+        "cache_read_input_tokens": 21736884.0,
+        "estimated_savings_usd": 40.239045000000075,
+        "estimated_uncached_usd": 65.19715400000008,
+        "input_tokens": 1463023.0,
+        "known_cost_usd": 24.95810900000001,
+        "output_tokens": 1455922.0,
+        "requests": 3466.0
+      }
+    },
+    "states": {
+      "completed": 6618
+    }
+  },
+  "execution_errors": [],
+  "new_assessment_episode_count": 24,
+  "primary": {
+    "cases": 2,
+    "rows": [
+      {
+        "baseline_G": 0.4118589743589743,
+        "final_G": 0.39871794871794863,
+        "gain": -0.01314102564102565,
+        "method": "credit_memory",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.4118589743589743,
+        "final_G": 0.44102564102564096,
+        "gain": 0.029166666666666674,
+        "method": "procedure_only",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.4118589743589743,
+        "final_G": 0.384775641025641,
+        "gain": -0.027083333333333293,
+        "method": "reports",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.4197115384615384,
+        "final_G": 0.42307692307692313,
+        "gain": 0.003365384615384659,
+        "method": "credit_memory",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.4197115384615384,
+        "final_G": 0.3737179487179487,
+        "gain": -0.045993589743589705,
+        "method": "procedure_only",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.4197115384615384,
+        "final_G": 0.44439102564102567,
+        "gain": 0.02467948717948723,
+        "method": "reports",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.28958333333333336,
+        "final_G": 0.4799679487179487,
+        "gain": 0.19038461538461535,
+        "method": "credit_memory",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.28958333333333336,
+        "final_G": 0.4439102564102564,
+        "gain": 0.15432692307692308,
+        "method": "procedure_only",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.28958333333333336,
+        "final_G": 0.4584935897435898,
+        "gain": 0.16891025641025642,
+        "method": "reports",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.40833333333333327,
+        "final_G": 0.3975961538461539,
+        "gain": -0.010737179487179407,
+        "method": "credit_memory",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.40833333333333327,
+        "final_G": 0.43141025641025643,
+        "gain": 0.023076923076923134,
+        "method": "procedure_only",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.40833333333333327,
+        "final_G": 0.3932692307692308,
+        "gain": -0.015064102564102483,
+        "method": "reports",
+        "user": 3
+      }
+    ],
+    "summary": {
+      "credit_memory": {
+        "baseline_G": {
+          "ci95": [
+            0.3201522435897436,
+            0.41688902243589726
+          ],
+          "mean": 0.3823717948717948,
+          "n": 4
+        },
+        "final_G": {
+          "ci95": [
+            0.39815705128205126,
+            0.45965544871794867
+          ],
+          "mean": 0.4248397435897436,
+          "n": 4
+        },
+        "gain": {
+          "ci95": [
+            -0.011939102564102529,
+            0.14010416666666667
+          ],
+          "mean": 0.042467948717948734,
+          "n": 4
+        }
+      },
+      "procedure_only": {
+        "baseline_G": {
+          "ci95": [
+            0.3201522435897436,
+            0.41688902243589726
+          ],
+          "mean": 0.3823717948717948,
+          "n": 4
+        },
+        "final_G": {
+          "ci95": [
+            0.3905448717948718,
+            0.4424679487179487
+          ],
+          "mean": 0.42251602564102564,
+          "n": 4
+        },
+        "gain": {
+          "ci95": [
+            -0.02720352564102561,
+            0.12151442307692309
+          ],
+          "mean": 0.0401442307692308,
+          "n": 4
+        }
+      },
+      "procedure_only_minus_credit_memory": {
+        "ci95": [
+          -0.04270833333333331,
+          0.03806089743589743
+        ],
+        "mean": -0.0023237179487179405,
+        "n": 4
+      },
+      "reports": {
+        "baseline_G": {
+          "ci95": [
+            0.3201522435897436,
+            0.41688902243589726
+          ],
+          "mean": 0.3823717948717948,
+          "n": 4
+        },
+        "final_G": {
+          "ci95": [
+            0.3890224358974359,
+            0.45144230769230775
+          ],
+          "mean": 0.42023237179487183,
+          "n": 4
+        },
+        "gain": {
+          "ci95": [
+            -0.021073717948717888,
+            0.12291666666666669
+          ],
+          "mean": 0.03786057692307697,
+          "n": 4
+        }
+      },
+      "reports_minus_credit_memory": {
+        "ci95": [
+          -0.017708333333333284,
+          0.012500000000000018
+        ],
+        "mean": -0.004607371794871768,
+        "n": 4
+      },
+      "reports_minus_procedure_only": {
+        "ci95": [
+          -0.04719551282051279,
+          0.043469551282051294
+        ],
+        "mean": -0.0022836538461538276,
+        "n": 4
+      }
+    }
+  },
+  "primary_test": {
+    "cases": 2,
+    "comparator": "reports",
+    "contrast": "candidate minus comparator, averaging primary cases within each persona",
+    "estimate": {
+      "ci95": [
+        -0.012500000000000018,
+        0.017708333333333284
+      ],
+      "mean": 0.004607371794871768,
+      "n": 4
+    },
+    "method": "credit_memory"
+  },
+  "protocol_sha256": "999647afa8ec9839449935a4b062a53a781992b11ff3c24a347151ad9c44c1c1",
+  "reused_episode_count": 72,
+  "run_usage_by_phase": {
+    ".": {
+      "cache_creation_1h_input_tokens": 0.0,
+      "cache_creation_5m_input_tokens": 20152.0,
+      "cache_creation_input_tokens": 20152.0,
+      "cache_hit_calls": 0.0,
+      "cache_read_fraction": 0.0,
+      "cache_read_input_tokens": 0.0,
+      "calls": 4.0,
+      "estimated_savings_usd": -0.02015200000000006,
+      "estimated_uncached_usd": 0.530856,
+      "estimated_usd": 0.551008,
+      "input_tokens": 88407.0,
+      "invocations": 1,
+      "output_tokens": 4831.0,
+      "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+      "total_input_tokens": 108559.0
+    },
+    "assessment/hiring": {
+      "cache_creation_1h_input_tokens": 0.0,
+      "cache_creation_5m_input_tokens": 82234.0,
+      "cache_creation_input_tokens": 82234.0,
+      "cache_hit_calls": 136.0,
+      "cache_read_fraction": 0.8002976780116174,
+      "cache_read_input_tokens": 480698.0,
+      "calls": 145.0,
+      "estimated_savings_usd": 1.1475107,
+      "estimated_uncached_usd": 2.174128,
+      "estimated_usd": 1.0266173,
+      "input_tokens": 37717.0,
+      "invocations": 1,
+      "output_tokens": 42622.0,
+      "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+      "total_input_tokens": 600649.0
+    },
+    "assessment/sim4_revisited": {
+      "cache_creation_1h_input_tokens": 0.0,
+      "cache_creation_5m_input_tokens": 161943.0,
+      "cache_creation_input_tokens": 161943.0,
+      "cache_hit_calls": 191.0,
+      "cache_read_fraction": 0.829579674538107,
+      "cache_read_input_tokens": 1298629.0,
+      "calls": 195.0,
+      "estimated_savings_usd": 3.3175989999999995,
+      "estimated_uncached_usd": 5.691336,
+      "estimated_usd": 2.373737,
+      "input_tokens": 104834.0,
+      "invocations": 1,
+      "output_tokens": 90463.0,
+      "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+      "total_input_tokens": 1565406.0
+    }
+  },
+  "run_usage_total": {
+    "cache_read_fraction": 0.7822544836178797,
+    "cache_read_input_tokens": 1779327.0,
+    "calls": 344.0,
+    "estimated_savings_usd": 4.444957699999999,
+    "estimated_uncached_usd": 8.39632,
+    "estimated_usd": 3.9513623000000004,
+    "output_tokens": 137916.0,
+    "total_input_tokens": 2274614.0
+  },
+  "source_sha256": "0eb60cbbfddac9c74bfdb76ce073fdb3a1c56c7624f0a1f6cf8c019e0408b457"
+}

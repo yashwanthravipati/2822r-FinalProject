@@ -1,0 +1,40 @@
+{
+  "coach": {
+    "cache_creation_1h_input_tokens": 0,
+    "cache_creation_5m_input_tokens": 20152,
+    "cache_creation_input_tokens": 20152,
+    "cache_hit_call_fraction": 0.0,
+    "cache_hit_calls": 0,
+    "cache_read_fraction": 0.0,
+    "cache_read_input_tokens": 0,
+    "calls": 4,
+    "estimated_uncached_usd": 0.530856,
+    "estimated_usd": 0.551008,
+    "input_tokens": 88407,
+    "output_tokens": 4831,
+    "total_input_tokens": 108559
+  },
+  "learner": {
+    "cache_creation_1h_input_tokens": 0,
+    "cache_creation_5m_input_tokens": 0,
+    "cache_creation_input_tokens": 0,
+    "cache_hit_call_fraction": 0.0,
+    "cache_hit_calls": 0,
+    "cache_read_fraction": 0.0,
+    "cache_read_input_tokens": 0,
+    "calls": 0,
+    "estimated_uncached_usd": 0.0,
+    "estimated_usd": 0.0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_input_tokens": 0
+  },
+  "ledger": {
+    "accounted_usd": 81.183159,
+    "actual_usd": 56.937399,
+    "limit_usd": 100.0,
+    "remaining_usd": 18.816841,
+    "requests": 5951,
+    "unresolved_requests": 3
+  }
+}
