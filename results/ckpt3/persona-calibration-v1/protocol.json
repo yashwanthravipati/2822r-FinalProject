@@ -1,0 +1,31 @@
+{
+  "awareness": 0.5,
+  "cases": {
+    "cloudline_hiring": "c97ec5569d979fad439b607647c3a62c15691509d8fd9cb54943891c3ac8d6a8",
+    "harbor_analytics": "a05b7eb213dafdddefe5cd2285f8a82005092c2b47867c874abf5bf8bf2b7380"
+  },
+  "cedar_used": false,
+  "counterpart": "rule-based, tier 3, target focus",
+  "effort": "low",
+  "expected_episodes": 48,
+  "feedback": [],
+  "interpretation": "Diagnostic only; all six positive directions needed to advance",
+  "learner": "claude-sonnet-5-5",
+  "learner_focus": null,
+  "limitations": "Four pairs/error; endogenous opportunities; unseeded LLM; rule-based opponent",
+  "other_error_levels": 0.3,
+  "primary": "fraction of episodes exhibiting the target error, high minus low",
+  "rapport": 0.5,
+  "runner_sha256": "772deac81b20a4b6095e469bc316e8c834f0caa0fcd7bb72427bfac9d54ee520",
+  "secondary": "Opportunity coverage and conditional rate; zero opportunities=null",
+  "seeds": [
+    2822111710,
+    2822111711
+  ],
+  "sim4_used": false,
+  "source_sha256": "3bca49e6f09eaf1a4c32dbdbc7a73459120e8fa4c85b616c0376b76995d3a302",
+  "target_levels": [
+    0.1,
+    0.9
+  ]
+}

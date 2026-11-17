@@ -20,6 +20,18 @@ FIELDS = (
 )
 
 
+def audit_usage(root):
+    """Audit runners may have one model and a single usage.json receipt."""
+    paths = sorted({*root.glob("usage_*.json"), *root.glob("usage.json")})
+    totals = dict.fromkeys(FIELDS, 0)
+    for path in paths:
+        receipt = json.loads(path.read_text())
+        for role in ("learner", "coach"):
+            for key in FIELDS:
+                totals[key] += receipt.get(role, {}).get(key, 0)
+    return {"invocations": len(paths), **totals}
+
+
 def ledger(path):
     with sqlite3.connect(f"file:{path}?mode=ro", uri=True) as db:
         cap = db.execute("SELECT cap FROM budget WHERE id=1").fetchone()[0]
@@ -53,6 +65,15 @@ def main():
             "phases": phases,
             "usage": {k: sum(v.get(k, 0) for v in phases.values()) for k in FIELDS},
         }
+    for name in ("audit-corrected-smoke-v1", "persona-calibration-v1"):
+        root = Path("results/ckpt3") / name
+        if root.exists():
+            usage = audit_usage(root)
+            studies[str(root)] = {
+                "independently_verified": (root / "verification.json").exists(),
+                "phases": {".": usage},
+                "usage": {k: usage[k] for k in FIELDS},
+            }
     totals = {k: sum(v["usage"][k] for v in studies.values()) for k in FIELDS}
     totals["cache_read_fraction"] = (
         totals["cache_read_input_tokens"] / totals["total_input_tokens"]

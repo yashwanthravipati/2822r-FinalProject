@@ -62,3 +62,15 @@ Sim4 has now been examined and is a revisited benchmark, not an untouched test s
   completed, all R=0.230769 before/after, zero schedule violations. No efficacy claim.
   Audit smoke cost $0.483545, combined checkpoint-3 total $179.424048. Main-path audit
   and limits recorded in logs/ckpt3-system-audit.md; larger behavioral calibration remains.
+- 2026-11-17: Before further paid calls, preregistered a 48-episode behavioral screen:
+  two existing public development cases, six target weaknesses, .1/.9 target settings,
+  two matched controller seeds. Other errors .3, awareness/rapport .5, no coaching or
+  trait updates; target-focused rule-based exposure with no learner practice callout.
+  Primary diagnostic is high-minus-low fraction of episodes exhibiting the target error;
+  also report opportunity coverage and conditional rates (undefined with zero opportunities).
+  Four pairs/error cannot establish calibration; all six positive directions are required
+  to advance this screening stage. Sim4 and unused Cedar excluded. Source/cases/runner
+  frozen in persona-calibration-v1/protocol.json before outcomes. Estimated 400 Sonnet calls
+  x (6,000 input tokens at $2/M + 350 output at $10/M) = $6.20 before cache savings;
+  actual lengths vary. Three workers, existing cumulative development cap $110 preserved
+  ($17.658087 headroom), under the user's latest $150 development/evaluation authorization.
