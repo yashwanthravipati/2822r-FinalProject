@@ -1,0 +1,48 @@
+{
+  "scope": "Fresh correctness smoke test, not behavioral calibration or efficacy evidence",
+  "episodes": [
+    {
+      "episode": "learner0_after",
+      "status": "agreed",
+      "R": 0.23076923076923078,
+      "below_walkaway": false,
+      "schedule_violations": 0
+    },
+    {
+      "episode": "learner0_baseline",
+      "status": "agreed",
+      "R": 0.23076923076923078,
+      "below_walkaway": false,
+      "schedule_violations": 0
+    },
+    {
+      "episode": "learner1_after",
+      "status": "agreed",
+      "R": 0.23076923076923078,
+      "below_walkaway": false,
+      "schedule_violations": 0
+    },
+    {
+      "episode": "learner1_baseline",
+      "status": "agreed",
+      "R": 0.23076923076923078,
+      "below_walkaway": false,
+      "schedule_violations": 0
+    }
+  ],
+  "feasible_best": 8700.0,
+  "source_sha256": "3bca49e6f09eaf1a4c32dbdbc7a73459120e8fa4c85b616c0376b76995d3a302",
+  "comprehension_ids_correct": 6,
+  "comprehension_meanings_reviewed_correct": 6,
+  "new_ledger_cost_usd": 0.483545,
+  "usage_cost_usd": 0.48351960000000005,
+  "requests": 60,
+  "development_ledger": {
+    "accounted_usd": 92.341913,
+    "actual_usd": 92.341913,
+    "limit_usd": 110.0,
+    "remaining_usd": 17.658087,
+    "requests": 9566,
+    "unresolved_requests": 0
+  }
+}

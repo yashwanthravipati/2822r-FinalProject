@@ -1,0 +1,75 @@
+{
+  "finding": "The intended six named weakness tendencies are not explicitly defined in the LLM learner prompt.",
+  "current_core_source_sha256": "0eb60cbbfddac9c74bfdb76ce073fdb3a1c56c7624f0a1f6cf8c019e0408b457",
+  "runtime_check_case": "cloudline_hiring",
+  "runtime_check_role": "candidate",
+  "error_ids": [
+    "error:1",
+    "error:2",
+    "error:3",
+    "error:4",
+    "error:5",
+    "error:6"
+  ],
+  "runtime_canonical_labels_present": {
+    "error:1": false,
+    "error:2": false,
+    "error:3": false,
+    "error:4": false,
+    "error:5": false,
+    "error:6": false
+  },
+  "trait_values_are_unlabeled_numeric_scalars": true,
+  "historical_constructors": {
+    "4e3e5ec": {
+      "source_sha256": "a0f2172f248a47fdf21c6dd0aa6240c42d5854abf90117e60885d0642e35e00d",
+      "serializes_traits_errors_directly": true,
+      "contains_canonical_behavior_labels": {
+        "error:1": false,
+        "error:2": false,
+        "error:3": false,
+        "error:4": false,
+        "error:5": false,
+        "error:6": false
+      }
+    },
+    "a7db19e": {
+      "source_sha256": "0f3edb5980cd5507254b20d766d5e3117a67a2c2eb0864443f04f79926095089",
+      "serializes_traits_errors_directly": true,
+      "contains_canonical_behavior_labels": {
+        "error:1": false,
+        "error:2": false,
+        "error:3": false,
+        "error:4": false,
+        "error:5": false,
+        "error:6": false
+      }
+    },
+    "ecbd73a": {
+      "source_sha256": "b89b11d57926b10e6d5f09e4750265312ebd6088aa802d026d318ccdd9434250",
+      "serializes_traits_errors_directly": true,
+      "contains_canonical_behavior_labels": {
+        "error:1": false,
+        "error:2": false,
+        "error:3": false,
+        "error:4": false,
+        "error:5": false,
+        "error:6": false
+      }
+    },
+    "a462d48": {
+      "source_sha256": "77a06300cec1ba9111403201e2b64f5b004cf9fab17f8dd03159fa2636531ae7",
+      "serializes_traits_errors_directly": true,
+      "contains_canonical_behavior_labels": {
+        "error:1": false,
+        "error:2": false,
+        "error:3": false,
+        "error:4": false,
+        "error:5": false,
+        "error:6": false
+      }
+    }
+  },
+  "api_calls": 0,
+  "interpretation": "Observed scores are retained under the actual prompt. They do not validate the intended named-weakness learner population. No causal explanation of treatment effects is established by this audit. Scripted behavior branches are separate."
+}

@@ -1,0 +1,8 @@
+[
+{"expected": "error:1", "id_correct": true, "reported": "error:1"},
+{"expected": "error:2", "id_correct": true, "reported": "error:2"},
+{"expected": "error:3", "id_correct": true, "reported": "error:3"},
+{"expected": "error:4", "id_correct": true, "reported": "error:4"},
+{"expected": "error:5", "id_correct": true, "reported": "error:5"},
+{"expected": "error:6", "id_correct": true, "reported": "error:6"}
+]

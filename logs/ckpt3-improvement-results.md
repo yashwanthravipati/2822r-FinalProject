@@ -1,5 +1,15 @@
 # Coaching and curriculum comparisons
 
+**Post-study correction: the intended LLM weaknesses were not correctly specified.**
+The learner prompt supplied probabilities under `error:1`–`error:6` without explaining
+the IDs. This is an implementation defect, not merely imperfect calibration. The
+following numeric outcomes remain observations under that defective prompt; they do
+not validate personalized training of learners with the intended named weaknesses.
+They must not be relabeled as results from a corrected simulator. The omission alone
+does not explain the negative effects. Frozen runs are preserved, and no further paid
+calls are being made while the defect and interpretation are audited. The separate
+scripted policy has explicit behavioral branches and is not affected by this omission.
+
 Neither prospective comparison established a reliable gain over full reports. The
 first workbook confirmation was essentially tied; the later varied-practice follow-up
 was only +0.004579 higher, with a 95% interval spanning negative and positive effects.

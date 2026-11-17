@@ -54,3 +54,11 @@ Sim4 has now been examined and is a revisited benchmark, not an untouched test s
   unresolved requests. Extended docs/report.tex at user's request with every completed
   comparison, limitations and reconciled costs; PDF compiles. 187 offline tests pass.
   Reliable outcome superiority remains unestablished; report/results ready for review.
+
+- 2026-11-17: Subsequent audit found missing LLM weakness definitions, a constraint-blind
+  joint-efficiency reference, and malformed-case acceptance. Repaired all three; 195
+  offline tests pass. Old results prominently corrected, old core preserved at 4613bb2.
+  Fresh six-profile comprehension check passed 6/6; four fresh integration episodes
+  completed, all R=0.230769 before/after, zero schedule violations. No efficacy claim.
+  Audit smoke cost $0.483545, combined checkpoint-3 total $179.424048. Main-path audit
+  and limits recorded in logs/ckpt3-system-audit.md; larger behavioral calibration remains.

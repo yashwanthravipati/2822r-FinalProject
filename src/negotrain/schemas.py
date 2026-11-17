@@ -8,6 +8,7 @@ the tests and docs/architecture.md when you do.
 
 from __future__ import annotations
 
+import math
 from datetime import datetime, timezone
 from typing import Literal
 from uuid import uuid4
@@ -83,7 +84,27 @@ class Case(BaseModel):
 
     @model_validator(mode="after")
     def _check_points_cover_issues(self) -> Case:
+        issue_ids = [issue.id for issue in self.issues]
+        role_ids = [role.id for role in self.roles]
+        if not issue_ids or len(issue_ids) != len(set(issue_ids)):
+            raise ValueError("case requires nonempty, unique issue IDs")
+        if not role_ids or len(role_ids) != len(set(role_ids)):
+            raise ValueError("case requires nonempty, unique role IDs")
+        for issue in self.issues:
+            options = issue.option_ids()
+            if not options or len(options) != len(set(options)):
+                raise ValueError("issues require nonempty, unique option IDs")
         for role in self.roles:
+            if not math.isfinite(role.reservation_value) or any(
+                not math.isfinite(value)
+                for table in role.points.values()
+                for value in table.values()
+            ):
+                raise ValueError("utilities and reservation values must be finite")
+            for constraint in role.constraints:
+                for key, options in constraint.disallowed.items():
+                    if key not in issue_ids or set(options) - set(self.issue(key).option_ids()):
+                        raise ValueError("constraint references an unknown issue or option")
             for issue in self.issues:
                 table = role.points.get(issue.id)
                 if table is None:

@@ -114,6 +114,10 @@ measure realized detector rates and held-out no-focus competence G. These are se
 experiments: policy propensities are not asserted to equal conditional error rates.
 LLM personas receive role-projected case materials, pre-session focus callouts, and prior
 post-session feedback; their states are not manually improved by the synthetic Learn map.
+The corrected learner prompt includes a name, behavioral definition and unchanged
+frequency for every error ID. Historical runs through commit 4613bb2 omitted those
+definitions and must not be interpreted as validated named-weakness populations.
+See `logs/ckpt3-system-audit.md`; old frozen audits require the pre-fix revision.
 Independent users may run concurrently; requests wait for active budget reservations to
 settle when that can free enough capacity, while unknown charges stay reserved.
 

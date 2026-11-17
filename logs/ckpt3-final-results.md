@@ -1,5 +1,14 @@
 # Checkpoint 3: final simulated-learning and transfer results
 
+**Post-study correction:** the LLM learner received six numeric error tendencies under
+opaque IDs without their behavioral definitions. Thus the intended named-weakness
+personas were not correctly specified. The scores below describe the implemented
+prompt/memory conditions, not a validated test of those intended learners. Corrected
+persona prompts require behavioral calibration and new controls; these outcomes cannot
+serve as runs of that corrected simulator. See the prominent correction in
+`docs/report.tex`. This defect is separate from the already reported uncertainty and
+absence of human evidence.
+
 ## Main finding
 
 Compact reflection produced a positive held-out Sim4 gain after five Sim3 rehearsals:

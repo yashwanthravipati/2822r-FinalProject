@@ -34,6 +34,23 @@ score after practice, neither personalized prompt refinement nor varied practice
 yet demonstrated reliable superiority over ordinary post-session reports in our
 prospective comparisons. The human-learning question remains open.
 
+\paragraph{Implementation defect discovered after these experiments.}
+\textbf{The intended six-weakness LLM personas were not correctly specified.}
+The learner prompt serialized numeric tendencies under opaque IDs such as
+\texttt{error:1}, without a dictionary explaining which behavior each ID represented.
+This omission is present in the historical learner implementation as well as the
+frozen implementation used for the later experiments. Therefore these results do
+\emph{not} validate training learners with the intended named weaknesses, and should
+not be presented as evidence for that personalized-training claim. The tables retain
+the observed scores under the defective prompt; they are not results from a corrected
+simulator. The omission does not establish the cause of the negative comparisons.
+The separate scripted policy implements named behaviors in code and is not affected
+by this prompt defect. Corrected prompts, behavioral calibration and new controls
+are required before testing the intended LLM-persona hypothesis again.
+The subsequent correctness audit repaired the missing definitions; its fresh,
+limited integration evaluation is reported separately below. It does not retroactively
+validate the earlier experiments.
+
 \paragraph{1. The case $c$.}
 The case is the negotiation the user uploads. Formally, a case is the tuple
 \begin{equation}
@@ -183,6 +200,8 @@ where $D$ contains completed practice transcripts and feedback. Persona paramete
 and model weights remain fixed. Each assessment starts a fresh actor with its
 assigned persona and frozen memory, and provides no assessment feedback. Consequently,
 the measured effect is contextual adaptation, not durable learning without memory.
+Here ``persona'' denotes a sampled prompt configuration, not a validated six-weakness
+learner: the missing codebook described above prevents that stronger interpretation.
 The Binomial model above is an idealization: scripted action propensities and LLM
 persona instructions need not equal realized conditional detector error rates.
 
@@ -427,12 +446,32 @@ training objective requires.
 The completed evidence supports a working, auditable simulation platform and a
 controlled comparison of coaching choices. It does not support declaring the new
 prompt-refinement methods or adaptive curriculum better than ordinary reports.
+The persona-specification defect further prevents interpreting these comparisons
+as a valid test of training the intended weakness-conditioned learners.
 We retain reports as the reference method. Further improvement should target a
 specific observed decision failure, use a development gate, and test the frozen
 intervention on more fresh cases and personas. A larger preregistered comparison
 and, ultimately, a human study are needed for stronger claims. We will not tune
 against Sim4 or the other observed confirmation outcomes and continue calling
 them untouched tests.
+
+\paragraph{Corrected-system audit and fresh integration test.}
+The repaired learner prompt supplies each weakness's name and behavioral definition
+beside its unchanged numeric frequency. The audit also corrected the joint-efficiency
+reference to obey hard constraints and added rejection of non-finite utilities,
+duplicate IDs and invalid constraint references. The primary normalized-surplus
+denominator already respected constraints. All 195 offline tests pass, including
+eight new regression cases; seven stored case fixtures validate successfully.
+
+A fresh live smoke test identified and explained all six intended weaknesses correctly.
+Two learners then each completed baseline, feedback and reassessment on the public hiring
+case: four agreements, no below-walk-away outcomes and no schedule violations. Every
+episode scored $R=0.230769$, so no improvement was observed. This tests comprehension
+and integration, not calibrated weakness frequencies or coaching efficacy. Its 60
+requests cost an additional \$0.483545; checkpoint-3 usage is now \$179.424048.
+The preceding cost table is the pre-audit snapshot. Larger behavioral calibration
+with new controls is still required. Audit details are in
+\path{logs/ckpt3-system-audit.md}.
 
 \paragraph{Reproducibility.}
 Numeric results, paired rows, frozen protocols and plots are under
@@ -441,7 +480,9 @@ prospective studies are \path{consolidation-final-v1} and
 \path{consolidation-diverse-final-v1}. Analysis scripts independently verify scoring,
 and \path{scripts/summarize_improvement_costs.py} reconciles usage with durable ledgers.
 Raw transcripts, original class materials, generated personal memories and secrets
-remain excluded from published artifacts. The current offline suite passes 187 tests;
+remain excluded from published artifacts. Historical frozen experiments require the
+pre-repair core at git revision \texttt{4613bb2}; repaired-core results are stored
+separately in \path{audit-corrected-smoke-v1}. The current offline suite passes 195 tests;
 the live API test is excluded from that count.
 
 \begin{thebibliography}{1}

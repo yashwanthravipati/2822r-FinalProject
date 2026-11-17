@@ -66,14 +66,24 @@ def joint_points(case: Case, offer: Offer) -> float | None:
 
 
 def max_joint_offer(case: Case) -> Offer:
-    """The agreement maximizing total points across roles (ignores constraints).
+    """The legal agreement maximizing total points across roles.
 
     With additive schedules this is separable: pick the best option per issue.
     """
     terms = {}
     for issue in case.issues:
+        banned = {
+            option
+            for role in case.roles
+            for constraint in role.constraints
+            if constraint.hard
+            for option in constraint.disallowed.get(issue.id, [])
+        }
+        available = [option for option in issue.option_ids() if option not in banned]
+        if not available:
+            raise ValueError(f"no legal option for issue {issue.id}")
         terms[issue.id] = max(
-            issue.option_ids(),
+            available,
             key=lambda opt, iid=issue.id: sum(r.points[iid][opt] for r in case.roles),
         )
     return Offer(terms=terms)

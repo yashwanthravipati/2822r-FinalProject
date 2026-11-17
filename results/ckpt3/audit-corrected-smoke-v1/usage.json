@@ -1,0 +1,48 @@
+{
+  "after": {
+    "accounted_usd": 92.341913,
+    "actual_usd": 92.341913,
+    "limit_usd": 110.0,
+    "remaining_usd": 17.658087,
+    "requests": 9566,
+    "unresolved_requests": 0
+  },
+  "before": {
+    "accounted_usd": 91.858368,
+    "actual_usd": 91.858368,
+    "limit_usd": 110.0,
+    "remaining_usd": 18.141632,
+    "requests": 9506,
+    "unresolved_requests": 0
+  },
+  "coach": {
+    "cache_creation_1h_input_tokens": 0,
+    "cache_creation_5m_input_tokens": 15655,
+    "cache_creation_input_tokens": 15655,
+    "cache_hit_call_fraction": 0.8846153846153846,
+    "cache_hit_calls": 23,
+    "cache_read_fraction": 0.656470748052889,
+    "cache_read_input_tokens": 57990,
+    "calls": 26,
+    "estimated_uncached_usd": 0.500204,
+    "estimated_usd": 0.295497,
+    "input_tokens": 14691,
+    "output_tokens": 7343,
+    "total_input_tokens": 88336
+  },
+  "learner": {
+    "cache_creation_1h_input_tokens": 0,
+    "cache_creation_5m_input_tokens": 24410,
+    "cache_creation_input_tokens": 24410,
+    "cache_hit_call_fraction": 0.8823529411764706,
+    "cache_hit_calls": 30,
+    "cache_read_fraction": 0.7595286996000432,
+    "cache_read_input_tokens": 105396,
+    "calls": 34,
+    "estimated_uncached_usd": 0.37607,
+    "estimated_usd": 0.1880226,
+    "input_tokens": 8959,
+    "output_tokens": 9854,
+    "total_input_tokens": 138765
+  }
+}

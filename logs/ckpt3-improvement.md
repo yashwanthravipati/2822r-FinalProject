@@ -505,3 +505,24 @@ ledger without a lower cap; explicitly require the newly authorized $110 limit.
   clarified no human pilot and no demonstrated superiority, and compiled the PDF. Latest
   result and current cost reconciliation are included. No fresh confirmation launched
   for the failed candidate. GitHub publication still awaits destination/payload approval.
+
+
+## Timed correctness audit and fresh smoke evaluation
+User requested an entire-system obvious-defect audit, fixes, and an evaluation within
+10 minutes, authorizing up to $150 for development and subsequent evaluation. Start
+21:31:54 UTC; deadline 21:41:54 UTC. Use existing remaining allowance first; do not
+reset or raise the existing ledgers for this bounded smoke test. Forecast 60–100
+requests, roughly 0.5–1M cached-inclusive input and 25–50k output tokens, $1–3.
+Models/gateway unchanged. Six profile-comprehension checks and two independent
+baseline/debrief/post sequences on the public hiring case; 4 negotiations, tier 3.
+No historical control reuse, fixed traits within each pair, no Learn updates, no
+claim of efficacy or calibrated error rates from this small integration test.
+The prior code is preserved at git 4613bb2 and /tmp/negotrain-pre-fix-4613bb2.tar.
+Old frozen experiments must be audited at that revision, not against repaired core.
+
+- Timed audit completed: 195 offline tests; six correct live profile explanations and
+  four complete baseline/post negotiations, all R=0.230769, no schedule violations.
+  60 requests cost $0.483545; development $92.341913, final $87.082135. No pending
+  calls in those ledgers. Current code includes explicit weakness meanings, legal joint
+  reference scoring and strict case validation. Earlier experiments remain flagged as
+  defective in persona specification, not relabeled as corrected results.

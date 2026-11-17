@@ -1,0 +1,30 @@
+{
+  "K": 5,
+  "case_sha256": "c97ec5569d979fad439b607647c3a62c15691509d8fd9cb54943891c3ac8d6a8",
+  "coach_model": "claude-opus-5-5",
+  "design": "Six profile-comprehension checks; two baseline/debrief/post sequences",
+  "learner_model": "claude-sonnet-5-5",
+  "old_controls_reused": false,
+  "probe_tiers": [
+    1,
+    3,
+    5
+  ],
+  "reward": "surplus_share",
+  "role": "candidate",
+  "scope": "Smoke test, not an efficacy or persona-calibration study",
+  "scoring": "declared numeric case utilities",
+  "seed": 2822111702,
+  "source_sha256": "3bca49e6f09eaf1a4c32dbdbc7a73459120e8fa4c85b616c0376b76995d3a302",
+  "training_tiers": [
+    2,
+    2,
+    4,
+    4,
+    4
+  ],
+  "users": [
+    0,
+    1
+  ]
+}

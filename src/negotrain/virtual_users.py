@@ -21,6 +21,16 @@ from negotrain.llm import LLM, CachedText, cached_json
 from negotrain.profiling.observations import ERRORS, case_facts
 from negotrain.schemas import Case, Session, Turn, TurnTags
 
+WEAKNESS_DESCRIPTIONS = {
+    "error:1": "Making a concession before the other side has made any concession.",
+    "error:2": "Conceding again without receiving movement since your previous concession.",
+    "error:3": "Letting their opening anchor your counteroffer instead of your own priorities.",
+    "error:4": "Accepting little surplus over your walk-away without exploring a useful trade.",
+    "error:5": "Never raising or varying an issue that matters in your own point table.",
+    "error:6": "Proposing a package worse for both sides than an earlier discussed package, "
+    "where that comparison is supported by visible information, not guessed private utilities.",
+}
+
 
 class VirtualTraits(BaseModel):
     errors: dict[str, float]
@@ -220,7 +230,14 @@ invent missing role facts. Only formal actions change the agreement.\n"""
         self.system = cached_json(
             {"visible_case": visible},
             {
-                "initial_tendencies": traits.errors,
+                "initial_tendencies": {
+                    key: {
+                        "name": ERRORS[key],
+                        "description": WEAKNESS_DESCRIPTIONS[key],
+                        "frequency": value,
+                    }
+                    for key, value in traits.errors.items()
+                },
                 "fact_awareness": traits.awareness,
                 "rapport": traits.rapport,
             },

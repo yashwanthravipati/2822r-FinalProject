@@ -1,0 +1,330 @@
+{
+  "baseline_R": 0.23076923076923078,
+  "baseline_counts": {
+    "counts": {
+      "error:1": {
+        "occurrences": 1,
+        "opportunities": 3,
+        "turns": [
+          2
+        ]
+      },
+      "error:2": {
+        "occurrences": 1,
+        "opportunities": 2,
+        "turns": [
+          8
+        ]
+      },
+      "error:3": {
+        "occurrences": 0,
+        "opportunities": 0,
+        "turns": []
+      },
+      "error:4": {
+        "occurrences": 0,
+        "opportunities": 0,
+        "turns": []
+      },
+      "error:5": {
+        "occurrences": 0,
+        "opportunities": 5,
+        "turns": []
+      },
+      "error:6": {
+        "occurrences": 0,
+        "opportunities": 5,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:alternative": {
+        "occurrences": 0,
+        "opportunities": 5,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:other_priority:bonus": {
+        "occurrences": 0,
+        "opportunities": 5,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:other_priority:remote": {
+        "occurrences": 0,
+        "opportunities": 5,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:other_priority:salary": {
+        "occurrences": 0,
+        "opportunities": 5,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:other_priority:start": {
+        "occurrences": 0,
+        "opportunities": 5,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:other_priority:vacation": {
+        "occurrences": 0,
+        "opportunities": 5,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:own_priority:bonus": {
+        "occurrences": 1,
+        "opportunities": 5,
+        "turns": [
+          2
+        ]
+      },
+      "fact:cloudline_hiring:candidate:own_priority:remote": {
+        "occurrences": 2,
+        "opportunities": 5,
+        "turns": [
+          2,
+          4
+        ]
+      },
+      "fact:cloudline_hiring:candidate:own_priority:salary": {
+        "occurrences": 2,
+        "opportunities": 5,
+        "turns": [
+          2,
+          6
+        ]
+      },
+      "fact:cloudline_hiring:candidate:own_priority:start": {
+        "occurrences": 1,
+        "opportunities": 5,
+        "turns": [
+          0
+        ]
+      },
+      "fact:cloudline_hiring:candidate:own_priority:vacation": {
+        "occurrences": 0,
+        "opportunities": 5,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:tradeable:bonus": {
+        "occurrences": 1,
+        "opportunities": 5,
+        "turns": [
+          2
+        ]
+      },
+      "fact:cloudline_hiring:candidate:tradeable:remote": {
+        "occurrences": 0,
+        "opportunities": 5,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:tradeable:salary": {
+        "occurrences": 0,
+        "opportunities": 5,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:tradeable:start": {
+        "occurrences": 0,
+        "opportunities": 5,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:tradeable:vacation": {
+        "occurrences": 2,
+        "opportunities": 5,
+        "turns": [
+          2,
+          4
+        ]
+      },
+      "fact:cloudline_hiring:candidate:walkaway": {
+        "occurrences": 5,
+        "opportunities": 5,
+        "turns": [
+          0,
+          2,
+          4,
+          6,
+          8
+        ]
+      },
+      "rapport": {
+        "occurrences": 4,
+        "opportunities": 5,
+        "turns": [
+          2,
+          4,
+          6,
+          8
+        ]
+      }
+    },
+    "excluded_numeric_turns": 0,
+    "untagged_user_turns": 0
+  },
+  "baseline_status": "agreed",
+  "post_R": 0.23076923076923078,
+  "post_counts": {
+    "counts": {
+      "error:1": {
+        "occurrences": 1,
+        "opportunities": 4,
+        "turns": [
+          2
+        ]
+      },
+      "error:2": {
+        "occurrences": 1,
+        "opportunities": 3,
+        "turns": [
+          6
+        ]
+      },
+      "error:3": {
+        "occurrences": 0,
+        "opportunities": 0,
+        "turns": []
+      },
+      "error:4": {
+        "occurrences": 0,
+        "opportunities": 0,
+        "turns": []
+      },
+      "error:5": {
+        "occurrences": 0,
+        "opportunities": 5,
+        "turns": []
+      },
+      "error:6": {
+        "occurrences": 0,
+        "opportunities": 7,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:alternative": {
+        "occurrences": 2,
+        "opportunities": 7,
+        "turns": [
+          2,
+          6
+        ]
+      },
+      "fact:cloudline_hiring:candidate:other_priority:bonus": {
+        "occurrences": 0,
+        "opportunities": 7,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:other_priority:remote": {
+        "occurrences": 1,
+        "opportunities": 7,
+        "turns": [
+          6
+        ]
+      },
+      "fact:cloudline_hiring:candidate:other_priority:salary": {
+        "occurrences": 0,
+        "opportunities": 7,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:other_priority:start": {
+        "occurrences": 0,
+        "opportunities": 7,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:other_priority:vacation": {
+        "occurrences": 0,
+        "opportunities": 7,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:own_priority:bonus": {
+        "occurrences": 0,
+        "opportunities": 7,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:own_priority:remote": {
+        "occurrences": 1,
+        "opportunities": 7,
+        "turns": [
+          12
+        ]
+      },
+      "fact:cloudline_hiring:candidate:own_priority:salary": {
+        "occurrences": 2,
+        "opportunities": 7,
+        "turns": [
+          2,
+          4
+        ]
+      },
+      "fact:cloudline_hiring:candidate:own_priority:start": {
+        "occurrences": 1,
+        "opportunities": 7,
+        "turns": [
+          0
+        ]
+      },
+      "fact:cloudline_hiring:candidate:own_priority:vacation": {
+        "occurrences": 0,
+        "opportunities": 7,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:tradeable:bonus": {
+        "occurrences": 3,
+        "opportunities": 7,
+        "turns": [
+          4,
+          8,
+          10
+        ]
+      },
+      "fact:cloudline_hiring:candidate:tradeable:remote": {
+        "occurrences": 0,
+        "opportunities": 7,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:tradeable:salary": {
+        "occurrences": 2,
+        "opportunities": 7,
+        "turns": [
+          2,
+          6
+        ]
+      },
+      "fact:cloudline_hiring:candidate:tradeable:start": {
+        "occurrences": 0,
+        "opportunities": 7,
+        "turns": []
+      },
+      "fact:cloudline_hiring:candidate:tradeable:vacation": {
+        "occurrences": 1,
+        "opportunities": 7,
+        "turns": [
+          12
+        ]
+      },
+      "fact:cloudline_hiring:candidate:walkaway": {
+        "occurrences": 7,
+        "opportunities": 7,
+        "turns": [
+          0,
+          2,
+          4,
+          6,
+          8,
+          10,
+          12
+        ]
+      },
+      "rapport": {
+        "occurrences": 6,
+        "opportunities": 7,
+        "turns": [
+          2,
+          4,
+          6,
+          8,
+          10,
+          12
+        ]
+      }
+    },
+    "excluded_numeric_turns": 0,
+    "untagged_user_turns": 0
+  },
+  "post_status": "agreed",
+  "target": "error:1",
+  "user": 0
+}

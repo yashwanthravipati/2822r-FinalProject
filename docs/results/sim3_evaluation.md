@@ -1,5 +1,13 @@
 # sim3 virtual-user evaluation
 
+**Correction to the live-LLM interpretation:** the learner prompt supplied six error
+probabilities under IDs such as `error:1`, without defining their behaviors. The
+intended six-weakness LLM personas were therefore not correctly specified. The live
+scores remain observations under that defective prompt, not evidence of training the
+intended named weaknesses. The separate scripted and Binomial-oracle experiments below
+use explicit code and are not affected by this prompt omission. Corrected LLM-persona
+claims require new behavioral calibration and controls.
+
 2026-10-28. This experiment evaluates the reimplemented coach on the supplied sim3
 negotiation. It does **not establish that the coach improves human negotiation**.
 
