@@ -105,3 +105,11 @@ claimed matching current-source fingerprint. Raw histories and coaching remain i
   $5.611818 usage for 818 calls, versus $12.968222 at the same volume without caching.
   Selection on hiring chose workbook for users 0/2, reflection for 1, and reports for 3;
   their Sim4 assessment began only after this mapping was written.
+- Separate hiring validation (personas 4–7), unchanged candidate: workbook gain +0.078526,
+  reports +0.044872, reflection approximately zero, fixed procedure +0.041667. Workbook
+  minus reports +0.033654, interval [-0.006410, 0.075321], n=4. Of 60 episodes, 59 agreed;
+  the one impasse was in reports. Five below-walk-away agreements: reflection 3, reports 1,
+  procedure-only 1; workbook and baseline 0. No schedule violations. Assessment usage
+  cost $5.451397 for 796 calls. The prespecified selector chooses reports for user 4,
+  procedure-only for 5, workbook for 6/7. This mapping was materialized after Sim4 began,
+  using only completed hiring outcomes and the rule committed before any Sim4 results.

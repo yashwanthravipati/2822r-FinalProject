@@ -1,0 +1,18 @@
+{
+  "frozen_memories_sha256": "8387f939a6dbb648fbdad7a6cba42560a4584408e8fe14b6e2be2fbbd88f7afa",
+  "rule": "highest mean final_G across three validation tiers; ties use fixed ORDER",
+  "selected": {
+    "4": "reports",
+    "5": "procedure_only",
+    "6": "workbook",
+    "7": "workbook"
+  },
+  "selection_case": "hiring",
+  "selection_rows_sha256": "d052f7602ca7fa2b669853cf014c1dcb3a3d59b06e03657e43d2dfd94c6c884d",
+  "tie_order": [
+    "reports",
+    "reflection",
+    "workbook",
+    "procedure_only"
+  ]
+}
