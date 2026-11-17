@@ -1,0 +1,40 @@
+{
+  "K": 5,
+  "budget": "final",
+  "cache_ttl": "5m",
+  "case_sha256": "f1a6c1f43257775d8fa271d29faafb794b5c16d9744ff94afc6f8a11f4fd42b9",
+  "coach_model": "claude-opus-5-5",
+  "controller": "hybrid",
+  "heldout_case_sha256": "2d339ecf290bdf6d868f85f220295195b58356a9657820fb51afd7bfc70f8c9e",
+  "heldout_role": "global_relief",
+  "learner_model": "claude-sonnet-5-5",
+  "memory_limit_rules": 5,
+  "methods": [
+    "reports",
+    "reflection",
+    "rehearsal"
+  ],
+  "phase": "train",
+  "probe_tiers": [
+    1,
+    3,
+    5
+  ],
+  "reward": "surplus_share",
+  "role": "officer",
+  "rounds": 5,
+  "scoring": "declared numeric case utilities",
+  "seed": 28221117,
+  "source_sha256": "29f4133d304f7063f637ac0a83a4d1f13462fdbab152484c420e0950a8d37393",
+  "targeting": "none",
+  "training_case_sha256": "0ea3d8144e1252b477aea3e42b267b5e873e843516b901762c16d3d22c2b7f93",
+  "training_role": "officer",
+  "training_tiers": [
+    2,
+    2,
+    4,
+    4,
+    4
+  ],
+  "users": 8
+}
