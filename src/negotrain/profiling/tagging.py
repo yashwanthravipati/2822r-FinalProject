@@ -2,11 +2,9 @@
 
 from __future__ import annotations
 
-import json
-
 from pydantic import BaseModel
 
-from negotrain.llm import LLM
+from negotrain.llm import LLM, cached_json
 from negotrain.profiling.observations import case_facts
 from negotrain.schemas import Case, Session, TurnTags
 
@@ -40,16 +38,23 @@ def tag_session(session: Session, case: Case, llm: LLM) -> None:
     """Apply one validated batch atomically; no hidden counterpart sheet enters the prompt."""
     facts = case_facts(case, session.user_role_id)
     expected = {t.index for t in session.turns if t.speaker == "user"}
-    payload = {
-        "expected_user_turn_indices": sorted(expected),
-        "own_role": case.role(session.user_role_id).model_dump(),
-        "facts": [f.model_dump() for f in facts],
-        "issues": [{"id": i.id, "name": i.name} for i in case.issues],
-        "turns": [{"index": t.index, "speaker": t.speaker, "text": t.text} for t in session.turns],
-    }
+    payload = cached_json(
+        {
+            "own_role": case.role(session.user_role_id).model_dump(),
+            "facts": [f.model_dump() for f in facts],
+            "issues": [{"id": i.id, "name": i.name} for i in case.issues],
+        },
+        {
+            "expected_user_turn_indices": sorted(expected),
+            "turns": [
+                {"index": t.index, "speaker": t.speaker, "text": t.text} for t in session.turns
+            ],
+        },
+        cache_indices=(0,),
+    )
     fact_ids = {f.id for f in facts if f.kind != "walkaway"}
     issues = {i.id for i in case.issues}
-    messages = [{"role": "user", "content": json.dumps(payload)}]
+    messages = [{"role": "user", "content": payload}]
     for attempt in range(2):
         result = llm.parse(RUBRIC, messages, TagBatch, max_tokens=4096 * (attempt + 1))
         error = None

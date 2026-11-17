@@ -17,6 +17,7 @@ import subprocess
 import tempfile
 import threading
 from collections.abc import Callable, Sequence
+from copy import deepcopy
 from dataclasses import dataclass, field
 from types import SimpleNamespace
 from typing import Any, Protocol, TypeVar
@@ -29,6 +30,54 @@ from negotrain.budget import SpendLedger
 
 T = TypeVar("T", bound=BaseModel)
 Message = dict[str, Any]  # {"role": "user" | "assistant", "content": str}
+
+
+class CachedText(str):
+    """Ordinary text with explicit prefix boundaries for the API backend only.
+
+    Parts concatenate verbatim; local CLI and scripted clients still see a string.
+    Unmarked parts remain separate blocks so growing histories can find earlier writes.
+    """
+
+    def __new__(cls, *parts: str, cache_indices: tuple[int, ...] | None = None):
+        if not parts or any(not isinstance(p, str) or not p for p in parts):
+            raise ValueError("cache parts must be nonempty strings")
+        indices = tuple(range(len(parts))) if cache_indices is None else cache_indices
+        if len(set(indices)) != len(indices) or any(i < 0 or i >= len(parts) for i in indices):
+            raise ValueError("invalid cache indices")
+        value = super().__new__(cls, "".join(parts))
+        value.parts = tuple(parts)
+        value.cache_indices = tuple(indices)
+        return value
+
+    def blocks(self, ttl: str = "5m") -> list[dict]:
+        return [
+            {"type": "text", "text": part}
+            | (
+                {"cache_control": {"type": "ephemeral", "ttl": ttl}}
+                if i in self.cache_indices
+                else {}
+            )
+            for i, part in enumerate(self.parts)
+        ]
+
+    def append_uncached(self, text: str) -> CachedText:
+        return CachedText(*self.parts, text, cache_indices=self.cache_indices)
+
+
+def cached_json(
+    *sections: dict, prefix: str = "", cache_indices: tuple[int, ...] | None = None
+) -> CachedText:
+    """Serialize disjoint object sections with independently reusable prefixes."""
+    keys = [key for section in sections for key in section]
+    if not sections or any(not section for section in sections) or len(keys) != len(set(keys)):
+        raise ValueError("JSON cache sections must be nonempty with distinct keys")
+    parts = [json.dumps(section)[1:-1] for section in sections]
+    parts[0] = prefix + "{" + parts[0]
+    for i in range(1, len(parts)):
+        parts[i] = ", " + parts[i]
+    parts[-1] += "}"
+    return CachedText(*parts, cache_indices=cache_indices)
 
 
 class LLMRefusal(RuntimeError):
@@ -69,6 +118,10 @@ class Usage:
     output_tokens: int = 0
     cache_read_input_tokens: int = 0
     cache_creation_input_tokens: int = 0
+    cache_creation_5m_input_tokens: int = 0
+    cache_creation_1h_input_tokens: int = 0
+    cache_hit_calls: int = 0
+    fallback_cache_ttl: str = "5m"
     prices: dict = field(default_factory=lambda: dict(PRICE_PER_MTOK))
     # Rollouts call the API from several threads.
     _lock: threading.Lock = field(default_factory=threading.Lock, repr=False, compare=False)
@@ -79,22 +132,45 @@ class Usage:
             self.input_tokens += usage.input_tokens or 0
             self.output_tokens += usage.output_tokens or 0
             self.cache_read_input_tokens += getattr(usage, "cache_read_input_tokens", 0) or 0
-            self.cache_creation_input_tokens += (
-                getattr(usage, "cache_creation_input_tokens", 0) or 0
-            )
+            created = getattr(usage, "cache_creation_input_tokens", 0) or 0
+            self.cache_creation_input_tokens += created
+            detail = getattr(usage, "cache_creation", None)
+
+            def count(name):
+                return (
+                    detail.get(name, 0) if isinstance(detail, dict) else getattr(detail, name, 0)
+                ) or 0
+
+            hour = count("ephemeral_1h_input_tokens")
+            short = count("ephemeral_5m_input_tokens")
+            # Older clients may omit the TTL breakdown. If 1h writes were requested,
+            # conservatively price any unspecified writes at 1h rather than underbill.
+            unspecified = max(0, created - hour - short)
+            if self.fallback_cache_ttl == "1h":
+                hour += unspecified
+            else:
+                short += unspecified
+            self.cache_creation_1h_input_tokens += hour
+            self.cache_creation_5m_input_tokens += short
+            self.cache_hit_calls += bool(getattr(usage, "cache_read_input_tokens", 0))
 
     def cost(self) -> float:
-        """Estimated USD at PRICE_PER_MTOK (cache writes approximated at the 5-minute rate)."""
+        """Estimated USD, using provider-reported cache write TTLs when available."""
         p = self.prices
         return (
             self.input_tokens * p["input"]
             + self.output_tokens * p["output"]
             + self.cache_read_input_tokens * p["cache_read"]
-            + self.cache_creation_input_tokens * p["cache_write"]
+            + (self.cache_creation_input_tokens - self.cache_creation_1h_input_tokens)
+            * p["cache_write"]
+            + self.cache_creation_1h_input_tokens * (2 * p["input"])
         ) / 1e6
 
     def snapshot(self) -> dict:
         with self._lock:
+            total_input = (
+                self.input_tokens + self.cache_creation_input_tokens + self.cache_read_input_tokens
+            )
             return {
                 name: getattr(self, name)
                 for name in (
@@ -103,8 +179,22 @@ class Usage:
                     "output_tokens",
                     "cache_read_input_tokens",
                     "cache_creation_input_tokens",
+                    "cache_creation_5m_input_tokens",
+                    "cache_creation_1h_input_tokens",
+                    "cache_hit_calls",
                 )
-            } | {"estimated_usd": self.cost()}
+            } | {
+                "estimated_usd": self.cost(),
+                "total_input_tokens": total_input,
+                "cache_read_fraction": self.cache_read_input_tokens / total_input
+                if total_input
+                else 0.0,
+                "cache_hit_call_fraction": self.cache_hit_calls / self.calls if self.calls else 0.0,
+                "estimated_uncached_usd": (
+                    total_input * self.prices["input"] + self.output_tokens * self.prices["output"]
+                )
+                / 1e6,
+            }
 
 
 class ClaudeLLM:
@@ -116,29 +206,58 @@ class ClaudeLLM:
         effort: str | None = None,
         client: anthropic.Anthropic | None = None,
         ledger: SpendLedger | None = None,
+        cache_ttl: str | None = None,
     ):
         self.model = model or config.model()
         self.effort = effort or config.effort()
+        self.cache_ttl = cache_ttl if cache_ttl is not None else config.cache_ttl()
+        if self.cache_ttl not in ("5m", "1h"):
+            raise ValueError("cache_ttl must be 5m or 1h")
         if self.model not in MODEL_PRICES:
             raise ValueError("model needs verified pricing and a context bound before API use")
         self.client = (client or anthropic.Anthropic()).with_options(max_retries=0, timeout=180)
         self.ledger = ledger or SpendLedger(config.REPO_ROOT / ".api-budget.sqlite3")
-        self.usage = Usage(prices=MODEL_PRICES[self.model])
+        self.usage = Usage(prices=MODEL_PRICES[self.model], fallback_cache_ttl=self.cache_ttl)
 
     def _request(self, system: str, messages: Sequence[Message], max_tokens: int) -> dict:
-        return {
+        system_blocks = (system if isinstance(system, CachedText) else CachedText(system)).blocks(
+            self.cache_ttl
+        )
+        rendered = []
+        explicit_messages = False
+        for message in messages:
+            content = message["content"]
+            if isinstance(content, CachedText):
+                explicit_messages = True
+                # The changing conversation gets cheap, short-lived entries. Longer
+                # system TTLs always precede shorter message TTLs as required by the API.
+                content = content.blocks("5m")
+            else:
+                content = deepcopy(content)
+            if isinstance(content, list):
+                explicit_messages |= any("cache_control" in b for b in content)
+            rendered.append({**message, "content": content})
+        blocks = system_blocks + [
+            b for m in rendered if isinstance(m["content"], list) for b in m["content"]
+        ]
+        breakpoints = sum("cache_control" in b for b in blocks)
+        if breakpoints > 4:
+            raise ValueError("at most four cache breakpoints are supported")
+        request = {
             "model": self.model,
             "max_tokens": max_tokens,
-            "system": [{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
-            "messages": list(messages),
+            "system": system_blocks,
+            "messages": rendered,
             "output_config": {"effort": self.effort},
-            # The system prompt (case + role sheet) is identical across turns of a session.
-            "cache_control": {"type": "ephemeral"},
-            # Fallback is opt-in: omit it so every model request has its own reserve.
         }
+        # Explicit message boundaries stop before changing controller/deadline suffixes.
+        # Automatic caching there would pay to write a prefix we will never reuse.
+        if not explicit_messages and breakpoints < 4 and rendered:
+            request["cache_control"] = {"type": "ephemeral", "ttl": "5m"}
+        return request
 
     def _check(self, response: Any, reservation: str) -> None:
-        request_usage = Usage(prices=MODEL_PRICES[self.model])
+        request_usage = Usage(prices=MODEL_PRICES[self.model], fallback_cache_ttl=self.cache_ttl)
         request_usage.add(response.usage)
         self.ledger.settle(reservation, request_usage.cost(), request_usage.snapshot())
         self.usage.add(response.usage)
@@ -164,12 +283,12 @@ class ClaudeLLM:
         # Reserve the ENTIRE documented 1M context at the most expensive input/cache
         # rate (1h writes), plus max output. This avoids treating token-count estimates
         # as hard bounds. Normal usage releases the unused reserve immediately.
+        request = self._request(system, messages, max_tokens)
         prices = MODEL_PRICES[self.model]
         bound = 2 * prices["input"] + max_tokens * prices["output"] / 1e6
         reservation = self.ledger.reserve(self.model, bound, wait_seconds=180)
         raw = None
         try:
-            request = self._request(system, messages, max_tokens)
             if output_type is None:
                 response = self.client.beta.messages.create(**request)
             else:
@@ -319,6 +438,7 @@ class ClaudeCodeLLM:
                 output_tokens=usage.get("output_tokens", 0),
                 cache_read_input_tokens=usage.get("cache_read_input_tokens", 0),
                 cache_creation_input_tokens=usage.get("cache_creation_input_tokens", 0),
+                cache_creation=usage.get("cache_creation"),
             )
         )
         if data.get("stop_reason") == "refusal":

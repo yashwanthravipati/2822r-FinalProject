@@ -17,7 +17,7 @@ from negotrain.cases.offers import best_points, indexed_offer, own_offer_table, 
 from negotrain.cases.scoring import score_offer
 from negotrain.counterpart.agent import CounterpartMove
 from negotrain.curriculum import focus_callout
-from negotrain.llm import LLM
+from negotrain.llm import LLM, CachedText, cached_json
 from negotrain.profiling.observations import ERRORS, case_facts
 from negotrain.schemas import Case, Session, Turn, TurnTags
 
@@ -217,15 +217,18 @@ Give a short natural message and at most ONE formal action: a complete offer usi
 option IDs, acceptance of their latest complete offer, or walk away. You may talk without
 a formal action. Never add custom terms. Respect hard constraints on your role. Do not
 invent missing role facts. Only formal actions change the agreement.\n"""
-        self.system += json.dumps(
+        self.system = cached_json(
+            {"visible_case": visible},
             {
-                "visible_case": visible,
                 "initial_tendencies": traits.errors,
                 "fact_awareness": traits.awareness,
                 "rapport": traits.rapport,
+            },
+            {
                 "past_coaching": (feedback or [])[-5:],
                 "pre_session_practice_callout": focus_callout(focus) if focus else None,
-            }
+            },
+            prefix=self.system,
         )
 
     def respond(self, session: Session) -> Turn:
@@ -239,17 +242,16 @@ invent missing role facts. Only formal actions change the agreement.\n"""
             }
             for t in session.turns
         ]
-        messages = [
-            {
-                "role": "user",
-                "content": json.dumps(
-                    {
-                        "conversation": visible,
-                        "moves_remaining": session.max_user_turns - session.user_turns,
-                    }
-                ),
-            }
-        ]
+        # Separate every immutable turn so the provider can find the previous
+        # turn's cache entry. Closing JSON and the changing deadline stay uncached.
+        parts = ['{"conversation": [']
+        for i, turn in enumerate(visible):
+            parts.append((", " if i else "") + json.dumps(turn))
+        parts.append(
+            '], "moves_remaining": ' + str(session.max_user_turns - session.user_turns) + "}"
+        )
+        content = CachedText(*parts, cache_indices=(len(parts) - 2,) if visible else ())
+        messages = [{"role": "user", "content": content}]
         for _ in range(2):
             move = self.llm.parse(self.system, messages, CounterpartMove, max_tokens=4096)
             try:

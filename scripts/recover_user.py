@@ -33,8 +33,12 @@ def main():
     cal = Path(config["calibration_from"])
     costs = CostModel.model_validate_json((cal / "costs.json").read_text())
     tuning = json.loads((cal / "tuning.json").read_text())
-    cp = ClaudeLLM(model=config["counterpart_model"], effort="low")
-    user = ClaudeLLM(model=config["user_model"], effort="low")
+    cp = ClaudeLLM(
+        model=config["counterpart_model"], effort="low", cache_ttl=config.get("cache_ttl", "5m")
+    )
+    user = ClaudeLLM(
+        model=config["user_model"], effort="low", cache_ttl=config.get("cache_ttl", "5m")
+    )
     exp = Experiment(load_case(args.case), config["role"], args.root, config, cp, user)
     with (exp.raw / f".recover-user{args.user}.lock").open("w") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)

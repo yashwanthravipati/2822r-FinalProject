@@ -16,7 +16,7 @@ from negotrain.cases.scoring import score_offer
 from negotrain.counterpart.aspiration import aspiration
 from negotrain.counterpart.profiles import describe
 from negotrain.counterpart.rule_based import RuleBasedCounterpart
-from negotrain.llm import LLM, Message
+from negotrain.llm import LLM, CachedText, Message
 from negotrain.schemas import Case, CounterpartProfile, Offer, Session, Turn
 
 MAX_ATTEMPTS = 3
@@ -90,7 +90,8 @@ class CounterpartAgent:
             f"- {issue_id}: " + ", ".join(f"{opt}={pts:g}" for opt, pts in table.items())
             for issue_id, table in self.role.points.items()
         )
-        return f"""You are role-playing one side of a negotiation exercise that trains a human \
+        case_prefix = f"""You are role-playing one side of a negotiation exercise that \
+trains a human \
 negotiator. Stay in character. Do not coach the other side or comment on the exercise.
 
 # Case (public information both sides have)
@@ -106,7 +107,8 @@ Your points for each option (higher is better for you):
 {points}
 Walking away without a deal is worth {self.role.reservation_value:g} points to you. Never \
 accept or propose a complete deal worth less than that.
-
+"""
+        behavior = f"""
 # How you negotiate
 {describe(self.profile)}
 
@@ -121,6 +123,7 @@ Custom terms have no defined point values: don't invent a score or claim a numer
 threshold was met. Known hard constraints still apply. Numeric minimums apply to fully \
 listed offers only. Set accept to true only to accept the other side's latest complete \
 formal offer exactly as stated, including all custom wording."""
+        return CachedText(case_prefix, behavior)
 
     def _messages(self, session: Session) -> list[Message]:
         messages: list[Message] = []
@@ -129,6 +132,9 @@ formal offer exactly as stated, including all custom wording."""
                 messages.append({"role": "assistant", "content": _render_own(turn)})
             else:
                 messages.append({"role": "user", "content": _render_other(turn)})
+        if messages:
+            # Cache visible history before appending ephemeral controller notes.
+            messages[-1]["content"] = CachedText(messages[-1]["content"])
         if not messages:
             messages.append(
                 {"role": "user", "content": "[The negotiation begins. You speak first.]"}
@@ -322,10 +328,15 @@ def _merge_consecutive(messages: list[Message]) -> list[Message]:
     merged: list[Message] = []
     for m in messages:
         if merged and merged[-1]["role"] == m["role"]:
-            merged[-1] = {
-                "role": m["role"],
-                "content": merged[-1]["content"] + "\n\n" + m["content"],
-            }
+            left, right = merged[-1]["content"], m["content"]
+            if isinstance(right, CachedText):
+                # Earlier unmarked text remains before the marked history boundary.
+                content = CachedText(str(left) + "\n\n" + str(right))
+            elif isinstance(left, CachedText):
+                content = left.append_uncached("\n\n" + right)
+            else:
+                content = left + "\n\n" + right
+            merged[-1] = {"role": m["role"], "content": content}
         else:
             merged.append(dict(m))
     return merged

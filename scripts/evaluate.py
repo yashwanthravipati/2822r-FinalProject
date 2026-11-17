@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from negotrain.cases import load_case
+from negotrain.config import cache_ttl
 from negotrain.evaluation import (
     Experiment,
     calibrate,
@@ -62,6 +63,7 @@ def main():
             if k not in ("stage", "output", "case", "resume_note")
         }
         config["source_sha256"] = hashlib.sha256(source).hexdigest()
+        config["cache_ttl"] = cache_ttl()
         previous_path = args.output / "config.json"
         if args.resume_note and previous_path.exists():
             previous = json.loads(previous_path.read_text())
@@ -80,8 +82,12 @@ def main():
             config["workers"] = previous["workers"]
         config["counterpart_model"] = "claude-opus-5-5" if args.live else "rule-based"
         config["user_model"] = "claude-sonnet-5-5" if args.live else "grounded-scripted"
-        opponent = ClaudeLLM(effort="low") if args.live else None
-        user = ClaudeLLM(model="claude-sonnet-5-5", effort="low") if args.live else None
+        opponent = ClaudeLLM(effort="low", cache_ttl=config["cache_ttl"]) if args.live else None
+        user = (
+            ClaudeLLM(model="claude-sonnet-5-5", effort="low", cache_ttl=config["cache_ttl"])
+            if args.live
+            else None
+        )
         experiment = Experiment(
             load_case(args.case), args.role, args.output, config, opponent, user
         )

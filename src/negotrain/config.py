@@ -22,6 +22,11 @@ def effort() -> str:
     return os.getenv("NEGOTRAIN_EFFORT", "medium")
 
 
+def cache_ttl() -> str:
+    """System prefix lifetime; 5m refreshes on hits, 1h costs more to write."""
+    return os.getenv("NEGOTRAIN_CACHE_TTL", "5m")
+
+
 def chat_effort() -> str:
     """Effort for counterpart turns in the app: low keeps a live conversation responsive."""
     return os.getenv("NEGOTRAIN_CHAT_EFFORT", "low")

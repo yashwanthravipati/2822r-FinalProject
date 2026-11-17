@@ -13,7 +13,7 @@ from pydantic import BaseModel, Field
 from negotrain.cases.offers import feasible_best_points
 from negotrain.cases.scoring import efficiency, joint_points, max_joint_offer, score_offer
 from negotrain.feedback.rollouts import CounterfactualReport
-from negotrain.llm import LLM
+from negotrain.llm import LLM, CachedText
 from negotrain.profiling.features import FLAG_DESCRIPTIONS, Features, extract_features, flags
 from negotrain.profiling.observations import ERRORS, observe
 from negotrain.schemas import Case, Session
@@ -156,7 +156,7 @@ def _prompt(
     feats = ", ".join(f"{k}={v:.2f}" for k, v in features.items() if v is not None)
     flag_text = "\n".join(f"- {FLAG_DESCRIPTIONS[k]}" for k in flag_keys) or "- none"
     dials = session.counterpart_profile.model_dump() if session.counterpart_profile else "n/a"
-    return f"""# Case: {case.title}
+    context = f"""# Case: {case.title}
 {case.public_brief}
 
 # Student's role
@@ -164,7 +164,8 @@ def _prompt(
 
 # Counterpart's role (revealed after the session)
 {sheet(them)}
-Counterpart behavior profile: {dials}
+"""
+    details = f"""Counterpart behavior profile: {dials}
 
 # Transcript
 {transcript(session, case)}
@@ -191,6 +192,7 @@ both sheets and must be labeled hindsight. Intervals with four rollouts are expl
 {observe(session, case).model_dump_json()}
 
 Write the debrief."""
+    return CachedText(context, details, cache_indices=(0,))
 
 
 def template_report(

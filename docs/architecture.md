@@ -115,8 +115,37 @@ experiments: policy propensities are not asserted to equal conditional error rat
 LLM personas receive role-projected case materials, pre-session focus callouts, and prior
 post-session feedback; their states are not manually improved by the synthetic Learn map.
 Independent users may run concurrently; requests wait for active budget reservations to
-settle when that can free enough capacity, while unknown charges stay reserved. Static
-role/persona prompts have explicit cache breakpoints. Each user can be recovered separately
+settle when that can free enough capacity, while unknown charges stay reserved.
+
+Provider prompt caching uses explicit boundaries: the learner's role-projected case,
+initial persona, and coaching/focus are separate system prefixes. Changing coaching does
+not invalidate the earlier case/persona entries. Counterparts separate the case/role from
+the difficulty profile. Growing learner transcripts keep one block per visible turn and
+cache through the last turn; deadlines and controller instructions stay after the cache
+boundary. Tagging and debriefs cache their stable case/rubric context ahead of session data.
+`CachedText` remains ordinary text for CLI and scripted backends; only the API gateway
+renders its block boundaries. This caches input computation, never generated responses.
+Role visibility, independent model sampling, and the fixed economic controller remain intact.
+
+The default system cache TTL is 5 minutes, refreshed by hits. Set `NEGOTRAIN_CACHE_TTL=1h`
+(or `ClaudeLLM(cache_ttl="1h")`) only when reuse commonly occurs after longer gaps; hour
+writes cost more. Conversation entries remain at 5 minutes, following the longer-lived
+system entries. Experiments record the setting and recovery uses the recorded value.
+Requests use at most four explicit breakpoints; automatic caching is enabled only when
+there are no explicit message boundaries and a slot remains. No paid cache prewarming is
+performed. Hits still depend on provider minimum prefix lengths, exact prefixes (including
+model/output schema/effort), TTLs, and concurrent cache availability. See the
+[provider caching documentation](https://platform.claude.com/docs/en/build-with-claude/prompt-caching).
+
+Usage snapshots and settled ledger rows record 5-minute/1-hour writes, read tokens,
+cache-hit calls, token-weighted read fractions, and the estimated cost of the same token
+volume without caching. Mixed TTLs use the provider's write breakdown; missing breakdowns
+are conservatively charged at the requested system TTL. Savings can be negative on cold
+prompts. Offline regressions verify prefix stability, role isolation, breakpoint limits,
+and billing; actual savings require a future live comparison. Use a new experiment output
+directory for the changed source and prompt layout.
+
+Each user can be recovered separately
 without resampling, and failure tracebacks remain private. Per-turn checkpoints make interrupted episodes
 resumable, and user-level paired bootstrap intervals preserve sampling dependence.
 
