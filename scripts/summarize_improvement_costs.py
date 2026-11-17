@@ -65,7 +65,13 @@ def main():
             "phases": phases,
             "usage": {k: sum(v.get(k, 0) for v in phases.values()) for k in FIELDS},
         }
-    for name in ("audit-corrected-smoke-v1", "persona-calibration-v1"):
+    for name in (
+        "audit-corrected-smoke-v1",
+        "persona-calibration-v1",
+        "persona-probes-v1",
+        "persona-probes-v2",
+        "persona-probes-v3",
+    ):
         root = Path("results/ckpt3") / name
         if root.exists():
             usage = audit_usage(root)

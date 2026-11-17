@@ -1,0 +1,256 @@
+{
+  "complete_probes": 96,
+  "scope": "Controlled one-decision diagnostic, not training or full-session validation",
+  "variants": {
+    "definitions": {
+      "all_six_pass": false,
+      "weaknesses": [
+        {
+          "levels": {
+            "0.1": {
+              "conditional_rate": null,
+              "events": 0,
+              "n": 4,
+              "occurrences": 0,
+              "opportunities": 0
+            },
+            "0.9": {
+              "conditional_rate": 1.0,
+              "events": 4,
+              "n": 4,
+              "occurrences": 4,
+              "opportunities": 4
+            }
+          },
+          "screen_pass": true,
+          "target": "error:1"
+        },
+        {
+          "levels": {
+            "0.1": {
+              "conditional_rate": 1.0,
+              "events": 4,
+              "n": 4,
+              "occurrences": 4,
+              "opportunities": 4
+            },
+            "0.9": {
+              "conditional_rate": 1.0,
+              "events": 4,
+              "n": 4,
+              "occurrences": 4,
+              "opportunities": 4
+            }
+          },
+          "screen_pass": false,
+          "target": "error:2"
+        },
+        {
+          "levels": {
+            "0.1": {
+              "conditional_rate": 0.0,
+              "events": 0,
+              "n": 4,
+              "occurrences": 0,
+              "opportunities": 4
+            },
+            "0.9": {
+              "conditional_rate": 0.0,
+              "events": 0,
+              "n": 4,
+              "occurrences": 0,
+              "opportunities": 4
+            }
+          },
+          "screen_pass": false,
+          "target": "error:3"
+        },
+        {
+          "levels": {
+            "0.1": {
+              "conditional_rate": null,
+              "events": 0,
+              "n": 4,
+              "occurrences": 0,
+              "opportunities": 0
+            },
+            "0.9": {
+              "conditional_rate": null,
+              "events": 0,
+              "n": 4,
+              "occurrences": 0,
+              "opportunities": 0
+            }
+          },
+          "screen_pass": false,
+          "target": "error:4"
+        },
+        {
+          "levels": {
+            "0.1": {
+              "conditional_rate": 0.0,
+              "events": 0,
+              "n": 4,
+              "occurrences": 0,
+              "opportunities": 12
+            },
+            "0.9": {
+              "conditional_rate": 0.0,
+              "events": 0,
+              "n": 4,
+              "occurrences": 0,
+              "opportunities": 12
+            }
+          },
+          "screen_pass": false,
+          "target": "error:5"
+        },
+        {
+          "levels": {
+            "0.1": {
+              "conditional_rate": null,
+              "events": 0,
+              "n": 4,
+              "occurrences": 0,
+              "opportunities": 0
+            },
+            "0.9": {
+              "conditional_rate": null,
+              "events": 0,
+              "n": 4,
+              "occurrences": 0,
+              "opportunities": 0
+            }
+          },
+          "screen_pass": false,
+          "target": "error:6"
+        }
+      ]
+    },
+    "enactment": {
+      "all_six_pass": false,
+      "weaknesses": [
+        {
+          "levels": {
+            "0.1": {
+              "conditional_rate": 1.0,
+              "events": 2,
+              "n": 4,
+              "occurrences": 2,
+              "opportunities": 2
+            },
+            "0.9": {
+              "conditional_rate": 1.0,
+              "events": 4,
+              "n": 4,
+              "occurrences": 4,
+              "opportunities": 4
+            }
+          },
+          "screen_pass": false,
+          "target": "error:1"
+        },
+        {
+          "levels": {
+            "0.1": {
+              "conditional_rate": 1.0,
+              "events": 2,
+              "n": 4,
+              "occurrences": 2,
+              "opportunities": 2
+            },
+            "0.9": {
+              "conditional_rate": 1.0,
+              "events": 4,
+              "n": 4,
+              "occurrences": 4,
+              "opportunities": 4
+            }
+          },
+          "screen_pass": false,
+          "target": "error:2"
+        },
+        {
+          "levels": {
+            "0.1": {
+              "conditional_rate": 0.0,
+              "events": 0,
+              "n": 4,
+              "occurrences": 0,
+              "opportunities": 4
+            },
+            "0.9": {
+              "conditional_rate": 0.5,
+              "events": 2,
+              "n": 4,
+              "occurrences": 2,
+              "opportunities": 4
+            }
+          },
+          "screen_pass": false,
+          "target": "error:3"
+        },
+        {
+          "levels": {
+            "0.1": {
+              "conditional_rate": null,
+              "events": 0,
+              "n": 4,
+              "occurrences": 0,
+              "opportunities": 0
+            },
+            "0.9": {
+              "conditional_rate": 1.0,
+              "events": 2,
+              "n": 4,
+              "occurrences": 2,
+              "opportunities": 2
+            }
+          },
+          "screen_pass": false,
+          "target": "error:4"
+        },
+        {
+          "levels": {
+            "0.1": {
+              "conditional_rate": 0.0,
+              "events": 0,
+              "n": 4,
+              "occurrences": 0,
+              "opportunities": 12
+            },
+            "0.9": {
+              "conditional_rate": 0.0,
+              "events": 0,
+              "n": 4,
+              "occurrences": 0,
+              "opportunities": 12
+            }
+          },
+          "screen_pass": false,
+          "target": "error:5"
+        },
+        {
+          "levels": {
+            "0.1": {
+              "conditional_rate": null,
+              "events": 0,
+              "n": 4,
+              "occurrences": 0,
+              "opportunities": 0
+            },
+            "0.9": {
+              "conditional_rate": 0.0,
+              "events": 0,
+              "n": 4,
+              "occurrences": 0,
+              "opportunities": 1
+            }
+          },
+          "screen_pass": false,
+          "target": "error:6"
+        }
+      ]
+    }
+  }
+}

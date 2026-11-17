@@ -1,0 +1,29 @@
+{
+  "case_sha256": "da19f7baefa9910528bb5970f036f645679ef296c15a83807a91ae172ee738f9",
+  "cedar_used": false,
+  "change_from_v1": "Omit non-target frequencies and explicitly state they are unspecified",
+  "core_sha256": "2344e86d531d8ea3ccc9e60883eafd9ea8837a9a13c87f976da1fd78276fab31",
+  "effort": "low",
+  "expected_probes": 96,
+  "gate": "Each of six targets: high has at least 3/4 events; low at most 1/4",
+  "limits": "One decision, four draws, authored prefixes; no full-session or learning claim",
+  "model": "claude-sonnet-5-5",
+  "other_errors": "unspecified; omitted from the actor payload",
+  "primary": "Target event at controlled response, including zero on no formal event",
+  "repeats": 4,
+  "seed": 2822111802,
+  "sim4_used": false,
+  "sources": {
+    "persona_instructions.py": "ed2f01eee35dc244505a327fe736925d86bcc6507d0c2e880424349b1f5ddc68",
+    "probe_isolated_personas.py": "28aa1dadb3b44f14ad31cac8e2e456034e45fe49cb16140dda1c1ec4478d6fa5",
+    "probe_persona_controls.py": "a58eb0e4b991c5cec72e25e461a2958be767e23ab1f1b33b7c7078dbcf27755f"
+  },
+  "target_levels": [
+    0.1,
+    0.9
+  ],
+  "variants": [
+    "definitions",
+    "enactment"
+  ]
+}

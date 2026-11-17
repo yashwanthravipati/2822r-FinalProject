@@ -1,0 +1,27 @@
+{
+  "case_sha256": "da19f7baefa9910528bb5970f036f645679ef296c15a83807a91ae172ee738f9",
+  "cedar_used": false,
+  "core_sha256": "2344e86d531d8ea3ccc9e60883eafd9ea8837a9a13c87f976da1fd78276fab31",
+  "effort": "low",
+  "enactment_sha256": "95e02adeee9b3016c04d7119aa9bf5ec88f62761795c7a27b94c4640725879ec",
+  "expected_probes": 96,
+  "gate": "Each of six targets: high has at least 3/4 events; low at most 1/4",
+  "helper_sha256": "ed2f01eee35dc244505a327fe736925d86bcc6507d0c2e880424349b1f5ddc68",
+  "limits": "Authored prefixes; one decision; isolated traits; unseeded LLM; no coaching",
+  "model": "claude-sonnet-5-5",
+  "other_errors": 0,
+  "primary": "target event at controlled response, including zero on no formal event",
+  "repeats": 4,
+  "runner_sha256": "a58eb0e4b991c5cec72e25e461a2958be767e23ab1f1b33b7c7078dbcf27755f",
+  "secondary": "numeric detector opportunities; undefined with zero opportunities",
+  "seed": 2822111801,
+  "sim4_used": false,
+  "target_levels": [
+    0.1,
+    0.9
+  ],
+  "variants": [
+    "definitions",
+    "enactment"
+  ]
+}

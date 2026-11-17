@@ -1,0 +1,28 @@
+{
+  "case_sha256": "da19f7baefa9910528bb5970f036f645679ef296c15a83807a91ae172ee738f9",
+  "cedar_used": false,
+  "change": "Require private intent and one-sentence effect before action",
+  "core_sha256": "2344e86d531d8ea3ccc9e60883eafd9ea8837a9a13c87f976da1fd78276fab31",
+  "effort": "low",
+  "expected_probes": 48,
+  "gate": "Each of six targets: high has at least 3/4 events; low at most 1/4",
+  "kind": "private_intent",
+  "model": "claude-sonnet-5-5",
+  "no_coaching": true,
+  "other_errors": "unspecified",
+  "primary": "Observed action event, never the model's claimed intent",
+  "repeats": 4,
+  "seed": 2822111803,
+  "sim4_used": false,
+  "sources": {
+    "persona_decision.py": "785ffd781a5244ea00da089641cca08973de565c421cb93bd340076fcdc3b196",
+    "persona_instructions.py": "ed2f01eee35dc244505a327fe736925d86bcc6507d0c2e880424349b1f5ddc68",
+    "probe_isolated_personas.py": "28aa1dadb3b44f14ad31cac8e2e456034e45fe49cb16140dda1c1ec4478d6fa5",
+    "probe_persona_controls.py": "a58eb0e4b991c5cec72e25e461a2958be767e23ab1f1b33b7c7078dbcf27755f",
+    "probe_persona_intent.py": "7814dca44d404bfc53c759f685bdabf3afc6c8b1df7bddad3a2b45ae47d0a3b6"
+  },
+  "target_levels": [
+    0.1,
+    0.9
+  ]
+}

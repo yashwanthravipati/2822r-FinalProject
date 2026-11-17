@@ -82,3 +82,45 @@ Sim4 has now been examined and is a revisited benchmark, not an untouched test s
   e8e0820; later validation-only fix closes extra point-table entries and blank IDs.
   All five public cases and 579 offer scores remain identical; 206 offline tests pass.
   Report extended with the failed behavioral screen; no coaching superiority claim.
+- 2026-11-17: Preregistered persona-probes-v1 after the failed full-session screen.
+  Compare unchanged definitions with one experimental concrete enactment instruction;
+  six authored decision contexts, two levels, four independent API draws: 96 responses
+  plus 16 issue-annotation calls. Other weakness settings zero to isolate controls.
+  Each context has independently checked positive/negative legal action witnesses.
+  Primary event incidence is per controlled decision; secondary detector rates retain
+  missing opportunities. Gate for advancing: all six targets have >=3/4 high events
+  and <=1/4 low events. This is diagnostic development, not coaching or human evidence.
+  No Sim4/Cedar use; production actor unchanged. Expected 112 calls x (5,000 input at
+  $2/M + 500 output at $10/M) = $1.68 before caching; three workers, current $15.689116
+  development headroom and $110 cumulative cap retained, within the latest $150 approval.
+- 2026-11-17: v1 completed 96 probes /112 requests for $0.283143. Definitions passed
+  zero per-target gates; concrete enactment passed only error:2. Manual review of all
+  16 issue-neglect responses confirmed explicit mentions, agreeing with the tagger.
+  Found a diagnostic conflict: dominated offers can necessarily also be first concessions,
+  so setting all non-target errors to zero can contradict the target. Retain v1; no
+  promotion. Freeze v2 with all non-target frequencies omitted (unspecified), an explicit
+  scope statement, otherwise identical contexts, levels, repeats and gates. Fresh 96
+  responses +16 annotations; same $1.68 pre-cache estimate and existing ledger cap.
+  A regression test demonstrates the overlapping detectors and verifies the v2 payload.
+- 2026-11-17: v2 completed 96 probes /112 calls, $0.277633; definitions pass error:1
+  only, concrete enactment passes none. High anchoring and low acceptance appear in 2/4
+  concrete probes but miss the unchanged >=3/4 gate. Preregister v3: same isolated
+  contexts and actor, adding a private categorical intent plus one-sentence observable
+  effect before the formal move. Score actual actions, never self-reported intent.
+  No forced actions, no probability updates, no coaching. Fresh 48 responses plus eight
+  annotations, expected 56 x (5,000 input at $2/M + 500 output at $10/M) = $0.84 before
+  caching. Same gate, three workers, existing cumulative development cap retained.
+- 2026-11-17: v3 completed 48 probes/56 calls for $0.181308; error:1 and error:2 pass
+  (0/4 low versus 4/4 high), other four miss the gate. User explicitly requested immediate
+  evals. Freeze corrected-transfer-v1: four fixed learners, two per concession weakness,
+  frequency .9 with non-target traits unspecified, concrete enactment plus private intent.
+  Five Sim3 sessions at tiers 2,2,4,4,4 with ordinary post-session LLM reports, then paired
+  Sim4 no-feedback versus five-report assessment at tier 3. Rule-based counterpart keeps
+  formal economics fixed and limits latency. Twenty practice plus eight test episodes;
+  no trait updates, Sim4 practice, Sim4 feedback or post-test tuning. Memories frozen
+  before testing. Primary paired R difference with uncertainty, n=4; this is exploratory,
+  not validation of all six controls or humans. Sim4 remains historically revisited.
+  Estimate 260 Sonnet calls x (6,000 input at $2/M + 500 output at $10/M) plus 20 Opus
+  debriefs x (12,000 input at $4/M +1,500 output at $20/M) = $5.98 before caching.
+  Existing separate $110 ledgers retained: practice on dev, assessment on final; two
+  practice workers and three assessment workers fit conservative request reservations.

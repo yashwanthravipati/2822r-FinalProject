@@ -1,0 +1,24 @@
+{
+  "all_final_messages_explicitly_raised_all_three_issues": true,
+  "matched": 16,
+  "method": "Assistant inspection of all 16 final messages and tags against the fixed issue-raising rubric; not human inter-rater reliability",
+  "reviewed": 16,
+  "sessions": {
+    "definitions_error5_0.1_0": "5737bc7bc1e3d05c2ba857e32ae0e13a0e6ef93b92e4b46da67c43161ad32c93",
+    "definitions_error5_0.1_1": "248dd26efc0c87669bc2a4695aca40191a188d615617fb7aa2e3e5831af09945",
+    "definitions_error5_0.1_2": "39cbee2b10f6934c5fc585954cb9e603aaf008c59a962865fec286e4d55cb727",
+    "definitions_error5_0.1_3": "5bfcf3fb0953db8e7f564a919558f0d5cef635f7c0e6478c08d022c21deb0d32",
+    "definitions_error5_0.9_0": "fe4c1988d5d1a99a50bfbbfd6f896928b1cf4f215f8a428a7f4016a7dff54b4e",
+    "definitions_error5_0.9_1": "faed31a1268634905a0e0f55adf9774afae26cb9872d2de2b352237bd16f2532",
+    "definitions_error5_0.9_2": "bd148e2838eaa5d27bcfd30b9f7e8ed0ad14e51d433d90c1d230ad0ab4444061",
+    "definitions_error5_0.9_3": "8d4442210e41ad32343d22488138d5ea0225c33457341dd1bcabe3c28f1f4bf1",
+    "enactment_error5_0.1_0": "866caaeb9fd77cb3d8e6e806b3e7e17fae0a7ecf328e37b97de0d83a9ef11fb5",
+    "enactment_error5_0.1_1": "bd99383a118a2a489905aaa439b4949256d0b52e4576c43b46ec420522f74d61",
+    "enactment_error5_0.1_2": "865f07d5ff2d2a54d0979fe62604e032d1ab913729a523b22a55b7475fed029c",
+    "enactment_error5_0.1_3": "5a36586ca5d2d702cafeb03cd28f54acf9dec112844e305601263f0224ebd756",
+    "enactment_error5_0.9_0": "806d984813461a7db131b2614877df882d4e6fba7002110c99d4eb1d6993a0f2",
+    "enactment_error5_0.9_1": "292785564d69083ac726414cd2ae4ed511f4b498361a926687bacc0ec33ad6f3",
+    "enactment_error5_0.9_2": "79756ed594152ed6a4411354583edb407758c20c81e89308422e85a41460c65e",
+    "enactment_error5_0.9_3": "94a80d11e39850862f7fbfe58ce8924dfa600b569ec6ea2ccb0eb2f0e409d8f6"
+  }
+}
