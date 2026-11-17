@@ -90,7 +90,13 @@ def main():
     fig.text(0.05, 0.025, note, fontsize=9, color="#525c66")
     fig.tight_layout(rect=(0, 0.07, 1, 1))
     for extension in ("png", "svg"):
-        fig.savefig(args.root / f"learning_gains.{extension}", dpi=180)
+        path = args.root / f"learning_gains.{extension}"
+        fig.savefig(path, dpi=180)
+        if extension == "svg":
+            # Matplotlib adds trailing spaces to path data; keep generated diffs clean.
+            path.write_text(
+                "\n".join(line.rstrip() for line in path.read_text().splitlines()) + "\n"
+            )
     print(args.root / "learning_gains.png")
 
 

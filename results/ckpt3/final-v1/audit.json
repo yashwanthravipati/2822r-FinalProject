@@ -1,44 +1,99 @@
 {
   "api": {
-    "accounted_usd": 23.137475999999996,
-    "known_cost_usd": 23.137475999999996,
+    "accounted_usd": 41.13378100000002,
+    "known_cost_usd": 41.13378100000002,
     "models": {
       "claude-opus-5-5": {
-        "accounted_usd": 15.432487,
+        "accounted_usd": 26.045750000000016,
         "cache_creation_1h_input_tokens": 0.0,
-        "cache_creation_5m_input_tokens": 702167.0,
-        "cache_creation_input_tokens": 702167.0,
-        "cache_hit_calls": 947.0,
-        "cache_read_fraction": 0.6733792796645537,
-        "cache_read_input_tokens": 3130279.0,
-        "estimated_savings_usd": 11.192481000000017,
-        "estimated_uncached_usd": 26.624968000000017,
-        "input_tokens": 816166.0,
-        "known_cost_usd": 15.432487,
-        "output_tokens": 401526.0,
-        "requests": 955.0
+        "cache_creation_5m_input_tokens": 1239148.0,
+        "cache_creation_input_tokens": 1239148.0,
+        "cache_hit_calls": 1716.0,
+        "cache_read_fraction": 0.7365580422356441,
+        "cache_read_input_tokens": 6768662.0,
+        "estimated_savings_usd": 24.48102600000001,
+        "estimated_uncached_usd": 50.52677600000003,
+        "input_tokens": 1181774.0,
+        "known_cost_usd": 26.045750000000016,
+        "output_tokens": 688422.0,
+        "requests": 1725.0
       },
       "claude-sonnet-5-5": {
-        "accounted_usd": 7.704988999999996,
+        "accounted_usd": 15.088031000000006,
         "cache_creation_1h_input_tokens": 0.0,
-        "cache_creation_5m_input_tokens": 721544.0,
-        "cache_creation_input_tokens": 721544.0,
-        "cache_hit_calls": 1079.0,
-        "cache_read_fraction": 0.8572325468235942,
-        "cache_read_input_tokens": 6791472.0,
-        "estimated_savings_usd": 12.542451000000037,
-        "estimated_uncached_usd": 20.247440000000033,
-        "input_tokens": 409539.0,
-        "known_cost_usd": 7.704988999999996,
-        "output_tokens": 440233.0,
-        "requests": 1086.0
+        "cache_creation_5m_input_tokens": 1344902.0,
+        "cache_creation_input_tokens": 1344902.0,
+        "cache_hit_calls": 1973.0,
+        "cache_read_fraction": 0.8544846669119098,
+        "cache_read_input_tokens": 13130918.0,
+        "estimated_savings_usd": 24.27535100000007,
+        "estimated_uncached_usd": 39.36338200000008,
+        "input_tokens": 891241.0,
+        "known_cost_usd": 15.088031000000006,
+        "output_tokens": 862926.0,
+        "requests": 1987.0
       }
     },
     "states": {
-      "completed": 2041
+      "completed": 3712
     }
   },
   "api_scope": "Cumulative final ledger across all runs, including prior tests",
+  "heldout": {
+    "agreement_rate": 1.0,
+    "below_walkaway_agreements": 0,
+    "conditions": {
+      "baseline": {
+        "agreements": 24,
+        "below_walkaway_agreements": 0,
+        "episodes": 24,
+        "mean_user_turns": 6.25
+      },
+      "generic_zero_shot_assessment": {
+        "agreements": 24,
+        "below_walkaway_agreements": 0,
+        "episodes": 24,
+        "mean_user_turns": 6.5
+      },
+      "reflection_assessment": {
+        "agreements": 24,
+        "below_walkaway_agreements": 0,
+        "episodes": 24,
+        "mean_user_turns": 7.0
+      },
+      "rehearsal_assessment": {
+        "agreements": 24,
+        "below_walkaway_agreements": 0,
+        "episodes": 24,
+        "mean_user_turns": 6.041666666666667
+      },
+      "reports_assessment": {
+        "agreements": 24,
+        "below_walkaway_agreements": 0,
+        "episodes": 24,
+        "mean_user_turns": 6.75
+      }
+    },
+    "episodes": 120,
+    "schedule_violations": 0
+  },
+  "heldout_run_api": {
+    "cache_creation_1h_input_tokens": 0.0,
+    "cache_creation_5m_input_tokens": 1160339.0,
+    "cache_creation_input_tokens": 1160339.0,
+    "cache_hit_calls": 1663.0,
+    "cache_read_fraction": 0.8324932055275559,
+    "cache_read_input_tokens": 9977829.0,
+    "calls": 1671.0,
+    "estimated_savings_usd": 25.0221428,
+    "estimated_uncached_usd": 43.01775,
+    "estimated_usd": 17.9956072,
+    "input_tokens": 847310.0,
+    "invocations": 1,
+    "output_tokens": 709589.0,
+    "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+    "total_input_tokens": 11985478.0
+  },
   "run_api": {
     "cache_creation_1h_input_tokens": 0.0,
     "cache_creation_5m_input_tokens": 1423711.0,

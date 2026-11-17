@@ -22,9 +22,9 @@ from Sim3 to the held-out Sim4 scenario under separate $100 development/final AP
 - [x] Disjoint training/assessment harness and source-visibility isolation pass offline tests.
 - [x] Sim4 projection is prepared locally, audited and frozen before final training.
 - [x] Synthetic smoke and full five-rehearsal development complete within the development budget.
-- [ ] Final paired Sim3-to-Sim4 evaluation completes within the final budget.
+- [x] Final paired Sim3-to-Sim4 evaluation completes within the final budget.
 - [x] Development results, costs, limitations, and reproduction instructions are logged.
-- [ ] Final results and uncertainty are logged after held-out assessment.
+- [x] Final results and uncertainty are logged after held-out assessment.
 - [x] Implementation and completed development artifacts are committed and pushed to ckpt3.
 
 ## Log
@@ -39,3 +39,5 @@ from Sim3 to the held-out Sim4 scenario under separate $100 development/final AP
 - 2026-11-17: Blocked audit confirmed the same unanswered external-payload approval across three consecutive goal turns. Remote ckpt3 matches completed development checkpoint 245ca8c; no evaluator process or held-out results exist. Remaining final evaluation requires explicit permission to send role-appropriate Sim3/Sim4 briefs to Anthropic. No additional spend; goal is incomplete.
 
 - 2026-11-17: User explicitly approved case-content transmission and clarified the content is fictional. Resume the final eight-persona, five-rehearsal paired study under the separate $100 final cap; retain all three training methods and generic held-out reference. Case and method selection are frozen before held-out outcomes.
+
+- 2026-11-17: Final study complete: all 336 episodes and 24 frozen memories independently verified; 3,712 completed API requests, $41.133781, zero unresolved charges. Held-out gains: reports +0.07500, reflection +0.08333, application +0.01823, generic +0.01406. Reflection-minus-reports +0.00833, pointwise 95% interval [-0.05522, 0.06616]; superiority is not established. Full results/limitations in logs/ckpt3-final-results.md. All execution criteria are satisfied; task-board closure awaits user acceptance or merge per repository policy.

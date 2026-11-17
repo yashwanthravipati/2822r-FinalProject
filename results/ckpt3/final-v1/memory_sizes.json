@@ -1,0 +1,177 @@
+{
+  "generic_zero_shot": {
+    "characters": 1293,
+    "whitespace_words": 193
+  },
+  "note": "Context sizes, not provider token counts or per-method API costs. Evidence fields are excluded from learner cards.",
+  "rows": [
+    {
+      "characters": 16316,
+      "method": "reports",
+      "rules": null,
+      "user": 0,
+      "whitespace_words": 2330
+    },
+    {
+      "characters": 1435,
+      "method": "reflection",
+      "rules": 4,
+      "user": 0,
+      "whitespace_words": 233
+    },
+    {
+      "characters": 1373,
+      "method": "rehearsal",
+      "rules": 4,
+      "user": 0,
+      "whitespace_words": 230
+    },
+    {
+      "characters": 16336,
+      "method": "reports",
+      "rules": null,
+      "user": 1,
+      "whitespace_words": 2326
+    },
+    {
+      "characters": 1429,
+      "method": "reflection",
+      "rules": 4,
+      "user": 1,
+      "whitespace_words": 237
+    },
+    {
+      "characters": 1551,
+      "method": "rehearsal",
+      "rules": 4,
+      "user": 1,
+      "whitespace_words": 256
+    },
+    {
+      "characters": 16138,
+      "method": "reports",
+      "rules": null,
+      "user": 2,
+      "whitespace_words": 2293
+    },
+    {
+      "characters": 1361,
+      "method": "reflection",
+      "rules": 4,
+      "user": 2,
+      "whitespace_words": 231
+    },
+    {
+      "characters": 1679,
+      "method": "rehearsal",
+      "rules": 4,
+      "user": 2,
+      "whitespace_words": 279
+    },
+    {
+      "characters": 16367,
+      "method": "reports",
+      "rules": null,
+      "user": 3,
+      "whitespace_words": 2334
+    },
+    {
+      "characters": 1531,
+      "method": "reflection",
+      "rules": 4,
+      "user": 3,
+      "whitespace_words": 252
+    },
+    {
+      "characters": 1705,
+      "method": "rehearsal",
+      "rules": 5,
+      "user": 3,
+      "whitespace_words": 273
+    },
+    {
+      "characters": 17203,
+      "method": "reports",
+      "rules": null,
+      "user": 4,
+      "whitespace_words": 2490
+    },
+    {
+      "characters": 1515,
+      "method": "reflection",
+      "rules": 4,
+      "user": 4,
+      "whitespace_words": 248
+    },
+    {
+      "characters": 1452,
+      "method": "rehearsal",
+      "rules": 4,
+      "user": 4,
+      "whitespace_words": 256
+    },
+    {
+      "characters": 16650,
+      "method": "reports",
+      "rules": null,
+      "user": 5,
+      "whitespace_words": 2411
+    },
+    {
+      "characters": 1492,
+      "method": "reflection",
+      "rules": 4,
+      "user": 5,
+      "whitespace_words": 251
+    },
+    {
+      "characters": 1640,
+      "method": "rehearsal",
+      "rules": 4,
+      "user": 5,
+      "whitespace_words": 272
+    },
+    {
+      "characters": 16889,
+      "method": "reports",
+      "rules": null,
+      "user": 6,
+      "whitespace_words": 2479
+    },
+    {
+      "characters": 1657,
+      "method": "reflection",
+      "rules": 5,
+      "user": 6,
+      "whitespace_words": 279
+    },
+    {
+      "characters": 1452,
+      "method": "rehearsal",
+      "rules": 4,
+      "user": 6,
+      "whitespace_words": 256
+    },
+    {
+      "characters": 16162,
+      "method": "reports",
+      "rules": null,
+      "user": 7,
+      "whitespace_words": 2296
+    },
+    {
+      "characters": 1641,
+      "method": "reflection",
+      "rules": 5,
+      "user": 7,
+      "whitespace_words": 279
+    },
+    {
+      "characters": 1364,
+      "method": "rehearsal",
+      "rules": 4,
+      "user": 7,
+      "whitespace_words": 221
+    }
+  ]
+}
