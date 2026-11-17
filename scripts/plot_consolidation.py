@@ -31,6 +31,8 @@ def main():
     if "selected_transfer" in data:
         data = data["selected_transfer"]
     datasets = [(data["primary"]["rows"], "Primary: cases averaged within persona")]
+    if data["primary"]["cases"] == 1:
+        datasets = []
     datasets += [
         (value["rows"], key.replace("_", " ").title()) for key, value in data["cases"].items()
     ]

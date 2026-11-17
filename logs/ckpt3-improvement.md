@@ -129,3 +129,27 @@ claimed matching current-source fingerprint. Raw histories and coaching remain i
   resume at the identical prompt/state; no persona, seed, memory, model, or completed score
   is replaced. Preserve the original error artifact and retry cost. A recurrent refusal
   is reported as an unresolved execution failure rather than silently dropping the user.
+- Both v1 cohorts finished, 240 assessment episodes. The one refusal resumed successfully
+  with seven additional calls ($0.104813); no uncertain requests remain. Incremental v1
+  cost $34.175610; cumulative development $43.339210, final unchanged $41.133781.
+  Sim4 workbook gains differ by cohort: -0.004167 (0–3) and +0.078125 (4–7).
+  Reports: +0.067708 and +0.057292. Personalized selection: -0.025000 and +0.087500.
+  Pooled exploratory Sim4 gains: reports +0.062500, workbook +0.036979, procedure +0.043229,
+  reflection -0.006771, selected +0.031250. No demonstrated transfer improvement over reports.
+  All outcome tables, errors, hashes, costs and paired plots are preserved.
+
+## v2 development ablations, specified before new calls
+
+Test two focused changes: remove the workbook's historical examples (retain identical
+personalized plans/procedure), and retain all five original reports while adding the fixed
+decision procedure. This asks whether compression or historical examples hurt transfer.
+Neither changes actor/persona/economics, and neither requires another coaching call.
+
+Reuse the exact completed baseline/reports/workbook/procedure episodes and frozen memories
+from v1, with file hashes and source provenance; never rerun a control to obtain a favorable
+sample. Run only the two new arms on the same known cases and counterpart seeds. First
+personas 0–3, then the separate 4–7 cohort if worth validating; these are development
+ablations, not fresh test outcomes. Additional calls: roughly 650–800 for 48 new episodes
+per cohort, approximately 4–5M total input (mostly cached) and 0.3–0.4M output, forecast
+$6–10 per cohort at the measured blended rates. At most $12–20 across both, within the
+remaining $56.660790 development allowance. The final budget and fresh cases stay untouched.
