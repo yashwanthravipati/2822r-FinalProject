@@ -20,6 +20,8 @@ def main():
         "workbook": "Personalized\nworkbook",
         "procedure_only": "Fixed\nprocedure",
         "personalized_selection": "Selected per\npersona",
+        "workbook_no_examples": "Workbook without\nexamples",
+        "reports_with_procedure": "Reports +\nprocedure",
     }
     plot.COLORS = {
         "reports": "#7b8490",
@@ -27,6 +29,8 @@ def main():
         "workbook": "#168577",
         "procedure_only": "#ad8541",
         "personalized_selection": "#945aa5",
+        "workbook_no_examples": "#df7d38",
+        "reports_with_procedure": "#6f58ad",
     }
     if "selected_transfer" in data:
         data = data["selected_transfer"]

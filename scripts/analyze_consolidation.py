@@ -133,8 +133,17 @@ def main():
     ]
     source = hashlib.sha256(b"".join(p.read_bytes() for p in paths)).hexdigest()
     check(source == protocol["source_sha256"], "source changed")
+    if "ablation_source_sha256" in protocol:
+        check(
+            digest(Path("scripts/consolidation_ablate.py")) == protocol["ablation_source_sha256"],
+            "ablation source changed",
+        )
     check(digest(root / "protocol.json") == frozen["protocol_sha256"], "protocol changed")
-    for path, sha in {**frozen["memories"], **frozen["history"]}.items():
+    for path, sha in {
+        **frozen["memories"],
+        **frozen["history"],
+        **frozen.get("reused_episodes", {}),
+    }.items():
         check(digest(Path(path)) == sha, "frozen memory/history changed")
     expected = {str(root / "raw" / f"learner{u}.memories.json") for u in protocol["users"]}
     check(frozen["memories"].keys() == expected, "missing frozen persona")
@@ -183,6 +192,10 @@ def main():
         if entry["primary"]:
             primary.append(rows)
     result["primary"] = aggregate(primary, protocol["users"], protocol["methods"])
+    result["reused_episode_count"] = len(frozen.get("reused_episodes", {}))
+    result["new_assessment_episode_count"] = (
+        sum(c["episodes"] for c in result["cases"].values()) - result["reused_episode_count"]
+    )
     selection_path = root / "selection.json"
     if selection_path.exists():
         selection = read(selection_path)
