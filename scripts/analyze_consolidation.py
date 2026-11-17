@@ -1,0 +1,185 @@
+"""Audit matched-history agreements independently and aggregate cases within persona."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import itertools
+import json
+import math
+import re
+from pathlib import Path
+
+from analyze_ckpt3 import episode_diagnostics, ledger_report, run_usage
+from negotrain.cases import load_case
+from negotrain.evaluation import interval, write_json
+from verify_ckpt3 import check, digest, economics
+
+
+def read(path):
+    return json.loads(path.read_text())
+
+
+def aggregate(case_rows, users, methods):
+    """Cases are repeated observations, not independent sampled personas."""
+    check(bool(case_rows), "no cases")
+    expected = set(itertools.product(users, methods))
+    indexed = []
+    for rows in case_rows:
+        index = {(r["user"], r["method"]): r for r in rows}
+        check(len(index) == len(rows) and index.keys() == expected, "incomplete paired cohort")
+        indexed.append(index)
+    rows = []
+    for user, method in sorted(expected):
+        row = {"user": user, "method": method}
+        for metric in ("baseline_G", "final_G", "gain"):
+            row[metric] = sum(i[user, method][metric] for i in indexed) / len(indexed)
+        rows.append(row)
+    summary = {
+        m: {
+            k: interval([r[k] for r in rows if r["method"] == m])
+            for k in ("baseline_G", "final_G", "gain")
+        }
+        for m in methods
+    }
+    for a, b in itertools.combinations(methods, 2):
+        by_method = {m: {r["user"]: r["gain"] for r in rows if r["method"] == m} for m in (a, b)}
+        summary[a + "_minus_" + b] = interval([by_method[a][u] - by_method[b][u] for u in users])
+    return {"cases": len(case_rows), "rows": rows, "summary": summary}
+
+
+def audit_case(root, entry, protocol):
+    case = load_case(entry["path"])
+    score, best = economics(case, entry["role"])
+    expected = {}
+    for uid in protocol["users"]:
+        for tier in protocol["probe_tiers"]:
+            expected[f"learner{uid}_baseline_t{tier}"] = tier
+            for method in protocol["methods"]:
+                expected[f"learner{uid}_{method}_after_t{tier}"] = tier
+    scores, statuses, below = {}, {}, 0
+    for path in sorted((root / "raw").glob("*.json")):
+        data = read(path)
+        if not isinstance(data, dict) or "session" not in data:
+            continue
+        s = data["session"]
+        key = s["id"]
+        check(key in expected and key not in scores, "unplanned or duplicate episode")
+        check(data["complete"], "incomplete episode")
+        check(s["case_id"] == case.id and s["user_role_id"] == entry["role"], "wrong case/role")
+        check(s["counterpart_role_id"] == case.other_role(entry["role"]).id, "wrong counterpart")
+        check(s["counterpart_profile"]["tier"] == expected[key], "wrong tier")
+        check(data["schedule_violations"] == 0, "counterpart schedule violation")
+        scores[key] = score(s)
+        statuses[s["status"]] = statuses.get(s["status"], 0) + 1
+        below += scores[key] < 0
+    check(scores.keys() == expected.keys(), "missing planned episodes")
+    rows = read(root / "assess_rows.json")
+    pairs = set(itertools.product(protocol["users"], protocol["methods"]))
+    seen = set()
+    for row in rows:
+        pair = row["user"], row["method"]
+        check(pair in pairs and pair not in seen, "unplanned/duplicate row")
+        seen.add(pair)
+        uid, method = pair
+        before = sum(scores[f"learner{uid}_baseline_t{t}"] for t in protocol["probe_tiers"]) / 3
+        after = (
+            sum(scores[f"learner{uid}_{method}_after_t{t}"] for t in protocol["probe_tiers"]) / 3
+        )
+        for k, value in (("baseline_G", before), ("final_G", after), ("gain", after - before)):
+            check(math.isclose(row[k], value, abs_tol=1e-12), f"wrong {k}")
+    check(seen == pairs, "missing rows")
+    return rows, {
+        "episodes": len(scores),
+        "status_counts": statuses,
+        "below_walkaway": below,
+        "feasible_best": best,
+    }
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--root", type=Path, required=True)
+    p.add_argument(
+        "--training-case", type=Path, default=Path("data/cases/private/sim3_inferred.json")
+    )
+    args = p.parse_args()
+    root = args.root
+    protocol, frozen = read(root / "protocol.json"), read(root / "frozen.json")
+    paths = sorted(Path("src/negotrain").rglob("*.py")) + [
+        Path("scripts/consolidation_evaluate.py")
+    ]
+    source = hashlib.sha256(b"".join(p.read_bytes() for p in paths)).hexdigest()
+    check(source == protocol["source_sha256"], "source changed")
+    check(digest(root / "protocol.json") == frozen["protocol_sha256"], "protocol changed")
+    for path, sha in {**frozen["memories"], **frozen["history"]}.items():
+        check(digest(Path(path)) == sha, "frozen memory/history changed")
+    expected = {str(root / "raw" / f"learner{u}.memories.json") for u in protocol["users"]}
+    check(frozen["memories"].keys() == expected, "missing frozen persona")
+    check(digest(args.training_case) == protocol["training_case_sha256"], "training case changed")
+    training_case = load_case(args.training_case)
+    training_score, _ = economics(training_case, protocol["training_role"])
+    expected_training = {
+        f"learner{u}_reports_train{t}" for u in protocol["users"] for t in range(5)
+    }
+    seen_training = set()
+    for path in frozen["history"]:
+        key = Path(path).stem
+        match = re.fullmatch(r"learner\d+_reports_train(\d+)", key)
+        if not match:
+            continue
+        data = read(Path(path))
+        session = data["session"]
+        check(key in expected_training and key not in seen_training, "unexpected training history")
+        seen_training.add(key)
+        check(data["complete"] and session["id"] == key, "incomplete training episode")
+        check(
+            session["case_id"] == training_case.id
+            and session["user_role_id"] == protocol["training_role"],
+            "wrong training role/case",
+        )
+        check(
+            session["counterpart_profile"]["tier"] == protocol["training_tiers"][int(match[1])],
+            "wrong training tier",
+        )
+        check(data["schedule_violations"] == 0, "training schedule violation")
+        training_score(session)
+    check(seen_training == expected_training, "missing common practice history")
+    result = {"source_sha256": source, "protocol_sha256": frozen["protocol_sha256"], "cases": {}}
+    primary = []
+    for entry in protocol["cases"]:
+        check(digest(Path(entry["path"])) == entry["sha256"], "case changed")
+        rows, diagnostics = audit_case(root / "assessment" / entry["key"], entry, protocol)
+        result["cases"][entry["key"]] = {
+            **diagnostics,
+            "status": entry["status"],
+            **aggregate([rows], protocol["users"], protocol["methods"]),
+            "diagnostics": episode_diagnostics(
+                root / "assessment" / entry["key"], Path(entry["path"])
+            ),
+        }
+        if entry["primary"]:
+            primary.append(rows)
+    result["primary"] = aggregate(primary, protocol["users"], protocol["methods"])
+    result["common_practice_episodes_verified"] = len(seen_training)
+    result["run_usage_by_phase"] = {
+        str(p.relative_to(root)): run_usage(p)
+        for p in sorted({p.parent for p in root.rglob("usage_*.json")})
+    }
+    result["cumulative_budget"] = ledger_report(
+        Path(f".api-budget.sqlite3.ckpt3-{protocol['budget']}")
+    )
+    write_json(root / "verified_analysis.json", result)
+    print(
+        json.dumps(
+            {
+                "primary": result["primary"]["summary"],
+                "episodes": sum(r["episodes"] for r in result["cases"].values()),
+            },
+            indent=2,
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
