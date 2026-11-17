@@ -366,3 +366,9 @@ final-budget allowance. Total 84 new episodes, forecast $12–16, leaving at lea
 for conservative live reservations within the unchanged final $100 cap. A fresh case
 does not make these seven personas fresh, and this follows multiple failed candidates.
 Report the whole sequence regardless of the outcome. Beacon's case bytes remain frozen.
+
+- Varied-practice implementation validated offline: 184 tests pass, one live deselected;
+  all task files valid. The curriculum preserves the exact two-report prefix and five
+  total reports, uses sequential accumulated feedback, and never modifies persona traits.
+  Independent audits distinguish the original control histories from the shared prefix
+  and new varied-practice sessions; transfer-case overlap is rejected before API calls.

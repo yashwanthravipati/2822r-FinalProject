@@ -180,6 +180,13 @@ deterministic preparation aid to all five reports, freezes case-specific memorie
 projects only the current case to the unchanged actor. Audits verify those projections.
 This tests an arithmetic aid, not new coaching-generation calls or persona changes.
 
+`diverse_evaluate.py` tests a different hypothesis: keep the first two exact Sim3 practice
+sessions, then rehearse hiring/Sim4/hiring with the same tiers and five-session total.
+`diverse_practice.py` carries ordinary reports between these cases and independently
+audits the new sessions, seeds, curves and report identities. The comparison is against
+five Sim3 sessions, so only the two-session prefix is shared; it is a curriculum effect,
+not matched-history prompt refinement. Transfer assessment cannot use a practice case.
+
 `results/calibration/` holds population costs and tuned lambda/kappa, matched by full case
 hash and role before the app loads them. Calibration from another upload is never reused.
 Before calibration, the app retains explicitly uncalibrated unit priors. Private raw

@@ -1,0 +1,26 @@
+{
+  "cases": [
+    {
+      "key": "hiring",
+      "path": "data/cases/cloudline_hiring.json",
+      "primary": true,
+      "role": "candidate",
+      "sha256": "37acbcbf6be2b9e8b2489b058e0f347f1a5007f485a945725a6d049f70976541",
+      "status": "development"
+    },
+    {
+      "key": "sim4_revisited",
+      "path": "data/cases/private/sim4_inferred.json",
+      "primary": true,
+      "role": "global_relief",
+      "sha256": "2d339ecf290bdf6d868f85f220295195b58356a9657820fb51afd7bfc70f8c9e",
+      "status": "development"
+    }
+  ],
+  "schedule": [
+    "hiring",
+    "sim4_revisited",
+    "hiring"
+  ],
+  "shared_prefix": "first two original Sim3 sessions; five reports total"
+}

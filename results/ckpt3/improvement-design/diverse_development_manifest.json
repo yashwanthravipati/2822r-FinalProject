@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {
+      "key": "harbor_analytics",
+      "path": "data/cases/harbor_analytics.json",
+      "role": "buyer",
+      "primary": true,
+      "status": "development_revisited",
+      "sha256": "1d5c501b05bcc99cba1c8f2591af6c2c187855c85094488643b36852f6ffb95f"
+    }
+  ],
+  "scope": "Previously seen first-confirmation case, explicitly revisited for development on the original eight personas. Not a fresh test."
+}

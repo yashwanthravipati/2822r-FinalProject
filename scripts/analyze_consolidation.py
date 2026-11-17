@@ -133,6 +133,15 @@ def main():
     ]
     source = hashlib.sha256(b"".join(p.read_bytes() for p in paths)).hexdigest()
     check(source == protocol["source_sha256"], "source changed")
+    if "diverse_source_sha256" in protocol:
+        check(
+            digest(Path("scripts/diverse_evaluate.py")) == protocol["diverse_source_sha256"],
+            "diverse runner changed",
+        )
+        check(
+            digest(Path("scripts/diverse_practice.py")) == protocol["diverse_memory_sha256"],
+            "diverse practice source changed",
+        )
     if "worksheet_source_sha256" in protocol:
         check(
             digest(Path("scripts/worksheet_evaluate.py")) == protocol["worksheet_source_sha256"],
@@ -288,6 +297,14 @@ def main():
             "negotiations per persona",
         }
     result["common_practice_episodes_verified"] = len(seen_training)
+    if "diverse_source_sha256" in protocol:
+        from diverse_practice import audit_practice
+
+        result["control_practice_episodes_verified"] = result.pop(
+            "common_practice_episodes_verified"
+        )
+        result["shared_practice_prefix_episodes"] = 2 * len(protocol["users"])
+        result["diverse_practice"] = audit_practice(root, protocol)
     result["execution_errors"] = [
         {"artifact": str(p.relative_to(root)), "failures": read(p)}
         for p in sorted(root.rglob("errors_*.json"))

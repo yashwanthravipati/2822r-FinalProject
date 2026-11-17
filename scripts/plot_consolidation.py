@@ -24,6 +24,7 @@ def main():
         "reports_with_procedure": "Reports +\nprocedure",
         "credit_memory": "Terminal-credit\nworkbook",
         "worksheet_reports": "Reports +\nown-value worksheet",
+        "diverse_reports": "Varied practice\nreports",
     }
     plot.COLORS = {
         "reports": "#7b8490",
@@ -35,6 +36,7 @@ def main():
         "reports_with_procedure": "#6f58ad",
         "credit_memory": "#168577",
         "worksheet_reports": "#366ea5",
+        "diverse_reports": "#168577",
     }
     if "selected_transfer" in data:
         data = data["selected_transfer"]
