@@ -94,6 +94,16 @@ be dismissed by citing the positive first-cohort mean. Neither candidate used fi
 calls or generated Beacon Museum assessment outcomes. Their code, frozen histories,
 verified analyses and selection decisions are versioned.
 
+The complete matched-history comparison is reproduced by
+`scripts/compare_coaching_candidates.py`. Its paired plot retains all seven alternatives
+to reports and deduplicates reused controls:
+
+![All completed matched-history candidates](../results/ckpt3/improvement-design/all_memory_candidates.png)
+
+None has an interval wholly above zero. The reflective card is worse on this development
+comparison (−0.057071, pointwise interval [−0.096655, −0.020683]). These intervals are not
+adjusted for the repeated exploratory comparisons.
+
 The next prespecified comparison keeps five practice sessions but changes their variety:
 two shared Sim3 sessions followed by hiring/Sim4/hiring, versus five Sim3 sessions. This
 tests the curriculum as a package, not prompt refinement from identical histories.
