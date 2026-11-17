@@ -76,8 +76,8 @@ A generic strategy card is assessed as a zero-shot reference on the held-out cas
 not described as a trained control. Persona draws, method-order randomization, case/source
 hashes, and cache settings are persisted. LLM sampling itself is not seedable.
 
-Reproduction (commands involving class data require the pending explicit external-payload
-approval; no Sim4 outcome has been inspected):
+Reproduction (the user explicitly approved sending the fictional case content to Anthropic
+on 2026-11-17; no Sim4 outcome was inspected before freezing this protocol):
 
 The original synthetic smoke used source revision `ece6dbe`; the five-round v2 synthetic
 development used `0264028`. Restore the corresponding revision in a separate checkout
@@ -101,9 +101,9 @@ sampling can still differ. Saved numeric artifacts can be analyzed without paid 
 # Sim4 was constructed and audited locally; reuse the private frozen projection.
 # See results/ckpt3/heldout-case/manifest.json for hashes and numerical checks.
 # scripts/prepare_sim4.py is an optional API-assisted constructor for a new version,
-# not needed for the frozen case and not authorized to transmit class content yet.
+# not needed for the frozen case.
 
-# Proposed final run: finalize user count from smoke costs before invoking.
+# Final run: eight personas, frozen after development and before held-out outcomes.
 .venv/bin/python scripts/ckpt3_evaluate.py train \
   --root results/ckpt3/final-v1 --budget final --users 8 --rounds 5 --workers 4
 .venv/bin/python scripts/ckpt3_evaluate.py assess \
@@ -149,6 +149,6 @@ Sim4 is now an analyst-built, locally frozen conditional-plan model; source docu
 were not sent for parsing. Its full briefs and original text remain private. The public
 manifest and numeric-only surrogate are in `results/ckpt3/heldout-case/`. The private case
 hash is `2d339ecf290bdf6d868f85f220295195b58356a9657820fb51afd7bfc70f8c9e`.
-Final live evaluation still needs explicit approval for sending role-appropriate briefs
-to the Anthropic API. The frozen point assumptions must not be revised after observing
-method performance.
+The user explicitly approved sending role-appropriate fictional briefs to the Anthropic
+API on 2026-11-17. The frozen point assumptions must not be revised after observing method
+performance.

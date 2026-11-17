@@ -1,7 +1,7 @@
 ---
 id: T-046
 title: Checkpoint 3 few-shot coaching memory and held-out Sim4 evaluation
-status: blocked
+status: in-progress
 milestone: M4
 workstream: analysis  # cases | counterpart | feedback | profiling | app | study | analysis | infra
 owner: codex
@@ -37,3 +37,5 @@ from Sim3 to the held-out Sim4 scenario under separate $100 development/final AP
 - 2026-11-17: V2 development completed: 54 episodes, $7.503585, 77.90% input cache reads. Mean gains: reports +0.09936, reflection +0.04167, application -0.04808 (n=2, no population inference). Cumulative development $9.163600; final allowance untouched. No API process remains active. Added per-run accounting and corrected future-run metadata. Final class-content approval still pending.
 
 - 2026-11-17: Blocked audit confirmed the same unanswered external-payload approval across three consecutive goal turns. Remote ckpt3 matches completed development checkpoint 245ca8c; no evaluator process or held-out results exist. Remaining final evaluation requires explicit permission to send role-appropriate Sim3/Sim4 briefs to Anthropic. No additional spend; goal is incomplete.
+
+- 2026-11-17: User explicitly approved case-content transmission and clarified the content is fictional. Resume the final eight-persona, five-rehearsal paired study under the separate $100 final cap; retain all three training methods and generic held-out reference. Case and method selection are frozen before held-out outcomes.
