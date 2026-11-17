@@ -221,3 +221,11 @@ known refusal may be resumed once from the identical checkpoint with its cost re
   Same-token-volume uncached estimate $27.971128. Final ledger $62.409289 at phase end,
   no unresolved calls. Maple Festival then started under the identical frozen protocol;
   primary comparisons remain uninterpreted until both cases complete.
+- Confirmation completed and independently verified all 287 episodes. Primary workbook
+  minus reports = -0.000113921, 95% interval [-0.033283967, +0.029720608], n=7. No demonstrated
+  improvement. Fixed procedure has the highest secondary point estimate, but its contrast
+  with reports is also inconclusive. Full results and failures are in
+  `logs/ckpt3-improvement-results.md`. Confirmation ledger increment $34.587048; total new
+  improvement spending $81.667637. Remaining caps: development $43.755811, final $24.279171.
+  The goal of better demonstrated transfer remains unmet; proceed to the credit-based
+  example-selection hypothesis without overwriting or relabeling this confirmation.

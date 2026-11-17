@@ -1,0 +1,1390 @@
+{
+  "cases": {
+    "harbor_analytics": {
+      "below_walkaway": 15,
+      "cases": 1,
+      "diagnostics": {
+        "agreement_rate": 1.0,
+        "below_walkaway_agreements": 15,
+        "conditions": {
+          "baseline": {
+            "agreements": 21,
+            "below_walkaway_agreements": 4,
+            "episodes": 21,
+            "mean_user_turns": 6.428571428571429
+          },
+          "procedure_only_assessment": {
+            "agreements": 21,
+            "below_walkaway_agreements": 2,
+            "episodes": 21,
+            "mean_user_turns": 6.190476190476191
+          },
+          "reports_assessment": {
+            "agreements": 21,
+            "below_walkaway_agreements": 5,
+            "episodes": 21,
+            "mean_user_turns": 6.666666666666667
+          },
+          "workbook_assessment": {
+            "agreements": 21,
+            "below_walkaway_agreements": 1,
+            "episodes": 21,
+            "mean_user_turns": 6.571428571428571
+          },
+          "workbook_no_examples_assessment": {
+            "agreements": 21,
+            "below_walkaway_agreements": 3,
+            "episodes": 21,
+            "mean_user_turns": 6.333333333333333
+          }
+        },
+        "episodes": 105,
+        "schedule_violations": 0
+      },
+      "episodes": 105,
+      "feasible_best": 370.0,
+      "rows": [
+        {
+          "baseline_G": 0.14912280701754385,
+          "final_G": 0.14912280701754385,
+          "gain": 0.0,
+          "method": "procedure_only",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.14912280701754385,
+          "final_G": 0.21929824561403508,
+          "gain": 0.07017543859649122,
+          "method": "reports",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.14912280701754385,
+          "final_G": 0.21929824561403508,
+          "gain": 0.07017543859649122,
+          "method": "workbook",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.14912280701754385,
+          "final_G": 0.22807017543859645,
+          "gain": 0.0789473684210526,
+          "method": "workbook_no_examples",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.2280701754385965,
+          "final_G": 0.16666666666666666,
+          "gain": -0.06140350877192985,
+          "method": "procedure_only",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.2280701754385965,
+          "final_G": 0.17543859649122806,
+          "gain": -0.052631578947368446,
+          "method": "reports",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.2280701754385965,
+          "final_G": 0.17543859649122806,
+          "gain": -0.052631578947368446,
+          "method": "workbook",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.2280701754385965,
+          "final_G": 0.07894736842105263,
+          "gain": -0.14912280701754388,
+          "method": "workbook_no_examples",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.14912280701754385,
+          "final_G": 0.1754385964912281,
+          "gain": 0.026315789473684237,
+          "method": "procedure_only",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.14912280701754385,
+          "final_G": 0.03508771929824561,
+          "gain": -0.11403508771929824,
+          "method": "reports",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.14912280701754385,
+          "final_G": 0.15789473684210525,
+          "gain": 0.008771929824561403,
+          "method": "workbook",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.14912280701754385,
+          "final_G": 0.15789473684210528,
+          "gain": 0.00877192982456143,
+          "method": "workbook_no_examples",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.14912280701754385,
+          "final_G": 0.25438596491228066,
+          "gain": 0.10526315789473681,
+          "method": "procedure_only",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.14912280701754385,
+          "final_G": 0.14035087719298245,
+          "gain": -0.008771929824561403,
+          "method": "reports",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.14912280701754385,
+          "final_G": 0.16666666666666666,
+          "gain": 0.017543859649122806,
+          "method": "workbook",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.14912280701754385,
+          "final_G": 0.22807017543859645,
+          "gain": 0.0789473684210526,
+          "method": "workbook_no_examples",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.22807017543859645,
+          "gain": 0.06140350877192979,
+          "method": "procedure_only",
+          "user": 4
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.23684210526315788,
+          "gain": 0.07017543859649122,
+          "method": "reports",
+          "user": 4
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.23684210526315788,
+          "gain": 0.07017543859649122,
+          "method": "workbook",
+          "user": 4
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.15789473684210525,
+          "gain": -0.008771929824561403,
+          "method": "workbook_no_examples",
+          "user": 4
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.1929824561403509,
+          "gain": 0.026315789473684237,
+          "method": "procedure_only",
+          "user": 5
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.20175438596491227,
+          "gain": 0.03508771929824561,
+          "method": "reports",
+          "user": 5
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.14912280701754385,
+          "gain": -0.017543859649122806,
+          "method": "workbook",
+          "user": 5
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.20175438596491227,
+          "gain": 0.03508771929824561,
+          "method": "workbook_no_examples",
+          "user": 5
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.16666666666666666,
+          "gain": 0.0,
+          "method": "procedure_only",
+          "user": 6
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.09649122807017545,
+          "gain": -0.07017543859649121,
+          "method": "reports",
+          "user": 6
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.21052631578947367,
+          "gain": 0.043859649122807015,
+          "method": "workbook",
+          "user": 6
+        },
+        {
+          "baseline_G": 0.16666666666666666,
+          "final_G": 0.21929824561403508,
+          "gain": 0.05263157894736842,
+          "method": "workbook_no_examples",
+          "user": 6
+        }
+      ],
+      "status": "fresh_test",
+      "status_counts": {
+        "agreed": 105
+      },
+      "summary": {
+        "procedure_only": {
+          "baseline_G": {
+            "ci95": [
+              0.15413533834586463,
+              0.19047619047619047
+            ],
+            "mean": 0.16791979949874689,
+            "n": 7
+          },
+          "final_G": {
+            "ci95": [
+              0.16666666666666669,
+              0.21679197994987467
+            ],
+            "mean": 0.19047619047619047,
+            "n": 7
+          },
+          "gain": {
+            "ci95": [
+              -0.013784461152882208,
+              0.057644110275689206
+            ],
+            "mean": 0.022556390977443604,
+            "n": 7
+          }
+        },
+        "procedure_only_minus_workbook_no_examples": {
+          "ci95": [
+            -0.0338345864661654,
+            0.04761904761904761
+          ],
+          "mean": 0.008771929824561406,
+          "n": 7
+        },
+        "reports": {
+          "baseline_G": {
+            "ci95": [
+              0.15413533834586463,
+              0.19047619047619047
+            ],
+            "mean": 0.16791979949874689,
+            "n": 7
+          },
+          "final_G": {
+            "ci95": [
+              0.10526315789473684,
+              0.20300751879699247
+            ],
+            "mean": 0.15789473684210528,
+            "n": 7
+          },
+          "gain": {
+            "ci95": [
+              -0.06015037593984962,
+              0.037593984962406006
+            ],
+            "mean": -0.010025062656641605,
+            "n": 7
+          }
+        },
+        "reports_minus_procedure_only": {
+          "ci95": [
+            -0.08521303258145363,
+            0.017543859649122806
+          ],
+          "mean": -0.03258145363408521,
+          "n": 7
+        },
+        "reports_minus_workbook": {
+          "ci95": [
+            -0.07521929824561403,
+            0.011278195488721804
+          ],
+          "mean": -0.03007518796992481,
+          "n": 7
+        },
+        "reports_minus_workbook_no_examples": {
+          "ci95": [
+            -0.08395989974937343,
+            0.03634085213032582
+          ],
+          "mean": -0.023809523809523805,
+          "n": 7
+        },
+        "workbook": {
+          "baseline_G": {
+            "ci95": [
+              0.15413533834586463,
+              0.19047619047619047
+            ],
+            "mean": 0.16791979949874689,
+            "n": 7
+          },
+          "final_G": {
+            "ci95": [
+              0.16666666666666666,
+              0.21177944862155387
+            ],
+            "mean": 0.18796992481203006,
+            "n": 7
+          },
+          "gain": {
+            "ci95": [
+              -0.011309523809523823,
+              0.05012531328320802
+            ],
+            "mean": 0.020050125313283203,
+            "n": 7
+          }
+        },
+        "workbook_minus_procedure_only": {
+          "ci95": [
+            -0.038847117794486206,
+            0.03508771929824562
+          ],
+          "mean": -0.002506265664160401,
+          "n": 7
+        },
+        "workbook_minus_workbook_no_examples": {
+          "ci95": [
+            -0.033834586466165405,
+            0.0463659147869674
+          ],
+          "mean": 0.0062656641604010065,
+          "n": 7
+        },
+        "workbook_no_examples": {
+          "baseline_G": {
+            "ci95": [
+              0.15413533834586463,
+              0.19047619047619047
+            ],
+            "mean": 0.16791979949874689,
+            "n": 7
+          },
+          "final_G": {
+            "ci95": [
+              0.14160401002506268,
+              0.21428571428571427
+            ],
+            "mean": 0.18170426065162906,
+            "n": 7
+          },
+          "gain": {
+            "ci95": [
+              -0.04511278195488723,
+              0.058897243107769406
+            ],
+            "mean": 0.013784461152882196,
+            "n": 7
+          }
+        }
+      }
+    },
+    "maple_festival": {
+      "below_walkaway": 24,
+      "cases": 1,
+      "diagnostics": {
+        "agreement_rate": 0.9809523809523809,
+        "below_walkaway_agreements": 24,
+        "conditions": {
+          "baseline": {
+            "agreements": 19,
+            "below_walkaway_agreements": 3,
+            "episodes": 21,
+            "mean_user_turns": 6.9523809523809526
+          },
+          "procedure_only_assessment": {
+            "agreements": 21,
+            "below_walkaway_agreements": 5,
+            "episodes": 21,
+            "mean_user_turns": 7.809523809523809
+          },
+          "reports_assessment": {
+            "agreements": 21,
+            "below_walkaway_agreements": 5,
+            "episodes": 21,
+            "mean_user_turns": 7.523809523809524
+          },
+          "workbook_assessment": {
+            "agreements": 21,
+            "below_walkaway_agreements": 4,
+            "episodes": 21,
+            "mean_user_turns": 7.523809523809524
+          },
+          "workbook_no_examples_assessment": {
+            "agreements": 21,
+            "below_walkaway_agreements": 7,
+            "episodes": 21,
+            "mean_user_turns": 7.190476190476191
+          }
+        },
+        "episodes": 105,
+        "schedule_violations": 0
+      },
+      "episodes": 105,
+      "feasible_best": 355.0,
+      "rows": [
+        {
+          "baseline_G": 0.22222222222222224,
+          "final_G": 0.29292929292929293,
+          "gain": 0.07070707070707069,
+          "method": "procedure_only",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.22222222222222224,
+          "final_G": 0.18181818181818185,
+          "gain": -0.04040404040404039,
+          "method": "reports",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.22222222222222224,
+          "final_G": 0.20202020202020202,
+          "gain": -0.02020202020202022,
+          "method": "workbook",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.22222222222222224,
+          "final_G": 0.13131313131313133,
+          "gain": -0.09090909090909091,
+          "method": "workbook_no_examples",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.1313131313131313,
+          "final_G": 0.14141414141414144,
+          "gain": 0.010101010101010138,
+          "method": "procedure_only",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.1313131313131313,
+          "final_G": 0.030303030303030314,
+          "gain": -0.10101010101010098,
+          "method": "reports",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.1313131313131313,
+          "final_G": 0.0909090909090909,
+          "gain": -0.0404040404040404,
+          "method": "workbook",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.1313131313131313,
+          "final_G": 0.16161616161616163,
+          "gain": 0.03030303030303033,
+          "method": "workbook_no_examples",
+          "user": 1
+        },
+        {
+          "baseline_G": -0.01010101010101011,
+          "final_G": 0.04040404040404041,
+          "gain": 0.05050505050505052,
+          "method": "procedure_only",
+          "user": 2
+        },
+        {
+          "baseline_G": -0.01010101010101011,
+          "final_G": 0.22222222222222224,
+          "gain": 0.23232323232323235,
+          "method": "reports",
+          "user": 2
+        },
+        {
+          "baseline_G": -0.01010101010101011,
+          "final_G": 0.21212121212121213,
+          "gain": 0.22222222222222224,
+          "method": "workbook",
+          "user": 2
+        },
+        {
+          "baseline_G": -0.01010101010101011,
+          "final_G": 0.030303030303030314,
+          "gain": 0.04040404040404043,
+          "method": "workbook_no_examples",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.030303030303030293,
+          "final_G": 0.11111111111111112,
+          "gain": 0.08080808080808083,
+          "method": "procedure_only",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.030303030303030293,
+          "final_G": 0.12121212121212122,
+          "gain": 0.09090909090909093,
+          "method": "reports",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.030303030303030293,
+          "final_G": 0.1414141414141414,
+          "gain": 0.11111111111111112,
+          "method": "workbook",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.030303030303030293,
+          "final_G": 0.07070707070707072,
+          "gain": 0.04040404040404043,
+          "method": "workbook_no_examples",
+          "user": 3
+        },
+        {
+          "baseline_G": -0.010101010101010091,
+          "final_G": 0.08080808080808079,
+          "gain": 0.09090909090909088,
+          "method": "procedure_only",
+          "user": 4
+        },
+        {
+          "baseline_G": -0.010101010101010091,
+          "final_G": 0.15151515151515152,
+          "gain": 0.1616161616161616,
+          "method": "reports",
+          "user": 4
+        },
+        {
+          "baseline_G": -0.010101010101010091,
+          "final_G": 0.020202020202020183,
+          "gain": 0.030303030303030276,
+          "method": "workbook",
+          "user": 4
+        },
+        {
+          "baseline_G": -0.010101010101010091,
+          "final_G": 0.04040404040404039,
+          "gain": 0.050505050505050476,
+          "method": "workbook_no_examples",
+          "user": 4
+        },
+        {
+          "baseline_G": 0.24242424242424243,
+          "final_G": 0.2222222222222222,
+          "gain": -0.02020202020202022,
+          "method": "procedure_only",
+          "user": 5
+        },
+        {
+          "baseline_G": 0.24242424242424243,
+          "final_G": 0.23232323232323235,
+          "gain": -0.010101010101010083,
+          "method": "reports",
+          "user": 5
+        },
+        {
+          "baseline_G": 0.24242424242424243,
+          "final_G": 0.15151515151515152,
+          "gain": -0.09090909090909091,
+          "method": "workbook",
+          "user": 5
+        },
+        {
+          "baseline_G": 0.24242424242424243,
+          "final_G": -0.020202020202020204,
+          "gain": -0.26262626262626265,
+          "method": "workbook_no_examples",
+          "user": 5
+        },
+        {
+          "baseline_G": 0.202020202020202,
+          "final_G": 0.1414141414141414,
+          "gain": -0.06060606060606058,
+          "method": "procedure_only",
+          "user": 6
+        },
+        {
+          "baseline_G": 0.202020202020202,
+          "final_G": 0.010101010101010091,
+          "gain": -0.1919191919191919,
+          "method": "reports",
+          "user": 6
+        },
+        {
+          "baseline_G": 0.202020202020202,
+          "final_G": -0.08080808080808081,
+          "gain": -0.2828282828282828,
+          "method": "workbook",
+          "user": 6
+        },
+        {
+          "baseline_G": 0.202020202020202,
+          "final_G": 0.1717171717171717,
+          "gain": -0.030303030303030276,
+          "method": "workbook_no_examples",
+          "user": 6
+        }
+      ],
+      "status": "fresh_test",
+      "status_counts": {
+        "agreed": 103,
+        "impasse": 2
+      },
+      "summary": {
+        "procedure_only": {
+          "baseline_G": {
+            "ci95": [
+              0.04325396825396824,
+              0.1919191919191919
+            ],
+            "mean": 0.11544011544011543,
+            "n": 7
+          },
+          "final_G": {
+            "ci95": [
+              0.09235209235209234,
+              0.21067821067821071
+            ],
+            "mean": 0.14718614718614717,
+            "n": 7
+          },
+          "gain": {
+            "ci95": [
+              -0.010101010101010095,
+              0.06785714285714269
+            ],
+            "mean": 0.03174603174603176,
+            "n": 7
+          }
+        },
+        "procedure_only_minus_workbook_no_examples": {
+          "ci95": [
+            2.9738116731030977e-18,
+            0.13856421356421336
+          ],
+          "mean": 0.06349206349206349,
+          "n": 7
+        },
+        "reports": {
+          "baseline_G": {
+            "ci95": [
+              0.04325396825396824,
+              0.1919191919191919
+            ],
+            "mean": 0.11544011544011543,
+            "n": 7
+          },
+          "final_G": {
+            "ci95": [
+              0.07355699855699856,
+              0.1933621933621934
+            ],
+            "mean": 0.13564213564213565,
+            "n": 7
+          },
+          "gain": {
+            "ci95": [
+              -0.08084415584415582,
+              0.12554112554112556
+            ],
+            "mean": 0.02020202020202021,
+            "n": 7
+          }
+        },
+        "reports_minus_procedure_only": {
+          "ci95": [
+            -0.08802308802308802,
+            0.07215007215007216
+          ],
+          "mean": -0.011544011544011537,
+          "n": 7
+        },
+        "reports_minus_workbook": {
+          "ci95": [
+            -0.017316017316017288,
+            0.07936507936507937
+          ],
+          "mean": 0.03030303030303032,
+          "n": 7
+        },
+        "reports_minus_workbook_no_examples": {
+          "ci95": [
+            -0.05772005772005773,
+            0.1572871572871573
+          ],
+          "mean": 0.05194805194805195,
+          "n": 7
+        },
+        "workbook": {
+          "baseline_G": {
+            "ci95": [
+              0.04325396825396824,
+              0.1919191919191919
+            ],
+            "mean": 0.11544011544011543,
+            "n": 7
+          },
+          "final_G": {
+            "ci95": [
+              0.025937950937950923,
+              0.17316017316017315
+            ],
+            "mean": 0.10533910533910536,
+            "n": 7
+          },
+          "gain": {
+            "ci95": [
+              -0.12698412698412698,
+              0.09523809523809523
+            ],
+            "mean": -0.010101010101010107,
+            "n": 7
+          }
+        },
+        "workbook_minus_procedure_only": {
+          "ci95": [
+            -0.12121212121212122,
+            0.04332611832611812
+          ],
+          "mean": -0.041847041847041855,
+          "n": 7
+        },
+        "workbook_minus_workbook_no_examples": {
+          "ci95": [
+            -0.08802308802308804,
+            0.11976911976911976
+          ],
+          "mean": 0.02164502164502164,
+          "n": 7
+        },
+        "workbook_no_examples": {
+          "baseline_G": {
+            "ci95": [
+              0.04325396825396824,
+              0.1919191919191919
+            ],
+            "mean": 0.11544011544011543,
+            "n": 7
+          },
+          "final_G": {
+            "ci95": [
+              0.03318903318903319,
+              0.13423520923520907
+            ],
+            "mean": 0.0836940836940837,
+            "n": 7
+          },
+          "gain": {
+            "ci95": [
+              -0.11976911976911976,
+              0.03030303030303032
+            ],
+            "mean": -0.03174603174603174,
+            "n": 7
+          }
+        }
+      }
+    }
+  },
+  "common_practice_episodes_verified": 35,
+  "cumulative_budget": {
+    "accounted_usd": 75.72082899999997,
+    "known_cost_usd": 75.72082899999997,
+    "models": {
+      "claude-opus-5-5": {
+        "accounted_usd": 45.09051999999996,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 2245616.0,
+        "cache_creation_input_tokens": 2245616.0,
+        "cache_hit_calls": 3569.0,
+        "cache_read_fraction": 0.7514466125190176,
+        "cache_read_input_tokens": 12682305.0,
+        "estimated_savings_usd": 45.94562800000006,
+        "estimated_uncached_usd": 91.03614800000003,
+        "input_tokens": 1949266.0,
+        "known_cost_usd": 45.09051999999996,
+        "output_tokens": 1176370.0,
+        "requests": 3592.0
+      },
+      "claude-sonnet-5-5": {
+        "accounted_usd": 30.630309000000008,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 2559633.0,
+        "cache_creation_input_tokens": 2559633.0,
+        "cache_hit_calls": 4028.0,
+        "cache_read_fraction": 0.8576708057237713,
+        "cache_read_input_tokens": 25255249.0,
+        "estimated_savings_usd": 46.70331100000011,
+        "estimated_uncached_usd": 77.33362000000012,
+        "input_tokens": 1631438.0,
+        "known_cost_usd": 30.630309000000008,
+        "output_tokens": 1844098.0,
+        "requests": 4048.0
+      }
+    },
+    "states": {
+      "completed": 7640
+    }
+  },
+  "execution_errors": [],
+  "new_assessment_episode_count": 210,
+  "primary": {
+    "cases": 2,
+    "rows": [
+      {
+        "baseline_G": 0.18567251461988304,
+        "final_G": 0.2210260499734184,
+        "gain": 0.035353535353535345,
+        "method": "procedure_only",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.18567251461988304,
+        "final_G": 0.20055821371610846,
+        "gain": 0.014885699096225419,
+        "method": "reports",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.18567251461988304,
+        "final_G": 0.21065922381711855,
+        "gain": 0.0249867091972355,
+        "method": "workbook",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.18567251461988304,
+        "final_G": 0.1796916533758639,
+        "gain": -0.005980861244019156,
+        "method": "workbook_no_examples",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.1796916533758639,
+        "final_G": 0.15404040404040403,
+        "gain": -0.025651249335459855,
+        "method": "procedure_only",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.1796916533758639,
+        "final_G": 0.10287081339712918,
+        "gain": -0.0768208399787347,
+        "method": "reports",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.1796916533758639,
+        "final_G": 0.13317384370015947,
+        "gain": -0.04651780967570442,
+        "method": "workbook",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.1796916533758639,
+        "final_G": 0.12028176501860713,
+        "gain": -0.059409888357256774,
+        "method": "workbook_no_examples",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.06951089845826687,
+        "final_G": 0.10792131844763425,
+        "gain": 0.03841041998936738,
+        "method": "procedure_only",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.06951089845826687,
+        "final_G": 0.1286549707602339,
+        "gain": 0.059144072301967054,
+        "method": "reports",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.06951089845826687,
+        "final_G": 0.18500797448165868,
+        "gain": 0.11549707602339182,
+        "method": "workbook",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.06951089845826687,
+        "final_G": 0.09409888357256779,
+        "gain": 0.02458798511430093,
+        "method": "workbook_no_examples",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.08971291866028708,
+        "final_G": 0.18274853801169588,
+        "gain": 0.09303561935140882,
+        "method": "procedure_only",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.08971291866028708,
+        "final_G": 0.13078149920255183,
+        "gain": 0.04106858054226476,
+        "method": "reports",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.08971291866028708,
+        "final_G": 0.15404040404040403,
+        "gain": 0.06432748538011696,
+        "method": "workbook",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.08971291866028708,
+        "final_G": 0.14938862307283357,
+        "gain": 0.059675704412546514,
+        "method": "workbook_no_examples",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.07828282828282829,
+        "final_G": 0.15443912812333863,
+        "gain": 0.07615629984051034,
+        "method": "procedure_only",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.07828282828282829,
+        "final_G": 0.1941786283891547,
+        "gain": 0.11589580010632641,
+        "method": "reports",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.07828282828282829,
+        "final_G": 0.12852206273258904,
+        "gain": 0.05023923444976075,
+        "method": "workbook",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.07828282828282829,
+        "final_G": 0.09914938862307282,
+        "gain": 0.020866560340244537,
+        "method": "workbook_no_examples",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.20454545454545453,
+        "final_G": 0.20760233918128657,
+        "gain": 0.003056884635832008,
+        "method": "procedure_only",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.20454545454545453,
+        "final_G": 0.2170388091440723,
+        "gain": 0.012493354598617765,
+        "method": "reports",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.20454545454545453,
+        "final_G": 0.15031897926634769,
+        "gain": -0.05422647527910686,
+        "method": "workbook",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.20454545454545453,
+        "final_G": 0.09077618288144604,
+        "gain": -0.11376927166400852,
+        "method": "workbook_no_examples",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.1843434343434343,
+        "final_G": 0.15404040404040403,
+        "gain": -0.03030303030303029,
+        "method": "procedure_only",
+        "user": 6
+      },
+      {
+        "baseline_G": 0.1843434343434343,
+        "final_G": 0.05329611908559277,
+        "gain": -0.13104731525784155,
+        "method": "reports",
+        "user": 6
+      },
+      {
+        "baseline_G": 0.1843434343434343,
+        "final_G": 0.06485911749069642,
+        "gain": -0.1194843168527379,
+        "method": "workbook",
+        "user": 6
+      },
+      {
+        "baseline_G": 0.1843434343434343,
+        "final_G": 0.1955077086656034,
+        "gain": 0.011164274322169071,
+        "method": "workbook_no_examples",
+        "user": 6
+      }
+    ],
+    "summary": {
+      "procedure_only": {
+        "baseline_G": {
+          "ci95": [
+            0.10305166324903167,
+            0.1825748082327029
+          ],
+          "mean": 0.14167995746943116,
+          "n": 7
+        },
+        "final_G": {
+          "ci95": [
+            0.14253436621857674,
+            0.19476722108301056
+          ],
+          "mean": 0.1688311688311688,
+          "n": 7
+        },
+        "gain": {
+          "ci95": [
+            -0.005301131616921086,
+            0.05840358471937419
+          ],
+          "mean": 0.02715121136173768,
+          "n": 7
+        }
+      },
+      "procedure_only_minus_workbook_no_examples": {
+        "ci95": [
+          0.003906546669704565,
+          0.07032875749981014
+        ],
+        "mean": 0.03613199665831245,
+        "n": 7
+      },
+      "reports": {
+        "baseline_G": {
+          "ci95": [
+            0.10305166324903167,
+            0.1825748082327029
+          ],
+          "mean": 0.14167995746943116,
+          "n": 7
+        },
+        "final_G": {
+          "ci95": [
+            0.10343567251461987,
+            0.18622930432140955
+          ],
+          "mean": 0.14676843624212044,
+          "n": 7
+        },
+        "gain": {
+          "ci95": [
+            -0.05511885775043668,
+            0.05978962557909927
+          ],
+          "mean": 0.0050884787726893045,
+          "n": 7
+        }
+      },
+      "reports_minus_procedure_only": {
+        "ci95": [
+          -0.056903622693096366,
+          0.011050827827143622
+        ],
+        "mean": -0.02206273258904837,
+        "n": 7
+      },
+      "reports_minus_workbook": {
+        "ci95": [
+          -0.02972060833902938,
+          0.03328396749449382
+        ],
+        "mean": 0.00011392116655275865,
+        "n": 7
+      },
+      "reports_minus_workbook_no_examples": {
+        "ci95": [
+          -0.049540992633097886,
+          0.07165641376167695
+        ],
+        "mean": 0.01406926406926408,
+        "n": 7
+      },
+      "workbook": {
+        "baseline_G": {
+          "ci95": [
+            0.10305166324903167,
+            0.1825748082327029
+          ],
+          "mean": 0.14167995746943116,
+          "n": 7
+        },
+        "final_G": {
+          "ci95": [
+            0.11360408597250701,
+            0.17676957545378594
+          ],
+          "mean": 0.14665451507556768,
+          "n": 7
+        },
+        "gain": {
+          "ci95": [
+            -0.05464418622313359,
+            0.05918204602415128
+          ],
+          "mean": 0.0049745576061365464,
+          "n": 7
+        }
+      },
+      "workbook_minus_procedure_only": {
+        "ci95": [
+          -0.054494190020505824,
+          0.01630069491911591
+        ],
+        "mean": -0.022176653755601128,
+        "n": 7
+      },
+      "workbook_minus_workbook_no_examples": {
+        "ci95": [
+          -0.03898999392420444,
+          0.05439735702893596
+        ],
+        "mean": 0.013955342902711323,
+        "n": 7
+      },
+      "workbook_no_examples": {
+        "baseline_G": {
+          "ci95": [
+            0.10305166324903167,
+            0.1825748082327029
+          ],
+          "mean": 0.14167995746943116,
+          "n": 7
+        },
+        "final_G": {
+          "ci95": [
+            0.10537423103212577,
+            0.16332497911445282
+          ],
+          "mean": 0.13269917217285637,
+          "n": 7
+        },
+        "gain": {
+          "ci95": [
+            -0.053531556163135124,
+            0.02534745955798587
+          ],
+          "mean": -0.008980785296574771,
+          "n": 7
+        }
+      }
+    }
+  },
+  "primary_test": {
+    "cases": 2,
+    "comparator": "reports",
+    "contrast": "candidate minus comparator, averaging primary cases within each persona",
+    "estimate": {
+      "ci95": [
+        -0.03328396749449382,
+        0.029720608339029345
+      ],
+      "mean": -0.00011392116655275865,
+      "n": 7
+    },
+    "method": "workbook"
+  },
+  "protocol_sha256": "400ec7b56ca765ddbdc4097944d896a9e39cb513b4ba6a0a94a7f8dfe569c0a5",
+  "reused_episode_count": 0,
+  "run_usage_by_phase": {
+    ".": {
+      "cache_creation_1h_input_tokens": 0.0,
+      "cache_creation_5m_input_tokens": 533816.0,
+      "cache_creation_input_tokens": 533816.0,
+      "cache_hit_calls": 739.0,
+      "cache_read_fraction": 0.7854592429413951,
+      "cache_read_input_tokens": 4182034.0,
+      "calls": 748.0,
+      "estimated_savings_usd": 9.740519000000003,
+      "estimated_uncached_usd": 18.593524000000002,
+      "estimated_usd": 8.853005,
+      "input_tokens": 608467.0,
+      "invocations": 1,
+      "output_tokens": 297399.0,
+      "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+      "total_input_tokens": 5324317.0
+    },
+    "assessment/harbor_analytics": {
+      "cache_creation_1h_input_tokens": 0.0,
+      "cache_creation_5m_input_tokens": 779260.0,
+      "cache_creation_input_tokens": 779260.0,
+      "cache_hit_calls": 1492.0,
+      "cache_read_fraction": 0.8401726321615207,
+      "cache_read_input_tokens": 6315208.0,
+      "calls": 1498.0,
+      "estimated_savings_usd": 15.5496072,
+      "estimated_uncached_usd": 27.971128,
+      "estimated_usd": 12.4215208,
+      "input_tokens": 422092.0,
+      "invocations": 1,
+      "output_tokens": 576169.0,
+      "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+      "total_input_tokens": 7516560.0
+    },
+    "assessment/maple_festival": {
+      "cache_creation_1h_input_tokens": 0.0,
+      "cache_creation_5m_input_tokens": 908123.0,
+      "cache_creation_input_tokens": 908123.0,
+      "cache_hit_calls": 1677.0,
+      "cache_read_fraction": 0.8448067076070596,
+      "cache_read_input_tokens": 7540732.0,
+      "calls": 1682.0,
+      "estimated_savings_usd": 18.6041126,
+      "estimated_uncached_usd": 31.914958000000002,
+      "estimated_usd": 13.310845400000002,
+      "input_tokens": 477130.0,
+      "invocations": 1,
+      "output_tokens": 595552.0,
+      "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+      "total_input_tokens": 8925985.0
+    }
+  },
+  "run_usage_total": {
+    "cache_read_fraction": 0.8286896843467837,
+    "cache_read_input_tokens": 18037974.0,
+    "calls": 3928.0,
+    "estimated_savings_usd": 43.89423880000001,
+    "estimated_uncached_usd": 78.47961000000001,
+    "estimated_usd": 34.5853712,
+    "output_tokens": 1469120.0,
+    "total_input_tokens": 21766862.0
+  },
+  "source_sha256": "0eb60cbbfddac9c74bfdb76ce073fdb3a1c56c7624f0a1f6cf8c019e0408b457",
+  "training": {
+    "below_walkaway": 0,
+    "episodes": 77,
+    "feasible_best": 490.0,
+    "rows": [
+      {
+        "baseline_G": 0.4166666666666667,
+        "final_G": 0.4772727272727273,
+        "gain": 0.06060606060606061,
+        "method": "reports",
+        "training_R": [
+          0.5454545454545454,
+          0.6136363636363636,
+          0.38636363636363635,
+          0.4318181818181818,
+          0.38636363636363635
+        ],
+        "user": 0
+      },
+      {
+        "baseline_G": 0.4545454545454546,
+        "final_G": 0.46969696969696967,
+        "gain": 0.015151515151515083,
+        "method": "reports",
+        "training_R": [
+          0.5,
+          0.4090909090909091,
+          0.3181818181818182,
+          0.3181818181818182,
+          0.38636363636363635
+        ],
+        "user": 1
+      },
+      {
+        "baseline_G": 0.30303030303030304,
+        "final_G": 0.3636363636363636,
+        "gain": 0.06060606060606055,
+        "method": "reports",
+        "training_R": [
+          0.5454545454545454,
+          0.5909090909090909,
+          0.36363636363636365,
+          0.38636363636363635,
+          0.3181818181818182
+        ],
+        "user": 2
+      },
+      {
+        "baseline_G": 0.356060606060606,
+        "final_G": 0.4772727272727273,
+        "gain": 0.12121212121212127,
+        "method": "reports",
+        "training_R": [
+          0.5,
+          0.6136363636363636,
+          0.3181818181818182,
+          0.4318181818181818,
+          0.3181818181818182
+        ],
+        "user": 3
+      },
+      {
+        "baseline_G": 0.356060606060606,
+        "final_G": 0.4772727272727273,
+        "gain": 0.12121212121212127,
+        "method": "reports",
+        "training_R": [
+          0.5227272727272727,
+          0.6136363636363636,
+          0.3181818181818182,
+          0.4318181818181818,
+          0.38636363636363635
+        ],
+        "user": 4
+      },
+      {
+        "baseline_G": 0.37878787878787884,
+        "final_G": 0.4318181818181819,
+        "gain": 0.05303030303030304,
+        "method": "reports",
+        "training_R": [
+          0.5454545454545454,
+          0.45454545454545453,
+          0.38636363636363635,
+          0.3181818181818182,
+          0.3181818181818182
+        ],
+        "user": 5
+      },
+      {
+        "baseline_G": 0.3863636363636364,
+        "final_G": 0.42424242424242425,
+        "gain": 0.037878787878787845,
+        "method": "reports",
+        "training_R": [
+          0.5,
+          0.5454545454545454,
+          0.38636363636363635,
+          0.38636363636363635,
+          0.38636363636363635
+        ],
+        "user": 6
+      }
+    ],
+    "status_counts": {
+      "agreed": 77
+    }
+  }
+}
