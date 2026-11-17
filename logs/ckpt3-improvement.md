@@ -375,7 +375,7 @@ Report the whole sequence regardless of the outcome. Beacon's case bytes remain 
 
 - All 24 new varied-practice sessions and debriefs completed; independent audit verifies
   report identity/order, the exact two-session prefix, seeds, tiers, complete cohorts and
-  numerical scores. All agreed above walk-away; zero schedule violations. Preparation
+  numerical scores. All agreed at or above walk-away; zero schedule violations. Preparation
   uses 449 requests, usage estimate $5.376557 and ledger increment $5.376745. Development
   cumulative $76.131619, no unresolved charges. Both histories were frozen before Harbor
   assessment. Use two workers per cohort to reduce contention for conservative live
@@ -421,3 +421,21 @@ d4221d8bf6412a5fbd9439ddeabe91e4fa30090d94c28a30dc409bb510f19b1c.
   Preparation uses 397 requests, $4.817079 usage estimate and $4.817238 ledger increment.
   Final cumulative $80.538067, remaining $19.461933, no unresolved charges. Assessment
   remains the planned 63 episodes and unchanged primary diverse-reports versus reports.
+
+- Beacon completed all 63 assessment episodes and independently verified all 84 new
+  episodes including practice. All agreed at or above walk-away; no schedule violations or
+  execution failures. Prespecified diverse-minus-reports +0.004578755, 95% interval
+  [-0.043956044, +0.043956044], n=7: inconclusive, not reliable superiority or equivalence.
+  Five personas improved and two worsened; none excluded. The larger development mean
+  did not carry over clearly. Full results and limitations are retained in
+  `logs/ckpt3-improvement-results.md` alongside the earlier negative confirmation.
+- Follow-up ledger cost $11.361306, usage receipts $11.360795, 1,193 requests; cached reads
+  82.10% of 7,506,087 input tokens, 436,866 output tokens. Same-volume caching savings
+  $14.464173. Current goal cumulative $121.775492; checkpoint-3 cumulative $172.072873
+  (development $84.990738, final $87.082135), no unresolved requests. Remaining allowances
+  $15.009262 and $12.917865 respectively; caps were never reset, increased or transferred.
+- No further paid experiment is launched. The reliable-improvement objective remains
+  unmet. Remaining final allowance includes the gateway's conservative ~$8 live-request
+  reserve, leaving under $5 for additional realized cost, insufficient for another
+  comparison of the planned size at the observed $6.54 assessment cost. Preserve funds
+  and the full evidence rather than repeatedly testing until a favorable result appears.

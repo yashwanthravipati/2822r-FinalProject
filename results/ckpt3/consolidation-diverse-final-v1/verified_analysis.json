@@ -1,0 +1,480 @@
+{
+  "cases": {
+    "beacon_museum": {
+      "below_walkaway": 0,
+      "cases": 1,
+      "diagnostics": {
+        "agreement_rate": 1.0,
+        "below_walkaway_agreements": 0,
+        "conditions": {
+          "baseline": {
+            "agreements": 21,
+            "below_walkaway_agreements": 0,
+            "episodes": 21,
+            "mean_user_turns": 5.380952380952381
+          },
+          "diverse_reports_assessment": {
+            "agreements": 21,
+            "below_walkaway_agreements": 0,
+            "episodes": 21,
+            "mean_user_turns": 5.904761904761905
+          },
+          "reports_assessment": {
+            "agreements": 21,
+            "below_walkaway_agreements": 0,
+            "episodes": 21,
+            "mean_user_turns": 5.857142857142857
+          }
+        },
+        "episodes": 63,
+        "schedule_violations": 0
+      },
+      "episodes": 63,
+      "feasible_best": 490.0,
+      "rows": [
+        {
+          "baseline_G": 0.4743589743589744,
+          "final_G": 0.4935897435897436,
+          "gain": 0.019230769230769218,
+          "method": "diverse_reports",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.4743589743589744,
+          "final_G": 0.4743589743589743,
+          "gain": -1.1102230246251565e-16,
+          "method": "reports",
+          "user": 0
+        },
+        {
+          "baseline_G": 0.4679487179487179,
+          "final_G": 0.5064102564102564,
+          "gain": 0.03846153846153849,
+          "method": "diverse_reports",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.4679487179487179,
+          "final_G": 0.43589743589743596,
+          "gain": -0.03205128205128194,
+          "method": "reports",
+          "user": 1
+        },
+        {
+          "baseline_G": 0.391025641025641,
+          "final_G": 0.4166666666666667,
+          "gain": 0.02564102564102566,
+          "method": "diverse_reports",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.391025641025641,
+          "final_G": 0.4487179487179487,
+          "gain": 0.057692307692307654,
+          "method": "reports",
+          "user": 2
+        },
+        {
+          "baseline_G": 0.43589743589743596,
+          "final_G": 0.3461538461538462,
+          "gain": -0.08974358974358976,
+          "method": "diverse_reports",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.43589743589743596,
+          "final_G": 0.4743589743589743,
+          "gain": 0.038461538461538325,
+          "method": "reports",
+          "user": 3
+        },
+        {
+          "baseline_G": 0.3397435897435898,
+          "final_G": 0.5128205128205128,
+          "gain": 0.17307692307692296,
+          "method": "diverse_reports",
+          "user": 4
+        },
+        {
+          "baseline_G": 0.3397435897435898,
+          "final_G": 0.4743589743589743,
+          "gain": 0.13461538461538447,
+          "method": "reports",
+          "user": 4
+        },
+        {
+          "baseline_G": 0.3782051282051282,
+          "final_G": 0.4935897435897436,
+          "gain": 0.11538461538461542,
+          "method": "diverse_reports",
+          "user": 5
+        },
+        {
+          "baseline_G": 0.3782051282051282,
+          "final_G": 0.44871794871794873,
+          "gain": 0.07051282051282054,
+          "method": "reports",
+          "user": 5
+        },
+        {
+          "baseline_G": 0.44871794871794873,
+          "final_G": 0.43589743589743596,
+          "gain": -0.012820512820512775,
+          "method": "diverse_reports",
+          "user": 6
+        },
+        {
+          "baseline_G": 0.44871794871794873,
+          "final_G": 0.4166666666666667,
+          "gain": -0.03205128205128205,
+          "method": "reports",
+          "user": 6
+        }
+      ],
+      "status": "fresh_test",
+      "status_counts": {
+        "agreed": 63
+      },
+      "summary": {
+        "diverse_reports": {
+          "baseline_G": {
+            "ci95": [
+              0.3827838827838828,
+              0.453319597069597
+            ],
+            "mean": 0.4194139194139194,
+            "n": 7
+          },
+          "final_G": {
+            "ci95": [
+              0.4148122710622711,
+              0.4963369963369963
+            ],
+            "mean": 0.4578754578754579,
+            "n": 7
+          },
+          "gain": {
+            "ci95": [
+              -0.017399267399267393,
+              0.09706959706959704
+            ],
+            "mean": 0.03846153846153846,
+            "n": 7
+          }
+        },
+        "reports": {
+          "baseline_G": {
+            "ci95": [
+              0.3827838827838828,
+              0.453319597069597
+            ],
+            "mean": 0.4194139194139194,
+            "n": 7
+          },
+          "final_G": {
+            "ci95": [
+              0.43681318681318687,
+              0.46703296703296704
+            ],
+            "mean": 0.4532967032967033,
+            "n": 7
+          },
+          "gain": {
+            "ci95": [
+              -0.0064331501831501586,
+              0.07692307692307686
+            ],
+            "mean": 0.03388278388278384,
+            "n": 7
+          }
+        },
+        "reports_minus_diverse_reports": {
+          "ci95": [
+            -0.04395604395604395,
+            0.043956043956043855
+          ],
+          "mean": -0.004578754578754618,
+          "n": 7
+        }
+      }
+    }
+  },
+  "control_practice_episodes_verified": 35,
+  "cumulative_budget": {
+    "accounted_usd": 87.08213499999994,
+    "known_cost_usd": 87.08213499999994,
+    "models": {
+      "claude-opus-5-5": {
+        "accounted_usd": 51.69077499999995,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 2554396.0,
+        "cache_creation_input_tokens": 2554396.0,
+        "cache_hit_calls": 4138.0,
+        "cache_read_fraction": 0.7488416434860329,
+        "cache_read_input_tokens": 14418361.0,
+        "estimated_savings_usd": 52.23364099999993,
+        "estimated_uncached_usd": 103.92441599999988,
+        "input_tokens": 2281462.0,
+        "known_cost_usd": 51.69077499999995,
+        "output_tokens": 1345377.0,
+        "requests": 4165.0
+      },
+      "claude-sonnet-5-5": {
+        "accounted_usd": 35.391359999999985,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 3029448.0,
+        "cache_creation_input_tokens": 3029448.0,
+        "cache_hit_calls": 4644.0,
+        "cache_read_fraction": 0.8584725689887673,
+        "cache_read_input_tokens": 29682011.0,
+        "estimated_savings_usd": 54.87896000000011,
+        "estimated_uncached_usd": 90.2703200000001,
+        "input_tokens": 1863916.0,
+        "known_cost_usd": 35.391359999999985,
+        "output_tokens": 2111957.0,
+        "requests": 4668.0
+      }
+    },
+    "states": {
+      "completed": 8833
+    }
+  },
+  "diverse_practice": {
+    "below_walkaway": 0,
+    "new_episodes": 21,
+    "status_counts": {
+      "agreed": 21
+    }
+  },
+  "execution_errors": [],
+  "new_assessment_episode_count": 63,
+  "primary": {
+    "cases": 1,
+    "rows": [
+      {
+        "baseline_G": 0.4743589743589744,
+        "final_G": 0.4935897435897436,
+        "gain": 0.019230769230769218,
+        "method": "diverse_reports",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.4743589743589744,
+        "final_G": 0.4743589743589743,
+        "gain": -1.1102230246251565e-16,
+        "method": "reports",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.4679487179487179,
+        "final_G": 0.5064102564102564,
+        "gain": 0.03846153846153849,
+        "method": "diverse_reports",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.4679487179487179,
+        "final_G": 0.43589743589743596,
+        "gain": -0.03205128205128194,
+        "method": "reports",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.391025641025641,
+        "final_G": 0.4166666666666667,
+        "gain": 0.02564102564102566,
+        "method": "diverse_reports",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.391025641025641,
+        "final_G": 0.4487179487179487,
+        "gain": 0.057692307692307654,
+        "method": "reports",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.43589743589743596,
+        "final_G": 0.3461538461538462,
+        "gain": -0.08974358974358976,
+        "method": "diverse_reports",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.43589743589743596,
+        "final_G": 0.4743589743589743,
+        "gain": 0.038461538461538325,
+        "method": "reports",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.3397435897435898,
+        "final_G": 0.5128205128205128,
+        "gain": 0.17307692307692296,
+        "method": "diverse_reports",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.3397435897435898,
+        "final_G": 0.4743589743589743,
+        "gain": 0.13461538461538447,
+        "method": "reports",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.3782051282051282,
+        "final_G": 0.4935897435897436,
+        "gain": 0.11538461538461542,
+        "method": "diverse_reports",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.3782051282051282,
+        "final_G": 0.44871794871794873,
+        "gain": 0.07051282051282054,
+        "method": "reports",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.44871794871794873,
+        "final_G": 0.43589743589743596,
+        "gain": -0.012820512820512775,
+        "method": "diverse_reports",
+        "user": 6
+      },
+      {
+        "baseline_G": 0.44871794871794873,
+        "final_G": 0.4166666666666667,
+        "gain": -0.03205128205128205,
+        "method": "reports",
+        "user": 6
+      }
+    ],
+    "summary": {
+      "diverse_reports": {
+        "baseline_G": {
+          "ci95": [
+            0.3827838827838828,
+            0.453319597069597
+          ],
+          "mean": 0.4194139194139194,
+          "n": 7
+        },
+        "final_G": {
+          "ci95": [
+            0.4148122710622711,
+            0.4963369963369963
+          ],
+          "mean": 0.4578754578754579,
+          "n": 7
+        },
+        "gain": {
+          "ci95": [
+            -0.017399267399267393,
+            0.09706959706959704
+          ],
+          "mean": 0.03846153846153846,
+          "n": 7
+        }
+      },
+      "reports": {
+        "baseline_G": {
+          "ci95": [
+            0.3827838827838828,
+            0.453319597069597
+          ],
+          "mean": 0.4194139194139194,
+          "n": 7
+        },
+        "final_G": {
+          "ci95": [
+            0.43681318681318687,
+            0.46703296703296704
+          ],
+          "mean": 0.4532967032967033,
+          "n": 7
+        },
+        "gain": {
+          "ci95": [
+            -0.0064331501831501586,
+            0.07692307692307686
+          ],
+          "mean": 0.03388278388278384,
+          "n": 7
+        }
+      },
+      "reports_minus_diverse_reports": {
+        "ci95": [
+          -0.04395604395604395,
+          0.043956043956043855
+        ],
+        "mean": -0.004578754578754618,
+        "n": 7
+      }
+    }
+  },
+  "primary_test": {
+    "cases": 1,
+    "comparator": "reports",
+    "contrast": "candidate minus comparator, averaging primary cases within each persona",
+    "estimate": {
+      "ci95": [
+        -0.043956043956043855,
+        0.04395604395604395
+      ],
+      "mean": 0.004578754578754618,
+      "n": 7
+    },
+    "method": "diverse_reports"
+  },
+  "protocol_sha256": "82bf4cca0e087c8ee297b967f6bace591d01e24c9a59f4f3acd528ab96c036e9",
+  "reused_episode_count": 0,
+  "run_usage_by_phase": {
+    ".": {
+      "cache_creation_1h_input_tokens": 0.0,
+      "cache_creation_5m_input_tokens": 299477.0,
+      "cache_creation_input_tokens": 299477.0,
+      "cache_hit_calls": 391.0,
+      "cache_read_fraction": 0.7778069792230939,
+      "cache_read_input_tokens": 2225578.0,
+      "calls": 397.0,
+      "estimated_savings_usd": 5.414117000000001,
+      "estimated_uncached_usd": 10.231196,
+      "estimated_usd": 4.817079,
+      "input_tokens": 336295.0,
+      "invocations": 1,
+      "output_tokens": 156012.0,
+      "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+      "total_input_tokens": 2861350.0
+    },
+    "assessment/beacon_museum": {
+      "cache_creation_1h_input_tokens": 0.0,
+      "cache_creation_5m_input_tokens": 479118.0,
+      "cache_creation_input_tokens": 479118.0,
+      "cache_hit_calls": 794.0,
+      "cache_read_fraction": 0.8476777048948089,
+      "cache_read_input_tokens": 3937240.0,
+      "calls": 796.0,
+      "estimated_savings_usd": 9.0500561,
+      "estimated_uncached_usd": 15.593772000000001,
+      "estimated_usd": 6.5437159000000005,
+      "input_tokens": 228379.0,
+      "invocations": 1,
+      "output_tokens": 280854.0,
+      "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+      "total_input_tokens": 4644737.0
+    }
+  },
+  "run_usage_total": {
+    "cache_read_fraction": 0.8210427084045255,
+    "cache_read_input_tokens": 6162818.0,
+    "calls": 1193.0,
+    "estimated_savings_usd": 14.464173100000002,
+    "estimated_uncached_usd": 25.824968000000002,
+    "estimated_usd": 11.3607949,
+    "output_tokens": 436866.0,
+    "total_input_tokens": 7506087.0
+  },
+  "shared_practice_prefix_episodes": 14,
+  "source_sha256": "0eb60cbbfddac9c74bfdb76ce073fdb3a1c56c7624f0a1f6cf8c019e0408b457"
+}

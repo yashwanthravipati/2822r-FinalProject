@@ -57,8 +57,12 @@ def main():
         if n >= 5
         else "Development cohort: dots are personas, diamonds are means; exploratory only."
     )
+    if len(datasets) == 1:
+        note = note.replace("; bars:", ";\nbars:").replace(
+            "personas, diamonds", "personas,\ndiamonds"
+        )
     fig.text(0.025, 0.025, note, fontsize=10)
-    fig.tight_layout(rect=(0, 0.07, 1, 1))
+    fig.tight_layout(rect=(0, 0.11 if len(datasets) == 1 else 0.07, 1, 1))
     for extension in ("png", "svg"):
         path = args.root / f"paired_gains.{extension}"
         fig.savefig(path, dpi=180)
