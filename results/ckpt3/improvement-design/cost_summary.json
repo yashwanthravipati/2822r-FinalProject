@@ -1,16 +1,16 @@
 {
-  "all_three_ledgers_known_cost_usd": 244.283223,
-  "cumulative_checkpoint3_known_cost_usd": 178.940503,
+  "all_three_ledgers_known_cost_usd": 246.735739,
+  "cumulative_checkpoint3_known_cost_usd": 181.393019,
   "cumulative_checkpoint3_ledgers": {
     "dev": {
-      "accounted_usd": 91.858368,
+      "accounted_usd": 94.310884,
       "goal_start_known_cost_usd": 9.1636,
-      "known_usage_cost_usd": 91.858368,
+      "known_usage_cost_usd": 94.310884,
       "limit_usd": 110.0,
-      "new_goal_known_cost_usd": 82.694768,
-      "remaining_accounted_allowance_usd": 18.141632,
+      "new_goal_known_cost_usd": 85.147284,
+      "remaining_accounted_allowance_usd": 15.689116,
       "request_states": {
-        "completed": 9506
+        "completed": 9917
       },
       "unresolved_reserved_upper_bound_usd": 0.0
     },
@@ -27,17 +27,17 @@
       "unresolved_reserved_upper_bound_usd": 0.0
     }
   },
-  "ledger_minus_receipts_usd": 0.00582120000001396,
-  "new_goal_known_cost_usd": 128.643122,
+  "ledger_minus_receipts_usd": 0.005992800000001353,
+  "new_goal_known_cost_usd": 131.095638,
   "new_goal_receipts": {
-    "cache_read_fraction": 0.8315587565016695,
-    "cache_read_input_tokens": 71888020.0,
-    "calls": 13566.0,
-    "estimated_uncached_usd": 302.063302,
-    "estimated_usd": 128.6373008,
-    "output_tokens": 5111398.0,
-    "same_volume_estimated_savings_usd": 173.42600120000003,
-    "total_input_tokens": 86449718.0
+    "cache_read_fraction": 0.8317461739961044,
+    "cache_read_input_tokens": 73134784.0,
+    "calls": 13977.0,
+    "estimated_uncached_usd": 306.912058,
+    "estimated_usd": 131.0896452,
+    "output_tokens": 5275365.0,
+    "same_volume_estimated_savings_usd": 175.8224128,
+    "total_input_tokens": 87929210.0
   },
   "scope": "Usage-based estimates, not a provider invoice. New-goal receipts never sum cumulative ledger snapshots. Cache savings compare the same token volume. Unknown historical charges remain reserved upper bounds, not confirmed spending.",
   "separate_historical_ledger": {
@@ -52,6 +52,28 @@
     "unresolved_reserved_upper_bound_usd": 68.09216
   },
   "studies": {
+    "results/ckpt3/audit-corrected-smoke-v1": {
+      "independently_verified": true,
+      "phases": {
+        ".": {
+          "cache_read_input_tokens": 163386,
+          "calls": 60,
+          "estimated_uncached_usd": 0.876274,
+          "estimated_usd": 0.48351960000000005,
+          "invocations": 1,
+          "output_tokens": 17197,
+          "total_input_tokens": 227101
+        }
+      },
+      "usage": {
+        "cache_read_input_tokens": 163386,
+        "calls": 60,
+        "estimated_uncached_usd": 0.876274,
+        "estimated_usd": 0.48351960000000005,
+        "output_tokens": 17197,
+        "total_input_tokens": 227101
+      }
+    },
     "results/ckpt3/consolidation-credit-dev-v1": {
       "independently_verified": true,
       "phases": {
@@ -861,6 +883,28 @@
         "estimated_usd": 3.5622547,
         "output_tokens": 136682.0,
         "total_input_tokens": 3085964.0
+      }
+    },
+    "results/ckpt3/persona-calibration-v1": {
+      "independently_verified": true,
+      "phases": {
+        ".": {
+          "cache_read_input_tokens": 1083378,
+          "calls": 351,
+          "estimated_uncached_usd": 3.972482,
+          "estimated_usd": 1.9688248000000002,
+          "invocations": 1,
+          "output_tokens": 146770,
+          "total_input_tokens": 1252391
+        }
+      },
+      "usage": {
+        "cache_read_input_tokens": 1083378,
+        "calls": 351,
+        "estimated_uncached_usd": 3.972482,
+        "estimated_usd": 1.9688248000000002,
+        "output_tokens": 146770,
+        "total_input_tokens": 1252391
       }
     }
   }

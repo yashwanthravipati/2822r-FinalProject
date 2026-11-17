@@ -65,3 +65,43 @@ the AST hash are recorded. Raw dialogue and debriefs remain private.
 Next scientific requirement: test high-versus-low named propensities against realized
 opportunity-conditioned behavior with fresh controls before another coaching-efficacy
 study. The old data cannot substitute for corrected baseline histories.
+
+## Follow-up behavioral screen and validation closure
+
+Completed a preregistered 48-episode screen after the timed initial audit: six targets,
+two levels (.1/.9), two public development cases and two matched controller seeds.
+Other errors .3; awareness/rapport .5; no feedback, trait updates or learner callout.
+The tier-3 rule-based controller received target focus without coaching the learner.
+Sim4 and Cedar were excluded. Four pairs per target and unseeded API sampling make
+this descriptive screening, not a precision calibration study.
+
+| Target | Low episodes with error / 4 | High / 4 | Low occurrences/opportunities | High |
+|---|---:|---:|---:|---:|
+| Conceding first | 4 | 4 | 4/14 | 5/14 |
+| Unreciprocated concession | 3 | 4 | 5/14 | 7/16 |
+| Anchoring | 0 | 0 | 0/4 | 0/4 |
+| Accepting low | 0 | 0 | undefined (0 opportunities) | undefined (0 opportunities) |
+| Ignoring an issue | 0 | 0 | 0/22 | 0/22 |
+| Dominated offer | 2 | 2 | 4/27 | 3/27 |
+
+The primary episode-incidence gate failed: only one control increased. Conditional
+rates are secondary and opportunities are endogenous; zero opportunities are missing
+evidence, not successful avoidance. This does not validate the six-dimensional
+simulator. Do not resume efficacy claims based on presumed planted frequencies.
+
+All 48 sessions agreed, zero below-walk-away outcomes, missing annotations or schedule
+violations. Independent enumeration and transcript replay pass. Cost $1.968971,
+351 requests; cache reads 86.5048% of input tokens. Both audit evaluations together:
+411 requests, $2.452516. Cumulative checkpoint-3 $181.393019: development $94.310884,
+final $87.082135; no unresolved requests, existing $110 caps unchanged. Updated cost
+aggregation now includes both audit receipts without adding cumulative snapshots.
+
+A further reproduced input defect allowed extra unlisted point entries at case load
+and in standalone scoring. Session validation already rejected such offers. The fix
+requires exact point-table coverage and nonblank IDs, and the scorer independently
+checks listed options. Eight additional regression cases cover this; the complete
+suite now passes 206 tests. The fix was developed separately while the live cohort
+used the frozen core, then applied after its verification. All five public case
+serializations and 579 recorded offer scores are unchanged across this validation
+fix (`validation_reference.json` / `validation_recheck.json`). Live-core revision:
+`e8e0820`; current strict calibration verification must use that historical core.

@@ -74,3 +74,11 @@ Sim4 has now been examined and is a revisited benchmark, not an untouched test s
   x (6,000 input tokens at $2/M + 350 output at $10/M) = $6.20 before cache savings;
   actual lengths vary. Three workers, existing cumulative development cap $110 preserved
   ($17.658087 headroom), under the user's latest $150 development/evaluation authorization.
+- 2026-11-17: Completed all 48 calibration episodes, independently verified. Primary
+  high-low episode-incidence increased only for error:2; the six-control gate failed.
+  Error:4 had zero opportunities, not a measurable zero error probability. All sessions
+  agreed with zero below-walk-away, schedule or missing-tag failures. $1.968971/351 calls;
+  audit plus smoke $2.452516, cumulative checkpoint-3 $181.393019. Source frozen at
+  e8e0820; later validation-only fix closes extra point-table entries and blank IDs.
+  All five public cases and 579 offer scores remain identical; 206 offline tests pass.
+  Report extended with the failed behavioral screen; no coaching superiority claim.

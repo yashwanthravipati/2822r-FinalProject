@@ -1,0 +1,15 @@
+{
+  "observed": {
+    "case_hashes": {
+      "beacon_museum": "dbaae8c54eea9938c5d0ad22f202e7f7dad0a169cb405314e0b05dbd3274a6d4",
+      "cedar_warehouse": "eb39ab7da3fd1f503a6738813b20d9b71e7914d67e5cdbd29a798bfaa1055df1",
+      "cloudline_hiring": "c97ec5569d979fad439b607647c3a62c15691509d8fd9cb54943891c3ac8d6a8",
+      "harbor_analytics": "a05b7eb213dafdddefe5cd2285f8a82005092c2b47867c874abf5bf8bf2b7380",
+      "maple_festival": "0837cbbd1f5b6715e90328a86868a0f70a25abab104dc2dae10a87403e6236e0"
+    },
+    "episodes": 48,
+    "score_digest": "fc7bc2f41bce5daa6be764916e2a7476bbe46dfc5d7f73244f20bd5bdf26105b",
+    "scored_offers": 579
+  },
+  "source_sha256": "3bca49e6f09eaf1a4c32dbdbc7a73459120e8fa4c85b616c0376b76995d3a302"
+}

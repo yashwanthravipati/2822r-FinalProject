@@ -460,18 +460,61 @@ The repaired learner prompt supplies each weakness's name and behavioral definit
 beside its unchanged numeric frequency. The audit also corrected the joint-efficiency
 reference to obey hard constraints and added rejection of non-finite utilities,
 duplicate IDs and invalid constraint references. The primary normalized-surplus
-denominator already respected constraints. All 195 offline tests pass, including
-eight new regression cases; seven stored case fixtures validate successfully.
+denominator already respected constraints. A follow-up input audit also rejected blank
+IDs and extra unlisted point-table entries; the standalone scorer now checks the public
+option catalog even if a point table is later mutated. All 206 offline tests pass.
 
 A fresh live smoke test identified and explained all six intended weaknesses correctly.
 Two learners then each completed baseline, feedback and reassessment on the public hiring
 case: four agreements, no below-walk-away outcomes and no schedule violations. Every
 episode scored $R=0.230769$, so no improvement was observed. This tests comprehension
 and integration, not calibrated weakness frequencies or coaching efficacy. Its 60
-requests cost an additional \$0.483545; checkpoint-3 usage is now \$179.424048.
-The preceding cost table is the pre-audit snapshot. Larger behavioral calibration
-with new controls is still required. Audit details are in
-\path{logs/ckpt3-system-audit.md}.
+requests cost an additional \$0.483545. The preceding cost table is the pre-audit
+snapshot. Audit details are in \path{logs/ckpt3-system-audit.md}.
+
+\paragraph{Behavioral validation of the repaired persona prompt.}
+Comprehension did not establish enactment. We therefore froze a fresh 48-episode
+screen: six target weaknesses, low/high settings of 0.1/0.9, two existing public
+development cases (hiring and Harbor), and two matched controller seeds. All other
+error settings were 0.3; awareness and rapport were 0.5. Each learner received no
+feedback or preparation callout. A tier-3 rule-based counterpart exposed the target
+behavior; its focus was kept separate from learner coaching. Sim4 and unused Cedar
+were excluded. The primary diagnostic was the fraction of episodes exhibiting the
+target error; opportunity-conditioned counts were secondary. Model sampling was not
+seeded, and this small screen cannot establish calibrated probabilities.
+
+\begin{center}
+\begin{tabular}{lrrrr}
+\hline
+& \multicolumn{2}{c}{Episodes with error / 4}
+& \multicolumn{2}{c}{Occurrences / opportunities} \\
+Weakness & Low & High & Low & High \\
+\hline
+Conceding first & 4 & 4 & 4/14 & 5/14 \\
+Unreciprocated concession & 3 & 4 & 5/14 & 7/16 \\
+Anchoring & 0 & 0 & 0/4 & 0/4 \\
+Accepting low & 0 & 0 & undefined & undefined \\
+Ignoring an issue & 0 & 0 & 0/22 & 0/22 \\
+Dominated offer & 2 & 2 & 4/27 & 3/27 \\
+\hline
+\end{tabular}
+\end{center}
+
+Only unreciprocated concession moved in the intended direction on the primary
+measure; the prespecified six-control screening gate failed. Accepting low had
+zero detector opportunities in both groups, so its conditional rate is undefined,
+not zero. Opportunities depend on the learner's actions, and the dominated-offer
+detector uses both utility tables offline while the learner sees only its own.
+These results do not validate a six-dimensional weakness-conditioned simulator.
+Further coaching-efficacy claims require behavioral calibration or a design based
+on measured baseline failures, rather than presumed planted error frequencies.
+
+All 48 sessions agreed, with no below-walk-away outcomes, missing annotations or
+schedule violations. Independent enumeration verified terminal scores. The screen
+used 351 requests and cost \$1.968971; 86.5\% of its input tokens were cache reads.
+Together with the smoke test, the audit evaluations cost \$2.452516. Cumulative
+checkpoint-3 usage is \$181.393019 (development \$94.310884; final \$87.082135),
+with no unresolved requests in those ledgers and both \$110 caps unchanged.
 
 \paragraph{Reproducibility.}
 Numeric results, paired rows, frozen protocols and plots are under
@@ -482,7 +525,11 @@ and \path{scripts/summarize_improvement_costs.py} reconciles usage with durable 
 Raw transcripts, original class materials, generated personal memories and secrets
 remain excluded from published artifacts. Historical frozen experiments require the
 pre-repair core at git revision \texttt{4613bb2}; repaired-core results are stored
-separately in \path{audit-corrected-smoke-v1}. The current offline suite passes 195 tests;
+separately in \path{audit-corrected-smoke-v1} and \path{persona-calibration-v1}.
+The behavioral screen used core revision \texttt{e8e0820}; its strict verifier
+requires that frozen implementation. The subsequent validation-only fix preserves
+all five public case serializations and all 579 recorded offer scores, checked in
+\path{validation_recheck.json}. The current offline suite passes 206 tests;
 the live API test is excluded from that count.
 
 \begin{thebibliography}{1}

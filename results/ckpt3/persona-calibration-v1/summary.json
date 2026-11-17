@@ -1,0 +1,145 @@
+{
+  "all_six_positive_direction": false,
+  "complete_episodes": 48,
+  "scope": "Descriptive screening, four matched pairs per weakness; no efficacy claim",
+  "weaknesses": [
+    {
+      "groups": {
+        "0.1": {
+          "conditional_rate": 0.2857142857142857,
+          "episode_error_fraction": 1.0,
+          "episodes": 4,
+          "episodes_with_opportunity": 4,
+          "occurrences": 4,
+          "opportunities": 14
+        },
+        "0.9": {
+          "conditional_rate": 0.35714285714285715,
+          "episode_error_fraction": 1.0,
+          "episodes": 4,
+          "episodes_with_opportunity": 4,
+          "occurrences": 5,
+          "opportunities": 14
+        }
+      },
+      "high_minus_low_episode_fraction": 0.0,
+      "name": "Conceding first",
+      "target": "error:1"
+    },
+    {
+      "groups": {
+        "0.1": {
+          "conditional_rate": 0.35714285714285715,
+          "episode_error_fraction": 0.75,
+          "episodes": 4,
+          "episodes_with_opportunity": 4,
+          "occurrences": 5,
+          "opportunities": 14
+        },
+        "0.9": {
+          "conditional_rate": 0.4375,
+          "episode_error_fraction": 1.0,
+          "episodes": 4,
+          "episodes_with_opportunity": 4,
+          "occurrences": 7,
+          "opportunities": 16
+        }
+      },
+      "high_minus_low_episode_fraction": 0.25,
+      "name": "Unreciprocated concession",
+      "target": "error:2"
+    },
+    {
+      "groups": {
+        "0.1": {
+          "conditional_rate": 0.0,
+          "episode_error_fraction": 0.0,
+          "episodes": 4,
+          "episodes_with_opportunity": 4,
+          "occurrences": 0,
+          "opportunities": 4
+        },
+        "0.9": {
+          "conditional_rate": 0.0,
+          "episode_error_fraction": 0.0,
+          "episodes": 4,
+          "episodes_with_opportunity": 4,
+          "occurrences": 0,
+          "opportunities": 4
+        }
+      },
+      "high_minus_low_episode_fraction": 0.0,
+      "name": "Anchoring on their number",
+      "target": "error:3"
+    },
+    {
+      "groups": {
+        "0.1": {
+          "conditional_rate": null,
+          "episode_error_fraction": 0.0,
+          "episodes": 4,
+          "episodes_with_opportunity": 0,
+          "occurrences": 0,
+          "opportunities": 0
+        },
+        "0.9": {
+          "conditional_rate": null,
+          "episode_error_fraction": 0.0,
+          "episodes": 4,
+          "episodes_with_opportunity": 0,
+          "occurrences": 0,
+          "opportunities": 0
+        }
+      },
+      "high_minus_low_episode_fraction": 0.0,
+      "name": "Accepting low",
+      "target": "error:4"
+    },
+    {
+      "groups": {
+        "0.1": {
+          "conditional_rate": 0.0,
+          "episode_error_fraction": 0.0,
+          "episodes": 4,
+          "episodes_with_opportunity": 4,
+          "occurrences": 0,
+          "opportunities": 22
+        },
+        "0.9": {
+          "conditional_rate": 0.0,
+          "episode_error_fraction": 0.0,
+          "episodes": 4,
+          "episodes_with_opportunity": 4,
+          "occurrences": 0,
+          "opportunities": 22
+        }
+      },
+      "high_minus_low_episode_fraction": 0.0,
+      "name": "Ignoring an issue",
+      "target": "error:5"
+    },
+    {
+      "groups": {
+        "0.1": {
+          "conditional_rate": 0.14814814814814814,
+          "episode_error_fraction": 0.5,
+          "episodes": 4,
+          "episodes_with_opportunity": 4,
+          "occurrences": 4,
+          "opportunities": 27
+        },
+        "0.9": {
+          "conditional_rate": 0.1111111111111111,
+          "episode_error_fraction": 0.5,
+          "episodes": 4,
+          "episodes_with_opportunity": 4,
+          "occurrences": 3,
+          "opportunities": 27
+        }
+      },
+      "high_minus_low_episode_fraction": 0.0,
+      "name": "Dominated offer",
+      "target": "error:6"
+    }
+  ]
+}
