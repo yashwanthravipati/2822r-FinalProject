@@ -1,0 +1,39 @@
+{
+  "paired_effect": {
+    "ci95": [
+      0.15000000000000002,
+      0.66875
+    ],
+    "mean": 0.409375,
+    "n": 4
+  },
+  "pairs": [
+    {
+      "difference": 0.15000000000000002,
+      "five_reports": 0.75,
+      "no_feedback": 0.6,
+      "user": 0
+    },
+    {
+      "difference": 0.15000000000000002,
+      "five_reports": 0.75,
+      "no_feedback": 0.6,
+      "user": 1
+    },
+    {
+      "difference": 0.6875,
+      "five_reports": 0.75,
+      "no_feedback": 0.0625,
+      "user": 2
+    },
+    {
+      "difference": 0.6499999999999999,
+      "five_reports": 0.8875,
+      "no_feedback": 0.2375,
+      "user": 3
+    }
+  ],
+  "practice_episodes": 20,
+  "scope": "Small exploratory evaluation; only two controls passed one-step diagnostic; full-session calibration unproven; inferred utilities; no human claim",
+  "test_episodes": 8
+}

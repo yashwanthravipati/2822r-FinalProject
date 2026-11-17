@@ -124,3 +124,12 @@ Sim4 has now been examined and is a revisited benchmark, not an untouched test s
   debriefs x (12,000 input at $4/M +1,500 output at $20/M) = $5.98 before caching.
   Existing separate $110 ledgers retained: practice on dev, assessment on final; two
   practice workers and three assessment workers fit conservative request reservations.
+- 2026-11-17: Corrected transfer eval completed: 20 practice +8 Sim4 test episodes,
+  all independently verified. Mean R .784375 with five reports vs .375 without,
+  paired gain +.409375; all four positive, bootstrap CI [.15,.66875], exact sign-flip
+  p=.125. Two profiles/four replicates are exploratory. Target errors were absent in
+  both test arms, so the result does not prove weakness remediation or six-control
+  calibration. All 28 agreed, zero below-walk-away, schedule or annotation failures.
+  Cost $2.439023/217 requests; total since audit approval $5.633623. Cumulative dev
+  $96.924150, final $87.649976, no unresolved calls. Report and cost summary updated;
+  218 offline tests pass. Broad reliable-improvement objective still requires confirmation.

@@ -105,3 +105,46 @@ used the frozen core, then applied after its verification. All five public case
 serializations and 579 recorded offer scores are unchanged across this validation
 fix (`validation_reference.json` / `validation_recheck.json`). Live-core revision:
 `e8e0820`; current strict calibration verification must use that historical core.
+
+## Controlled diagnostics and corrected Sim4 evaluation
+
+Three further diagnostics tested explicit enactment and private behavioral intent on
+authored one-decision contexts. Each had checked legal positive/negative witnesses.
+V1 (96 responses) exposed a design conflict: non-target zero settings can prohibit a
+target error that necessarily overlaps another detector. V2 (96 responses) omitted
+non-target frequencies. V3 (48 responses) additionally required a private intent and
+one-sentence effect, kept outside the public move. All scored actual actions, not
+self-reports. No variant passed all six controls. V3 passed the two concession
+controls: 0/4 low and 4/4 high events for each. Total diagnostic cost $0.742084,
+280 calls including annotations. Production actor behavior was not silently replaced.
+
+After the user's explicit request to run evals immediately, a separate exploratory
+two-profile comparison was frozen before Sim4 assessment (commit `3ebd2f4`). This does
+not satisfy the original six-control gate. Four fixed learners, two per concession
+profile, completed five Sim3 practices with LLM reports at tiers 2,2,4,4,4. The actor
+used the tested concrete instructions/private intent with target .9, other tendencies
+unspecified, and no trait updates. The economic counterpart was rule-based, with
+templated dialogue. All 20 reports were LLM-generated and frozen before testing.
+Sim4 had no practice, feedback or tuning in this run; historical reuse remains disclosed.
+
+| Replicate | No feedback R | Five reports R | Difference |
+|---|---:|---:|---:|
+| Conceding first 1 | .6000 | .7500 | +.1500 |
+| Conceding first 2 | .6000 | .7500 | +.1500 |
+| Unreciprocated 1 | .0625 | .7500 | +.6875 |
+| Unreciprocated 2 | .2375 | .8875 | +.6500 |
+| Mean | .3750 | .784375 | +.409375 |
+
+Bootstrap interval [.1500,.66875]; exact two-sided sign-flip p=.125. This is a positive
+exploratory score result, not strong general efficacy evidence. The designated target
+errors were absent from both Sim4 arms, and occurred only twice across practice, so
+the study does not establish remediation of those weaknesses or full-session persona
+calibration. All 28 episodes agreed with zero below-walk-away outcomes, schedule
+violations or missing tags. Independent enumeration, replay and memory/source checks
+pass in `corrected-transfer-v1/verification.json`.
+
+This evaluation cost $2.439023 /217 calls. Total since audit approval: $5.633623.
+Checkpoint-3 totals: development $96.924150, final $87.649976, combined $184.574126;
+no unresolved requests in either ledger, both $110 cumulative caps unchanged.
+The cost summary includes all new receipts and keeps historical uncertainty separate.
+All 218 offline tests pass; the expanded report includes every diagnostic and result.

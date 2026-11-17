@@ -1,0 +1,4 @@
+[
+{"R": 0.0625, "arm": "no_feedback", "counts": {"error:1": {"occurrences": 1, "opportunities": 3}, "error:2": {"occurrences": 0, "opportunities": 2}, "error:3": {"occurrences": 0, "opportunities": 0}, "error:4": {"occurrences": 0, "opportunities": 0}, "error:5": {"occurrences": 0, "opportunities": 6}, "error:6": {"occurrences": 1, "opportunities": 4}}, "status": "agreed", "user": 2, "user_turns": 4},
+{"R": 0.75, "arm": "five_reports", "counts": {"error:1": {"occurrences": 0, "opportunities": 0}, "error:2": {"occurrences": 0, "opportunities": 0}, "error:3": {"occurrences": 0, "opportunities": 0}, "error:4": {"occurrences": 0, "opportunities": 1}, "error:5": {"occurrences": 0, "opportunities": 6}, "error:6": {"occurrences": 0, "opportunities": 10}}, "status": "agreed", "user": 2, "user_turns": 11}
+]

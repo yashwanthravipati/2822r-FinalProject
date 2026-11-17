@@ -33,23 +33,27 @@ over an existing coaching method. Although several conditions improve their mean
 score after practice, neither personalized prompt refinement nor varied practice has
 yet demonstrated reliable superiority over ordinary post-session reports in our
 prospective comparisons. The human-learning question remains open.
+A new, separately frozen corrected-core comparison found higher Sim4 scores with
+five retained coaching reports than without feedback: mean paired gain $0.4094$
+across four simulation replicates. This is exploratory evidence from two concession
+profiles, not validation of the full six-weakness population or human improvement.
 
 \paragraph{Implementation defect discovered after these experiments.}
 \textbf{The intended six-weakness LLM personas were not correctly specified.}
 The learner prompt serialized numeric tendencies under opaque IDs such as
 \texttt{error:1}, without a dictionary explaining which behavior each ID represented.
 This omission is present in the historical learner implementation as well as the
-frozen implementation used for the later experiments. Therefore these results do
+frozen implementation used for the pre-audit experiments. Therefore those results do
 \emph{not} validate training learners with the intended named weaknesses, and should
-not be presented as evidence for that personalized-training claim. The tables retain
+not be presented as evidence for that personalized-training claim. The historical tables retain
 the observed scores under the defective prompt; they are not results from a corrected
 simulator. The omission does not establish the cause of the negative comparisons.
 The separate scripted policy implements named behaviors in code and is not affected
 by this prompt defect. Corrected prompts, behavioral calibration and new controls
 are required before testing the intended LLM-persona hypothesis again.
-The subsequent correctness audit repaired the missing definitions; its fresh,
-limited integration evaluation is reported separately below. It does not retroactively
-validate the earlier experiments.
+The subsequent correctness audit repaired the missing definitions; its fresh
+integration tests, persona diagnostics and exploratory transfer evaluation are
+reported separately below. They do not retroactively validate the earlier experiments.
 
 \paragraph{1. The case $c$.}
 The case is the negotiation the user uploads. Formally, a case is the tuple
@@ -462,7 +466,7 @@ reference to obey hard constraints and added rejection of non-finite utilities,
 duplicate IDs and invalid constraint references. The primary normalized-surplus
 denominator already respected constraints. A follow-up input audit also rejected blank
 IDs and extra unlisted point-table entries; the standalone scorer now checks the public
-option catalog even if a point table is later mutated. All 206 offline tests pass.
+option catalog even if a point table is later mutated. All 218 offline tests pass.
 
 A fresh live smoke test identified and explained all six intended weaknesses correctly.
 Two learners then each completed baseline, feedback and reassessment on the public hiring
@@ -513,8 +517,102 @@ All 48 sessions agreed, with no below-walk-away outcomes, missing annotations or
 schedule violations. Independent enumeration verified terminal scores. The screen
 used 351 requests and cost \$1.968971; 86.5\% of its input tokens were cache reads.
 Together with the smoke test, the audit evaluations cost \$2.452516. Cumulative
-checkpoint-3 usage is \$181.393019 (development \$94.310884; final \$87.082135),
+checkpoint-3 usage through this screen was \$181.393019
+(development \$94.310884; final \$87.082135),
 with no unresolved requests in those ledgers and both \$110 caps unchanged.
+
+\paragraph{Controlled persona diagnostics.}
+We next used an original three-issue diagnostic case with authored prefixes that
+admit both an error-producing and an error-avoiding legal action for each target.
+Each cell below contains the number of observed error events at low/high settings,
+out of four independent API responses per setting. The advance rule was fixed at
+at most one low-setting event and at least three high-setting events for every target.
+These are one-decision diagnostics, not full negotiations or learning outcomes.
+
+\begin{center}
+\small
+\begin{tabular}{lrrrrr}
+\hline
+& V1 definitions & V1 concrete & V2 definitions & V2 concrete & V3 intent \\
+\hline
+Conceding first & (2,4) & (3,4) & (0,4) & (2,4) & (0,4) \\
+Unreciprocated & (4,4) & (1,4) & (4,4) & (2,4) & (0,4) \\
+Anchoring & (0,0) & (0,0) & (0,0) & (0,2) & (0,2) \\
+Accepting low & (0,0) & (0,0) & (0,0) & (0,2) & (0,0) \\
+Ignoring an issue & (0,0) & (0,0) & (0,0) & (0,0) & (0,2) \\
+Dominated offer & (0,0) & (0,0) & (0,0) & (0,0) & (0,0) \\
+\hline
+\end{tabular}
+\end{center}
+
+Each pair is (low-setting events, high-setting events), each out of four responses.
+V1 set non-target
+weaknesses to zero, which can create conflicting instructions: a dominated offer
+in its prefix is necessarily also a first concession. V2 therefore left non-target
+frequencies unspecified. ``Concrete'' adds situation-specific enactment descriptions.
+V3 adds a private categorical behavioral intent and one-sentence effect before the
+formal action; the note is removed from the public move, and scoring uses the action
+rather than self-reported intent. All variants retained role information boundaries.
+Manual inspection of V1's 16 issue-neglect responses agreed with the issue-raising
+tags; this is an assistant audit, not human inter-rater reliability.
+
+V1 and V2 each used 96 responses; V3 used 48. None passed the six-control gate.
+V3 did pass the two concession controls (zero low versus four high events each),
+providing a limited basis for testing those two explicitly specified weaknesses.
+The three diagnostics cost \$0.742084 across 280 requests including annotations.
+Their observed variation and overlapping detectors further caution against treating
+the six initial frequencies as independent calibrated error probabilities.
+
+\paragraph{Exploratory corrected transfer evaluation.}
+We separately froze a transfer comparison limited to the two concession profiles
+that passed V3's controlled diagnostic; this does not satisfy the original six-control
+gate. Four simulation replicates used two runs per profile, with the target initial
+frequency fixed at 0.9 and other weaknesses unspecified. Each completed five Sim3
+practice sessions at tiers 2,2,4,4,4, receiving an ordinary post-session LLM report
+after each. The learner used concrete enactment and private intent; code never updated
+its trait values. A rule-based counterpart supplied deterministic formal actions and
+templated dialogue, while Opus generated the debriefs.
+
+After freezing all five-report memories, each replicate was assessed on Sim4 at tier 3
+with and without those reports, using the same controller seed and randomized arm
+order. The primary comparison is the paired difference in normalized surplus $R$.
+Sim4 supplied no practice, feedback or tuning in this run; it remains a revisited
+benchmark because of earlier studies. There are 20 practice episodes and eight test
+episodes. Four replicates from two prompt profiles, inferred case utilities and
+incomplete full-session behavioral calibration limit interpretation.
+
+\begin{center}
+\begin{tabular}{lrrr}
+\hline
+Profile / replicate & No feedback & Five reports & Difference \\
+\hline
+Conceding first / 1 & 0.6000 & 0.7500 & +0.1500 \\
+Conceding first / 2 & 0.6000 & 0.7500 & +0.1500 \\
+Unreciprocated / 1 & 0.0625 & 0.7500 & +0.6875 \\
+Unreciprocated / 2 & 0.2375 & 0.8875 & +0.6500 \\
+\hline
+Mean & 0.3750 & 0.7844 & +0.4094 \\
+\hline
+\end{tabular}
+\end{center}
+
+Every replicate improved. The paired empirical-bootstrap 95\% interval is
+$[0.1500,0.6688]$, but the exact two-sided sign-flip reference gives $p=0.125$;
+four replicates cannot establish a general training benefit. The designated
+concession errors did not occur in either Sim4 assessment arm, so this does not
+demonstrate their remediation. Their occurrence was sparse during practice too:
+two target-error events across the 20 sessions. The positive result concerns
+negotiation scores under this frozen comparison, rather than a validated causal
+mechanism for correcting the specified weaknesses.
+
+All 28 negotiations reached agreements, with no below-walk-away outcomes, schedule
+violations or missing annotations. Independent exhaustive scoring, transcript replay,
+memory hashes and source hashes verified the complete cohort. The evaluation used
+217 requests and cost \$2.439023. Total spending since the audit authorization is
+\$5.633623, including the smoke test, behavioral screen and controlled diagnostics.
+Cumulative checkpoint-3 known usage is \$184.574126 (development \$96.924150;
+final \$87.649976), with no unresolved requests in those ledgers. The two cumulative
+\$110 caps remain unchanged. These usage estimates are not a provider invoice.
 
 \paragraph{Reproducibility.}
 Numeric results, paired rows, frozen protocols and plots are under
@@ -529,8 +627,13 @@ separately in \path{audit-corrected-smoke-v1} and \path{persona-calibration-v1}.
 The behavioral screen used core revision \texttt{e8e0820}; its strict verifier
 requires that frozen implementation. The subsequent validation-only fix preserves
 all five public case serializations and all 579 recorded offer scores, checked in
-\path{validation_recheck.json}. The current offline suite passes 206 tests;
+\path{validation_recheck.json}. The current offline suite passes 218 tests;
 the live API test is excluded from that count.
+Controlled diagnostics are in \path{persona-probes-v1}, \path{persona-probes-v2} and
+\path{persona-probes-v3}; the new transfer comparison is \path{corrected-transfer-v1}.
+Its protocol and candidate implementation were committed at \texttt{3ebd2f4} before
+Sim4 assessment. \path{scripts/verify_corrected_transfer.py} independently checks
+all 28 scores, controller schedules and frozen coaching memories.
 
 \begin{thebibliography}{1}
 \bibitem{gepa}
