@@ -1,0 +1,87 @@
+{
+  "manual_review": "Assistant review of all eight rendered plans before validation. All exceed the requested word range. User 6 retains explicit training-case issue references. Some other plans describe historical successes or contextual details; portability is imperfect. These are generation limitations, not exposure to a future test case. No plan was revised after outcomes began.",
+  "rows": [
+    {
+      "citation_count": 6,
+      "rendered_words": 197,
+      "requested_word_range": [
+        100,
+        160
+      ],
+      "user": 0,
+      "within_requested_range": false
+    },
+    {
+      "citation_count": 6,
+      "rendered_words": 171,
+      "requested_word_range": [
+        100,
+        160
+      ],
+      "user": 1,
+      "within_requested_range": false
+    },
+    {
+      "citation_count": 6,
+      "rendered_words": 199,
+      "requested_word_range": [
+        100,
+        160
+      ],
+      "user": 2,
+      "within_requested_range": false
+    },
+    {
+      "citation_count": 6,
+      "rendered_words": 179,
+      "requested_word_range": [
+        100,
+        160
+      ],
+      "user": 3,
+      "within_requested_range": false
+    },
+    {
+      "citation_count": 6,
+      "rendered_words": 171,
+      "requested_word_range": [
+        100,
+        160
+      ],
+      "user": 4,
+      "within_requested_range": false
+    },
+    {
+      "citation_count": 6,
+      "rendered_words": 192,
+      "requested_word_range": [
+        100,
+        160
+      ],
+      "user": 5,
+      "within_requested_range": false
+    },
+    {
+      "citation_count": 6,
+      "rendered_words": 194,
+      "requested_word_range": [
+        100,
+        160
+      ],
+      "user": 6,
+      "within_requested_range": false
+    },
+    {
+      "citation_count": 5,
+      "rendered_words": 197,
+      "requested_word_range": [
+        100,
+        160
+      ],
+      "user": 7,
+      "within_requested_range": false
+    }
+  ],
+  "strict_length_validation": false,
+  "strict_portability_validation": false
+}

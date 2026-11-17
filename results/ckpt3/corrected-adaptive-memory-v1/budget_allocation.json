@@ -1,0 +1,22 @@
+{
+  "after": {
+    "accounted_usd": 114.455912,
+    "actual_usd": 102.333032,
+    "limit_usd": 125.0,
+    "remaining_usd": 10.544088,
+    "requests": 10771,
+    "unresolved_requests": 3
+  },
+  "before": {
+    "accounted_usd": 114.455912,
+    "actual_usd": 102.333032,
+    "limit_usd": 115.0,
+    "remaining_usd": 0.544088,
+    "requests": 10771,
+    "unresolved_requests": 3
+  },
+  "latest_new_work_allowance_usd": 150,
+  "maximum_new_spending_under_caps_usd": 56.059497,
+  "pre_audit_known_usd": 178.940503,
+  "reason": "Allocate development cumulative cap $125 and retain final $110 within user authorization of up to $150 for development and subsequent evaluation. Combined ceilings $235 minus pre-audit $178.940503 allow at most $56.059497 of new spending. Preserve all prior charges and reservations; accommodate three full-context request reservations for the fixed 96-episode study."
+}

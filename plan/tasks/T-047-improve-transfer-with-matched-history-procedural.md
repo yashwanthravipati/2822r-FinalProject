@@ -186,3 +186,12 @@ Sim4 has now been examined and is a revisited benchmark, not an untouched test s
   $14.274579 headroom under $115, final cap $110 unchanged, latest $150 joint new-work
   allowance retained. No new practice/API history regeneration. Tests cover own-sheet
   isolation, citation integrity, exact five-report retention and conservative selection.
+- 2026-11-17: Before validation, audited all eight frozen generated plans: 171--199
+  rendered words rather than requested 100--160, and one contains explicit training
+  issue references. Recorded in plan_quality.json; do not claim strictly portable or
+  length-matched output. Retain the actual frozen outputs without outcome-driven edits.
+  Financial amendment: development cumulative ceiling $115->$125 under the latest
+  $150 joint allowance, final stays $110. The $235 combined ceilings permit at most
+  $56.059497 after the pre-audit known $178.940503. This maintains three conservative
+  full-context reservations without altering charges, protocol or expected actual cost;
+  budget_allocation.json and the ledger limit-change table preserve the decision.
