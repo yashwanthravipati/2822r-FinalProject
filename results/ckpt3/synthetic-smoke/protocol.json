@@ -1,0 +1,30 @@
+{
+  "budget": "dev",
+  "cache_ttl": "5m",
+  "coach_model": "claude-opus-5-5",
+  "controller": "hybrid",
+  "heldout_role": "global_relief",
+  "learner_model": "claude-sonnet-5-5",
+  "memory_limit_rules": 5,
+  "methods": [
+    "reports",
+    "reflection",
+    "rehearsal"
+  ],
+  "probe_tiers": [
+    1,
+    3,
+    5
+  ],
+  "rounds": 2,
+  "seed": 28221118,
+  "source_sha256": "512ec4064aaa22e92eb70a0ea1c614927cfa1d2d51dbaa9f021aeb1d41f96403",
+  "targeting": "none",
+  "training_case_sha256": "37acbcbf6be2b9e8b2489b058e0f347f1a5007f485a945725a6d049f70976541",
+  "training_role": "candidate",
+  "training_tiers": [
+    2,
+    2
+  ],
+  "users": 1
+}

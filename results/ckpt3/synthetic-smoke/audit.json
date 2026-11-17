@@ -1,0 +1,46 @@
+{
+  "api": {
+    "accounted_usd": 1.660015,
+    "known_cost_usd": 1.660015,
+    "models": {
+      "claude-opus-5-5": {
+        "accounted_usd": 1.043921,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 61332.0,
+        "cache_creation_input_tokens": 61332.0,
+        "cache_hit_calls": 102.0,
+        "cache_read_fraction": 0.6896077853140666,
+        "cache_read_input_tokens": 233846.0,
+        "estimated_savings_usd": 0.8272390000000001,
+        "estimated_uncached_usd": 1.8711600000000002,
+        "input_tokens": 43922.0,
+        "known_cost_usd": 1.043921,
+        "output_tokens": 25738.0,
+        "requests": 106.0
+      },
+      "claude-sonnet-5-5": {
+        "accounted_usd": 0.616094,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 51610.0,
+        "cache_creation_input_tokens": 51610.0,
+        "cache_hit_calls": 110.0,
+        "cache_read_fraction": 0.8193293460722945,
+        "cache_read_input_tokens": 387959.0,
+        "estimated_savings_usd": 0.7112719999999993,
+        "estimated_uncached_usd": 1.3273659999999994,
+        "input_tokens": 33939.0,
+        "known_cost_usd": 0.616094,
+        "output_tokens": 38035.0,
+        "requests": 113.0
+      }
+    },
+    "states": {
+      "completed": 219
+    }
+  },
+  "training": {
+    "agreement_rate": 1.0,
+    "episodes": 18,
+    "schedule_violations": 0
+  }
+}

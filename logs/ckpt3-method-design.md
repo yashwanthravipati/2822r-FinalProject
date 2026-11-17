@@ -64,3 +64,60 @@ We test LLM behavior with external memory, not durable weight learning or human 
 Sim4 utilities are inferred experimental assumptions. Report generic-advice and memory
 comparisons, token costs, agreement, failures, and the limits of a single held-out case.
 If reflection fails, report that directly rather than tune on the held-out case.
+
+## Implemented comparison and reproducibility
+
+The initial implementation compares three equally long training branches per persona:
+accumulated reports, reflection-only cards, and reflection plus one short learner
+application/correction per rehearsal. Difficulty and focus are fixed across branches.
+The application arm has extra teaching interactions and API compute; its contrast with
+reflection measures that combined intervention, not a compute-matched causal effect.
+A generic strategy card is assessed as a zero-shot reference on the held-out case; it is
+not described as a trained control. Persona draws, method-order randomization, case/source
+hashes, and cache settings are persisted. LLM sampling itself is not seedable.
+
+Reproduction (commands involving class data require the pending explicit external-payload
+approval; no Sim4 outcome has been inspected):
+
+```bash
+# Synthetic smoke; no class materials are sent.
+.venv/bin/python scripts/ckpt3_evaluate.py train \
+  --root results/ckpt3/synthetic-smoke --budget dev --users 1 --rounds 2 \
+  --workers 1 --seed 28221118 --training-case data/cases/cloudline_hiring.json \
+  --training-role candidate
+
+# After source/content approval, construct and audit the held-out scoring projection.
+.venv/bin/python scripts/prepare_sim4.py
+
+# Proposed final run: finalize user count from smoke costs before invoking.
+.venv/bin/python scripts/ckpt3_evaluate.py train \
+  --root results/ckpt3/final-v1 --budget final --users 8 --rounds 5 --workers 4
+.venv/bin/python scripts/ckpt3_evaluate.py assess \
+  --root results/ckpt3/final-v1 --budget final --users 8 --rounds 5 --workers 4
+.venv/bin/python scripts/analyze_ckpt3.py --root results/ckpt3/final-v1 --budget final
+```
+
+At eight personas this design has 24 shared Sim3 baseline probes, 120 training episodes,
+72 Sim3 post probes, 24 shared Sim4 baselines, 72 Sim4 post probes, and 24 generic-card
+Sim4 probes: 336 episodes. There are 40 reflection-only updates and 40 three-call
+application updates. Sim4 cannot be used by `--budget dev`; training memories and the
+protocol must match their freeze hashes before assessment begins. Completed learning
+steps reject changed inputs on resume. Counterfactual reports retain the original
+scripted-rollout limitations in the accumulated-report control.
+
+## Additional transfer literature and interpretation
+
+[Loewenstein, Thompson and Gentner (1999)](https://www.kellogg.northwestern.edu/academics-research/research/detail/1999/analogical-encoding-facilitates-knowledge-transfer-in-negotiation/)
+and [Gentner, Loewenstein and Thompson (2003)](https://www.kellogg.northwestern.edu/academics-research/research/detail/2003/learning-and-transfer-a-general-role-for-analogical-encoding)
+provide negotiation-specific evidence that comparing structurally related examples can
+help people abstract a strategy and use it in a new negotiation. These human findings
+motivate a short analogy/application exercise; they do not establish that our LLM memory
+method has the same effect. The initial smoke uses a question about the observed mistake.
+Before final evaluation, a fresh fictional application context would make transfer of the
+principle a more direct teaching target without touching Sim4.
+
+The report-versus-memory comparison is a package comparison: the old report uses scripted
+counterfactual estimates while the new coach uses observed dialogue and deterministic
+own-utility evidence. A benefit cannot be attributed solely to compression. Reflection
+versus application/correction is the more focused ablation, though it adds interactions
+and compute. These distinctions should remain explicit in the write-up.
