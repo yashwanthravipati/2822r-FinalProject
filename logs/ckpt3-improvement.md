@@ -1,0 +1,74 @@
+# Matched-history coaching improvement
+
+## Prospective design, 2026-11-17
+
+The completed T-046 study did not establish reflective-card superiority. Sim3 transcripts
+show examples of accepting a lower-value formal package after a persuasive explanation,
+even when a card advised checking whole-package value. This motivates explicit decision
+procedures and worked arithmetic, not a claim that they will improve outcomes.
+
+All conditions now receive the SAME five report-guided practice histories. Afterwards,
+compare full reports, sequential reflection reconstructed from those histories, a new
+consolidated workbook, and the fixed procedure alone. The workbook includes portable
+personal plans, at most three conditional rules, and two historical own-utility examples
+with arithmetic calculated in code. Prior offers are comparison points, not guaranteed
+available alternatives. Current-case values must be recomputed. Coaching remains
+post-session; actor model, persona, private-information boundaries and economics stay fixed.
+
+This isolates memory construction more clearly than separately evolving practice branches.
+The procedure-only condition measures generic instruction effects. A victory for that
+condition would not establish personalized learning. Neither intervention updates weights.
+
+The approach draws on [GEPA](https://arxiv.org/html/2507.19457v2)'s separation of reflective
+proposal and measured validation, and [negotiation feedback work](https://arxiv.org/abs/2305.10142)
+using critique and retained history. It does not implement GEPA's full population search.
+[MERIT](https://arxiv.org/html/2602.10467v1) also motivates utility-grounded feedback;
+results in these papers are not evidence that this implementation works. The withdrawn
+2505.22998 paper is not used as evidence.
+
+## Data separation and selection
+
+Initial development reuses the completed report histories for personas 0–3 (seed 28221117)
+and assesses Cloudline hiring and Sim4. Personas 4–7 are reserved for a separate development
+validation comparison. All methods use the same baseline and counterpart seeds; all users,
+including failures and negative gains, remain included. Candidate selection is by the mean
+normalized outcome across development cases within each persona, with paired uncertainty
+and agreement failures reported. If revision is needed, record it before another run.
+
+Sim4 is explicitly revisited. Two original, hand-authored synthetic cases (Harbor Analytics
+and Maple Festival) were frozen before any follow-up experiment; see
+`results/ckpt3/improvement-design/fresh_cases_manifest.json`. Their utilities are assumptions,
+not external benchmark labels. Do not revise them based on measured candidate outcomes.
+The development runner rejects manifests marked fresh_test.
+
+Prospective final design: six new personas (seed 28221129), five common report-guided
+rehearsals, all four memory conditions, and three assessment cases. The primary outcome
+averages the TWO fresh-case gains within each persona, then compares paired personas;
+Sim4 is secondary. Do not treat user-case pairs as independent users. Freeze the selected
+intervention, instructions and final configuration before fresh outcomes. The final design
+may be reduced for a documented budget forecast before test outcomes, never after seeing
+an unfavorable result. Preserve the earlier study and its source commit 374cb63.
+
+## API forecast and authorization
+
+Starting cumulative ledgers: development $9.163600/100; final $41.133781/100.
+Remaining: $90.836400 development and $58.866219 final. The user's prior explicit budget,
+commit/push and fictional-case API authorization persists. No new allowance is created.
+
+Initial preparation: 24 coach calls, roughly 0.2–0.5M input and 0.03–0.06M output tokens,
+approximately $1–3 with cached inputs. Initial assessment: 120 episodes, approximately
+1,200–1,600 requests, 8–12M total input and 0.4–0.7M output tokens. At 80% cached reads,
+effective input cost is approximately $0.5–1/M plus cache writes, and blended output
+approximately $15/M: forecast $15–25 plus preparation. Separate validation is similar.
+Final 336 episodes plus 36 memory-construction calls: forecast $45–52 additional final
+cost, subject to actual measured development usage. Rates and assumptions are estimates;
+the shared gateway records provider tokens and enforces the existing cumulative caps.
+No retries or uncertain reservations are silently discarded.
+
+## Validation and reproducibility
+
+Offline tests cover own-only evidence, acceptance arithmetic, immutable memories/personas,
+paired cohort alignment, and no assessment feedback. Protocols fingerprint source, cases,
+historical inputs, instructions and frozen memories. New files change the source fingerprint;
+the earlier final study remains reproducible at its historical commit, not with a falsely
+claimed matching current-source fingerprint. Raw histories and coaching remain ignored.

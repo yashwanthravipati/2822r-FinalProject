@@ -1,0 +1,206 @@
+{
+  "id": "harbor_analytics",
+  "title": "Harbor Analytics Contract",
+  "source": "Original synthetic research case, authored before follow-up model outcomes; free to use and commit. Utilities are experimental assumptions.",
+  "public_brief": "A small logistics firm is negotiating a one-year-priced analytics subscription with a software supplier. Agree on six listed terms as one complete contract. All service options are technically available except any explicit role constraints. Both parties have alternatives and may decline a deal.",
+  "issues": [
+    {
+      "id": "fee",
+      "name": "Annual subscription fee",
+      "options": [
+        {
+          "id": "fee_0",
+          "label": "$60,000"
+        },
+        {
+          "id": "fee_1",
+          "label": "$75,000"
+        },
+        {
+          "id": "fee_2",
+          "label": "$90,000"
+        }
+      ]
+    },
+    {
+      "id": "support",
+      "name": "Support",
+      "options": [
+        {
+          "id": "support_0",
+          "label": "Email support"
+        },
+        {
+          "id": "support_1",
+          "label": "Business-hours priority support"
+        },
+        {
+          "id": "support_2",
+          "label": "24-hour premium support"
+        }
+      ]
+    },
+    {
+      "id": "term",
+      "name": "Commitment",
+      "options": [
+        {
+          "id": "term_0",
+          "label": "12 months"
+        },
+        {
+          "id": "term_1",
+          "label": "24 months"
+        },
+        {
+          "id": "term_2",
+          "label": "36 months"
+        }
+      ]
+    },
+    {
+      "id": "deployment",
+      "name": "Deployment",
+      "options": [
+        {
+          "id": "deployment_0",
+          "label": "Shared implementation"
+        },
+        {
+          "id": "deployment_1",
+          "label": "Supplier-managed remote implementation"
+        },
+        {
+          "id": "deployment_2",
+          "label": "On-site implementation"
+        }
+      ]
+    },
+    {
+      "id": "rollout",
+      "name": "Rollout date",
+      "options": [
+        {
+          "id": "rollout_0",
+          "label": "2 weeks"
+        },
+        {
+          "id": "rollout_1",
+          "label": "6 weeks"
+        },
+        {
+          "id": "rollout_2",
+          "label": "10 weeks"
+        }
+      ]
+    },
+    {
+      "id": "export",
+      "name": "Data access",
+      "options": [
+        {
+          "id": "export_0",
+          "label": "Full raw-data export"
+        },
+        {
+          "id": "export_1",
+          "label": "Limited row-level export"
+        },
+        {
+          "id": "export_2",
+          "label": "Aggregate-only reports"
+        }
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "id": "buyer",
+      "name": "Logistics procurement lead",
+      "confidential_brief": "You need reliable analytics for a regional logistics team. Price, raw-data portability and useful support matter most. A six-week rollout fits your migration schedule better than rushing. Managed deployment saves your team work. You prefer a short commitment because requirements may change. Your alternative is to keep the current service and hire temporary analysts; its total value is your stated walk-away. Data exports must include individual records for audits, so aggregate-only access is unacceptable.",
+      "reservation_value": 180,
+      "points": {
+        "fee": {
+          "fee_0": 90,
+          "fee_1": 45,
+          "fee_2": 0
+        },
+        "support": {
+          "support_0": 0,
+          "support_1": 40,
+          "support_2": 70
+        },
+        "term": {
+          "term_0": 60,
+          "term_1": 30,
+          "term_2": 0
+        },
+        "deployment": {
+          "deployment_0": 15,
+          "deployment_1": 55,
+          "deployment_2": 30
+        },
+        "rollout": {
+          "rollout_0": 20,
+          "rollout_1": 60,
+          "rollout_2": 0
+        },
+        "export": {
+          "export_0": 65,
+          "export_1": 30,
+          "export_2": 0
+        }
+      },
+      "constraints": [
+        {
+          "description": "Audit access requires individual records.",
+          "hard": true,
+          "disallowed": {
+            "export": [
+              "export_2"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "supplier",
+      "name": "Analytics account lead",
+      "confidential_brief": "Recurring revenue and a longer contract matter most. Premium round-the-clock support is costly; email support is cheap. Shared deployment uses fewer staff than on-site deployment. Six weeks is easiest for the implementation team. Export rights are relatively inexpensive compared with staffing support, although limited exports help retention. Your alternative is allocating the implementation slot to another account; its value is your stated walk-away.",
+      "reservation_value": 175,
+      "points": {
+        "fee": {
+          "fee_0": 0,
+          "fee_1": 45,
+          "fee_2": 90
+        },
+        "support": {
+          "support_0": 80,
+          "support_1": 50,
+          "support_2": 0
+        },
+        "term": {
+          "term_0": 0,
+          "term_1": 35,
+          "term_2": 70
+        },
+        "deployment": {
+          "deployment_0": 60,
+          "deployment_1": 40,
+          "deployment_2": 0
+        },
+        "rollout": {
+          "rollout_0": 0,
+          "rollout_1": 65,
+          "rollout_2": 45
+        },
+        "export": {
+          "export_0": 45,
+          "export_1": 60,
+          "export_2": 70
+        }
+      },
+      "constraints": []
+    }
+  ]
+}

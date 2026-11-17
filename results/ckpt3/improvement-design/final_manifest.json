@@ -1,0 +1,25 @@
+{
+  "cases": [
+    {
+      "key": "harbor_analytics",
+      "path": "data/cases/harbor_analytics.json",
+      "role": "buyer",
+      "primary": true,
+      "status": "fresh_test"
+    },
+    {
+      "key": "maple_festival",
+      "path": "data/cases/maple_festival.json",
+      "role": "organizer",
+      "primary": true,
+      "status": "fresh_test"
+    },
+    {
+      "key": "sim4_revisited",
+      "path": "data/cases/private/sim4_inferred.json",
+      "role": "global_relief",
+      "primary": false,
+      "status": "revisited_benchmark"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "construction": "original synthetic cases; no model outcomes used; fixed before candidate evaluation",
+  "cases": [
+    {
+      "key": "harbor_analytics",
+      "path": "data/cases/harbor_analytics.json",
+      "role": "buyer",
+      "primary": true,
+      "status": "fresh_test",
+      "sha256": "1d5c501b05bcc99cba1c8f2591af6c2c187855c85094488643b36852f6ffb95f",
+      "packages": 729,
+      "hard_constraint_feasible": 486,
+      "mutually_acceptable": 288,
+      "feasible_best": [
+        370.0,
+        390.0
+      ]
+    },
+    {
+      "key": "maple_festival",
+      "path": "data/cases/maple_festival.json",
+      "role": "organizer",
+      "primary": true,
+      "status": "fresh_test",
+      "sha256": "47a51180e3c3268104320bbcfe80b5f6779e4323215c32f4f3e73059ffe1c0a0",
+      "packages": 729,
+      "hard_constraint_feasible": 324,
+      "mutually_acceptable": 197,
+      "feasible_best": [
+        355.0,
+        375.0
+      ]
+    }
+  ]
+}

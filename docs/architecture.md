@@ -149,6 +149,14 @@ Each user can be recovered separately
 without resampling, and failure tracebacks remain private. Per-turn checkpoints make interrupted episodes
 resumable, and user-level paired bootstrap intervals preserve sampling dependence.
 
+`consolidation.py` builds a post-practice workbook from completed own-visible histories
+and debriefs. Historical offer comparisons use deterministic own-utility arithmetic.
+`scripts/consolidation_evaluate.py` compares reports, reconstructed reflection, workbooks,
+and fixed instructions from identical five-session report-guided histories. It freezes
+case/source/history/memory hashes before assessment and rejects fresh-test cases in
+development. Separate cumulative checkpoint-3 ledgers retain their authorized $100 caps.
+See `logs/ckpt3-improvement.md` for selection and transfer-test separation.
+
 `results/calibration/` holds population costs and tuned lambda/kappa, matched by full case
 hash and role before the app loads them. Calibration from another upload is never reused.
 Before calibration, the app retains explicitly uncalibrated unit priors. Private raw

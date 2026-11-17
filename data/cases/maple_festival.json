@@ -1,0 +1,216 @@
+{
+  "id": "maple_festival",
+  "title": "Maple Festival Venue",
+  "source": "Original synthetic research case, authored before follow-up model outcomes; free to use and commit. Utilities are experimental assumptions.",
+  "public_brief": "A community arts festival and a venue operator are negotiating an event booking. Choose one option for each of six independent contract issues. Prices include the listed setup and equipment arrangements; all choices are available except explicit role constraints. An agreement requires the complete package.",
+  "issues": [
+    {
+      "id": "fee",
+      "name": "Venue fee",
+      "options": [
+        {
+          "id": "fee_0",
+          "label": "$8,000"
+        },
+        {
+          "id": "fee_1",
+          "label": "$11,000"
+        },
+        {
+          "id": "fee_2",
+          "label": "$14,000"
+        }
+      ]
+    },
+    {
+      "id": "date",
+      "name": "Event date",
+      "options": [
+        {
+          "id": "date_0",
+          "label": "Saturday"
+        },
+        {
+          "id": "date_1",
+          "label": "Friday evening"
+        },
+        {
+          "id": "date_2",
+          "label": "Tuesday"
+        }
+      ]
+    },
+    {
+      "id": "setup",
+      "name": "Setup access",
+      "options": [
+        {
+          "id": "setup_0",
+          "label": "4 hours"
+        },
+        {
+          "id": "setup_1",
+          "label": "8 hours"
+        },
+        {
+          "id": "setup_2",
+          "label": "Day before"
+        }
+      ]
+    },
+    {
+      "id": "equipment",
+      "name": "Equipment",
+      "options": [
+        {
+          "id": "equipment_0",
+          "label": "Basic house equipment"
+        },
+        {
+          "id": "equipment_1",
+          "label": "Full house production package"
+        },
+        {
+          "id": "equipment_2",
+          "label": "Organizer-provided equipment"
+        }
+      ]
+    },
+    {
+      "id": "cancellation",
+      "name": "Cancellation terms",
+      "options": [
+        {
+          "id": "cancellation_0",
+          "label": "Strict nonrefundable"
+        },
+        {
+          "id": "cancellation_1",
+          "label": "Shared cancellation risk"
+        },
+        {
+          "id": "cancellation_2",
+          "label": "Flexible refund"
+        }
+      ]
+    },
+    {
+      "id": "publicity",
+      "name": "Publicity",
+      "options": [
+        {
+          "id": "publicity_0",
+          "label": "Community-led branding"
+        },
+        {
+          "id": "publicity_1",
+          "label": "Joint venue and community branding"
+        },
+        {
+          "id": "publicity_2",
+          "label": "No public branding"
+        }
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "id": "organizer",
+      "name": "Festival organizer",
+      "confidential_brief": "Your audience needs a weekend-adjacent event; Tuesday cannot work. Fee and date are your main concerns, followed by usable equipment and cancellation flexibility. More setup time reduces volunteer strain. Community branding is useful; joint branding is also acceptable. You can instead use a smaller partner venue, worth your walk-away value.",
+      "reservation_value": 190,
+      "points": {
+        "fee": {
+          "fee_0": 100,
+          "fee_1": 50,
+          "fee_2": 0
+        },
+        "date": {
+          "date_0": 90,
+          "date_1": 60,
+          "date_2": 0
+        },
+        "setup": {
+          "setup_0": 0,
+          "setup_1": 45,
+          "setup_2": 65
+        },
+        "equipment": {
+          "equipment_0": 15,
+          "equipment_1": 70,
+          "equipment_2": 45
+        },
+        "cancellation": {
+          "cancellation_0": 0,
+          "cancellation_1": 35,
+          "cancellation_2": 70
+        },
+        "publicity": {
+          "publicity_0": 45,
+          "publicity_1": 35,
+          "publicity_2": 0
+        }
+      },
+      "constraints": [
+        {
+          "description": "Audience availability excludes Tuesday.",
+          "hard": true,
+          "disallowed": {
+            "date": [
+              "date_2"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "venue",
+      "name": "Venue operator",
+      "confidential_brief": "Revenue and avoiding cancellation risk matter most. A Tuesday booking is easy to accommodate, while Saturday displaces other demand. Basic equipment or client-provided equipment is inexpensive. Joint publicity is valuable. The room is booked the preceding day, so day-before setup is unavailable. Your alternative is another booking worth your stated walk-away value.",
+      "reservation_value": 210,
+      "points": {
+        "fee": {
+          "fee_0": 0,
+          "fee_1": 55,
+          "fee_2": 110
+        },
+        "date": {
+          "date_0": 0,
+          "date_1": 45,
+          "date_2": 80
+        },
+        "setup": {
+          "setup_0": 70,
+          "setup_1": 40,
+          "setup_2": 0
+        },
+        "equipment": {
+          "equipment_0": 70,
+          "equipment_1": 25,
+          "equipment_2": 60
+        },
+        "cancellation": {
+          "cancellation_0": 80,
+          "cancellation_1": 45,
+          "cancellation_2": 0
+        },
+        "publicity": {
+          "publicity_0": 40,
+          "publicity_1": 65,
+          "publicity_2": 5
+        }
+      },
+      "constraints": [
+        {
+          "description": "The room is occupied the preceding day.",
+          "hard": true,
+          "disallowed": {
+            "setup": [
+              "setup_2"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

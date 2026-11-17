@@ -1,0 +1,18 @@
+{
+  "cases": [
+    {
+      "key": "hiring",
+      "path": "data/cases/cloudline_hiring.json",
+      "role": "candidate",
+      "primary": true,
+      "status": "development"
+    },
+    {
+      "key": "sim4_revisited",
+      "path": "data/cases/private/sim4_inferred.json",
+      "role": "global_relief",
+      "primary": true,
+      "status": "development"
+    }
+  ]
+}
