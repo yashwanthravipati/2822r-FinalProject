@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sqlite3
 from collections import defaultdict
 from pathlib import Path
@@ -85,9 +86,18 @@ def episode_diagnostics(root: Path, case_path: Path):
             continue
         session = Session.model_validate(value["session"])
         row = metrics(session, case)
+        match = re.fullmatch(r"learner\d+_(baseline_t\d+|(.+)_(after_t\d+|train\d+))", session.id)
+        condition = "unclassified"
+        if match:
+            condition = (
+                "baseline"
+                if match[1].startswith("baseline_")
+                else f"{match[2]}_{'training' if match[3].startswith('train') else 'assessment'}"
+            )
         rows.append(
             {
                 "id": session.id,
+                "condition": condition,
                 "tier": session.counterpart_profile.tier,
                 "R": row["R"],
                 "agreement": row["agreement"],
@@ -98,11 +108,21 @@ def episode_diagnostics(root: Path, case_path: Path):
             }
         )
     write_json(root / "episode_diagnostics.json", rows)
+    conditions = {}
+    for condition in sorted({r["condition"] for r in rows}):
+        subset = [r for r in rows if r["condition"] == condition]
+        conditions[condition] = {
+            "episodes": len(subset),
+            "agreements": sum(r["agreement"] for r in subset),
+            "below_walkaway_agreements": sum(r["below_walkaway"] for r in subset),
+            "mean_user_turns": sum(r["user_turns"] for r in subset) / len(subset),
+        }
     return {
         "episodes": len(rows),
         "agreement_rate": sum(r["agreement"] for r in rows) / len(rows) if rows else None,
         "below_walkaway_agreements": sum(r["below_walkaway"] for r in rows),
         "schedule_violations": sum(r["schedule_violations"] for r in rows),
+        "conditions": conditions,
     }
 
 

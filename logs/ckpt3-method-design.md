@@ -152,3 +152,27 @@ hash is `2d339ecf290bdf6d868f85f220295195b58356a9657820fb51afd7bfc70f8c9e`.
 The user explicitly approved sending role-appropriate fictional briefs to the Anthropic
 API on 2026-11-17. The frozen point assumptions must not be revised after observing method
 performance.
+
+## Relation to the existing report's formalism
+
+The report's original experiment varied the focus-selection policy pi while keeping
+feedback broadly fixed. This checkpoint holds focus at none and varies the post-session
+feedback/memory update instead. It therefore studies a different component of the coach,
+not an improved estimate of the original uncertainty bonus or a replacement result for
+adaptive targeting. The negative synthetic results are retained as development evidence.
+
+For the LLM proxy, write the actor as U_theta(c, m_t, h), where theta includes its fixed
+model and initially sampled persona, m_t is the retained coaching memory, and h is the
+current negotiation history. Training changes m_t through the documented update rule;
+it does not directly edit theta, planted error probabilities, or model weights. A fresh
+assessment actor receives only its own case sheet, initial persona, and frozen memory.
+It does not inherit another assessment transcript. This is contextual adaptation, and
+its resemblance to durable human learning remains an untested assumption.
+
+For each persona u and method a, the observed transfer gain is
+Delta(u,a) = G_sim4(u,m_5^a) - G_sim4(u,empty). The paired comparison against reports is
+Delta(u,a) - Delta(u,reports), which cancels the shared baseline algebraically. Bootstrap
+these persona-level paired differences, not individual turns or the three tier probes
+as independent users. Method order is randomized, counterpart profile draws are matched,
+and LLM sampling remains unseeded. Intervals describe this small simulated cohort and
+single case, with no correction for the several exploratory comparisons.
