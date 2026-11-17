@@ -96,3 +96,12 @@ claimed matching current-source fingerprint. Raw histories and coaching remain i
   are evaluated regardless of selection, so generating the selection file after a target
   run does not affect the fixed rule; no target score enters selection. This tests bounded
   per-user prompt refinement more directly than assuming one representation suits everyone.
+- First complete development case (hiring, personas 0–3): workbook gain +0.025641,
+  reports +0.008013, reflection -0.036859, fixed procedure +0.003205. Workbook minus reports
+  +0.017628, paired pointwise bootstrap interval [0.003205, 0.032051], n=4; exploratory,
+  not a population claim. All 60 episodes agreed. Four agreements were below the learner's
+  walk-away: baseline 1, reports 1, procedure-only 2, reflection/workbook 0. No counterpart
+  schedule violations. Independent enumeration verifies the outcome table. Assessment cost
+  $5.611818 usage for 818 calls, versus $12.968222 at the same volume without caching.
+  Selection on hiring chose workbook for users 0/2, reflection for 1, and reports for 3;
+  their Sim4 assessment began only after this mapping was written.
