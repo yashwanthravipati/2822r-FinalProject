@@ -489,3 +489,19 @@ outcomes and compare within persona; no superiority claim unless evidence warran
 If the gate fails, do not use the fresh case or final-budget calls for this candidate.
 Do not change frozen core source or previous runners. New runners open the existing
 ledger without a lower cap; explicitly require the newly authorized $110 limit.
+
+
+- Arithmetic teach-back completed all 48 new assessments, reusing 96 verified controls.
+  All 32 numeric answers were correct before correction. Paired pooled advantage over
+  reports −0.046354167, CI [-0.077443910,-0.010172776], n=8; second-cohort mean
+  −0.025320513, CI [-0.067128405,+0.023998397], n=4. Gate failed. No Cedar assessment
+  or final-budget calls occurred. All 48 new episodes agreed, two below walk-away;
+  zero execution failures or schedule violations. Both complete cohorts retained.
+- Follow-up cost $6.867630 ledger/$6.867338 receipts, 679 requests. Development now
+  $91.858368, final $87.082135, total $178.940503; both caps $110, no unresolved calls.
+  Current goal $128.643122, 947 new episodes across 15 personas. All paid processes done.
+- User requested results and an extended report within 30 minutes at 21:02 UTC.
+  Integrated all completed studies into docs/report.tex while preserving their edits,
+  clarified no human pilot and no demonstrated superiority, and compiled the PDF. Latest
+  result and current cost reconciliation are included. No fresh confirmation launched
+  for the failed candidate. GitHub publication still awaits destination/payload approval.

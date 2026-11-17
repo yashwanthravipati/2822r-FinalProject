@@ -1,0 +1,10 @@
+[
+{"baseline_G": 0.5375, "final_G": 0.5958333333333333, "gain": 0.05833333333333335, "method": "reports", "user": 4},
+{"baseline_G": 0.5375, "final_G": 0.5291666666666667, "gain": -0.008333333333333304, "method": "teachback_reports", "user": 4},
+{"baseline_G": 0.5833333333333334, "final_G": 0.6666666666666666, "gain": 0.08333333333333326, "method": "reports", "user": 5},
+{"baseline_G": 0.5833333333333334, "final_G": 0.44583333333333336, "gain": -0.1375, "method": "teachback_reports", "user": 5},
+{"baseline_G": 0.5125, "final_G": 0.5166666666666666, "gain": 0.004166666666666652, "method": "reports", "user": 6},
+{"baseline_G": 0.5125, "final_G": 0.6541666666666667, "gain": 0.14166666666666672, "method": "teachback_reports", "user": 6},
+{"baseline_G": 0.5083333333333333, "final_G": 0.5916666666666667, "gain": 0.08333333333333337, "method": "reports", "user": 7},
+{"baseline_G": 0.5083333333333333, "final_G": 0.5583333333333333, "gain": 0.050000000000000044, "method": "teachback_reports", "user": 7}
+]

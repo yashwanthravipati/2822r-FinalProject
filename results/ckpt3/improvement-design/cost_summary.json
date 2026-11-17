@@ -1,16 +1,16 @@
 {
-  "all_three_ledgers_known_cost_usd": 237.415593,
-  "cumulative_checkpoint3_known_cost_usd": 172.072873,
+  "all_three_ledgers_known_cost_usd": 244.283223,
+  "cumulative_checkpoint3_known_cost_usd": 178.940503,
   "cumulative_checkpoint3_ledgers": {
     "dev": {
-      "accounted_usd": 84.990738,
+      "accounted_usd": 91.858368,
       "goal_start_known_cost_usd": 9.1636,
-      "known_usage_cost_usd": 84.990738,
-      "limit_usd": 100.0,
-      "new_goal_known_cost_usd": 75.827138,
-      "remaining_accounted_allowance_usd": 15.009262,
+      "known_usage_cost_usd": 91.858368,
+      "limit_usd": 110.0,
+      "new_goal_known_cost_usd": 82.694768,
+      "remaining_accounted_allowance_usd": 18.141632,
       "request_states": {
-        "completed": 8827
+        "completed": 9506
       },
       "unresolved_reserved_upper_bound_usd": 0.0
     },
@@ -18,26 +18,26 @@
       "accounted_usd": 87.082135,
       "goal_start_known_cost_usd": 41.133781,
       "known_usage_cost_usd": 87.082135,
-      "limit_usd": 100.0,
+      "limit_usd": 110.0,
       "new_goal_known_cost_usd": 45.948354,
-      "remaining_accounted_allowance_usd": 12.917865,
+      "remaining_accounted_allowance_usd": 22.917865,
       "request_states": {
         "completed": 8833
       },
       "unresolved_reserved_upper_bound_usd": 0.0
     }
   },
-  "ledger_minus_receipts_usd": 0.005529500000008625,
-  "new_goal_known_cost_usd": 121.775492,
+  "ledger_minus_receipts_usd": 0.00582120000001396,
+  "new_goal_known_cost_usd": 128.643122,
   "new_goal_receipts": {
-    "cache_read_fraction": 0.8307342608794959,
-    "cache_read_input_tokens": 67184413.0,
-    "calls": 12887.0,
-    "estimated_uncached_usd": 284.443736,
-    "estimated_usd": 121.76996249999999,
-    "output_tokens": 4853864.0,
-    "same_volume_estimated_savings_usd": 162.6737735,
-    "total_input_tokens": 80873531.0
+    "cache_read_fraction": 0.8315587565016695,
+    "cache_read_input_tokens": 71888020.0,
+    "calls": 13566.0,
+    "estimated_uncached_usd": 302.063302,
+    "estimated_usd": 128.6373008,
+    "output_tokens": 5111398.0,
+    "same_volume_estimated_savings_usd": 173.42600120000003,
+    "total_input_tokens": 86449718.0
   },
   "scope": "Usage-based estimates, not a provider invoice. New-goal receipts never sum cumulative ledger snapshots. Cache savings compare the same token volume. Unknown historical charges remain reserved upper bounds, not confirmed spending.",
   "separate_historical_ledger": {
@@ -494,6 +494,134 @@
         "estimated_usd": 34.5853712,
         "output_tokens": 1469120.0,
         "total_input_tokens": 21766862.0
+      }
+    },
+    "results/ckpt3/consolidation-teachback-dev-v1": {
+      "independently_verified": true,
+      "phases": {
+        ".": {
+          "cache_creation_1h_input_tokens": 0.0,
+          "cache_creation_5m_input_tokens": 66467.0,
+          "cache_creation_input_tokens": 66467.0,
+          "cache_hit_calls": 4.0,
+          "cache_read_fraction": 0.13280648905233233,
+          "cache_read_input_tokens": 10184.0,
+          "calls": 8.0,
+          "estimated_savings_usd": -0.014746200000000015,
+          "estimated_uncached_usd": 0.23267,
+          "estimated_usd": 0.2474162,
+          "input_tokens": 32.0,
+          "invocations": 1,
+          "output_tokens": 5264.0,
+          "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+          "total_input_tokens": 76683.0
+        },
+        "assessment/hiring": {
+          "cache_creation_1h_input_tokens": 0.0,
+          "cache_creation_5m_input_tokens": 105729.0,
+          "cache_creation_input_tokens": 105729.0,
+          "cache_hit_calls": 159.0,
+          "cache_read_fraction": 0.861876646765042,
+          "cache_read_input_tokens": 935861.0,
+          "calls": 164.0,
+          "estimated_savings_usd": 2.1135161,
+          "estimated_uncached_usd": 3.391674,
+          "estimated_usd": 1.2781579,
+          "input_tokens": 44251.0,
+          "invocations": 1,
+          "output_tokens": 51180.0,
+          "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+          "total_input_tokens": 1085841.0
+        },
+        "assessment/sim4_revisited": {
+          "cache_creation_1h_input_tokens": 0.0,
+          "cache_creation_5m_input_tokens": 152304.0,
+          "cache_creation_input_tokens": 152304.0,
+          "cache_hit_calls": 167.0,
+          "cache_read_fraction": 0.8513309772991807,
+          "cache_read_input_tokens": 1372131.0,
+          "calls": 170.0,
+          "estimated_savings_usd": 3.1842959000000004,
+          "estimated_uncached_usd": 5.1777940000000005,
+          "estimated_usd": 1.9934981,
+          "input_tokens": 87313.0,
+          "invocations": 1,
+          "output_tokens": 75102.0,
+          "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+          "total_input_tokens": 1611748.0
+        }
+      },
+      "usage": {
+        "cache_read_input_tokens": 2318176.0,
+        "calls": 342.0,
+        "estimated_uncached_usd": 8.802138000000001,
+        "estimated_usd": 3.5190722,
+        "output_tokens": 131546.0,
+        "total_input_tokens": 2774272.0
+      }
+    },
+    "results/ckpt3/consolidation-teachback-validation-v1": {
+      "independently_verified": true,
+      "phases": {
+        ".": {
+          "cache_creation_1h_input_tokens": 0.0,
+          "cache_creation_5m_input_tokens": 56118.0,
+          "cache_creation_input_tokens": 56118.0,
+          "cache_hit_calls": 8.0,
+          "cache_read_fraction": 0.26618573407564233,
+          "cache_read_input_tokens": 20368.0,
+          "calls": 8.0,
+          "estimated_savings_usd": 0.012746099999999982,
+          "estimated_uncached_usd": 0.23436,
+          "estimated_usd": 0.22161390000000003,
+          "input_tokens": 32.0,
+          "invocations": 1,
+          "output_tokens": 5425.0,
+          "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+          "total_input_tokens": 76518.0
+        },
+        "assessment/hiring": {
+          "cache_creation_1h_input_tokens": 0.0,
+          "cache_creation_5m_input_tokens": 92700.0,
+          "cache_creation_input_tokens": 92700.0,
+          "cache_hit_calls": 160.0,
+          "cache_read_fraction": 0.8727358297256002,
+          "cache_read_input_tokens": 932753.0,
+          "calls": 160.0,
+          "estimated_savings_usd": 2.0912361,
+          "estimated_uncached_usd": 3.270026,
+          "estimated_usd": 1.1787899,
+          "input_tokens": 43316.0,
+          "invocations": 1,
+          "output_tokens": 46555.0,
+          "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+          "total_input_tokens": 1068769.0
+        },
+        "assessment/sim4_revisited": {
+          "cache_creation_1h_input_tokens": 0.0,
+          "cache_creation_5m_input_tokens": 137457.0,
+          "cache_creation_input_tokens": 137457.0,
+          "cache_hit_calls": 169.0,
+          "cache_read_fraction": 0.8645936202937533,
+          "cache_read_input_tokens": 1432310.0,
+          "calls": 169.0,
+          "estimated_savings_usd": 3.365179699999999,
+          "estimated_uncached_usd": 5.313041999999999,
+          "estimated_usd": 1.9478623000000002,
+          "input_tokens": 86861.0,
+          "invocations": 1,
+          "output_tokens": 74008.0,
+          "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+          "total_input_tokens": 1656628.0
+        }
+      },
+      "usage": {
+        "cache_read_input_tokens": 2385431.0,
+        "calls": 337.0,
+        "estimated_uncached_usd": 8.817428,
+        "estimated_usd": 3.3482661,
+        "output_tokens": 125988.0,
+        "total_input_tokens": 2801915.0
       }
     },
     "results/ckpt3/consolidation-validation-v1": {

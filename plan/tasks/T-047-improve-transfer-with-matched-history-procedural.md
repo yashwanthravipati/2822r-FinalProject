@@ -47,3 +47,10 @@ Sim4 has now been examined and is a revisited benchmark, not an untouched test s
   48 new development episodes and gated 63-episode Cedar follow-up. Related prior generic
   application/correction failure remains acknowledged. Case and implementation frozen before
   outcomes; detailed costs, exact source histories and advance rule in improvement log.
+
+- 2026-11-17: Teach-back completed and failed the advance rule: −0.046354 versus reports,
+  CI [-0.077444,-0.010173], n=8, 48 new episodes/96 reused controls. Cedar untouched.
+  Cost $6.867630; cumulative checkpoint-3 $178.940503 under separate $110 caps, no
+  unresolved requests. Extended docs/report.tex at user's request with every completed
+  comparison, limitations and reconciled costs; PDF compiles. 187 offline tests pass.
+  Reliable outcome superiority remains unestablished; report/results ready for review.

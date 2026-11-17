@@ -159,7 +159,7 @@ Bootstrap intervals resample personas conditional on these cases and do not quan
 human generalization or broad task-population uncertainty. No human learning or model
 weight updates have been demonstrated.
 
-## Final cost reconciliation
+## Cost reconciliation through Beacon (historical snapshot)
 
 The Beacon follow-up used 1,193 requests: 7,506,087 input tokens including cache activity
 and 436,866 output tokens. Cached reads covered 82.10% of input. Usage estimate was
@@ -204,3 +204,44 @@ claims about human learning.
 Artifacts: `results/ckpt3/consolidation-final-v1/verified_analysis.json` and
 `results/ckpt3/consolidation-final-v1/paired_gains.png`. Source/protocol history and exact
 commands are recorded in `logs/ckpt3-improvement.md` and the frozen protocol JSON.
+
+
+## Arithmetic teach-back follow-up and current totals
+
+After the user raised both cumulative caps to $110, we tested one preregistered
+teach-back-plus-reports candidate. It used the same five practice histories, two own
+historical comparisons, exact arithmetic corrections, one short personalized reminder,
+and all five original reports. This is related to the previously unsuccessful analogy
+application/correction arm; it is not claimed as an entirely new mechanism.
+
+All 32 numeric answers were already correct. The 48 new assessments and 96 exact reused
+controls passed the independent audit. All 48 candidate episodes agreed, two below
+walk-away; zero schedule violations or execution failures. The paired advantage over
+reports was **−0.046354167**, 95% interval **[−0.077443910, −0.010172776]**, n=8, averaging
+hiring and revisited Sim4 within persona. Cohort 4–7 was also negative: −0.025320513,
+interval [−0.067128405, +0.023998397], n=4. It failed the frozen advance rule. These are
+exploratory results on previously observed cohorts/cases. Cedar remains unused; no final
+calls were made. Ordinary reports remain the reference method.
+
+This follow-up used 679 requests, $6.867338 in receipts and **$6.867630** in ledger charges.
+The cumulative improvement work now contains **947 new episodes**, 15 distinct personas,
+13,566 requests, 86,449,718 input tokens and 5,111,398 output tokens. Cache reads cover
+83.1559%; same-volume savings are **$173.426001**, comparing $302.063302 uncached with
+$128.637301 in receipts. Rounded ledger improvement cost is **$128.643122**.
+
+| Current scope | Known usage-based cost | Cap | Remaining |
+|---|---:|---:|---:|
+| Checkpoint-3 development | $91.858368 | $110 | $18.141632 |
+| Checkpoint-3 final | $87.082135 | $110 | $22.917865 |
+| Checkpoint-3 total | **$178.940503** | $220 | **$41.059497** |
+
+Both current ledgers have no unresolved requests and all paid processes are complete.
+The separate old ledger is unchanged: $65.342720 known and nine uncertain requests with
+$68.092160 of upper-bound reserves, not confirmed spend. All three ledgers' known total
+is **$244.283223**. These are usage-based estimates, not invoices.
+
+`docs/report.tex` now integrates the initial focus-policy evidence, initial Sim4 transfer,
+all matched-history candidates, both prospective studies, this negative follow-up,
+caching/cost reconciliation, implementation distinctions and human-transfer limitations.
+It preserves the user's existing title/margins/introduction and compiles to
+`docs/build/report.pdf`. The substantive reliable-improvement objective remains unmet.

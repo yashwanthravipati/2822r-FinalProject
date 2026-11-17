@@ -1,0 +1,562 @@
+{
+  "cases": {
+    "hiring": {
+      "below_walkaway": 2,
+      "cases": 1,
+      "diagnostics": {
+        "agreement_rate": 0.9722222222222222,
+        "below_walkaway_agreements": 2,
+        "conditions": {
+          "baseline": {
+            "agreements": 12,
+            "below_walkaway_agreements": 0,
+            "episodes": 12,
+            "mean_user_turns": 6.166666666666667
+          },
+          "reports_assessment": {
+            "agreements": 11,
+            "below_walkaway_agreements": 1,
+            "episodes": 12,
+            "mean_user_turns": 5.916666666666667
+          },
+          "teachback_reports_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 1,
+            "episodes": 12,
+            "mean_user_turns": 6.083333333333333
+          }
+        },
+        "episodes": 36,
+        "schedule_violations": 0
+      },
+      "episodes": 36,
+      "feasible_best": 8700.0,
+      "rows": [
+        {
+          "baseline_G": 0.1217948717948718,
+          "final_G": 0.25,
+          "gain": 0.1282051282051282,
+          "method": "reports",
+          "user": 4
+        },
+        {
+          "baseline_G": 0.1217948717948718,
+          "final_G": 0.1923076923076923,
+          "gain": 0.07051282051282048,
+          "method": "teachback_reports",
+          "user": 4
+        },
+        {
+          "baseline_G": 0.28205128205128205,
+          "final_G": 0.21794871794871798,
+          "gain": -0.06410256410256407,
+          "method": "reports",
+          "user": 5
+        },
+        {
+          "baseline_G": 0.28205128205128205,
+          "final_G": 0.2948717948717949,
+          "gain": 0.01282051282051283,
+          "method": "teachback_reports",
+          "user": 5
+        },
+        {
+          "baseline_G": 0.23076923076923075,
+          "final_G": 0.26282051282051283,
+          "gain": 0.032051282051282076,
+          "method": "reports",
+          "user": 6
+        },
+        {
+          "baseline_G": 0.23076923076923075,
+          "final_G": 0.23076923076923075,
+          "gain": 0.0,
+          "method": "teachback_reports",
+          "user": 6
+        },
+        {
+          "baseline_G": 0.15384615384615385,
+          "final_G": 0.2371794871794872,
+          "gain": 0.08333333333333334,
+          "method": "reports",
+          "user": 7
+        },
+        {
+          "baseline_G": 0.15384615384615385,
+          "final_G": 0.23076923076923075,
+          "gain": 0.0769230769230769,
+          "method": "teachback_reports",
+          "user": 7
+        }
+      ],
+      "status": "development",
+      "status_counts": {
+        "agreed": 35,
+        "impasse": 1
+      },
+      "summary": {
+        "reports": {
+          "baseline_G": {
+            "ci95": [
+              0.13782051282051283,
+              0.2564102564102564
+            ],
+            "mean": 0.1971153846153846,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.22596153846153846,
+              0.25641025641025644
+            ],
+            "mean": 0.24198717948717952,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.027243589743589716,
+              0.10576923076923078
+            ],
+            "mean": 0.044871794871794886,
+            "n": 4
+          }
+        },
+        "reports_minus_teachback_reports": {
+          "ci95": [
+            -0.049679487179487156,
+            0.04487179487179489
+          ],
+          "mean": 0.004807692307692332,
+          "n": 4
+        },
+        "teachback_reports": {
+          "baseline_G": {
+            "ci95": [
+              0.13782051282051283,
+              0.2564102564102564
+            ],
+            "mean": 0.1971153846153846,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.2019230769230769,
+              0.27884615384615385
+            ],
+            "mean": 0.23717948717948717,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              0.006410256410256415,
+              0.07371794871794869
+            ],
+            "mean": 0.040064102564102554,
+            "n": 4
+          }
+        }
+      }
+    },
+    "sim4_revisited": {
+      "below_walkaway": 0,
+      "cases": 1,
+      "diagnostics": {
+        "agreement_rate": 1.0,
+        "below_walkaway_agreements": 0,
+        "conditions": {
+          "baseline": {
+            "agreements": 12,
+            "below_walkaway_agreements": 0,
+            "episodes": 12,
+            "mean_user_turns": 6.333333333333333
+          },
+          "reports_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 0,
+            "episodes": 12,
+            "mean_user_turns": 7.75
+          },
+          "teachback_reports_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 0,
+            "episodes": 12,
+            "mean_user_turns": 6.583333333333333
+          }
+        },
+        "episodes": 36,
+        "schedule_violations": 0
+      },
+      "episodes": 36,
+      "feasible_best": 600.0,
+      "rows": [
+        {
+          "baseline_G": 0.5375,
+          "final_G": 0.5958333333333333,
+          "gain": 0.05833333333333335,
+          "method": "reports",
+          "user": 4
+        },
+        {
+          "baseline_G": 0.5375,
+          "final_G": 0.5291666666666667,
+          "gain": -0.008333333333333304,
+          "method": "teachback_reports",
+          "user": 4
+        },
+        {
+          "baseline_G": 0.5833333333333334,
+          "final_G": 0.6666666666666666,
+          "gain": 0.08333333333333326,
+          "method": "reports",
+          "user": 5
+        },
+        {
+          "baseline_G": 0.5833333333333334,
+          "final_G": 0.44583333333333336,
+          "gain": -0.1375,
+          "method": "teachback_reports",
+          "user": 5
+        },
+        {
+          "baseline_G": 0.5125,
+          "final_G": 0.5166666666666666,
+          "gain": 0.004166666666666652,
+          "method": "reports",
+          "user": 6
+        },
+        {
+          "baseline_G": 0.5125,
+          "final_G": 0.6541666666666667,
+          "gain": 0.14166666666666672,
+          "method": "teachback_reports",
+          "user": 6
+        },
+        {
+          "baseline_G": 0.5083333333333333,
+          "final_G": 0.5916666666666667,
+          "gain": 0.08333333333333337,
+          "method": "reports",
+          "user": 7
+        },
+        {
+          "baseline_G": 0.5083333333333333,
+          "final_G": 0.5583333333333333,
+          "gain": 0.050000000000000044,
+          "method": "teachback_reports",
+          "user": 7
+        }
+      ],
+      "status": "development",
+      "status_counts": {
+        "agreed": 36
+      },
+      "summary": {
+        "reports": {
+          "baseline_G": {
+            "ci95": [
+              0.5104166666666666,
+              0.5657812499999992
+            ],
+            "mean": 0.5354166666666667,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.5364583333333333,
+              0.6479427083333332
+            ],
+            "mean": 0.5927083333333333,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              0.023958333333333304,
+              0.08333333333333331
+            ],
+            "mean": 0.05729166666666666,
+            "n": 4
+          }
+        },
+        "reports_minus_teachback_reports": {
+          "ci95": [
+            -0.08645833333333339,
+            0.1741666666666655
+          ],
+          "mean": 0.045833333333333295,
+          "n": 4
+        },
+        "teachback_reports": {
+          "baseline_G": {
+            "ci95": [
+              0.5104166666666666,
+              0.5657812499999992
+            ],
+            "mean": 0.5354166666666667,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.47377604166666665,
+              0.6229166666666667
+            ],
+            "mean": 0.546875,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.0909895833333333,
+              0.10416666666666671
+            ],
+            "mean": 0.011458333333333362,
+            "n": 4
+          }
+        }
+      }
+    }
+  },
+  "common_practice_episodes_verified": 20,
+  "cumulative_budget": {
+    "accounted_usd": 91.85836799999981,
+    "known_cost_usd": 91.85836799999981,
+    "models": {
+      "claude-opus-5-5": {
+        "accounted_usd": 54.20498099999984,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 2699891.0,
+        "cache_creation_input_tokens": 2699891.0,
+        "cache_hit_calls": 4482.0,
+        "cache_read_fraction": 0.7637634676983821,
+        "cache_read_input_tokens": 16276202.0,
+        "estimated_savings_usd": 59.14772700000014,
+        "estimated_uncached_usd": 113.35270799999998,
+        "input_tokens": 2334434.0,
+        "known_cost_usd": 54.20498099999984,
+        "output_tokens": 1405530.0,
+        "requests": 4531.0
+      },
+      "claude-sonnet-5-5": {
+        "accounted_usd": 37.65338699999997,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 3431773.0,
+        "cache_creation_input_tokens": 3431773.0,
+        "cache_hit_calls": 4924.0,
+        "cache_read_fraction": 0.8642883652084727,
+        "cache_read_input_tokens": 35062523.0,
+        "estimated_savings_usd": 64.90076100000013,
+        "estimated_uncached_usd": 102.5541480000001,
+        "input_tokens": 2073788.0,
+        "known_cost_usd": 37.65338699999997,
+        "output_tokens": 2141798.0,
+        "requests": 4975.0
+      }
+    },
+    "states": {
+      "completed": 9506
+    }
+  },
+  "execution_errors": [],
+  "new_assessment_episode_count": 24,
+  "primary": {
+    "cases": 2,
+    "rows": [
+      {
+        "baseline_G": 0.3296474358974359,
+        "final_G": 0.42291666666666666,
+        "gain": 0.09326923076923077,
+        "method": "reports",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.3296474358974359,
+        "final_G": 0.3607371794871795,
+        "gain": 0.03108974358974359,
+        "method": "teachback_reports",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.4326923076923077,
+        "final_G": 0.4423076923076923,
+        "gain": 0.009615384615384595,
+        "method": "reports",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.4326923076923077,
+        "final_G": 0.3703525641025641,
+        "gain": -0.06233974358974359,
+        "method": "teachback_reports",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.37163461538461534,
+        "final_G": 0.3897435897435897,
+        "gain": 0.018108974358974364,
+        "method": "reports",
+        "user": 6
+      },
+      {
+        "baseline_G": 0.37163461538461534,
+        "final_G": 0.4424679487179487,
+        "gain": 0.07083333333333336,
+        "method": "teachback_reports",
+        "user": 6
+      },
+      {
+        "baseline_G": 0.3310897435897436,
+        "final_G": 0.41442307692307695,
+        "gain": 0.08333333333333336,
+        "method": "reports",
+        "user": 7
+      },
+      {
+        "baseline_G": 0.3310897435897436,
+        "final_G": 0.39455128205128204,
+        "gain": 0.06346153846153847,
+        "method": "teachback_reports",
+        "user": 7
+      }
+    ],
+    "summary": {
+      "reports": {
+        "baseline_G": {
+          "ci95": [
+            0.33036858974358974,
+            0.40729166666666666
+          ],
+          "mean": 0.3662660256410256,
+          "n": 4
+        },
+        "final_G": {
+          "ci95": [
+            0.3980368589743589,
+            0.4353896233974356
+          ],
+          "mean": 0.4173477564102564,
+          "n": 4
+        },
+        "gain": {
+          "ci95": [
+            0.01386217948717948,
+            0.08830128205128207
+          ],
+          "mean": 0.05108173076923077,
+          "n": 4
+        }
+      },
+      "reports_minus_teachback_reports": {
+        "ci95": [
+          -0.02399839743589745,
+          0.06712840544871759
+        ],
+        "mean": 0.02532051282051281,
+        "n": 4
+      },
+      "teachback_reports": {
+        "baseline_G": {
+          "ci95": [
+            0.33036858974358974,
+            0.40729166666666666
+          ],
+          "mean": 0.3662660256410256,
+          "n": 4
+        },
+        "final_G": {
+          "ci95": [
+            0.3655448717948718,
+            0.42443910256410255
+          ],
+          "mean": 0.39202724358974356,
+          "n": 4
+        },
+        "gain": {
+          "ci95": [
+            -0.031091746794871783,
+            0.06714743589743591
+          ],
+          "mean": 0.025761217948717958,
+          "n": 4
+        }
+      }
+    }
+  },
+  "primary_test": {
+    "cases": 2,
+    "comparator": "reports",
+    "contrast": "candidate minus comparator, averaging primary cases within each persona",
+    "estimate": {
+      "ci95": [
+        -0.06712840544871793,
+        0.02399839743589745
+      ],
+      "mean": -0.02532051282051281,
+      "n": 4
+    },
+    "method": "teachback_reports"
+  },
+  "protocol_sha256": "f9cdce2564c9efc59aa5ddbb3e5bf3fb1a20b907fc11e39f5551a1569656f3a8",
+  "reused_episode_count": 48,
+  "run_usage_by_phase": {
+    ".": {
+      "cache_creation_1h_input_tokens": 0.0,
+      "cache_creation_5m_input_tokens": 56118.0,
+      "cache_creation_input_tokens": 56118.0,
+      "cache_hit_calls": 8.0,
+      "cache_read_fraction": 0.26618573407564233,
+      "cache_read_input_tokens": 20368.0,
+      "calls": 8.0,
+      "estimated_savings_usd": 0.012746099999999982,
+      "estimated_uncached_usd": 0.23436,
+      "estimated_usd": 0.22161390000000003,
+      "input_tokens": 32.0,
+      "invocations": 1,
+      "output_tokens": 5425.0,
+      "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+      "total_input_tokens": 76518.0
+    },
+    "assessment/hiring": {
+      "cache_creation_1h_input_tokens": 0.0,
+      "cache_creation_5m_input_tokens": 92700.0,
+      "cache_creation_input_tokens": 92700.0,
+      "cache_hit_calls": 160.0,
+      "cache_read_fraction": 0.8727358297256002,
+      "cache_read_input_tokens": 932753.0,
+      "calls": 160.0,
+      "estimated_savings_usd": 2.0912361,
+      "estimated_uncached_usd": 3.270026,
+      "estimated_usd": 1.1787899,
+      "input_tokens": 43316.0,
+      "invocations": 1,
+      "output_tokens": 46555.0,
+      "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+      "total_input_tokens": 1068769.0
+    },
+    "assessment/sim4_revisited": {
+      "cache_creation_1h_input_tokens": 0.0,
+      "cache_creation_5m_input_tokens": 137457.0,
+      "cache_creation_input_tokens": 137457.0,
+      "cache_hit_calls": 169.0,
+      "cache_read_fraction": 0.8645936202937533,
+      "cache_read_input_tokens": 1432310.0,
+      "calls": 169.0,
+      "estimated_savings_usd": 3.365179699999999,
+      "estimated_uncached_usd": 5.313041999999999,
+      "estimated_usd": 1.9478623000000002,
+      "input_tokens": 86861.0,
+      "invocations": 1,
+      "output_tokens": 74008.0,
+      "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+      "total_input_tokens": 1656628.0
+    }
+  },
+  "run_usage_total": {
+    "cache_read_fraction": 0.8513573752237309,
+    "cache_read_input_tokens": 2385431.0,
+    "calls": 337.0,
+    "estimated_savings_usd": 5.4691619,
+    "estimated_uncached_usd": 8.817428,
+    "estimated_usd": 3.3482661,
+    "output_tokens": 125988.0,
+    "total_input_tokens": 2801915.0
+  },
+  "source_sha256": "0eb60cbbfddac9c74bfdb76ce073fdb3a1c56c7624f0a1f6cf8c019e0408b457"
+}

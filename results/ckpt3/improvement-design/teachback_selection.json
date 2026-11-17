@@ -1,0 +1,215 @@
+{
+  "calls": 679.0,
+  "candidate": "teachback_reports",
+  "comparator": "reports",
+  "estimated_usd": 6.8673383,
+  "new_assessment_episodes": 48,
+  "pooled": {
+    "cases": 2,
+    "rows": [
+      {
+        "baseline_G": 0.4118589743589743,
+        "final_G": 0.384775641025641,
+        "gain": -0.027083333333333293,
+        "method": "reports",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.4118589743589743,
+        "final_G": 0.388301282051282,
+        "gain": -0.02355769230769228,
+        "method": "teachback_reports",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.4197115384615384,
+        "final_G": 0.44439102564102567,
+        "gain": 0.02467948717948723,
+        "method": "reports",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.4197115384615384,
+        "final_G": 0.35721153846153847,
+        "gain": -0.06249999999999996,
+        "method": "teachback_reports",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.28958333333333336,
+        "final_G": 0.4584935897435898,
+        "gain": 0.16891025641025642,
+        "method": "reports",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.28958333333333336,
+        "final_G": 0.38253205128205126,
+        "gain": 0.09294871794871791,
+        "method": "teachback_reports",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.40833333333333327,
+        "final_G": 0.3932692307692308,
+        "gain": -0.015064102564102483,
+        "method": "reports",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.40833333333333327,
+        "final_G": 0.2833333333333334,
+        "gain": -0.1249999999999999,
+        "method": "teachback_reports",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.3296474358974359,
+        "final_G": 0.42291666666666666,
+        "gain": 0.09326923076923077,
+        "method": "reports",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.3296474358974359,
+        "final_G": 0.3607371794871795,
+        "gain": 0.03108974358974359,
+        "method": "teachback_reports",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.4326923076923077,
+        "final_G": 0.4423076923076923,
+        "gain": 0.009615384615384595,
+        "method": "reports",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.4326923076923077,
+        "final_G": 0.3703525641025641,
+        "gain": -0.06233974358974359,
+        "method": "teachback_reports",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.37163461538461534,
+        "final_G": 0.3897435897435897,
+        "gain": 0.018108974358974364,
+        "method": "reports",
+        "user": 6
+      },
+      {
+        "baseline_G": 0.37163461538461534,
+        "final_G": 0.4424679487179487,
+        "gain": 0.07083333333333336,
+        "method": "teachback_reports",
+        "user": 6
+      },
+      {
+        "baseline_G": 0.3310897435897436,
+        "final_G": 0.41442307692307695,
+        "gain": 0.08333333333333336,
+        "method": "reports",
+        "user": 7
+      },
+      {
+        "baseline_G": 0.3310897435897436,
+        "final_G": 0.39455128205128204,
+        "gain": 0.06346153846153847,
+        "method": "teachback_reports",
+        "user": 7
+      }
+    ],
+    "summary": {
+      "reports": {
+        "baseline_G": {
+          "ci95": [
+            0.3401642628205128,
+            0.40460086137820506
+          ],
+          "mean": 0.37431891025641023,
+          "n": 8
+        },
+        "final_G": {
+          "ci95": [
+            0.40167968749999994,
+            0.4361177884615385
+          ],
+          "mean": 0.41879006410256414,
+          "n": 8
+        },
+        "gain": {
+          "ci95": [
+            0.006606069711538494,
+            0.08782051282051284
+          ],
+          "mean": 0.04447115384615387,
+          "n": 8
+        }
+      },
+      "reports_minus_teachback_reports": {
+        "ci95": [
+          0.010172776442307687,
+          0.07744391025641026
+        ],
+        "mean": 0.04635416666666667,
+        "n": 8
+      },
+      "teachback_reports": {
+        "baseline_G": {
+          "ci95": [
+            0.3401642628205128,
+            0.40460086137820506
+          ],
+          "mean": 0.37431891025641023,
+          "n": 8
+        },
+        "final_G": {
+          "ci95": [
+            0.34208733974358974,
+            0.3997220552884615
+          ],
+          "mean": 0.37243589743589745,
+          "n": 8
+        },
+        "gain": {
+          "ci95": [
+            -0.05168569711538457,
+            0.045132712339743586
+          ],
+          "mean": -0.0018830128205128017,
+          "n": 8
+        }
+      }
+    }
+  },
+  "pooled_contrast": {
+    "ci95": [
+      -0.07744391025641026,
+      -0.010172776442307704
+    ],
+    "mean": -0.04635416666666667,
+    "n": 8
+  },
+  "proceed": false,
+  "reused_episodes": 96,
+  "rule": "Proceed only if paired candidate-minus-reports mean is positive both pooled and in the separate validation cohort; this is not a significance claim.",
+  "sources": {
+    "results/ckpt3/consolidation-teachback-dev-v1": {
+      "protocol_sha256": "791654241b5cce163c08902fa571249554bfa08148215c396ad57af4cf0f0970",
+      "verified_analysis_sha256": "1ff05acd6eec74b7aa4469d39150283eebf2aafcd655f4d78366e89a400483d8"
+    },
+    "results/ckpt3/consolidation-teachback-validation-v1": {
+      "protocol_sha256": "f9cdce2564c9efc59aa5ddbb3e5bf3fb1a20b907fc11e39f5551a1569656f3a8",
+      "verified_analysis_sha256": "05752b080f22afa11f12aff43c285f9cf2cdc4e2af977730508fb0de957400b4"
+    }
+  },
+  "validation_contrast": {
+    "ci95": [
+      -0.06712840544871793,
+      0.02399839743589745
+    ],
+    "mean": -0.02532051282051281,
+    "n": 4
+  }
+}
