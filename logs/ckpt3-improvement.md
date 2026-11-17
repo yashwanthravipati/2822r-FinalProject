@@ -19,6 +19,16 @@ This isolates memory construction more clearly than separately evolving practice
 The procedure-only condition measures generic instruction effects. A victory for that
 condition would not establish personalized learning. Neither intervention updates weights.
 
+For user u, let D_u contain the five common completed rehearsal histories and debriefs.
+Construct M_u = {reports(D_u), reflection(D_u), workbook(D_u), fixed_procedure}.
+The bounded personalized search is m*_u = argmax_m mean_tier G(u, hiring, m), using the
+prespecified tie order. Transfer compares G(u, target, m*_u) against each fixed memory
+condition on target cases not used in that selection. The selector uses twelve validation
+negotiations per persona (four candidates × three tiers), in addition to five rehearsals;
+it is therefore not a five-interaction intervention or an equal-evaluation-compute control.
+The selection case baseline is measured for comparison but does not affect the argmax.
+This is optimization of retained context, not actor weights or hidden persona parameters.
+
 The approach draws on [GEPA](https://arxiv.org/html/2507.19457v2)'s separation of reflective
 proposal and measured validation, and [negotiation feedback work](https://arxiv.org/abs/2305.10142)
 using critique and retained history. It does not implement GEPA's full population search.
