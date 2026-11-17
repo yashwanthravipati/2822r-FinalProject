@@ -1,0 +1,12 @@
+{
+  "case_file_matches_original_manifest": true,
+  "configuration_matches_except_case_cohort_seed_and_prespecified_inference": true,
+  "recorded_prior_cedar_sessions_before_run": 0,
+  "reference": "corrected-transfer-v1",
+  "unchanged_method_asts": {
+    "Learner": "45ff812a659cffa1afbb6de372f74213e1d7f8f1d863c3d47185dcf6bfb91cda",
+    "assess_after_test_role_normalization": "f8fff87cae20ee15545f601efcf8990c260cef7e8decc29e0819ce780e4ab186",
+    "record": "004a5a2715b513ce6b4b0e0b67859913ff9f11b1ad3a4824d31328a584b2702b",
+    "train": "3e5cf3568f4d6e9464ffdfab1a7486bbad9cbee4f40d68e050edffb495e46e86"
+  }
+}

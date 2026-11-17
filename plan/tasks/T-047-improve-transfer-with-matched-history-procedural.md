@@ -133,3 +133,17 @@ Sim4 has now been examined and is a revisited benchmark, not an untouched test s
   Cost $2.439023/217 requests; total since audit approval $5.633623. Cumulative dev
   $96.924150, final $87.649976, no unresolved calls. Report and cost summary updated;
   218 offline tests pass. Broad reliable-improvement objective still requires confirmation.
+- 2026-11-17: Preregister corrected-confirmation-v1 after the positive Sim4 pilot:
+  eight new simulation replicates (four per unchanged concession profile), five fresh
+  Sim3 practices each, then paired no-feedback/five-report tests on previously unused
+  Cedar as owner, tier 3. Same actor, reports, controller, models, effort and fixed traits.
+  Forty practice +16 assessment episodes, no outcome-dependent stopping or case tuning.
+  Primary confirmation rule: paired mean >0 and two-sided exact sign-flip p <= .05,
+  with complete independently verified outcomes. Two-profile/six-control limits remain.
+  Cedar file matches its original eff48d0a... manifest hash; no Cedar case_id appears
+  in any stored checkpoint-3 session. New controller seeds are disjoint from the pilot.
+  Estimate 400 Sonnet x (6,000 input at $2/M +500 output at $10/M) plus 40 Opus x
+  (12,000 input at $4/M +1,500 output at $20/M) = $9.92 before cache savings. Based
+  on the pilot, expected actual cost is about $4.88. Existing $110 caps preserved;
+  dev headroom $13.075850, final $22.350024. Two practice /three test workers; gateway
+  reservations may serialize Opus calls. Within the latest $150 audit/eval authorization.
