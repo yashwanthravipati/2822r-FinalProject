@@ -1,0 +1,65 @@
+{
+  "K": 5,
+  "ablation_source_sha256": "274cbff2dba29045e5924446a976739fe7124dde9af21c40286de61c9ae43ef6",
+  "budget": "final",
+  "cache_ttl": "5m",
+  "case_sha256": "f1a6c1f43257775d8fa271d29faafb794b5c16d9744ff94afc6f8a11f4fd42b9",
+  "cases": [
+    {
+      "key": "harbor_analytics",
+      "path": "data/cases/harbor_analytics.json",
+      "primary": true,
+      "role": "buyer",
+      "sha256": "1d5c501b05bcc99cba1c8f2591af6c2c187855c85094488643b36852f6ffb95f",
+      "status": "fresh_test"
+    },
+    {
+      "key": "maple_festival",
+      "path": "data/cases/maple_festival.json",
+      "primary": true,
+      "role": "organizer",
+      "sha256": "47a51180e3c3268104320bbcfe80b5f6779e4323215c32f4f3e73059ffe1c0a0",
+      "status": "fresh_test"
+    }
+  ],
+  "coach_model": "claude-opus-5-5",
+  "final_source_sha256": "5c57f3490ed18cc80c217c8fc7a38be4cf2bbc43821e8f4cef3f9ff7c6667653",
+  "instruction_sha256": "ba9a474e5c25744a66e37a3007e447193e31f7a1c96dba33bfba6c5504234e42",
+  "learner_model": "claude-sonnet-5-5",
+  "methods": [
+    "reports",
+    "workbook",
+    "procedure_only",
+    "workbook_no_examples"
+  ],
+  "primary_comparison": "reports",
+  "primary_method": "workbook",
+  "probe_tiers": [
+    1,
+    3,
+    5
+  ],
+  "reward": "surplus_share",
+  "role": "officer",
+  "scoring": "declared numeric case utilities",
+  "seed": 28221129,
+  "source_sha256": "0eb60cbbfddac9c74bfdb76ce073fdb3a1c56c7624f0a1f6cf8c019e0408b457",
+  "training_case_sha256": "0ea3d8144e1252b477aea3e42b267b5e873e843516b901762c16d3d22c2b7f93",
+  "training_role": "officer",
+  "training_tiers": [
+    2,
+    2,
+    4,
+    4,
+    4
+  ],
+  "users": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ]
+}

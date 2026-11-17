@@ -200,3 +200,10 @@ forecast $30–48 additional final cost using measured rates and a conservative 
 upper forecast. Existing final ledger $41.133781/100; remaining $58.866219. Preserve enough
 room for the gateway's conservative live reservations; never raise/reset the cap. A single
 known refusal may be resumed once from the identical checkpoint with its cost recorded.
+
+- Confirmation preparation completed: all 77 training-case episodes and seven consolidated
+  memories. Independent audit verifies their terminal utilities, training curves, seeds,
+  tiers, full cohort and memory hashes. Usage estimate $8.853005; ledger increment $8.853373
+  for 748 calls. Final cumulative ledger $49.987154 after preparation, no unresolved calls.
+  Fresh-case assessment began only after all memories were frozen; no primary outcomes
+  have been inspected or used to alter the selected method.

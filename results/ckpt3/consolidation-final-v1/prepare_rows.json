@@ -1,0 +1,9 @@
+[
+{"memory_characters": {"procedure_only": 1862, "reports": 17227, "reports_with_procedure": 19138, "workbook": 5069, "workbook_no_examples": 3954}, "user": 0},
+{"memory_characters": {"procedure_only": 1862, "reports": 16547, "reports_with_procedure": 18458, "workbook": 4814, "workbook_no_examples": 3801}, "user": 1},
+{"memory_characters": {"procedure_only": 1862, "reports": 16116, "reports_with_procedure": 18027, "workbook": 5302, "workbook_no_examples": 3991}, "user": 2},
+{"memory_characters": {"procedure_only": 1862, "reports": 16299, "reports_with_procedure": 18210, "workbook": 4918, "workbook_no_examples": 3848}, "user": 3},
+{"memory_characters": {"procedure_only": 1862, "reports": 16226, "reports_with_procedure": 18137, "workbook": 5149, "workbook_no_examples": 4091}, "user": 4},
+{"memory_characters": {"procedure_only": 1862, "reports": 16629, "reports_with_procedure": 18540, "workbook": 4807, "workbook_no_examples": 3881}, "user": 5},
+{"memory_characters": {"procedure_only": 1862, "reports": 15878, "reports_with_procedure": 17789, "workbook": 4819, "workbook_no_examples": 3800}, "user": 6}
+]
