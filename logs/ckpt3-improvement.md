@@ -215,3 +215,9 @@ known refusal may be resumed once from the identical checkpoint with its cost re
   hypothesis, while recognizing that the rollout estimates themselves can be wrong.
   No confirmation memory or selection rule was changed. Numeric diagnostic saved in
   `results/ckpt3/improvement-design/example_credit_diagnostic.json`; no API calls were used.
+- Harbor Analytics completed all 105 planned episodes. Independent audit checked their
+  agreement economics, seeds, tiers and complete paired rows without inspecting treatment
+  means. Provider-usage cost $12.421521; ledger increment $12.422135 for 1,498 calls.
+  Same-token-volume uncached estimate $27.971128. Final ledger $62.409289 at phase end,
+  no unresolved calls. Maple Festival then started under the identical frozen protocol;
+  primary comparisons remain uninterpreted until both cases complete.
