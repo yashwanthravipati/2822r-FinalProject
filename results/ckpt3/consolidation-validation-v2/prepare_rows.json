@@ -1,0 +1,6 @@
+[
+{"memory_characters": {"procedure_only": 1862, "reports": 17199, "reports_with_procedure": 19110, "workbook": 5167, "workbook_no_examples": 4079}, "user": 4},
+{"memory_characters": {"procedure_only": 1862, "reports": 16646, "reports_with_procedure": 18557, "workbook": 5115, "workbook_no_examples": 4120}, "user": 5},
+{"memory_characters": {"procedure_only": 1862, "reports": 16885, "reports_with_procedure": 18796, "workbook": 5040, "workbook_no_examples": 3976}, "user": 6},
+{"memory_characters": {"procedure_only": 1862, "reports": 16158, "reports_with_procedure": 18069, "workbook": 4766, "workbook_no_examples": 3789}, "user": 7}
+]

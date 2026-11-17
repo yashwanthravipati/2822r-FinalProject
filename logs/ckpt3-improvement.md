@@ -153,3 +153,11 @@ ablations, not fresh test outcomes. Additional calls: roughly 650–800 for 48 n
 per cohort, approximately 4–5M total input (mostly cached) and 0.3–0.4M output, forecast
 $6–10 per cohort at the measured blended rates. At most $12–20 across both, within the
 remaining $56.660790 development allowance. The final budget and fresh cases stay untouched.
+
+- Both unchanged v2 candidates were started concurrently on the two cohorts, before any
+  new-arm outcomes, with eight total workers. Preparation made zero API calls and preserved
+  96 exact control episodes per cohort. First complete hiring results are mixed:
+  reports-plus-procedure gain +0.032051 (0–3), +0.009615 (4–7); workbook-without-examples
+  +0.020833 and +0.030449. Existing reports gains remain +0.008013 and +0.044872.
+  The two new hiring arms cost $4.760785 in provider-usage estimates across both cohorts.
+  Sim4 outcomes are still pending. No candidate is selected from hiring alone.
