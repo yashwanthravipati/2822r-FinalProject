@@ -1,0 +1,22 @@
+{
+  "after": {
+    "accounted_usd": 109.401378,
+    "actual_usd": 109.401378,
+    "limit_usd": 140.0,
+    "remaining_usd": 30.598622,
+    "requests": 11598,
+    "unresolved_requests": 0
+  },
+  "before": {
+    "accounted_usd": 109.401378,
+    "actual_usd": 109.401378,
+    "limit_usd": 125.0,
+    "remaining_usd": 15.598622,
+    "requests": 11598,
+    "unresolved_requests": 0
+  },
+  "latest_new_work_allowance_usd": 150,
+  "maximum_new_spending_under_caps_usd": 71.059497,
+  "pre_audit_known_usd": 178.940503,
+  "reason": "Allocate cumulative development cap $140, final remains $110, within latest $150 joint new-work authorization. Combined caps $250 minus pre-audit known $178.940503 permit at most $71.059497 new spending. Preserve all charges/reservations; cover the fixed residual-advice development study and concurrent full-context reservations."
+}

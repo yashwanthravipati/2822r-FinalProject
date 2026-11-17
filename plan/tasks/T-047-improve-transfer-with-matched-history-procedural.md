@@ -223,3 +223,29 @@ Sim4 has now been examined and is a revisited benchmark, not an untouched test s
   tests pass, lint/format/task checks clean. Report includes full positive and negative
   comparisons and planning defects. Reliable superiority over both strong controls
   remains unestablished; retain the broader goal rather than redefine success.
+- 2026-11-17: New residual-advice development design, not promotion of the failed
+  selector. Trace inspection showed both gains and losses from replacing generic
+  advice with personal plans, including premature closure and wrong own-value arithmetic.
+  Retain generic advice and every original report, adding one 45--95-word conditional
+  lesson derived only from abstract own-value traces of the five Sim3 practices.
+  Enforce the word bound, no digits/past issue labels, and actual own-turn citations;
+  bounded regeneration on invalid output, with all attempts retained. No deterministic
+  policy override, hidden utilities, test-case coaching or manual trait learning.
+  Expand from eight to sixteen distinct practice histories (eight per concession
+  profile) by adding forty Sim3 sessions at the unchanged 2,2,4,4,4 tiers. New users
+  8--15 use fresh seeds and traits indexed modulo eight. Existing histories remain
+  exact; no old test outcomes enter the per-user coach payload.
+  Four fixed arms: reports; reports+generic; generic+own residual lesson; generic+
+  another learner's lesson (fixed cross-profile permutation). No per-user arm selection.
+  Development on Harbor/Maple: 16 x2 cases x4 arms =128 fresh negotiations. Aggregate
+  cases within history before inference. Primary advance gate remains positive means
+  and two-sided exact sign-flip p<=.05 against BOTH reports and generic; shuffled-note
+  specificity is a separately reported control, not proof by assumption. Do not alter
+  the gate or stop by intermediate outcomes. Freeze new original Pine/Willow cases
+  before development; any final follow-up requires passing this new gate and its
+  independently verified complete cohort. Sim4/Cedar remain excluded from tuning.
+  Estimated development cost $18 including 40 new practices, 16 bounded lesson builds,
+  and 128 assessments. Within latest $150 joint allowance; allocate cumulative dev
+  ceiling $140 and retain final $110 for conservative reservations. Combined $250
+  ceilings minus pre-audit $178.940503 permit at most $71.059497 new spending, below
+  $150; preserve all prior ledger charges and limits audit history.
