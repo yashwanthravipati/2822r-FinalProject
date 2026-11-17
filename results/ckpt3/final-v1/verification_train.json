@@ -1,0 +1,10 @@
+{
+  "frozen_memories": 24,
+  "protocol_sha256": "eac51a9313558fcee012eaf86af89239084876f9da6c0111efd19025b237f5f8",
+  "source_sha256": "29f4133d304f7063f637ac0a83a4d1f13462fdbab152484c420e0950a8d37393",
+  "train": {
+    "episodes": 216,
+    "feasible_best": 490.0,
+    "paired_rows": 24
+  }
+}

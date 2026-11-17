@@ -1,0 +1,29 @@
+{
+  "memories": {
+    "learner0_reflection.json": "606353bd30d21ba532b3205bbf00de67b6fcb879c215bb2abf8b40bfeadf9d79",
+    "learner0_rehearsal.json": "2039d01710dfc3bf15223e0d7a4923a680b88c6eb6a3319b0daff078e5ad812e",
+    "learner0_reports.json": "8a9592be7b8f2e7fbb5f03422835d3ccb23f53f4e44ef8e6e0c4c636fab25154",
+    "learner1_reflection.json": "4e2799610052b5c14088428c63faafa0a8a3c45969b4a9a3e4dfad9a3ccc3fb8",
+    "learner1_rehearsal.json": "5051c1c9bd5542d8fcf596c138dd9e8dfadefb9dea7076c978e97fbee7408ca5",
+    "learner1_reports.json": "88ad19b370cac6962e43367adb5e2ad120a473548f281703d059f2f7f8e49fb4",
+    "learner2_reflection.json": "c92e18491fc606c774d44cae645b253a2facd8bf21a09a0584206f302723e866",
+    "learner2_rehearsal.json": "d76d6a2057a0a6b2972721b340fa7844f0d55d91019a6ffdfc45d94c07252e2e",
+    "learner2_reports.json": "6cde3f910e22e1bd4c770f0603f7edd08f44c5790c23fac4d3ff68723ce37284",
+    "learner3_reflection.json": "439c9c8b385188d859ee97b45bcd961d092dc0bd5a09d401b2d9c0e6a77e9663",
+    "learner3_rehearsal.json": "350b5d16a4ed09a33ecb5cb25188957a159974f3b4def887df614da5ad4730b3",
+    "learner3_reports.json": "58e791cabb2af3a88fe729ad1b478e9e4c9c6c57529eaa974f9f5a5650e1f8bf",
+    "learner4_reflection.json": "7afbd16d338d99d131afe2449adce2072163110ac9eabf830eb48971047eca7e",
+    "learner4_rehearsal.json": "3b1e5b309868afa4cd2a73b06e080ff74c369f6079db10d5257d977501a704d2",
+    "learner4_reports.json": "0ca64ee3aa8b2176e9e4354899c0445d671be64c2cfb57370ae329e44807cd04",
+    "learner5_reflection.json": "ba3bb7fc209ecb2f42f70a1a0c4c6293a4fb01d2ef5c8961f8b228f62f4e2b6f",
+    "learner5_rehearsal.json": "647e62dcfb621bde4805edc7e43e2caeff3bfaca6f2ea3ea6670b8cb42145ef6",
+    "learner5_reports.json": "0e582f6d7ae5f5d1f6d6580c5ff1c49f0a1358fd025fb17eaf21c674a4b79f69",
+    "learner6_reflection.json": "ff35cc41b97c62c7c3edb2be28e3bdd277d537e43d4cd903d69c922243655f1c",
+    "learner6_rehearsal.json": "37e7e7e72c83eb869bc8af9e393746b06a37cbf73ef9bc23b20c7b6aeaa5da3b",
+    "learner6_reports.json": "9c6493c623aca3919f215a1941f660f67d6b88d48722d9f2acde99caa9d425ad",
+    "learner7_reflection.json": "b3626cd5e1231b694756b189bd9158ec8f5e8667efcd5908bc6f09781360a40d",
+    "learner7_rehearsal.json": "68442f3c2ec3b393171fc0a72e3c98ea88452e575b2b47b6c292d072437e2c40",
+    "learner7_reports.json": "b552a2806fd63e8ac00205747123e9f750489fa90bdf57f27e43ef60d1bdc607"
+  },
+  "protocol_sha256": "eac51a9313558fcee012eaf86af89239084876f9da6c0111efd19025b237f5f8"
+}

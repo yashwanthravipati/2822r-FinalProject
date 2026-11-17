@@ -107,8 +107,10 @@ sampling can still differ. Saved numeric artifacts can be analyzed without paid 
 .venv/bin/python scripts/ckpt3_evaluate.py train \
   --root results/ckpt3/final-v1 --budget final --users 8 --rounds 5 --workers 4
 .venv/bin/python scripts/ckpt3_evaluate.py assess \
-  --root results/ckpt3/final-v1 --budget final --users 8 --rounds 5 --workers 4
+  --root results/ckpt3/final-v1 --budget final --users 8 --rounds 5 --workers 8
 .venv/bin/python scripts/analyze_ckpt3.py --root results/ckpt3/final-v1 --budget final
+.venv/bin/python scripts/verify_ckpt3.py --root results/ckpt3/final-v1
+.venv/bin/python scripts/plot_ckpt3.py --root results/ckpt3/final-v1
 ```
 
 At eight personas this design has 24 shared Sim3 baseline probes, 120 training episodes,

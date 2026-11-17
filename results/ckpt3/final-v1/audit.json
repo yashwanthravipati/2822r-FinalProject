@@ -1,0 +1,109 @@
+{
+  "api": {
+    "accounted_usd": 23.137475999999996,
+    "known_cost_usd": 23.137475999999996,
+    "models": {
+      "claude-opus-5-5": {
+        "accounted_usd": 15.432487,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 702167.0,
+        "cache_creation_input_tokens": 702167.0,
+        "cache_hit_calls": 947.0,
+        "cache_read_fraction": 0.6733792796645537,
+        "cache_read_input_tokens": 3130279.0,
+        "estimated_savings_usd": 11.192481000000017,
+        "estimated_uncached_usd": 26.624968000000017,
+        "input_tokens": 816166.0,
+        "known_cost_usd": 15.432487,
+        "output_tokens": 401526.0,
+        "requests": 955.0
+      },
+      "claude-sonnet-5-5": {
+        "accounted_usd": 7.704988999999996,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 721544.0,
+        "cache_creation_input_tokens": 721544.0,
+        "cache_hit_calls": 1079.0,
+        "cache_read_fraction": 0.8572325468235942,
+        "cache_read_input_tokens": 6791472.0,
+        "estimated_savings_usd": 12.542451000000037,
+        "estimated_uncached_usd": 20.247440000000033,
+        "input_tokens": 409539.0,
+        "known_cost_usd": 7.704988999999996,
+        "output_tokens": 440233.0,
+        "requests": 1086.0
+      }
+    },
+    "states": {
+      "completed": 2041
+    }
+  },
+  "api_scope": "Cumulative final ledger across all runs, including prior tests",
+  "run_api": {
+    "cache_creation_1h_input_tokens": 0.0,
+    "cache_creation_5m_input_tokens": 1423711.0,
+    "cache_creation_input_tokens": 1423711.0,
+    "cache_hit_calls": 2026.0,
+    "cache_read_fraction": 0.7892466148926349,
+    "cache_read_input_tokens": 9921751.0,
+    "calls": 2041.0,
+    "estimated_savings_usd": 23.735917999999998,
+    "estimated_uncached_usd": 46.872408,
+    "estimated_usd": 23.136490000000002,
+    "input_tokens": 1225705.0,
+    "invocations": 1,
+    "output_tokens": 841759.0,
+    "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+    "total_input_tokens": 12571167.0
+  },
+  "training": {
+    "agreement_rate": 1.0,
+    "below_walkaway_agreements": 0,
+    "conditions": {
+      "baseline": {
+        "agreements": 24,
+        "below_walkaway_agreements": 0,
+        "episodes": 24,
+        "mean_user_turns": 3.25
+      },
+      "reflection_assessment": {
+        "agreements": 24,
+        "below_walkaway_agreements": 0,
+        "episodes": 24,
+        "mean_user_turns": 3.4583333333333335
+      },
+      "reflection_training": {
+        "agreements": 40,
+        "below_walkaway_agreements": 0,
+        "episodes": 40,
+        "mean_user_turns": 3.9
+      },
+      "rehearsal_assessment": {
+        "agreements": 24,
+        "below_walkaway_agreements": 0,
+        "episodes": 24,
+        "mean_user_turns": 3.5833333333333335
+      },
+      "rehearsal_training": {
+        "agreements": 40,
+        "below_walkaway_agreements": 0,
+        "episodes": 40,
+        "mean_user_turns": 3.925
+      },
+      "reports_assessment": {
+        "agreements": 24,
+        "below_walkaway_agreements": 0,
+        "episodes": 24,
+        "mean_user_turns": 3.9583333333333335
+      },
+      "reports_training": {
+        "agreements": 40,
+        "below_walkaway_agreements": 0,
+        "episodes": 40,
+        "mean_user_turns": 4.35
+      }
+    },
+    "episodes": 216,
+    "schedule_violations": 0
+  }
+}
