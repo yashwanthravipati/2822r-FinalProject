@@ -1,0 +1,26 @@
+{
+  "api_cost_usd": 0,
+  "construction": "local analyst projection; no API calls",
+  "exact_numeric_parity_checked_packages": 729,
+  "feasible_best": [
+    600.0,
+    525.0
+  ],
+  "hard_constraint_feasible_packages": 486,
+  "limitations": [
+    "All utilities and reservation values are analyst assumptions.",
+    "Conditional-plan utility is not realized access or patient welfare.",
+    "Additive utilities omit stochastic enforcement and cross-issue feasibility interactions.",
+    "One held-out scenario; no model outcomes inspected during projection design."
+  ],
+  "mutually_acceptable_packages": 480,
+  "packages": 729,
+  "private_case_sha256": "2d339ecf290bdf6d868f85f220295195b58356a9657820fb51afd7bfc70f8c9e",
+  "private_source_manifest_sha256": "04f07fce80f37915ef434df343de8795520a9f370f97e4421e75e103b0556017",
+  "source_documents": 31,
+  "source_visibility": "shared documents both roles; all remaining documents user role only",
+  "walkaway": [
+    200.0,
+    260.0
+  ]
+}

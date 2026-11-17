@@ -86,8 +86,10 @@ approval; no Sim4 outcome has been inspected):
   --workers 1 --seed 28221118 --training-case data/cases/cloudline_hiring.json \
   --training-role candidate
 
-# After source/content approval, construct and audit the held-out scoring projection.
-.venv/bin/python scripts/prepare_sim4.py
+# Sim4 was constructed and audited locally; reuse the private frozen projection.
+# See results/ckpt3/heldout-case/manifest.json for hashes and numerical checks.
+# scripts/prepare_sim4.py is an optional API-assisted constructor for a new version,
+# not needed for the frozen case and not authorized to transmit class content yet.
 
 # Proposed final run: finalize user count from smoke costs before invoking.
 .venv/bin/python scripts/ckpt3_evaluate.py train \
@@ -121,3 +123,20 @@ counterfactual estimates while the new coach uses observed dialogue and determin
 own-utility evidence. A benefit cannot be attributed solely to compression. Reflection
 versus application/correction is the more focused ablation, though it adds interactions
 and compute. These distinctions should remain explicit in the write-up.
+
+## Revised method and frozen measurement model
+
+The v2 coach abstracts domain nouns into issue value, constraints and alternatives, and
+keeps basic feasibility/walk-away/whole-package discipline while personalizing other rules.
+The application arm asks the learner to map the same principle to a separate fictional
+everyday negotiation. Its answer includes the shared principle, not just a repeated rule.
+This change follows the logged analogy literature and the v1 artifact's cash-specific
+triggers. It uses no held-out outcomes.
+
+Sim4 is now an analyst-built, locally frozen conditional-plan model; source documents
+were not sent for parsing. Its full briefs and original text remain private. The public
+manifest and numeric-only surrogate are in `results/ckpt3/heldout-case/`. The private case
+hash is `2d339ecf290bdf6d868f85f220295195b58356a9657820fb51afd7bfc70f8c9e`.
+Final live evaluation still needs explicit approval for sending role-appropriate briefs
+to the Anthropic API. The frozen point assumptions must not be revised after observing
+method performance.

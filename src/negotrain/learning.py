@@ -56,7 +56,8 @@ class Reflection(BaseModel):
         description="A concrete correction using only user-visible facts"
     )
     application_question: str = Field(
-        description="One short contrastive question asking this learner to apply the lesson"
+        description="A self-contained fictional negotiation in a different everyday domain, "
+        "asking the learner to apply and map the same strategic principle"
     )
 
 
@@ -64,6 +65,10 @@ class Application(BaseModel):
     intended_action: str
     reasoning: str
     exception: str
+    shared_principle: str = Field(
+        default="",
+        description="How the training mistake and fictional scenario share the same structure",
+    )
 
 
 GENERIC_CARD = """Negotiation practice notes:
@@ -96,19 +101,36 @@ prior rules and revise only what evidence warrants. Prioritize this learner's mo
 actionable mistake; do not reset to a generic checklist every time. Each rule needs an
 observable trigger, concrete action, and an exception. Reference actual training turns in
 the evidence field. The card's trigger/action/exception/priority must transfer: no case or
-role names, specific package IDs, numbers from the case, or claimed hidden utilities. Never
-rewrite the learner's persona or instruct them to stop role-playing their tendencies.
+role names, specific package IDs, numbers from the case, or claimed hidden utilities.
+Abstract domain-specific nouns into their economic function: write 'high-value issue',
+'low-cost concession', 'implementation constraint', or 'available alternative', not salary,
+cash, bonus, a border policy, or a clinical procedure. A learner in a different domain must
+be able to recognize the trigger without translating case jargon. Retain a compact core
+check for hard constraints, walk-away value, and whole-package utility even when recent
+training happened not to expose a violation. Build personalization around that check rather
+than replacing general decision discipline with a narrow trick from the last transcript.
+Do not claim an earlier offer is still available unless the counterpart has left it open.
+Never rewrite the learner's persona or instruct them to stop role-playing their tendencies.
 
-Also give one brief worked correction and one application question about the observed
-mistake. Use only facts the learner could know at that point and their own utility table.
-Do not reveal or invent the counterpart's private preferences. The question should contrast
-a tempting mistake with a better conditional strategy. The card is advice, not a script.
+Give a brief worked correction using only facts the learner could know at the observed
+turn and their own utility table. Do not reveal or invent hidden counterpart preferences.
+Then write ONE short application question in a DIFFERENT fictional everyday negotiation
+(e.g. booking a venue, buying equipment, or arranging a service). Label it hypothetical,
+supply all relevant priorities/constraints in the question, and ask the learner to choose
+an action AND map its underlying strategic principle back to the observed mistake. The
+scenario must contrast a tempting mistake with a better conditional strategy; avoid a
+trivial request to repeat your rule. Do not borrow a real future case or include political,
+security, medical, or humanitarian settings. Invented analogy details are not facts about
+the actual training case. The card is advice, not a script.
 Do not instruct the learner to exploit simulator tiers, countdown mechanics, or detector
 implementation. Explain uncertainty and genuine economic tradeoffs instead."""
 
 REVISE_SYSTEM = """You are a negotiation coach completing a brief post-practice application
 check. Read the proposed strategy card, worked correction, learner's answer, and original
-training evidence. Clarify misunderstood rules while retaining supported useful habits.
+training evidence. Check whether the learner mapped the same strategic structure across
+the two situations, not just repeated your wording. Clarify misunderstood rules while
+retaining supported useful habits. Do not use invented analogy events as observed evidence
+about the learner; cite the real training turns or explicitly label the application answer.
 Return the final card, at most five conditional rules and about 180-260 words. Include
 trigger, action, exception, and source evidence. If the learner understood, preserve the
 card rather than invent new lessons. No future-case information, role names, package IDs,
@@ -196,7 +218,10 @@ def refine_memory(
                     {
                         "instruction": (
                             "The practice negotiation is over. Apply the coaching lesson "
-                            "in your own words. State an action, why it helps, and when it fails."
+                            "to the separate hypothetical scenario in the question. State "
+                            "an action, why it helps, when it fails, and the shared principle "
+                            "linking this scenario to your practice mistake. Hypothetical "
+                            "details do not change the actual case facts."
                         ),
                         "worked_correction": proposal.worked_correction,
                         "question": proposal.application_question,

@@ -1,0 +1,215 @@
+{
+  "id": "sim4_numeric",
+  "issues": [
+    {
+      "description": "",
+      "id": "issue_1",
+      "name": "issue_1",
+      "options": [
+        {
+          "id": "a",
+          "label": "Option a"
+        },
+        {
+          "id": "b",
+          "label": "Option b"
+        },
+        {
+          "id": "c",
+          "label": "Option c"
+        }
+      ]
+    },
+    {
+      "description": "",
+      "id": "issue_2",
+      "name": "issue_2",
+      "options": [
+        {
+          "id": "a",
+          "label": "Option a"
+        },
+        {
+          "id": "b",
+          "label": "Option b"
+        },
+        {
+          "id": "c",
+          "label": "Option c"
+        }
+      ]
+    },
+    {
+      "description": "",
+      "id": "issue_3",
+      "name": "issue_3",
+      "options": [
+        {
+          "id": "a",
+          "label": "Option a"
+        },
+        {
+          "id": "b",
+          "label": "Option b"
+        },
+        {
+          "id": "c",
+          "label": "Option c"
+        }
+      ]
+    },
+    {
+      "description": "",
+      "id": "issue_4",
+      "name": "issue_4",
+      "options": [
+        {
+          "id": "a",
+          "label": "Option a"
+        },
+        {
+          "id": "b",
+          "label": "Option b"
+        },
+        {
+          "id": "c",
+          "label": "Option c"
+        }
+      ]
+    },
+    {
+      "description": "",
+      "id": "issue_5",
+      "name": "issue_5",
+      "options": [
+        {
+          "id": "a",
+          "label": "Option a"
+        },
+        {
+          "id": "b",
+          "label": "Option b"
+        },
+        {
+          "id": "c",
+          "label": "Option c"
+        }
+      ]
+    },
+    {
+      "description": "",
+      "id": "issue_6",
+      "name": "issue_6",
+      "options": [
+        {
+          "id": "a",
+          "label": "Option a"
+        },
+        {
+          "id": "b",
+          "label": "Option b"
+        },
+        {
+          "id": "c",
+          "label": "Option c"
+        }
+      ]
+    }
+  ],
+  "public_brief": "Invented conditional-plan utility table only; insufficient to reproduce live dialogue.",
+  "roles": [
+    {
+      "confidential_brief": "Numeric surrogate only; no class source text.",
+      "constraints": [
+        {
+          "description": "Synthetic option restriction",
+          "disallowed": {
+            "issue_1": [
+              "a"
+            ]
+          },
+          "hard": true
+        }
+      ],
+      "id": "role_1",
+      "inferred": true,
+      "name": "Role 1",
+      "points": {
+        "issue_1": {
+          "a": 0.0,
+          "b": 75.0,
+          "c": 110.0
+        },
+        "issue_2": {
+          "a": 20.0,
+          "b": 95.0,
+          "c": 110.0
+        },
+        "issue_3": {
+          "a": 0.0,
+          "b": 70.0,
+          "c": 95.0
+        },
+        "issue_4": {
+          "a": 30.0,
+          "b": 100.0,
+          "c": 85.0
+        },
+        "issue_5": {
+          "a": 90.0,
+          "b": 65.0,
+          "c": 45.0
+        },
+        "issue_6": {
+          "a": 35.0,
+          "b": 95.0,
+          "c": 110.0
+        }
+      },
+      "reservation_value": 200.0
+    },
+    {
+      "confidential_brief": "Numeric surrogate only; no class source text.",
+      "constraints": [],
+      "id": "role_2",
+      "inferred": true,
+      "name": "Role 2",
+      "points": {
+        "issue_1": {
+          "a": 100.0,
+          "b": 70.0,
+          "c": 45.0
+        },
+        "issue_2": {
+          "a": 85.0,
+          "b": 65.0,
+          "c": 35.0
+        },
+        "issue_3": {
+          "a": 95.0,
+          "b": 65.0,
+          "c": 40.0
+        },
+        "issue_4": {
+          "a": 90.0,
+          "b": 65.0,
+          "c": 45.0
+        },
+        "issue_5": {
+          "a": 20.0,
+          "b": 80.0,
+          "c": 110.0
+        },
+        "issue_6": {
+          "a": 75.0,
+          "b": 70.0,
+          "c": 35.0
+        }
+      },
+      "reservation_value": 260.0
+    }
+  ],
+  "source": "Local analyst assumptions; no official scores or source documents.",
+  "source_documents": [],
+  "title": "Held-out numeric scoring surrogate"
+}

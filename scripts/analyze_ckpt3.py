@@ -97,6 +97,7 @@ def main():
     result = {
         "training": episode_diagnostics(args.root, args.training_case),
         "api": ledger_report(Path(f".api-budget.sqlite3.ckpt3-{args.budget}")),
+        "api_scope": f"Cumulative {args.budget} ledger across all runs, including prior tests",
     }
     if (args.root / "heldout" / "assess_summary.json").exists():
         result["heldout"] = episode_diagnostics(args.root / "heldout", args.heldout_case)

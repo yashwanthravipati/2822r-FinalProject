@@ -29,12 +29,14 @@ PROPOSAL = {
     "card": CARD,
     "diagnosis": "Unilateral concession",
     "worked_correction": "Ask for a trade",
-    "application_question": "What would you ask for before moving again?",
+    "application_question": "Hypothetical venue booking: what would you request before "
+    "conceding a second time, and how does that map to your practice mistake?",
 }
 ANSWER = {
     "intended_action": "Ask for reciprocity",
     "reasoning": "Protect value",
     "exception": "Deadline",
+    "shared_principle": "Condition additional concessions on reciprocal value.",
 }
 
 
@@ -58,6 +60,8 @@ def test_strategy_learning_is_post_session_and_does_not_expose_hidden_sheet(case
     assert len(coach.calls) == 2 and len(learner.calls) == 1
     assert case.role("recruiter").confidential_brief not in str(coach.calls + learner.calls)
     assert "initial_tendencies" not in str(coach.calls)
+    assert "Hypothetical venue booking" in str(learner.calls)
+    assert "shared_principle" in str(coach.calls[-1])
     # Completed work is durable across retries without paying for or resampling outputs.
     assert (
         refine_memory(case, session, None, traits, coach, learner, tmp_path, rehearse=True)
