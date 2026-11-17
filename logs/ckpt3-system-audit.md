@@ -230,3 +230,43 @@ final $88.314178, no unresolved requests. Dev ceiling allocated $115->$125 withi
 the newer $150 joint allowance; final remains $110, all ledger history preserved.
 The complete suite passes 224 offline tests; report and reconciled costs include
 all outcomes and limitations. Superiority over both strong controls remains open.
+
+## Final personal-plan audit and closure
+
+After the user's urgent request for final evaluation, the proposed residual-advice
+search was not run. Its already-started forty practices supplied eight additional
+histories; all eighty source practices were verified. Eight existing personal plans
+were reused exactly and eight were generated with the unchanged method. The allocation
+of the never-scored Pine/Willow cases was amended before outcomes; original case hashes
+were retained. These investigator-authored cases were created after the earlier
+development studies and are not an externally sampled benchmark. Protocol/source
+were frozen at `b810560`; no final feedback, tuning or outcome-dependent stopping.
+The earlier failed development criterion remains failed.
+
+All **96 final negotiations completed and passed independent verification**. Mean R:
+reports .228448276; reports+generic .475215517; reports+personal .524784483.
+Personal-minus-reports +.296336207, 95% bootstrap CI [.201508621,.389008621], exact
+two-sided p=.000091553. Personal-minus-generic +.049568966, CI [-.070043103,.169181034],
+p=.455688477. The joint confirmation criterion fails. Improvement over ordinary
+reports is supported in this simulator; superiority over generic advice is unproven.
+Sixteen stochastic histories of two profiles and two synthetic cases do not establish
+human transfer or calibrated six-weakness behavior.
+
+Retained 95 agreements, one generic-arm impasse and two reports-only agreements below
+walk-away. Personal plans: 32 agreements, none below walk-away. Target counts:
+reports 6/81 opportunities, generic 0/52, personal 1/44; descriptive/endogenous.
+No schedule violations or missing annotations. Frozen memories, all five reports,
+source/history hashes, cited-user-turn existence, published practice rows, scoring
+and transcript replay checked. Known generator limits remain: all sixteen plans
+exceed the requested soft word range (169–216 words), and citation existence does
+not certify every coaching statement's truth.
+
+Costs: new practices $3.685244, new-plan preparation $0.629188, final assessment
+$9.609023; closing phase $13.923455. Since audit authorization $32.698508 of $150.
+Cumulative checkpoint-3 $211.639011 (dev $113.715810, final $97.923201), no unresolved
+requests in either ledger. The separate historical ledger's known $65.342720 and
+uncertain reserved upper bound $68.092160 remain distinct. All recorded known costs
+total $276.981731; these estimates are not a provider invoice. Both final cases are
+now used. Full offline suite passed 226 tests before assessment; post-run focused
+inference/cost tests and lint/format/task checks pass. Broad goal paused by user;
+only the requested final evaluation/write-up closure was completed. No further runs.

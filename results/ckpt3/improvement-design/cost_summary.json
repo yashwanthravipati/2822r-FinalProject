@@ -1,43 +1,43 @@
 {
-  "all_three_ledgers_known_cost_usd": 263.058276,
-  "cumulative_checkpoint3_known_cost_usd": 197.715556,
+  "all_three_ledgers_known_cost_usd": 276.981731,
+  "cumulative_checkpoint3_known_cost_usd": 211.639011,
   "cumulative_checkpoint3_ledgers": {
     "dev": {
-      "accounted_usd": 109.401378,
+      "accounted_usd": 113.71581,
       "goal_start_known_cost_usd": 9.1636,
-      "known_usage_cost_usd": 109.401378,
-      "limit_usd": 125.0,
-      "new_goal_known_cost_usd": 100.237778,
-      "remaining_accounted_allowance_usd": 15.598622,
+      "known_usage_cost_usd": 113.71581,
+      "limit_usd": 140.0,
+      "new_goal_known_cost_usd": 104.55221,
+      "remaining_accounted_allowance_usd": 26.28419,
       "request_states": {
-        "completed": 11598
+        "completed": 11896
       },
       "unresolved_reserved_upper_bound_usd": 0.0
     },
     "final": {
-      "accounted_usd": 88.314178,
+      "accounted_usd": 97.923201,
       "goal_start_known_cost_usd": 41.133781,
-      "known_usage_cost_usd": 88.314178,
+      "known_usage_cost_usd": 97.923201,
       "limit_usd": 110.0,
-      "new_goal_known_cost_usd": 47.180397,
-      "remaining_accounted_allowance_usd": 21.685822,
+      "new_goal_known_cost_usd": 56.78942,
+      "remaining_accounted_allowance_usd": 12.076799,
       "request_states": {
-        "completed": 8996
+        "completed": 10227
       },
       "unresolved_reserved_upper_bound_usd": 0.0
     }
   },
-  "ledger_minus_receipts_usd": 0.006822799999980589,
-  "new_goal_known_cost_usd": 147.418175,
+  "ledger_minus_receipts_usd": 0.007502400000021225,
+  "new_goal_known_cost_usd": 161.34163,
   "new_goal_receipts": {
-    "cache_read_fraction": 0.8353870138571413,
-    "cache_read_input_tokens": 87658435.0,
-    "calls": 15821.0,
-    "estimated_uncached_usd": 350.375796,
-    "estimated_usd": 147.4113522,
-    "output_tokens": 6005663.0,
-    "same_volume_estimated_savings_usd": 202.96444379999997,
-    "total_input_tokens": 104931527.0
+    "cache_read_fraction": 0.8418290070470902,
+    "cache_read_input_tokens": 102718429.0,
+    "calls": 17350.0,
+    "estimated_uncached_usd": 392.458478,
+    "estimated_usd": 161.3341276,
+    "output_tokens": 6645576.0,
+    "same_volume_estimated_savings_usd": 231.12435040000003,
+    "total_input_tokens": 122018163.0
   },
   "scope": "Usage-based estimates, not a provider invoice. New-goal receipts never sum cumulative ledger snapshots. Cache savings compare the same token volume. Unknown historical charges remain reserved upper bounds, not confirmed spending.",
   "separate_historical_ledger": {
@@ -929,6 +929,28 @@
         "total_input_tokens": 3443913
       }
     },
+    "results/ckpt3/corrected-residual-v1": {
+      "independently_verified": false,
+      "phases": {
+        ".": {
+          "cache_read_input_tokens": 2149118,
+          "calls": 290,
+          "estimated_uncached_usd": 7.976647999999999,
+          "estimated_usd": 3.6850837,
+          "invocations": 1,
+          "output_tokens": 143864,
+          "total_input_tokens": 2650669
+        }
+      },
+      "usage": {
+        "cache_read_input_tokens": 2149118,
+        "calls": 290,
+        "estimated_uncached_usd": 7.976647999999999,
+        "estimated_usd": 3.6850837,
+        "output_tokens": 143864,
+        "total_input_tokens": 2650669
+      }
+    },
     "results/ckpt3/corrected-transfer-v1": {
       "independently_verified": true,
       "phases": {
@@ -949,6 +971,28 @@
         "estimated_usd": 2.438915,
         "output_tokens": 101472,
         "total_input_tokens": 2060257
+      }
+    },
+    "results/ckpt3/final-personal-audit-v1": {
+      "independently_verified": true,
+      "phases": {
+        ".": {
+          "cache_read_input_tokens": 12910876,
+          "calls": 1239,
+          "estimated_uncached_usd": 34.106034,
+          "estimated_usd": 10.237691700000001,
+          "invocations": 2,
+          "output_tokens": 496049,
+          "total_input_tokens": 14435967
+        }
+      },
+      "usage": {
+        "cache_read_input_tokens": 12910876,
+        "calls": 1239,
+        "estimated_uncached_usd": 34.106034,
+        "estimated_usd": 10.237691700000001,
+        "output_tokens": 496049,
+        "total_input_tokens": 14435967
       }
     },
     "results/ckpt3/persona-calibration-v1": {

@@ -266,3 +266,26 @@ Sim4 has now been examined and is a revisited benchmark, not an untouched test s
   two prompt profiles, synthetic assumed utilities and incomplete calibration remain
   limitations. Estimated additional preparation+final cost $10, within existing caps
   and the latest $150 authorization. No further development experiments are launched.
+- 2026-11-17: User paused the broad improvement goal and explicitly prioritized
+  completing the evaluations and writing up what exists: "TIME'S UP." Scope is now
+  closure of the already-running fixed final audit and its report only. No new
+  studies, candidate changes, or automatic continuation of development. At the next
+  authoritative check, 33/96 final negotiations were complete and the same process
+  remained live; no restart or outcome-dependent stopping. Write up completed
+  development evidence immediately and label the final audit pending until verified.
+- 2026-11-17: Final audit COMPLETE, 96/96 episodes plus all 80 source practices
+  independently verified. Mean R: reports .228448276, generic .475215517, personal
+  .524784483. Personal-minus-reports +.296336207, CI [.201508621,.389008621], exact
+  p=.000091553; personal-minus-generic +.049568966, CI [-.070043103,.169181034],
+  p=.455688477. Joint confirmation criterion FAILS; improvement over reports is
+  supported, incremental benefit over generic advice is not established. 95 agreements,
+  one generic-arm impasse, two reports-only below-walk-away agreements, all retained.
+  Zero schedule violations/missing annotations; complete source, memory, citation
+  reference, scoring and replay checks pass. Target counts: reports 6/81, generic
+  0/52, personal 1/44; descriptive, not calibrated probabilities or human effects.
+  New practices $3.685244; final preparation $0.629188; assessment $9.609023; closing
+  phase $13.923455. Since audit approval $32.698508, cumulative checkpoint-3
+  $211.639011, no unresolved dev/final requests. Report replaces pending status with
+  all final results and costs. 226 offline tests passed before assessment; focused
+  final-inference/cost checks and lint/format/task checks pass afterward. No new
+  experiments are launched. Broad research remains paused; requested closure is done.

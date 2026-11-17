@@ -1,0 +1,22 @@
+{
+  "K": 5,
+  "case": "pine_learning",
+  "case_sha256": "4756da87a54f74765e3467a289e838b9be76734126a31a7eb33386b7535c6bb8",
+  "probe_tiers": [
+    1,
+    3,
+    5
+  ],
+  "protocol_sha256": "3a8f561b2755ee4e3f927001abce30a6b6c9eb920593d30a3f8d91ef331298ea",
+  "reward": "surplus_share",
+  "role": "district",
+  "scoring": "declared numeric case utilities",
+  "training_tiers": [
+    2,
+    2,
+    4,
+    4,
+    4
+  ],
+  "user": 14
+}

@@ -29,10 +29,13 @@ In this project, we test whether rehearsing a negotiation with an LLM coach can 
 \paragraph{Scope of the present evidence.}
 We have not conducted a human pilot. The results below evaluate simulated LLM
 negotiators and distinguish improvements over their own baselines from improvements
-over an existing coaching method. A corrected matched-history study found higher
-validation scores from per-user memory selection than from ordinary reports, but
-did not establish superiority over reports plus generic advice. Its stronger
-prespecified success criterion was not met. The human-learning question remains open.
+over an existing coaching method. The completed final audit compares sixteen
+simulation histories on two unused synthetic cases: mean normalized score is 0.2284
+with ordinary reports, 0.4752 with reports plus generic advice, and 0.5248 with reports
+plus personal plans. Personal plans improve over reports ($p<0.001$), but their
+advantage over generic advice is inconclusive ($p=0.456$). The stronger criterion
+requiring superiority over both controls was not met. The human-learning question
+remains open.
 A new, separately frozen corrected-core comparison found higher Sim4 scores with
 five retained coaching reports than without feedback: mean paired gain $0.4094$
 across four simulation replicates. This is exploratory evidence from two concession
@@ -749,6 +752,85 @@ These are project API usage estimates, not an invoice. The result supports furth
 development of retained reports plus advice, while superiority over generic advice
 and the value of individual selection remain unresolved.
 
+\paragraph{Unconditional final audit of personal plans.}
+After ending development, we froze an unconditional audit of the existing
+personal-plan generator. This does not turn the earlier failed advance criterion
+into a pass.
+The personal-plan arm had the highest secondary development mean, so its selection
+for this audit is disclosed; there is no per-user arm selector in the final test.
+Eight existing plans and their Sim3 histories were preserved exactly. Eight additional
+histories completed the same five-session practice schedule, and the unchanged
+generator produced their plans. All 80 source practices were independently verified;
+the 40 new practices cost \$3.685244. There are sixteen stochastic histories of two
+concession profiles, eight per profile, rather than sixteen distinct human types.
+
+Pine Learning and Willow Kitchen are original fictional cases with five and four
+issues respectively, explicit constraints for both roles, and assumed utility tables.
+They were authored after the earlier development studies, then frozen before this
+final audit, and had no recorded prior negotiations. They are investigator-authored
+synthetic cases, not an externally sampled benchmark. They were originally reserved
+for the abandoned search; the allocation
+to this unconditional audit was amended before any outcomes, with file hashes unchanged.
+The audit compares reports, reports plus generic advice, and reports plus the personal
+plan on both cases: 96 negotiations at tier 3, with matched controller seeds and
+randomized arm order. All memories are frozen before assessment; no final-case
+feedback, tuning or outcome-dependent stopping is allowed. The primary rule requires
+positive paired means and exact two-sided sign-flip $p\leq0.05$ against both controls,
+averaging the two cases within each history before inference. Sixteen histories
+permit 65,536 sign assignments; bootstrap intervals use 10,000 history-level resamples.
+The original generator's soft word-limit and portability limitations remain part of
+the tested method, rather than being silently corrected after seeing final outcomes.
+
+\begin{center}
+\begin{tabular}{lrrr}
+\hline
+Final case & Reports & Reports + generic & Reports + personal \\
+\hline
+Pine Learning & 0.2974 & 0.4677 & 0.5776 \\
+Willow Kitchen & 0.1595 & 0.4828 & 0.4720 \\
+\hline
+Mean & 0.2284 & 0.4752 & 0.5248 \\
+\hline
+\end{tabular}
+\end{center}
+
+All 96 planned final negotiations completed. Personal plans improved over reports
+by $0.2963$, paired bootstrap 95\% interval $[0.2015,0.3890]$, exact two-sided
+sign-flip $p=0.0000916$. Against generic advice, the mean difference was $0.0496$,
+interval $[-0.0700,0.1692]$, $p=0.4556885$. \textbf{The prespecified joint
+confirmation criterion failed.} The case-specific means above are descriptive:
+the personal plan scored higher than generic advice on Pine and slightly lower on
+Willow. This supports a score benefit over ordinary reports in the tested simulator,
+but does not establish an incremental benefit of personalization over generic advice
+or statistical equivalence between those two methods. The previous development
+selector's failed gate remains failed; neither result is replaced by a favorable
+secondary comparison.
+
+There were 95 agreements and one impasse, the latter in the generic arm. Two
+reports-only agreements fell below walk-away value; all were retained in the scores.
+Personal plans reached 32/32 agreements with no below-walk-away outcomes. Target-error
+counts were 6/81 opportunities with reports, 0/52 with generic advice and 1/44 with
+personal plans. These descriptive, trajectory-dependent counts do not validate the
+nominal trait frequencies or a human-learning mechanism. All 80 source practices
+and 96 final episodes passed independent scoring, transcript replay, schedule,
+annotation, source-hash and memory checks. Cited user decisions exist; this does
+not certify the semantic correctness of every generated lesson. All sixteen plans
+exceeded the requested soft word limit (169--216 words); the unchanged generator
+and its limitations are part of the evaluated method.
+
+Final preparation cost \$0.629188 for eight newly generated plans; the other eight
+were reused exactly. Final assessment cost \$9.609023. Together with the forty new
+practices (\$3.685244), this closing phase cost \$13.923455; preparation plus assessment
+used 1,239 requests. Known project API spending since the audit authorization is now
+\$32.698508 of the authorized \$150. Cumulative checkpoint-3 usage is \$211.639011
+(development \$113.715810; final \$97.923201), with no unresolved requests in those
+two ledgers. Including the separate historical ledger, recorded known costs total
+\$276.981731; its nine older uncertain requests retain a \$68.092160 reserved upper
+bound, not a confirmed charge. These are usage estimates, not a provider invoice.
+Both final cases are now used and cannot serve as untouched holdouts again.
+A proposed residual-advice search was abandoned before candidate generation or
+assessment. Further superiority or human-transfer claims require additional evidence.
+
 \paragraph{Reproducibility.}
 Numeric results, paired rows, frozen protocols and plots are under
 \path{results/ckpt3/}. The initial transfer study is \path{final-v1}; the two later
@@ -762,7 +844,7 @@ separately in \path{audit-corrected-smoke-v1} and \path{persona-calibration-v1}.
 The behavioral screen used core revision \texttt{e8e0820}; its strict verifier
 requires that frozen implementation. The subsequent validation-only fix preserves
 all five public case serializations and all 579 recorded offer scores, checked in
-\path{validation_recheck.json}. The current offline suite passes 224 tests;
+\path{validation_recheck.json}. The current offline suite passes 226 tests;
 the live API test is excluded from that count.
 Controlled diagnostics are in \path{persona-probes-v1}, \path{persona-probes-v2} and
 \path{persona-probes-v3}; the new transfer comparison is \path{corrected-transfer-v1}.
@@ -777,6 +859,11 @@ and generation code frozen at \texttt{dd19a8d}, selections committed at
 \texttt{4dd8b15} before validation results, and independent checks in
 \path{scripts/verify_adaptive_memory.py}. Plan-format and attainable-inference limits
 are recorded alongside the outcomes rather than silently repaired after assessment.
+The final audit is \path{final-personal-audit-v1}, frozen at \texttt{b810560} before
+assessment and independently checked by \path{scripts/verify_final_personal_audit.py}.
+The additional practice histories are under \path{corrected-residual-v1}; that directory
+contains cohort expansion only, not a completed residual-advice search. The case
+allocation amendment preserves the original case hashes and the change in study scope.
 
 \begin{thebibliography}{1}
 \bibitem{gepa}

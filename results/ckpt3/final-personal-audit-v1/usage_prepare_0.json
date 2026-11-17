@@ -1,0 +1,33 @@
+{
+  "after": {
+    "accounted_usd": 113.71581,
+    "actual_usd": 113.71581,
+    "limit_usd": 140.0,
+    "remaining_usd": 26.28419,
+    "requests": 11896,
+    "unresolved_requests": 0
+  },
+  "before": {
+    "accounted_usd": 113.086622,
+    "actual_usd": 113.086622,
+    "limit_usd": 140.0,
+    "remaining_usd": 26.913378,
+    "requests": 11888,
+    "unresolved_requests": 0
+  },
+  "coach": {
+    "cache_creation_1h_input_tokens": 0,
+    "cache_creation_5m_input_tokens": 110507,
+    "cache_creation_input_tokens": 110507,
+    "cache_hit_call_fraction": 0.875,
+    "cache_hit_calls": 7,
+    "cache_read_fraction": 0.06362558238034731,
+    "cache_read_input_tokens": 7511,
+    "calls": 8,
+    "estimated_uncached_usd": 0.54722,
+    "estimated_usd": 0.6291852,
+    "input_tokens": 32,
+    "output_tokens": 3751,
+    "total_input_tokens": 118050
+  }
+}

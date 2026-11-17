@@ -74,6 +74,8 @@ def main():
         "corrected-transfer-v1",
         "corrected-confirmation-v1",
         "corrected-adaptive-memory-v1",
+        "corrected-residual-v1",
+        "final-personal-audit-v1",
     ):
         root = Path("results/ckpt3") / name
         if root.exists():

@@ -1,0 +1,10 @@
+{
+  "cases": [
+    "pine_learning",
+    "willow_kitchen"
+  ],
+  "policy": "Both cases have been used by the fixed final audit. They must not be described or reused as untouched holdouts in later studies.",
+  "recorded_utc": "2026-11-17T23:55:08.002603+00:00",
+  "status": "assessment_complete",
+  "verified_final_episodes": 96
+}

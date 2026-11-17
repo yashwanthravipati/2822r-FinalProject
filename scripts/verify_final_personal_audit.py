@@ -108,13 +108,21 @@ def main():
     old_protocol = json.loads(
         Path("results/ckpt3/corrected-confirmation-v1/protocol.json").read_text()
     )
+    source_rows = json.loads((COHORT / "training_rows.json").read_text()) + json.loads(
+        Path("results/ckpt3/corrected-confirmation-v1/training_rows.json").read_text()
+    )
+    assert len(source_rows) == 80
+    by_stage = {(r["user"], r["stage"]): r for r in source_rows}
+    assert set(by_stage) == {(u, t) for u in USERS for t in range(5)}
     practice = []
     for u in USERS:
         sessions, reports = load_history(u)
         for t, _s in enumerate(sessions):
             seed = (old_protocol["seed"] if u < 8 else TRAIN_SEED) + u * 1009 + t
             raw = history_root(u) / f"user{u}_practice{t}.json"
-            checked = audit_episode(raw, train_case, "officer", (2, 2, 4, 4, 4)[t], seed)
+            checked = audit_episode(
+                raw, train_case, "officer", (2, 2, 4, 4, 4)[t], seed, by_stage[u, t]
+            )
             practice.append({"user": u, "stage": t, **checked})
             feedback = json.loads(
                 (history_root(u) / f"user{u}_practice{t}.feedback.json").read_text()
