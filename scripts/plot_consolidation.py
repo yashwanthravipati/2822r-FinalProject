@@ -19,13 +19,17 @@ def main():
         "reflection": "Reflective\ncard",
         "workbook": "Personalized\nworkbook",
         "procedure_only": "Fixed\nprocedure",
+        "personalized_selection": "Selected per\npersona",
     }
     plot.COLORS = {
         "reports": "#7b8490",
         "reflection": "#366ea5",
         "workbook": "#168577",
         "procedure_only": "#ad8541",
+        "personalized_selection": "#945aa5",
     }
+    if "selected_transfer" in data:
+        data = data["selected_transfer"]
     datasets = [(data["primary"]["rows"], "Primary: cases averaged within persona")]
     datasets += [
         (value["rows"], key.replace("_", " ").title()) for key, value in data["cases"].items()

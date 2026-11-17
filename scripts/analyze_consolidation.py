@@ -13,6 +13,7 @@ from pathlib import Path
 from analyze_ckpt3 import episode_diagnostics, ledger_report, run_usage
 from negotrain.cases import load_case
 from negotrain.evaluation import interval, write_json
+from select_consolidation import select
 from verify_ckpt3 import check, digest, economics
 
 
@@ -161,6 +162,46 @@ def main():
         if entry["primary"]:
             primary.append(rows)
     result["primary"] = aggregate(primary, protocol["users"], protocol["methods"])
+    selection_path = root / "selection.json"
+    if selection_path.exists():
+        selection = read(selection_path)
+        selection_root = root / "assessment" / selection["selection_case"]
+        check(
+            digest(selection_root / "assess_rows.json") == selection["selection_rows_sha256"],
+            "selection rows changed",
+        )
+        check(
+            digest(root / "frozen.json") == selection["frozen_memories_sha256"],
+            "selection memories changed",
+        )
+        chosen = select(read(selection_root / "assess_rows.json"), protocol["users"])
+        check(chosen == selection["selected"], "selection rule mismatch")
+        transfer = []
+        selected_cases = {}
+        for entry in protocol["cases"]:
+            if entry["key"] == selection["selection_case"]:
+                continue
+            rows = result["cases"][entry["key"]]["rows"]
+            selected = [
+                {**r, "method": "personalized_selection"}
+                for r in rows
+                if r["method"] == chosen[str(r["user"])]
+            ]
+            combined = rows + selected
+            selected_cases[entry["key"]] = aggregate(
+                [combined], protocol["users"], protocol["methods"] + ["personalized_selection"]
+            )
+            if entry["primary"]:
+                transfer.append(combined)
+        result["selected_transfer"] = {
+            "selection": selection,
+            "cases": selected_cases,
+            "primary": aggregate(
+                transfer, protocol["users"], protocol["methods"] + ["personalized_selection"]
+            ),
+            "scope": "excludes selection case; selection requires twelve validation "
+            "negotiations per persona",
+        }
     result["common_practice_episodes_verified"] = len(seen_training)
     result["run_usage_by_phase"] = {
         str(p.relative_to(root)): run_usage(p)
