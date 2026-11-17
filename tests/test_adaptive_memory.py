@@ -8,6 +8,7 @@ sys.path.insert(0, str(Path(__file__).parents[1] / "scripts"))
 from adaptive_memory import Plan, build_plan, choose, memory
 from evaluate_adaptive_memory import CASES
 from probe_persona_controls import probe_case, probe_prefix
+from verify_adaptive_memory import selection_limits
 
 
 def test_plan_payload_is_own_visible_and_citations_must_name_user_decisions(tmp_path):
@@ -83,3 +84,13 @@ def test_selector_uses_mean_margin_and_conservative_ties():
     validation = {c[0] for c in CASES["validation"]}
     assert not development & validation
     assert not (development | validation) & {"sim4", "cedar_warehouse"}
+
+
+def test_control_fallbacks_limit_attainable_exact_significance():
+    choices = dict(enumerate(["generic"] * 3 + ["personalized"] * 4 + ["reports"]))
+    limits = selection_limits(choices)
+    assert limits["generic"]["maximum_nonzero_pairs"] == 5
+    assert limits["generic"]["minimum_attainable_two_sided_p"] == 0.0625
+    assert not limits["generic"]["can_pass_p_05"]
+    assert limits["reports"]["can_pass_p_05"]
+    assert selection_limits({0: "generic"})["generic"]["minimum_attainable_two_sided_p"] == 1

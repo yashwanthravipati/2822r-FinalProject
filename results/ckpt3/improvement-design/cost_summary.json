@@ -1,16 +1,16 @@
 {
-  "all_three_ledgers_known_cost_usd": 254.382319,
-  "cumulative_checkpoint3_known_cost_usd": 189.039599,
+  "all_three_ledgers_known_cost_usd": 263.058276,
+  "cumulative_checkpoint3_known_cost_usd": 197.715556,
   "cumulative_checkpoint3_ledgers": {
     "dev": {
-      "accounted_usd": 100.725421,
+      "accounted_usd": 109.401378,
       "goal_start_known_cost_usd": 9.1636,
-      "known_usage_cost_usd": 100.725421,
-      "limit_usd": 115.0,
-      "new_goal_known_cost_usd": 91.561821,
-      "remaining_accounted_allowance_usd": 14.274579,
+      "known_usage_cost_usd": 109.401378,
+      "limit_usd": 125.0,
+      "new_goal_known_cost_usd": 100.237778,
+      "remaining_accounted_allowance_usd": 15.598622,
       "request_states": {
-        "completed": 10643
+        "completed": 11598
       },
       "unresolved_reserved_upper_bound_usd": 0.0
     },
@@ -27,17 +27,17 @@
       "unresolved_reserved_upper_bound_usd": 0.0
     }
   },
-  "ledger_minus_receipts_usd": 0.0064111000000082186,
-  "new_goal_known_cost_usd": 138.742218,
+  "ledger_minus_receipts_usd": 0.006822799999980589,
+  "new_goal_known_cost_usd": 147.418175,
   "new_goal_receipts": {
-    "cache_read_fraction": 0.8315360844740515,
-    "cache_read_input_tokens": 78278413.0,
-    "calls": 14866.0,
-    "estimated_uncached_usd": 324.515664,
-    "estimated_usd": 138.7358069,
-    "output_tokens": 5606983.0,
-    "same_volume_estimated_savings_usd": 185.77985710000002,
-    "total_input_tokens": 94137121.0
+    "cache_read_fraction": 0.8353870138571413,
+    "cache_read_input_tokens": 87658435.0,
+    "calls": 15821.0,
+    "estimated_uncached_usd": 350.375796,
+    "estimated_usd": 147.4113522,
+    "output_tokens": 6005663.0,
+    "same_volume_estimated_savings_usd": 202.96444379999997,
+    "total_input_tokens": 104931527.0
   },
   "scope": "Usage-based estimates, not a provider invoice. New-goal receipts never sum cumulative ledger snapshots. Cache savings compare the same token volume. Unknown historical charges remain reserved upper bounds, not confirmed spending.",
   "separate_historical_ledger": {
@@ -883,6 +883,28 @@
         "estimated_usd": 3.5622547,
         "output_tokens": 136682.0,
         "total_input_tokens": 3085964.0
+      }
+    },
+    "results/ckpt3/corrected-adaptive-memory-v1": {
+      "independently_verified": true,
+      "phases": {
+        ".": {
+          "cache_read_input_tokens": 9380022,
+          "calls": 955,
+          "estimated_uncached_usd": 25.860132,
+          "estimated_usd": 8.6755453,
+          "invocations": 1,
+          "output_tokens": 398680,
+          "total_input_tokens": 10794406
+        }
+      },
+      "usage": {
+        "cache_read_input_tokens": 9380022,
+        "calls": 955,
+        "estimated_uncached_usd": 25.860132,
+        "estimated_usd": 8.6755453,
+        "output_tokens": 398680,
+        "total_input_tokens": 10794406
       }
     },
     "results/ckpt3/corrected-confirmation-v1": {

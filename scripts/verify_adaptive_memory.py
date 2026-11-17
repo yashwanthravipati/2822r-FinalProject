@@ -33,6 +33,20 @@ def inference(differences, seed):
     }
 
 
+def selection_limits(selected):
+    """Exact reuse of a control creates structural zeros, reducing attainable power."""
+    limits = {}
+    for control in ("reports", "generic"):
+        possible = sum(a != control for a in selected.values())
+        minimum_p = min(1.0, 2.0 ** (1 - possible))
+        limits[control] = {
+            "maximum_nonzero_pairs": possible,
+            "minimum_attainable_two_sided_p": minimum_p,
+            "can_pass_p_05": minimum_p <= 0.05,
+        }
+    return limits
+
+
 def main():
     protocol = json.loads((ROOT / "protocol.json").read_text())
     frozen = json.loads((ROOT / "frozen.json").read_text())
@@ -179,6 +193,7 @@ def main():
         "validation_arm_means": {a: sum(m[a] for m in means.values()) / 8 for a in ARMS},
         "validation_selected_mean": sum(means[u][a] for u, a in selected.items()) / 8,
         "selected_minus_control": effects,
+        "selection_implied_inference_limits": selection_limits(selected),
         "personalized_minus_control_secondary": {
             control: inference(
                 [means[str(u)]["personalized"] - means[str(u)][control] for u in USERS],

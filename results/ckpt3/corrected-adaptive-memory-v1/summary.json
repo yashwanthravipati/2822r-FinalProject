@@ -1,0 +1,78 @@
+{
+  "advance_pass": false,
+  "scope": "Development study, two prompt profiles, known public cases, full-session weakness calibration unresolved; no human claim",
+  "selected": {
+    "0": "generic",
+    "1": "generic",
+    "2": "personalized",
+    "3": "personalized",
+    "4": "reports",
+    "5": "personalized",
+    "6": "personalized",
+    "7": "generic"
+  },
+  "selected_minus_control": {
+    "generic": {
+      "ci95": [
+        -0.04086538461538463,
+        0.17908653846153844
+      ],
+      "confirmation_pass": false,
+      "exact_sign_flip_p_two_sided": 0.625,
+      "mean": 0.050480769230769225,
+      "n": 8
+    },
+    "reports": {
+      "ci95": [
+        0.05168269230769232,
+        0.19471153846153844
+      ],
+      "confirmation_pass": true,
+      "exact_sign_flip_p_two_sided": 0.015625,
+      "mean": 0.11778846153846155,
+      "n": 8
+    }
+  },
+  "validation_means": {
+    "0": {
+      "generic": 0.5865384615384616,
+      "personalized": 0.5,
+      "reports": 0.5192307692307693
+    },
+    "1": {
+      "generic": 0.5192307692307693,
+      "personalized": 0.5192307692307693,
+      "reports": 0.5
+    },
+    "2": {
+      "generic": 0.5288461538461539,
+      "personalized": 0.6634615384615385,
+      "reports": 0.3846153846153846
+    },
+    "3": {
+      "generic": 0.3557692307692308,
+      "personalized": 0.7788461538461537,
+      "reports": 0.5288461538461539
+    },
+    "4": {
+      "generic": 0.42307692307692313,
+      "personalized": 0.5096153846153846,
+      "reports": 0.2692307692307692
+    },
+    "5": {
+      "generic": 0.47115384615384615,
+      "personalized": 0.42307692307692313,
+      "reports": 0.3269230769230769
+    },
+    "6": {
+      "generic": 0.5192307692307693,
+      "personalized": 0.5673076923076923,
+      "reports": 0.3557692307692308
+    },
+    "7": {
+      "generic": 0.4326923076923077,
+      "personalized": 0.3557692307692308,
+      "reports": 0.41346153846153844
+    }
+  }
+}

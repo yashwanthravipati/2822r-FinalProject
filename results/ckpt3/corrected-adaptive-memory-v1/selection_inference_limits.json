@@ -1,0 +1,17 @@
+{
+  "action": "Retain all 48 fixed validation outcomes and original criterion. No cohort expansion or one-sided substitution. Report development evidence; size any later independent confirmation prospectively.",
+  "limits": {
+    "generic": {
+      "can_pass_p_05": false,
+      "maximum_nonzero_pairs": 5,
+      "minimum_attainable_two_sided_p": 0.0625
+    },
+    "reports": {
+      "can_pass_p_05": true,
+      "maximum_nonzero_pairs": 7,
+      "minimum_attainable_two_sided_p": 0.015625
+    }
+  },
+  "recorded_utc": "2026-11-17T23:07:28.936250+00:00",
+  "selection_sha256": "91c60cb2aea905e280fdecfc48bf167914cea661c44e9243b8e36d6061945906"
+}

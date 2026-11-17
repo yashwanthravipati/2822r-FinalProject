@@ -24,6 +24,8 @@ Sim4 has now been examined and is a revisited benchmark, not an untouched test s
 - [x] Freeze the selected intervention before assessing fresh personas and cases.
 - [x] Independently verify complete outcomes, paired uncertainty, cost, and failure rates.
 - [x] Report all results, including negative comparisons, and practical limitations.
+- [ ] Establish prospective superiority over both ordinary reports and generic advice
+  with the corrected learner, retaining the unresolved calibration limits explicitly.
 
 ## Log
 - 2026-11-17: Started under the user's continuing autonomous improvement authorization.
@@ -195,3 +197,29 @@ Sim4 has now been examined and is a revisited benchmark, not an untouched test s
   $56.059497 after the pre-audit known $178.940503. This maintains three conservative
   full-context reservations without altering charges, protocol or expected actual cost;
   budget_allocation.json and the ledger limit-change table preserve the decision.
+- 2026-11-17: All 48 development outcomes complete; selection frozen at 4dd8b15 before
+  validation results: four personalized, three generic, one reports. During validation,
+  the inference audit exposed a design-power limit: generic selections create three
+  exact zero differences, leaving at most five nonzero pairs against generic and a
+  minimum attainable two-sided exact p=.0625. Thus the fixed p<=.05 advance gate is
+  unattainable for this realized selection. Record selection_inference_limits.json,
+  add a regression check, retain all fixed validation outcomes and the original gate.
+  No post-outcome sample extension, one-sided substitution or success redefinition.
+  Any later confirmation must plan a larger independent cohort for structural zeros;
+  a larger sample alone cannot fix a weak or negative effect.
+- 2026-11-17: All 96 outcomes independently verified. Validation means: reports
+  .412259615, generic .479567308, personal plan .539663462, selected .530048077.
+  Primary selected-minus-reports +.117788462, CI [.051682692,.194711538], p=.015625;
+  selected-minus-generic +.050480769, CI [-.040865385,.179086538], p=.625. Joint
+  advance gate FAILS; do not claim superiority over both controls or promote a fresh
+  final test under this gate. Secondary all-personalized comparisons: +.127403846
+  versus reports, exact p=.0546875; +.060096154 versus generic, p=.421875. Preserve
+  distinction from the primary selector. Validation target counts: reports 6/42,
+  generic 6/34, personal 0/24, selected 4/33; descriptive/endogenous opportunities.
+  All 96 agreed; one development reports-only below-walk-away outcome retained;
+  no validation below-walk-away, schedule violations or missing tags. Cost
+  $8.675957/955 requests; since latest audit authorization $18.775053. Cumulative
+  checkpoint-3 dev $109.401378 +final $88.314178, zero unresolved calls. 224 offline
+  tests pass, lint/format/task checks clean. Report includes full positive and negative
+  comparisons and planning defects. Reliable superiority over both strong controls
+  remains unestablished; retain the broader goal rather than redefine success.

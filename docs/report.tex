@@ -29,10 +29,10 @@ In this project, we test whether rehearsing a negotiation with an LLM coach can 
 \paragraph{Scope of the present evidence.}
 We have not conducted a human pilot. The results below evaluate simulated LLM
 negotiators and distinguish improvements over their own baselines from improvements
-over an existing coaching method. Although several conditions improve their mean
-score after practice, neither personalized prompt refinement nor varied practice has
-yet demonstrated reliable superiority over ordinary post-session reports in our
-prospective comparisons. The human-learning question remains open.
+over an existing coaching method. A corrected matched-history study found higher
+validation scores from per-user memory selection than from ordinary reports, but
+did not establish superiority over reports plus generic advice. Its stronger
+prespecified success criterion was not met. The human-learning question remains open.
 A new, separately frozen corrected-core comparison found higher Sim4 scores with
 five retained coaching reports than without feedback: mean paired gain $0.4094$
 across four simulation replicates. This is exploratory evidence from two concession
@@ -673,6 +673,82 @@ Cumulative checkpoint-3 usage is \$189.039599: development \$100.725421 and fina
 raised from \$110 to \$115 within that authorization to accommodate conservative
 in-flight reservations; the final cap remains \$110. These are usage estimates.
 
+\paragraph{Corrected matched-history memory selection.}
+To address the stronger comparison, we next froze a development study using only
+the eight corrected learners' five Sim3 practices. An Opus coach generated one or
+two conditional rules per learner from own-visible histories, with citations checked
+against actual user decisions. Every arm retained all five reports: reports alone,
+reports plus generic advice, or reports plus the personal plan. Advice and reports
+were bundled to prevent the learner's five-entry memory limit from dropping a report.
+The plan writer saw neither planted frequencies nor hidden opponent utilities.
+
+Each learner was assessed under all three arms on Harbor and Maple (48 negotiations).
+The selection rule chose the highest two-case mean, requiring at least 0.03 above
+reports and preferring reports, then generic advice, then personalization on ties.
+Selection was frozen before all three arms were assessed on Cloudline and Beacon
+(48 further negotiations). The primary comparison averages the two validation cases
+within each learner, then compares the selected memory with both controls across
+eight replicates. Advancing requires positive means and exact two-sided sign-flip
+$p\leq0.05$ against each control. These are known development cases, not fresh final
+holdouts. No Sim4 or Cedar outcomes enter the plans or selection.
+Output inspection found imperfect adherence to the requested format: the plans
+contained 171--199 words rather than the requested 100--160, and one explicitly
+retained training-case issue references. These limitations were recorded before
+validation; the frozen plans were evaluated as generated without post-outcome edits.
+The rule selected four personal plans, three generic plans and one reports-only memory.
+An inference audit during validation exposed a design-power limitation: selecting
+generic advice creates an exact zero difference against that same control. Thus at
+most five of eight pairs can be nonzero for this contrast, whose smallest attainable
+two-sided exact $p$ is $2/2^5=0.0625$. The original 0.05 gate is consequently
+unattainable for this realized selection. We retain the entire fixed cohort and gate,
+rather than extend the sample or switch to a one-sided test after observing results.
+Any subsequent independent study must account for these structural zeros in its
+sample-size planning; increasing sample size does not itself establish a useful effect.
+
+\begin{center}
+\begin{tabular}{lr}
+\hline
+Validation memory & Mean $R$ \\
+\hline
+Five reports & 0.4123 \\
+Reports + generic advice & 0.4796 \\
+Reports + personal plan (all learners) & 0.5397 \\
+Per-user selected memory (primary) & 0.5300 \\
+\hline
+\end{tabular}
+\end{center}
+
+The selected memory improved over reports by $0.1178$, paired bootstrap 95\% interval
+$[0.0517,0.1947]$, exact two-sided sign-flip $p=0.015625$ (seven positive pairs and
+one structural tie). Against generic advice its mean gain was $0.0505$, interval
+$[-0.0409,0.1791]$, $p=0.625$. The prespecified joint advance criterion failed:
+the generic comparison is uncertain, not merely just below a significance threshold.
+Giving every learner their personal plan had the highest mean, but this is a secondary
+comparison: gain over reports $0.1274$, interval $[0.0420,0.2164]$, exact $p=0.0546875$;
+gain over generic advice $0.0601$, interval $[-0.0300,0.1815]$, $p=0.421875$.
+We do not replace the primary selection criterion with this secondary result.
+
+Validation target-error counts were 6/42 opportunities with reports, 6/34 with generic
+advice, 0/24 with personal plans and 4/33 under the selected mixture. These descriptive
+counts suggest a behavioral difference for the personal-plan arm, but opportunities
+depend on the negotiation trajectory and the nominal trait frequencies remain
+uncalibrated. They do not validate all six controls or a human-learning mechanism.
+All 96 negotiations reached agreement. One development reports-only agreement fell
+below walk-away value and was retained; no validation agreement did. Independent
+replay and exhaustive scoring found no schedule violations or missing annotations,
+and verified the original reports, frozen plans, per-user selections and existence
+of the cited user decisions.
+
+This run used 955 requests and cost \$8.675957, bringing known spending since the latest
+audit authorization to \$18.775053. Cumulative checkpoint-3 usage is \$197.715556:
+development \$109.401378 and final \$88.314178, with no unresolved requests.
+The development ceiling was allocated another \$10, to \$125, to keep three conservative
+request reservations active; final remains \$110. The combined ceilings allow at most
+\$56.059497 after the pre-audit balance, within the user's \$150 new-work allowance.
+These are project API usage estimates, not an invoice. The result supports further
+development of retained reports plus advice, while superiority over generic advice
+and the value of individual selection remain unresolved.
+
 \paragraph{Reproducibility.}
 Numeric results, paired rows, frozen protocols and plots are under
 \path{results/ckpt3/}. The initial transfer study is \path{final-v1}; the two later
@@ -686,7 +762,7 @@ separately in \path{audit-corrected-smoke-v1} and \path{persona-calibration-v1}.
 The behavioral screen used core revision \texttt{e8e0820}; its strict verifier
 requires that frozen implementation. The subsequent validation-only fix preserves
 all five public case serializations and all 579 recorded offer scores, checked in
-\path{validation_recheck.json}. The current offline suite passes 220 tests;
+\path{validation_recheck.json}. The current offline suite passes 224 tests;
 the live API test is excluded from that count.
 Controlled diagnostics are in \path{persona-probes-v1}, \path{persona-probes-v2} and
 \path{persona-probes-v3}; the new transfer comparison is \path{corrected-transfer-v1}.
@@ -696,6 +772,11 @@ all 28 scores, controller schedules and frozen coaching memories.
 The Cedar confirmation protocol and implementation are in
 \path{corrected-confirmation-v1}, committed at \texttt{80e7bb7} before assessment;
 \path{scripts/verify_fresh_confirmation.py} checks its complete cohort independently.
+The corrected selection study is \path{corrected-adaptive-memory-v1}, with protocol
+and generation code frozen at \texttt{dd19a8d}, selections committed at
+\texttt{4dd8b15} before validation results, and independent checks in
+\path{scripts/verify_adaptive_memory.py}. Plan-format and attainable-inference limits
+are recorded alongside the outcomes rather than silently repaired after assessment.
 
 \begin{thebibliography}{1}
 \bibitem{gepa}

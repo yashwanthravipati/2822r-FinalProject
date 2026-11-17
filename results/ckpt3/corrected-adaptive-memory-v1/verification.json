@@ -1,0 +1,1150 @@
+{
+  "advance_pass": false,
+  "diagnostics": [
+    {
+      "R": 0.4473684210526316,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "adcc6ab736e8cbaecfe8cdf2ebdb700fc6439b1353af16b319e02df3faf42851",
+      "status": "agreed",
+      "user": 0
+    },
+    {
+      "R": 0.39473684210526316,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "89e5b2a5b1f9db17389c61e078744736b3ba056ace8d3f786192ecb24c0858ea",
+      "status": "agreed",
+      "user": 0
+    },
+    {
+      "R": 0.42105263157894735,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "b83d49dddbdb1ce2d23708f647188358be6564577d944eedb52f739c24c6675b",
+      "status": "agreed",
+      "user": 0
+    },
+    {
+      "R": 0.4473684210526316,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "337d18c3dfbce0a2606401ba521641bd3dc8aaca88615e1acc2f032beddc4b14",
+      "status": "agreed",
+      "user": 1
+    },
+    {
+      "R": 0.6052631578947368,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "f595d8eb329dc53a0bf7581907b01b6c39fc03002a74fd8931740ce5649ccc1c",
+      "status": "agreed",
+      "user": 1
+    },
+    {
+      "R": 0.42105263157894735,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "9aa42d3bbb97ceccbf92185e0a3ea09060dc49aaa4e7d0ae2dadaabb6b582213",
+      "status": "agreed",
+      "user": 1
+    },
+    {
+      "R": 0.42105263157894735,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "c6c8fc168929ee75a80ea00e5b8d1a96b7b9df4ba0ffbebab065902340ece877",
+      "status": "agreed",
+      "user": 2
+    },
+    {
+      "R": 0.6052631578947368,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "6e0520d36b07683b63fa843b8111e10903b2b9eb35db868d12b3335c8b3d573f",
+      "status": "agreed",
+      "user": 2
+    },
+    {
+      "R": 0.42105263157894735,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "ead5cc42ec5a04b5e0f0c3476fe6d266060aefd969f4ef44a3227245119db66c",
+      "status": "agreed",
+      "user": 2
+    },
+    {
+      "R": 0.4473684210526316,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "c3826de6b3823d67ef34bd239234ab1c8dd9a54a11149482b110e6d3fbefb7bc",
+      "status": "agreed",
+      "user": 3
+    },
+    {
+      "R": 0.4473684210526316,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "d213b2336504c05755f64b2235aa4cc71028a1d4d5a1ed50502971bc050bfccf",
+      "status": "agreed",
+      "user": 3
+    },
+    {
+      "R": 0.42105263157894735,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "cde2c1e41d7b76b02426ecfade804d64adeb1339451b1c41cdb3c4b924816bce",
+      "status": "agreed",
+      "user": 3
+    },
+    {
+      "R": 0.42105263157894735,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "f9742af7f3619a9bc258ad176f970a9873dc6753a75eb8c46b9b67bb82731f6c",
+      "status": "agreed",
+      "user": 4
+    },
+    {
+      "R": 0.21052631578947367,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "3d351802f1289b480a8c88fbc1ae808ff3ade3b22a0e787cea1074b6b38a5f65",
+      "status": "agreed",
+      "user": 4
+    },
+    {
+      "R": 0.21052631578947367,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "96500743a430e55b910b4c06d0debc8b98033559731c873da9dd65d09dbbc1aa",
+      "status": "agreed",
+      "user": 4
+    },
+    {
+      "R": -0.02631578947368421,
+      "arm": "reports",
+      "below_walkaway": true,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "36f0be9613b5a8a4a16f36bc038d68246eede41cf6a8d1e65f9f2e77cc6bcf41",
+      "status": "agreed",
+      "user": 5
+    },
+    {
+      "R": 0.7631578947368421,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "9302ec43750a8bc7a1dd1c50e0305800174b459b675f69da59eb753f5ea0ef65",
+      "status": "agreed",
+      "user": 5
+    },
+    {
+      "R": 0.42105263157894735,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "4725c4896724327b280bf288fc8d4a6257c04135f30e941c4eb1f19935d94bd9",
+      "status": "agreed",
+      "user": 5
+    },
+    {
+      "R": 0.05263157894736842,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "da2a1b5e99da6ad9e668cae9390715d7e1a14d1e8df42cb681b898020f463543",
+      "status": "agreed",
+      "user": 6
+    },
+    {
+      "R": 0.21052631578947367,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "990fda50fddd1830285aa4a0d8a106c15bd7f6e958a06088294e15cb19f77f3a",
+      "status": "agreed",
+      "user": 6
+    },
+    {
+      "R": 0.42105263157894735,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "9c32a98a5f3f0cd5a10c9d52f79448cc4ffd018f4168797ade2596959ee88841",
+      "status": "agreed",
+      "user": 6
+    },
+    {
+      "R": 0.21052631578947367,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "3c68265a05cd8f59c272bc22f3a32038c12aefba5468a913e8b5a6902d015f78",
+      "status": "agreed",
+      "user": 7
+    },
+    {
+      "R": 0.05263157894736842,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "fc88495bbddfcd9e7d326ec058f45c2fb4b27394437d9882419d016ccb32a229",
+      "status": "agreed",
+      "user": 7
+    },
+    {
+      "R": 0.2631578947368421,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "harbor_analytics",
+      "feasible_best": 370.0,
+      "phase": "development",
+      "raw_sha256": "ef8d086ce3bdf7448ff99f9e3af4ae20c0cfd1bda493b1a75e00e154ba739bd1",
+      "status": "agreed",
+      "user": 7
+    },
+    {
+      "R": 0.5454545454545454,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "4178c4f04b6e7e67dab0bfa2c46d0b3e2dbec4379506c187b804f7091de07231",
+      "status": "agreed",
+      "user": 0
+    },
+    {
+      "R": 0.6363636363636364,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "730373b2ba18ff875d0427f5aae1b4039ffae200fc3f42f00db149b5d46b16fe",
+      "status": "agreed",
+      "user": 0
+    },
+    {
+      "R": 0.8181818181818182,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "03db54570a3999b032c8e9c8d6fd7bb21e0360ebf10df9a0779216ae494875d6",
+      "status": "agreed",
+      "user": 0
+    },
+    {
+      "R": 0.36363636363636365,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "fbbe9c40bd78f073eadc5ff2d2e05ba7b9f697a5178c9e3bb1d668df913e8b68",
+      "status": "agreed",
+      "user": 1
+    },
+    {
+      "R": 0.8181818181818182,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "5326b04e0351868817e9ff64e0e2f778a7dfbd1021777834927b8f8b0a0c45e9",
+      "status": "agreed",
+      "user": 1
+    },
+    {
+      "R": 0.7272727272727273,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "c36a1dc49443e31bf9a5cb94d197dad50de8cad2fa08e6276cd8d1f1dfa65d20",
+      "status": "agreed",
+      "user": 1
+    },
+    {
+      "R": 0.48484848484848486,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "fde94e82f0be6d5560b67d2cdad45e0ca5d3c79a0d7ef562898a67624e9d04a3",
+      "status": "agreed",
+      "user": 2
+    },
+    {
+      "R": 0.2727272727272727,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "683faf0199b570bebbf280d91b6d6999641874b969db1feabd5a2a7551ac87a5",
+      "status": "agreed",
+      "user": 2
+    },
+    {
+      "R": 0.6363636363636364,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "60a11686628118b9608f250429ced8172f6ea642e8c511e57b87312e9fe7cfce",
+      "status": "agreed",
+      "user": 2
+    },
+    {
+      "R": 0.5454545454545454,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "0e1fcb758058e768dc910e78c6e99a540ba07bf1ed418dd4e9058fce91cc476c",
+      "status": "agreed",
+      "user": 3
+    },
+    {
+      "R": 0.6666666666666666,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "aa1cbd61506e95b2dc59f282491bd4ccc9e89f2d12eb0822657dd116ccba9cba",
+      "status": "agreed",
+      "user": 3
+    },
+    {
+      "R": 0.2727272727272727,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "cb447140194c08113a07c228dfbbdfe20c438cc0e31ec2a0615800a3706b5642",
+      "status": "agreed",
+      "user": 3
+    },
+    {
+      "R": 0.5454545454545454,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "a9d6128a1599326949cb403f53238b905d19364e19ed1448cc48cc270e79a498",
+      "status": "agreed",
+      "user": 4
+    },
+    {
+      "R": 0.36363636363636365,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "fde5f6958073420b35306e137aebae8ac849741620fba0f71c7559ddeba2b644",
+      "status": "agreed",
+      "user": 4
+    },
+    {
+      "R": 0.21212121212121213,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "4ee769224e7f7fee354f5789b9851b031c30a3b38713133bbdb665745358911a",
+      "status": "agreed",
+      "user": 4
+    },
+    {
+      "R": 0.48484848484848486,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "818c7dcfd9dec200385c4bb61ceb16dc01dd18ff55179c640ed4768730602cf6",
+      "status": "agreed",
+      "user": 5
+    },
+    {
+      "R": 0.2727272727272727,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "85c9916e51251e470154e8dc8d51097e04fa1740a1970e7677858e5987236763",
+      "status": "agreed",
+      "user": 5
+    },
+    {
+      "R": 0.2727272727272727,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "144994f7d46cb201d7cfa033efdbc0e55e48d14c0db570cc104f157c0dfbd968",
+      "status": "agreed",
+      "user": 5
+    },
+    {
+      "R": 0.18181818181818182,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "6009b61fc191ac1e6f91433b70c408f6c3527d3ca1ad5c77bd18855f13c01e63",
+      "status": "agreed",
+      "user": 6
+    },
+    {
+      "R": 0.6363636363636364,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "f59bab8207bde40528b63a4761bb014404dbeaa1deaae93e14f63d67ebdc5d6e",
+      "status": "agreed",
+      "user": 6
+    },
+    {
+      "R": 0.30303030303030304,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "69c8e7535fef2330a0acf08c41301962b832ab637800597c66b67a6919ff0c5b",
+      "status": "agreed",
+      "user": 6
+    },
+    {
+      "R": 0.2727272727272727,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "c1201ba972ff24c5a3fc3900504c50e19e7be5a3f2d2c1628366bac2e1443cea",
+      "status": "agreed",
+      "user": 7
+    },
+    {
+      "R": 0.06060606060606061,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "21c5bf4da4f11ccd866fd5cf855b481ad820b8227f274ee8ed4c607a219f9838",
+      "status": "agreed",
+      "user": 7
+    },
+    {
+      "R": 0.5454545454545454,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "maple_festival",
+      "feasible_best": 355.0,
+      "phase": "development",
+      "raw_sha256": "2767536040ddc5d4e049d92f74651f9627f8895e57725d4eb2f6bf4df8c566f0",
+      "status": "agreed",
+      "user": 7
+    },
+    {
+      "R": 0.3269230769230769,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "8b5aecb3da3734b7e967e3f47d395baea5be671e44900bbef723c24bae01bded",
+      "status": "agreed",
+      "user": 0
+    },
+    {
+      "R": 0.5576923076923077,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "3f370d65c09687674d01936f060c7e47cf595c075c636952188209192d5ed012",
+      "status": "agreed",
+      "user": 0
+    },
+    {
+      "R": 0.28846153846153844,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "31345a013b23aac588532aeae18d2b787dc2f13f1280abc0337ce0b75a581347",
+      "status": "agreed",
+      "user": 0
+    },
+    {
+      "R": 0.3269230769230769,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "4fdb7aa213e633a5cc8b9bc554a3bfd1224ce3e7c4f16b02ad43896a8fa6793b",
+      "status": "agreed",
+      "user": 1
+    },
+    {
+      "R": 0.34615384615384615,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "ddefa3d454861b0e2368138c8cba40ce5044c1d9011b2c475b4f443dbb6bfb36",
+      "status": "agreed",
+      "user": 1
+    },
+    {
+      "R": 0.38461538461538464,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "0b15de3ea6cce872cc0dbb6aed502678b8fb86705ae709de89f16410120a0818",
+      "status": "agreed",
+      "user": 1
+    },
+    {
+      "R": 0.3269230769230769,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "790ea89342a7e256cb026249466827ea13e3f5aa0e057b8310db44c0b2797c03",
+      "status": "agreed",
+      "user": 2
+    },
+    {
+      "R": 0.5192307692307693,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "dcc978234fb594177a4c024aed05061cf5d29f92e49a7ba5925489714ef7ff42",
+      "status": "agreed",
+      "user": 2
+    },
+    {
+      "R": 0.6153846153846154,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "d6ae806f08506ea3411268eb3bb96e9f468c1e2b7099a64acb8ba2c664cac7f1",
+      "status": "agreed",
+      "user": 2
+    },
+    {
+      "R": 0.5192307692307693,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "22b071b0fa7ae9426e57f98951653b1e3310da1b99c858ea9cf015d02abe9f6a",
+      "status": "agreed",
+      "user": 3
+    },
+    {
+      "R": 0.21153846153846154,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "98da9116ae517c7253918b856a980e7ca52273bb26debb996ea762641032c044",
+      "status": "agreed",
+      "user": 3
+    },
+    {
+      "R": 0.7307692307692307,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "b3caa6287f5d0f898adcb0ce721a2064cc2cd9002cfb3890dacf8f3c96dd5271",
+      "status": "agreed",
+      "user": 3
+    },
+    {
+      "R": 0.23076923076923078,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "7fcc0763ecc5ae91af8a7e7d9d91e2ec93ec2b870c03f680d20bcaf62773ed23",
+      "status": "agreed",
+      "user": 4
+    },
+    {
+      "R": 0.40384615384615385,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "a801200c70e66bda703767fd753168b4511df0bdb6923311b5ec77742adcaf3b",
+      "status": "agreed",
+      "user": 4
+    },
+    {
+      "R": 0.3269230769230769,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "ab8b6dde7bea34708bf7025c7c65f5f755e43794a857be78bc761c2473c1b2b5",
+      "status": "agreed",
+      "user": 4
+    },
+    {
+      "R": 0.23076923076923078,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "3886192fddda9fee7102f9d6eca00abbf29645f29dd00270ca249737802c8df7",
+      "status": "agreed",
+      "user": 5
+    },
+    {
+      "R": 0.23076923076923078,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "d8a222301982fefbae36dcd8b5094fcf6d850380ff9f1d50f438c03248bf9234",
+      "status": "agreed",
+      "user": 5
+    },
+    {
+      "R": 0.23076923076923078,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "73a8ef172add274666d37d04a113acd0b3bf35d22e74a2c4847a54463b78172e",
+      "status": "agreed",
+      "user": 5
+    },
+    {
+      "R": 0.4230769230769231,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "8f4a13ae53cf2939d861e85826c7235dae107bd2c8a7bbabcb305d0be4924638",
+      "status": "agreed",
+      "user": 6
+    },
+    {
+      "R": 0.3269230769230769,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "11beddf0c792b73ae0e0b7efade8691235fe3dfc97127dc6f25c89e379d056e8",
+      "status": "agreed",
+      "user": 6
+    },
+    {
+      "R": 0.21153846153846154,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "a8909be818c343b91b5a1a785fa24e338668035450afae447c5fdf48decffc0a",
+      "status": "agreed",
+      "user": 6
+    },
+    {
+      "R": 0.3269230769230769,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "bbb1070d07e552b638d8b04a657ead97d6fb534a441f56f967807079b6f749d8",
+      "status": "agreed",
+      "user": 7
+    },
+    {
+      "R": 0.21153846153846154,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "05d245dde42b8060053d2fbec7d638600eee5511059830cc584c95d4cbbde6f7",
+      "status": "agreed",
+      "user": 7
+    },
+    {
+      "R": 0.3269230769230769,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "cloudline_hiring",
+      "feasible_best": 8700.0,
+      "phase": "validation",
+      "raw_sha256": "dde2c1d4ca1153a8e477ccc541089f5dac47a2a5d7875888ca166eca9e625c72",
+      "status": "agreed",
+      "user": 7
+    },
+    {
+      "R": 0.7115384615384616,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "a5b9439e6d2d7f3b53cb150515060a6922e2bb5ceeaa02388cb4aefe462b782d",
+      "status": "agreed",
+      "user": 0
+    },
+    {
+      "R": 0.6153846153846154,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "2e6b8f43ffce732554c3d4b6f9c5a3980d832886b0e39f5727f289892ebdb4f7",
+      "status": "agreed",
+      "user": 0
+    },
+    {
+      "R": 0.7115384615384616,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "cf0f4402b4931fae25e33ddfb63c9f3c1fb6f6d9e60450dd869a0ac9ada47e45",
+      "status": "agreed",
+      "user": 0
+    },
+    {
+      "R": 0.7115384615384616,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "3f1a885d0892c22709a849bd4de2578070955d2e2e1dbfcd177522efde22d73e",
+      "status": "agreed",
+      "user": 1
+    },
+    {
+      "R": 0.6538461538461539,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "a28485bb841ebaeb8f065b056f0c4ef2afd230e431b5a9933276815d09c453fe",
+      "status": "agreed",
+      "user": 1
+    },
+    {
+      "R": 0.6538461538461539,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "6dde15c2d42133b53634485518cc20ce975ae43e362a01e0adb878a19ab8b339",
+      "status": "agreed",
+      "user": 1
+    },
+    {
+      "R": 0.4423076923076923,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "4d7f6b477731231538aa0b11e758e45d9d0616dd880efc17fc8d8ae6b26cd2e0",
+      "status": "agreed",
+      "user": 2
+    },
+    {
+      "R": 0.7115384615384616,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "0dd96e039f54c119404c26ab3426f85fb2127724cbf0a7781e7061608bf6751d",
+      "status": "agreed",
+      "user": 2
+    },
+    {
+      "R": 0.5384615384615384,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "5c8b9c680bec36291ea8c8a71e03f047929d4eab6eba4e78ca4a2135dee0fa2f",
+      "status": "agreed",
+      "user": 2
+    },
+    {
+      "R": 0.8269230769230769,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "005a82ef0e994478ebf58a8c291462389f8f4723d64ca5e9e7ca6ec92708e96f",
+      "status": "agreed",
+      "user": 3
+    },
+    {
+      "R": 0.5,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "15906296fbd111cf8acec78b504c2292ca85a3d38045c15706a6fcffd6fab06c",
+      "status": "agreed",
+      "user": 3
+    },
+    {
+      "R": 0.5384615384615384,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "b70571eea7a4f1792c5d1a3b895f2216d2d469fd981f505d3c9e11df961f2cd8",
+      "status": "agreed",
+      "user": 3
+    },
+    {
+      "R": 0.6153846153846154,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "80dff0517ea855aa19bc017f6ac2dadb28d89feafa27273527a2cd93215fad94",
+      "status": "agreed",
+      "user": 4
+    },
+    {
+      "R": 0.6153846153846154,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "1d6b5293bab258c98443c59e1108ed5811aa9cff1522721b22c3c11be8682876",
+      "status": "agreed",
+      "user": 4
+    },
+    {
+      "R": 0.21153846153846154,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "57f09912e5e0e7df5d56e2b8f87c444a3ab29460572004d0d068f52fefc633b2",
+      "status": "agreed",
+      "user": 4
+    },
+    {
+      "R": 0.6153846153846154,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "139bbabf6b8e10c7d46777d7a4af297763cd6dca7a31b01b9cd113d555f0f101",
+      "status": "agreed",
+      "user": 5
+    },
+    {
+      "R": 0.4230769230769231,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "98bf3969b562c406d8381e21e81736ab49056eacc4aa21091db990cce2df18eb",
+      "status": "agreed",
+      "user": 5
+    },
+    {
+      "R": 0.7115384615384616,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "8caacdc0900955c3641ad942b2896746d24daba64bd6babb98457dedcbd9d604",
+      "status": "agreed",
+      "user": 5
+    },
+    {
+      "R": 0.5,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "742802ecd708ce362fb30b45f7db9141d6569a2bb7e820c42610eb2dd385f7fc",
+      "status": "agreed",
+      "user": 6
+    },
+    {
+      "R": 0.7115384615384616,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "9ddbe237848275a05788f8b3f60df3646115861354ad17361d9571398398bc36",
+      "status": "agreed",
+      "user": 6
+    },
+    {
+      "R": 0.7115384615384616,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "bcb6d98426e9996487161710ff18d2f825cb69e8b2fcaf0e09ce9f731279dd60",
+      "status": "agreed",
+      "user": 6
+    },
+    {
+      "R": 0.5384615384615384,
+      "arm": "generic",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "180941ed6b83adf03920d2affca9f3570b6e02cf04f3312bd6485965583249af",
+      "status": "agreed",
+      "user": 7
+    },
+    {
+      "R": 0.5,
+      "arm": "personalized",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "5ec4d5b3fc5d906fb80e3f05a445a3bafbbb2712e4a1e9ad4d4ed04eaa273da5",
+      "status": "agreed",
+      "user": 7
+    },
+    {
+      "R": 0.5,
+      "arm": "reports",
+      "below_walkaway": false,
+      "case": "beacon_museum",
+      "feasible_best": 490.0,
+      "phase": "validation",
+      "raw_sha256": "ed5e8eb8fc3e775f465a4634381fa860900748277be3a35a606916d0ff9da174",
+      "status": "agreed",
+      "user": 7
+    }
+  ],
+  "ledger_cost_usd": 8.675956999999997,
+  "missing_annotations": 0,
+  "personalized_minus_control_secondary": {
+    "generic": {
+      "ci95": [
+        -0.030048076923076927,
+        0.18149038461538453
+      ],
+      "exact_sign_flip_p_two_sided": 0.421875,
+      "mean": 0.060096153846153834
+    },
+    "reports": {
+      "ci95": [
+        0.04203725961538462,
+        0.2163762019230768
+      ],
+      "exact_sign_flip_p_two_sided": 0.0546875,
+      "mean": 0.12740384615384615
+    }
+  },
+  "requests": 955,
+  "schedule_violations": 0,
+  "selected_minus_control": {
+    "generic": {
+      "ci95": [
+        -0.04086538461538463,
+        0.17908653846153844
+      ],
+      "exact_sign_flip_p_two_sided": 0.625,
+      "mean": 0.050480769230769225
+    },
+    "reports": {
+      "ci95": [
+        0.05168269230769232,
+        0.19471153846153844
+      ],
+      "exact_sign_flip_p_two_sided": 0.015625,
+      "mean": 0.11778846153846155
+    }
+  },
+  "selection_implied_inference_limits": {
+    "generic": {
+      "can_pass_p_05": false,
+      "maximum_nonzero_pairs": 5,
+      "minimum_attainable_two_sided_p": 0.0625
+    },
+    "reports": {
+      "can_pass_p_05": true,
+      "maximum_nonzero_pairs": 7,
+      "minimum_attainable_two_sided_p": 0.015625
+    }
+  },
+  "target_counts_descriptive": {
+    "development": {
+      "generic": {
+        "occurrences": 0,
+        "opportunities": 36
+      },
+      "personalized": {
+        "occurrences": 0,
+        "opportunities": 34
+      },
+      "reports": {
+        "occurrences": 3,
+        "opportunities": 47
+      }
+    },
+    "validation": {
+      "generic": {
+        "occurrences": 6,
+        "opportunities": 34
+      },
+      "personalized": {
+        "occurrences": 0,
+        "opportunities": 24
+      },
+      "reports": {
+        "occurrences": 6,
+        "opportunities": 42
+      }
+    }
+  },
+  "validation_arm_means": {
+    "generic": 0.4795673076923077,
+    "personalized": 0.5396634615384616,
+    "reports": 0.41225961538461536
+  },
+  "validation_selected_mean": 0.530048076923077,
+  "verified_episodes": 96
+}

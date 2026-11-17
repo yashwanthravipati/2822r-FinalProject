@@ -181,3 +181,52 @@ ledger entries were preserved, with the change recorded in `budget_allocation.js
 Separate historical uncertain charges remain reserved upper bounds, not known costs.
 The full offline suite passed 220 tests before assessment; the four focused inference
 and cost tests also pass after cost aggregation was extended to include this run.
+
+## Corrected personalization and selection against strong controls
+
+`corrected-adaptive-memory-v1` reused only the eight corrected Sim3 histories, never
+Sim4 or Cedar assessment data. Protocol/code were frozen at `dd19a8d`: reports,
+reports plus generic advice, and reports plus an own-history personal plan. All five
+reports remain exact; bundling prevents the five-entry actor limit from dropping one.
+Own-sheet isolation and cited-user-turn existence are tested. These checks do not
+certify the semantic correctness of every generated coaching statement.
+
+Completed 48 development negotiations on Harbor/Maple, then 48 validation negotiations
+on Cloudline/Beacon. The selection rule required a >=.03 two-case mean gain over
+reports; ties prefer simpler memories. Choices were frozen at `4dd8b15` before
+validation results: four personal, three generic, one reports. Cases are known
+development cases, not untouched final holdouts. All eight remain stochastic replicates
+of two profiles, with full-session trait calibration unresolved.
+
+| Validation arm | Mean R |
+|---|---:|
+| Reports | .412259615 |
+| Reports + generic | .479567308 |
+| Reports + personal plan | .539663462 |
+| Selected per user | .530048077 |
+
+Primary selected-minus-reports +.117788462, CI [.051682692,.194711538], exact p=.015625.
+Selected-minus-generic +.050480769, CI [-.040865385,.179086538], p=.625. **Joint advance
+gate fails.** The personal-plan-only comparisons are secondary: +.127403846 vs reports
+(p=.0546875) and +.060096154 vs generic (p=.421875). Do not substitute the best observed
+arm for the primary criterion. Validation target counts: reports 6/42 opportunities,
+generic 6/34, personal 0/24, selected 4/33; these are descriptive with endogenous
+opportunity counts, not validation of the nominal .9 tendency or a human mechanism.
+
+Two further limitations were caught and retained in public audit artifacts: generated
+plans exceed their requested 100–160 words (171–199) and one explicitly retains past
+issue names; three generic selections also create structural zero contrasts, leaving
+at most five informative pairs and minimum exact two-sided p=.0625 against generic.
+The original cohort/gate was retained; no sample expansion or one-sided substitution.
+A regression test now checks attainable inference limits. A larger cohort alone cannot
+repair a weak or negative intervention, and this run does not authorize advancing the
+candidate under its failed gate.
+
+All 96 agreements, scores and schedules independently verified; one development
+reports-only agreement below walk-away was retained, no such validation failures,
+zero schedule violations/missing annotations. Cost $8.675957 across 955 requests;
+$18.775053 since the audit authorization. Cumulative checkpoint-3 dev $109.401378,
+final $88.314178, no unresolved requests. Dev ceiling allocated $115->$125 within
+the newer $150 joint allowance; final remains $110, all ledger history preserved.
+The complete suite passes 224 offline tests; report and reconciled costs include
+all outcomes and limitations. Superiority over both strong controls remains open.
