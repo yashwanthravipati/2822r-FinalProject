@@ -72,3 +72,18 @@ paired cohort alignment, and no assessment feedback. Protocols fingerprint sourc
 historical inputs, instructions and frozen memories. New files change the source fingerprint;
 the earlier final study remains reproducible at its historical commit, not with a falsely
 claimed matching current-source fingerprint. Raw histories and coaching remain ignored.
+
+## Execution log
+
+- Initial preparation completed: 24 coach calls, $1.491108 usage ($1.491117 ledger delta),
+  no unresolved requests. Development ledger now $10.654717. Workbooks contain roughly
+  5,000 characters versus 16,300 for reports and 1,500 for reflection. These are character
+  counts, not token-cost claims.
+- Code and frozen case design committed as 518f121; independent verifier as 762e0d5.
+  Six new offline tests pass (171 total after adding the analysis test).
+- Started the unchanged v1 candidate on validation personas 4–7 before inspecting complete
+  development results. This is a separate cohort check, not adaptive candidate selection
+  on validation outcomes. Both cohorts retain all four conditions and both known cases.
+  Their already recorded combined forecast is approximately $32–56 additional development
+  cost including preparation, within the existing cumulative cap; at most eight workers
+  across the two processes. No fresh test outcomes are accessed.
