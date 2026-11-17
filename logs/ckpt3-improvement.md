@@ -123,3 +123,9 @@ claimed matching current-source fingerprint. Raw histories and coaching remain i
   cost $5.451397 for 796 calls. The prespecified selector chooses reports for user 4,
   procedure-only for 5, workbook for 6/7. This mapping was materialized after Sim4 began,
   using only completed hiring outcomes and the rule committed before any Sim4 results.
+- Development Sim4 user 0 / reflection / tier 5 received one provider refusal
+  (`reasoning_extraction`) from the counterpart-dialogue call after eight saved turns.
+  The gateway settled the response cost and preserved the checkpoint. Permit one explicit
+  resume at the identical prompt/state; no persona, seed, memory, model, or completed score
+  is replaced. Preserve the original error artifact and retry cost. A recurrent refusal
+  is reported as an unresolved execution failure rather than silently dropping the user.

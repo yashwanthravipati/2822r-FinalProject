@@ -224,6 +224,10 @@ def main():
             "negotiations per persona",
         }
     result["common_practice_episodes_verified"] = len(seen_training)
+    result["execution_errors"] = [
+        {"artifact": str(p.relative_to(root)), "failures": read(p)}
+        for p in sorted(root.rglob("errors_*.json"))
+    ]
     if (root / "training").exists():
         training_rows, training_audit = audit_case(
             root / "training",
