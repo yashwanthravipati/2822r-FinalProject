@@ -1,0 +1,215 @@
+{
+  "calls": 1505.0,
+  "candidate": "diverse_reports",
+  "comparator": "reports",
+  "estimated_usd": 14.235232100000001,
+  "new_assessment_episodes": 72,
+  "pooled": {
+    "cases": 1,
+    "rows": [
+      {
+        "baseline_G": 0.22807017543859645,
+        "final_G": 0.22807017543859645,
+        "gain": 0.0,
+        "method": "diverse_reports",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.22807017543859645,
+        "final_G": 0.23684210526315785,
+        "gain": 0.008771929824561403,
+        "method": "reports",
+        "user": 0
+      },
+      {
+        "baseline_G": 0.17543859649122806,
+        "final_G": 0.1929824561403509,
+        "gain": 0.017543859649122834,
+        "method": "diverse_reports",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.17543859649122806,
+        "final_G": 0.15789473684210525,
+        "gain": -0.017543859649122806,
+        "method": "reports",
+        "user": 1
+      },
+      {
+        "baseline_G": 0.2280701754385965,
+        "final_G": 0.21052631578947367,
+        "gain": -0.017543859649122834,
+        "method": "diverse_reports",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.2280701754385965,
+        "final_G": 0.09649122807017545,
+        "gain": -0.13157894736842107,
+        "method": "reports",
+        "user": 2
+      },
+      {
+        "baseline_G": 0.14035087719298245,
+        "final_G": 0.23684210526315785,
+        "gain": 0.0964912280701754,
+        "method": "diverse_reports",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.14035087719298245,
+        "final_G": 0.13157894736842105,
+        "gain": -0.008771929824561403,
+        "method": "reports",
+        "user": 3
+      },
+      {
+        "baseline_G": 0.01754385964912279,
+        "final_G": 0.22807017543859645,
+        "gain": 0.21052631578947367,
+        "method": "diverse_reports",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.01754385964912279,
+        "final_G": 0.09649122807017545,
+        "gain": 0.07894736842105265,
+        "method": "reports",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.21052631578947367,
+        "final_G": 0.07017543859649122,
+        "gain": -0.14035087719298245,
+        "method": "diverse_reports",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.21052631578947367,
+        "final_G": 0.13157894736842105,
+        "gain": -0.07894736842105263,
+        "method": "reports",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.07894736842105264,
+        "final_G": 0.07894736842105264,
+        "gain": 0.0,
+        "method": "diverse_reports",
+        "user": 6
+      },
+      {
+        "baseline_G": 0.07894736842105264,
+        "final_G": 0.14035087719298245,
+        "gain": 0.06140350877192981,
+        "method": "reports",
+        "user": 6
+      },
+      {
+        "baseline_G": 0.15789473684210525,
+        "final_G": 0.21929824561403508,
+        "gain": 0.06140350877192982,
+        "method": "diverse_reports",
+        "user": 7
+      },
+      {
+        "baseline_G": 0.15789473684210525,
+        "final_G": 0.14035087719298245,
+        "gain": -0.017543859649122806,
+        "method": "reports",
+        "user": 7
+      }
+    ],
+    "summary": {
+      "diverse_reports": {
+        "baseline_G": {
+          "ci95": [
+            0.10526315789473684,
+            0.19956140350877194
+          ],
+          "mean": 0.15460526315789475,
+          "n": 8
+        },
+        "final_G": {
+          "ci95": [
+            0.13157894736842105,
+            0.22258771929824558
+          ],
+          "mean": 0.18311403508771928,
+          "n": 8
+        },
+        "gain": {
+          "ci95": [
+            -0.03508771929824562,
+            0.09539473684210525
+          ],
+          "mean": 0.028508771929824556,
+          "n": 8
+        }
+      },
+      "reports": {
+        "baseline_G": {
+          "ci95": [
+            0.10526315789473684,
+            0.19956140350877194
+          ],
+          "mean": 0.15460526315789475,
+          "n": 8
+        },
+        "final_G": {
+          "ci95": [
+            0.11732456140350878,
+            0.1732456140350877
+          ],
+          "mean": 0.14144736842105263,
+          "n": 8
+        },
+        "gain": {
+          "ci95": [
+            -0.058114035087719305,
+            0.028508771929824563
+          ],
+          "mean": -0.013157894736842106,
+          "n": 8
+        }
+      },
+      "reports_minus_diverse_reports": {
+        "ci95": [
+          -0.08662280701754385,
+          0.009868421052631571
+        ],
+        "mean": -0.041666666666666664,
+        "n": 8
+      }
+    }
+  },
+  "pooled_contrast": {
+    "ci95": [
+      -0.009868421052631571,
+      0.08662280701754385
+    ],
+    "mean": 0.041666666666666664,
+    "n": 8
+  },
+  "proceed": true,
+  "reused_episodes": 0,
+  "rule": "Proceed only if paired candidate-minus-reports mean is positive both pooled and in the separate validation cohort; this is not a significance claim.",
+  "sources": {
+    "results/ckpt3/consolidation-diverse-dev-v1": {
+      "protocol_sha256": "bb84a14c62951fe3ae16a564ca1afda9cb9d8c2f7577202db8b3bb82724a97b5",
+      "verified_analysis_sha256": "1228c4a492261b8d6097c3a64c43e0ab2d43ece4ea5e13fada7d0f03c7a9f3f3"
+    },
+    "results/ckpt3/consolidation-diverse-validation-v1": {
+      "protocol_sha256": "68c9866b6430baf8b80fd92ba626ed93534b6a65d8afe02e930475aaec8fc02e",
+      "verified_analysis_sha256": "cccbc0b98876ca6d20ccb42923fe3d0f1749bbb1e7d2003e2cf127233342ed72"
+    }
+  },
+  "validation_contrast": {
+    "ci95": [
+      -0.061403508771929814,
+      0.10526315789473684
+    ],
+    "mean": 0.021929824561403504,
+    "n": 4
+  }
+}

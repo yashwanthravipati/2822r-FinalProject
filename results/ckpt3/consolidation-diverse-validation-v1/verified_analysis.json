@@ -1,0 +1,396 @@
+{
+  "cases": {
+    "harbor_analytics": {
+      "below_walkaway": 10,
+      "cases": 1,
+      "diagnostics": {
+        "agreement_rate": 1.0,
+        "below_walkaway_agreements": 10,
+        "conditions": {
+          "baseline": {
+            "agreements": 12,
+            "below_walkaway_agreements": 3,
+            "episodes": 12,
+            "mean_user_turns": 7.0
+          },
+          "diverse_reports_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 3,
+            "episodes": 12,
+            "mean_user_turns": 6.916666666666667
+          },
+          "reports_assessment": {
+            "agreements": 12,
+            "below_walkaway_agreements": 4,
+            "episodes": 12,
+            "mean_user_turns": 6.416666666666667
+          }
+        },
+        "episodes": 36,
+        "schedule_violations": 0
+      },
+      "episodes": 36,
+      "feasible_best": 370.0,
+      "rows": [
+        {
+          "baseline_G": 0.01754385964912279,
+          "final_G": 0.22807017543859645,
+          "gain": 0.21052631578947367,
+          "method": "diverse_reports",
+          "user": 4
+        },
+        {
+          "baseline_G": 0.01754385964912279,
+          "final_G": 0.09649122807017545,
+          "gain": 0.07894736842105265,
+          "method": "reports",
+          "user": 4
+        },
+        {
+          "baseline_G": 0.21052631578947367,
+          "final_G": 0.07017543859649122,
+          "gain": -0.14035087719298245,
+          "method": "diverse_reports",
+          "user": 5
+        },
+        {
+          "baseline_G": 0.21052631578947367,
+          "final_G": 0.13157894736842105,
+          "gain": -0.07894736842105263,
+          "method": "reports",
+          "user": 5
+        },
+        {
+          "baseline_G": 0.07894736842105264,
+          "final_G": 0.07894736842105264,
+          "gain": 0.0,
+          "method": "diverse_reports",
+          "user": 6
+        },
+        {
+          "baseline_G": 0.07894736842105264,
+          "final_G": 0.14035087719298245,
+          "gain": 0.06140350877192981,
+          "method": "reports",
+          "user": 6
+        },
+        {
+          "baseline_G": 0.15789473684210525,
+          "final_G": 0.21929824561403508,
+          "gain": 0.06140350877192982,
+          "method": "diverse_reports",
+          "user": 7
+        },
+        {
+          "baseline_G": 0.15789473684210525,
+          "final_G": 0.14035087719298245,
+          "gain": -0.017543859649122806,
+          "method": "reports",
+          "user": 7
+        }
+      ],
+      "status": "development_revisited",
+      "status_counts": {
+        "agreed": 36
+      },
+      "summary": {
+        "diverse_reports": {
+          "baseline_G": {
+            "ci95": [
+              0.04824561403508772,
+              0.1842105263157895
+            ],
+            "mean": 0.11622807017543858,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.07456140350877194,
+              0.22368421052631576
+            ],
+            "mean": 0.14912280701754385,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.08991228070175439,
+              0.15789473684210525
+            ],
+            "mean": 0.03289473684210526,
+            "n": 4
+          }
+        },
+        "reports": {
+          "baseline_G": {
+            "ci95": [
+              0.04824561403508772,
+              0.1842105263157895
+            ],
+            "mean": 0.11622807017543858,
+            "n": 4
+          },
+          "final_G": {
+            "ci95": [
+              0.1074561403508772,
+              0.14035087719298245
+            ],
+            "mean": 0.12719298245614036,
+            "n": 4
+          },
+          "gain": {
+            "ci95": [
+              -0.04824561403508772,
+              0.07017543859649122
+            ],
+            "mean": 0.010964912280701757,
+            "n": 4
+          }
+        },
+        "reports_minus_diverse_reports": {
+          "ci95": [
+            -0.10526315789473684,
+            0.061403508771929814
+          ],
+          "mean": -0.021929824561403504,
+          "n": 4
+        }
+      }
+    }
+  },
+  "control_practice_episodes_verified": 20,
+  "cumulative_budget": {
+    "accounted_usd": 84.99073799999988,
+    "known_cost_usd": 84.99073799999988,
+    "models": {
+      "claude-opus-5-5": {
+        "accounted_usd": 50.6626679999999,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 2498147.0,
+        "cache_creation_input_tokens": 2498147.0,
+        "cache_hit_calls": 4169.0,
+        "cache_read_fraction": 0.7616503825464132,
+        "cache_read_input_tokens": 15106921.0,
+        "estimated_savings_usd": 54.90633600000017,
+        "estimated_uncached_usd": 105.56900400000006,
+        "input_tokens": 2229388.0,
+        "known_cost_usd": 50.6626679999999,
+        "output_tokens": 1311559.0,
+        "requests": 4213.0
+      },
+      "claude-sonnet-5-5": {
+        "accounted_usd": 34.32806999999999,
+        "cache_creation_1h_input_tokens": 0.0,
+        "cache_creation_5m_input_tokens": 3022742.0,
+        "cache_creation_input_tokens": 3022742.0,
+        "cache_hit_calls": 4570.0,
+        "cache_read_fraction": 0.8645449343379922,
+        "cache_read_input_tokens": 31528197.0,
+        "estimated_savings_usd": 58.390216000000045,
+        "estimated_uncached_usd": 92.71828600000003,
+        "input_tokens": 1917029.0,
+        "known_cost_usd": 34.32806999999999,
+        "output_tokens": 1978235.0,
+        "requests": 4614.0
+      }
+    },
+    "states": {
+      "completed": 8827
+    }
+  },
+  "diverse_practice": {
+    "below_walkaway": 0,
+    "new_episodes": 12,
+    "status_counts": {
+      "agreed": 12
+    }
+  },
+  "execution_errors": [],
+  "new_assessment_episode_count": 36,
+  "primary": {
+    "cases": 1,
+    "rows": [
+      {
+        "baseline_G": 0.01754385964912279,
+        "final_G": 0.22807017543859645,
+        "gain": 0.21052631578947367,
+        "method": "diverse_reports",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.01754385964912279,
+        "final_G": 0.09649122807017545,
+        "gain": 0.07894736842105265,
+        "method": "reports",
+        "user": 4
+      },
+      {
+        "baseline_G": 0.21052631578947367,
+        "final_G": 0.07017543859649122,
+        "gain": -0.14035087719298245,
+        "method": "diverse_reports",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.21052631578947367,
+        "final_G": 0.13157894736842105,
+        "gain": -0.07894736842105263,
+        "method": "reports",
+        "user": 5
+      },
+      {
+        "baseline_G": 0.07894736842105264,
+        "final_G": 0.07894736842105264,
+        "gain": 0.0,
+        "method": "diverse_reports",
+        "user": 6
+      },
+      {
+        "baseline_G": 0.07894736842105264,
+        "final_G": 0.14035087719298245,
+        "gain": 0.06140350877192981,
+        "method": "reports",
+        "user": 6
+      },
+      {
+        "baseline_G": 0.15789473684210525,
+        "final_G": 0.21929824561403508,
+        "gain": 0.06140350877192982,
+        "method": "diverse_reports",
+        "user": 7
+      },
+      {
+        "baseline_G": 0.15789473684210525,
+        "final_G": 0.14035087719298245,
+        "gain": -0.017543859649122806,
+        "method": "reports",
+        "user": 7
+      }
+    ],
+    "summary": {
+      "diverse_reports": {
+        "baseline_G": {
+          "ci95": [
+            0.04824561403508772,
+            0.1842105263157895
+          ],
+          "mean": 0.11622807017543858,
+          "n": 4
+        },
+        "final_G": {
+          "ci95": [
+            0.07456140350877194,
+            0.22368421052631576
+          ],
+          "mean": 0.14912280701754385,
+          "n": 4
+        },
+        "gain": {
+          "ci95": [
+            -0.08991228070175439,
+            0.15789473684210525
+          ],
+          "mean": 0.03289473684210526,
+          "n": 4
+        }
+      },
+      "reports": {
+        "baseline_G": {
+          "ci95": [
+            0.04824561403508772,
+            0.1842105263157895
+          ],
+          "mean": 0.11622807017543858,
+          "n": 4
+        },
+        "final_G": {
+          "ci95": [
+            0.1074561403508772,
+            0.14035087719298245
+          ],
+          "mean": 0.12719298245614036,
+          "n": 4
+        },
+        "gain": {
+          "ci95": [
+            -0.04824561403508772,
+            0.07017543859649122
+          ],
+          "mean": 0.010964912280701757,
+          "n": 4
+        }
+      },
+      "reports_minus_diverse_reports": {
+        "ci95": [
+          -0.10526315789473684,
+          0.061403508771929814
+        ],
+        "mean": -0.021929824561403504,
+        "n": 4
+      }
+    }
+  },
+  "primary_test": {
+    "cases": 1,
+    "comparator": "reports",
+    "contrast": "candidate minus comparator, averaging primary cases within each persona",
+    "estimate": {
+      "ci95": [
+        -0.061403508771929814,
+        0.10526315789473684
+      ],
+      "mean": 0.021929824561403504,
+      "n": 4
+    },
+    "method": "diverse_reports"
+  },
+  "protocol_sha256": "68c9866b6430baf8b80fd92ba626ed93534b6a65d8afe02e930475aaec8fc02e",
+  "reused_episode_count": 0,
+  "run_usage_by_phase": {
+    ".": {
+      "cache_creation_1h_input_tokens": 0.0,
+      "cache_creation_5m_input_tokens": 157357.0,
+      "cache_creation_input_tokens": 157357.0,
+      "cache_hit_calls": 226.0,
+      "cache_read_fraction": 0.7854902381340676,
+      "cache_read_input_tokens": 1237836.0,
+      "calls": 226.0,
+      "estimated_savings_usd": 3.0077442999999997,
+      "estimated_uncached_usd": 5.625628,
+      "estimated_usd": 2.6178837,
+      "input_tokens": 180684.0,
+      "invocations": 1,
+      "output_tokens": 87302.0,
+      "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+      "total_input_tokens": 1575877.0
+    },
+    "assessment/harbor_analytics": {
+      "cache_creation_1h_input_tokens": 0.0,
+      "cache_creation_5m_input_tokens": 300169.0,
+      "cache_creation_input_tokens": 300169.0,
+      "cache_hit_calls": 528.0,
+      "cache_read_fraction": 0.8596348394742039,
+      "cache_read_input_tokens": 2742089.0,
+      "calls": 530.0,
+      "estimated_savings_usd": 6.4157153,
+      "estimated_uncached_usd": 10.76418,
+      "estimated_usd": 4.3484647,
+      "input_tokens": 147572.0,
+      "invocations": 1,
+      "output_tokens": 192410.0,
+      "scope": "Successful responses in this directory, summed across invocations; excludes unresolved requests and per-request ledger rounding",
+      "total_input_tokens": 3189830.0
+    }
+  },
+  "run_usage_total": {
+    "cache_read_fraction": 0.8351174337826476,
+    "cache_read_input_tokens": 3979925.0,
+    "calls": 756.0,
+    "estimated_savings_usd": 9.423459599999997,
+    "estimated_uncached_usd": 16.389808,
+    "estimated_usd": 6.9663484,
+    "output_tokens": 279712.0,
+    "total_input_tokens": 4765707.0
+  },
+  "shared_practice_prefix_episodes": 8,
+  "source_sha256": "0eb60cbbfddac9c74bfdb76ce073fdb3a1c56c7624f0a1f6cf8c019e0408b457"
+}

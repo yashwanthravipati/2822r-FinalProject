@@ -380,3 +380,37 @@ Report the whole sequence regardless of the outcome. Beacon's case bytes remain 
   cumulative $76.131619, no unresolved charges. Both histories were frozen before Harbor
   assessment. Use two workers per cohort to reduce contention for conservative live
   reservations as the existing cap approaches; do not alter models, seeds or conditions.
+
+- Harbor assessment encountered one `LLMTruncated` in the counterpart dialogue for
+  `learner1_diverse_reports_after_t1`, after seven durable turns. Both gateway attempts
+  settled their usage; this is not an unknown-charge failure. No partial formal action
+  was applied. Preserve the failure, costs and checkpoint, complete the other scheduled
+  personas, then attempt one bounded identical-protocol resume. Do not drop the persona
+  or change output limits, models, memories, seeds or outcome selection because of it.
+
+- Recovery completed all missing episodes under the identical protocol. The retry used
+  93 requests and $0.925104 ledger cost, including completion of the interrupted learner's
+  six scheduled treatment/control episodes; all completed episodes were reused. Original
+  failure metadata and usage remain in the audit. All 96 new episodes (24 practice + 72
+  Harbor) independently verified. Entire curriculum-development ledger increment
+  $14.235864, usage estimate $14.235232, 1,505 requests. Development cumulative $84.990738,
+  final still $75.720829; no unresolved charges. Total checkpoint-3 $160.711567, new
+  improvement goal $110.414186.
+
+## Curriculum selected for the previously specified Beacon follow-up
+
+Varied practice passes the frozen mean-based gate: candidate-minus-reports +0.041666667,
+95% interval [-0.009868421, +0.086622807], n=8. Validation users 4–7 mean +0.021929825,
+interval [-0.061403509, +0.105263158], n=4. This is preliminary development evidence,
+not established superiority; intervals include zero. Selection and complete paired rows
+are saved in `results/ckpt3/improvement-design/diverse_selection.json`. Do not change the
+curriculum, model, persona or memory format in response to subsequent Beacon outcomes.
+
+Proceed exactly as specified above: source `consolidation-final-v1` (seven personas,
+seed 28221129), two original Sim3-prefix reports plus hiring/Sim4/hiring rehearsals,
+then fresh Beacon baseline/reports/diverse-reports, three tiers each. Twenty-one new
+practice sessions + 63 assessment episodes, $12–16 forecast against the original final
+ledger's $24.279171 remaining. No prior Harbor or Maple assessment feedback enters the
+new practice or memories. These are reused confirmation personas, not a fresh-persona
+replication. The case is unused, SHA256
+d4221d8bf6412a5fbd9439ddeabe91e4fa30090d94c28a30dc409bb510f19b1c.
