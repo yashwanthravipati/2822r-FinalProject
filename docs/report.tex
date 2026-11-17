@@ -37,6 +37,10 @@ A new, separately frozen corrected-core comparison found higher Sim4 scores with
 five retained coaching reports than without feedback: mean paired gain $0.4094$
 across four simulation replicates. This is exploratory evidence from two concession
 profiles, not validation of the full six-weakness population or human improvement.
+A prospective eight-replicate confirmation on previously unused Cedar also found
+higher scores with ordinary reports: paired gain $0.1968$, exact two-sided
+sign-flip $p=0.03125$. This supports a narrow score benefit in the tested simulator;
+the designated weakness counts did not improve.
 
 \paragraph{Implementation defect discovered after these experiments.}
 \textbf{The intended six-weakness LLM personas were not correctly specified.}
@@ -611,8 +615,63 @@ memory hashes and source hashes verified the complete cohort. The evaluation use
 217 requests and cost \$2.439023. Total spending since the audit authorization is
 \$5.633623, including the smoke test, behavioral screen and controlled diagnostics.
 Cumulative checkpoint-3 known usage is \$184.574126 (development \$96.924150;
-final \$87.649976), with no unresolved requests in those ledgers. The two cumulative
-\$110 caps remain unchanged. These usage estimates are not a provider invoice.
+final \$87.649976), with no unresolved requests in those ledgers. Both cumulative
+caps were \$110 at the end of this pilot. These usage estimates are not a provider invoice.
+
+\paragraph{Prospective confirmation on a fresh case.}
+Following the exploratory Sim4 result, we froze the same actor and coaching method
+for eight new simulation replicates, four per concession profile, on Cedar Warehouse.
+Cedar's case file matched its original manifest hash and had no recorded prior
+negotiation outcomes. Each replicate completed five fresh Sim3 practices at the same
+tiers; all 40 reports were frozen before the 16 paired Cedar assessments. The learner
+played the owner at tier 3, with randomized arm order and matched controller seeds.
+No Cedar feedback, practice or tuning was permitted. The criterion fixed before
+assessment was a positive paired mean and a two-sided exact sign-flip $p\leq0.05$,
+using all eight replicates. Source comparisons verified that the actor, coaching and
+training procedure matched the pilot; the test case, role, seeds and cohort changed.
+These are eight stochastic replicates of two prompt profiles, not eight independently
+sampled human populations. This comparison tests ordinary reports against no feedback;
+it does not test personalized refinement against ordinary reports.
+
+\begin{center}
+\begin{tabular}{lrrr}
+\hline
+Profile / replicate & No feedback & Five reports & Difference \\
+\hline
+Conceding first / 1 & 0.2553 & 0.4894 & +0.2340 \\
+Conceding first / 2 & 0.2553 & 0.4894 & +0.2340 \\
+Conceding first / 3 & 0.2553 & 0.6170 & +0.3617 \\
+Conceding first / 4 & 0.0426 & 0.4894 & +0.4468 \\
+Unreciprocated / 1 & 0.2553 & 0.3191 & +0.0638 \\
+Unreciprocated / 2 & 0.3191 & 0.3191 & 0.0000 \\
+Unreciprocated / 3 & 0.2553 & 0.4894 & +0.2340 \\
+Unreciprocated / 4 & 0.2553 & 0.2553 & 0.0000 \\
+\hline
+Mean & 0.2367 & 0.4335 & +0.1968 \\
+\hline
+\end{tabular}
+\end{center}
+
+Six replicates improved and two tied. The paired empirical-bootstrap 95\% interval
+is $[0.0957,0.3059]$ and the exact two-sided sign-flip reference gives $p=0.03125$,
+meeting the prespecified confirmation criterion. This is evidence for score transfer
+to one fresh case under this fixed simulation setup. It does not establish general
+human learning or superiority of personalized prompt refinement. Moreover, designated
+target errors occurred 3 times in 16 opportunities without feedback and 4 times in
+18 opportunities with reports; practice contained 15 events in 80 opportunities.
+Those endogenous opportunity counts do not demonstrate weakness remediation or
+validate the nominal 0.9 trait as an enacted probability. Cedar has now been assessed
+and must not be described as an unused confirmation case in future studies.
+
+Independent exhaustive scoring, transcript replay, source and memory checks passed
+for all 56 negotiations. All reached agreement; none fell below walk-away values,
+violated the counterpart schedule or lacked annotations. The run cost \$4.465473
+across 392 requests (practice \$3.801271; assessment \$0.664202). Total known spending
+since the latest audit authorization is \$10.099096, within its \$150 allowance.
+Cumulative checkpoint-3 usage is \$189.039599: development \$100.725421 and final
+\$88.314178, with no unresolved requests. During practice, the development cap was
+raised from \$110 to \$115 within that authorization to accommodate conservative
+in-flight reservations; the final cap remains \$110. These are usage estimates.
 
 \paragraph{Reproducibility.}
 Numeric results, paired rows, frozen protocols and plots are under
@@ -627,13 +686,16 @@ separately in \path{audit-corrected-smoke-v1} and \path{persona-calibration-v1}.
 The behavioral screen used core revision \texttt{e8e0820}; its strict verifier
 requires that frozen implementation. The subsequent validation-only fix preserves
 all five public case serializations and all 579 recorded offer scores, checked in
-\path{validation_recheck.json}. The current offline suite passes 218 tests;
+\path{validation_recheck.json}. The current offline suite passes 220 tests;
 the live API test is excluded from that count.
 Controlled diagnostics are in \path{persona-probes-v1}, \path{persona-probes-v2} and
 \path{persona-probes-v3}; the new transfer comparison is \path{corrected-transfer-v1}.
 Its protocol and candidate implementation were committed at \texttt{3ebd2f4} before
 Sim4 assessment. \path{scripts/verify_corrected_transfer.py} independently checks
 all 28 scores, controller schedules and frozen coaching memories.
+The Cedar confirmation protocol and implementation are in
+\path{corrected-confirmation-v1}, committed at \texttt{80e7bb7} before assessment;
+\path{scripts/verify_fresh_confirmation.py} checks its complete cohort independently.
 
 \begin{thebibliography}{1}
 \bibitem{gepa}

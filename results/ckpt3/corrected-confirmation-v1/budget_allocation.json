@@ -1,0 +1,26 @@
+{
+  "after": {
+    "accounted_usd": 102.653625,
+    "actual_usd": 98.612665,
+    "limit_usd": 115.0,
+    "remaining_usd": 12.346375,
+    "requests": 10482,
+    "unresolved_requests": 1
+  },
+  "all_prior_request_ids_preserved": true,
+  "authorization": "Up to $150 for development and subsequent evaluation",
+  "before": {
+    "accounted_usd": 102.653625,
+    "actual_usd": 98.612665,
+    "limit_usd": 110.0,
+    "remaining_usd": 7.346375,
+    "requests": 10482,
+    "unresolved_requests": 1
+  },
+  "development_cap": 115,
+  "final_cap": 110,
+  "known_spending_before_audit": 178.940503,
+  "latest_new_work_allowance": 150,
+  "maximum_new_spending_under_caps": 46.059497,
+  "reason": "User authorized up to $150 for development and subsequent evaluation on 2026-11-17. Allocate cumulative caps dev=$115 and final=$110; compared with pre-audit known spending $178.940503, maximum additional spending is $46.059497, below $150. This avoids full-context reservation stalls; preserve all existing charges/reservations."
+}

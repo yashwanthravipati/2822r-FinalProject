@@ -147,3 +147,24 @@ Sim4 has now been examined and is a revisited benchmark, not an untouched test s
   on the pilot, expected actual cost is about $4.88. Existing $110 caps preserved;
   dev headroom $13.075850, final $22.350024. Two practice /three test workers; gateway
   reservations may serialize Opus calls. Within the latest $150 audit/eval authorization.
+- 2026-11-17: Financial allocation amendment during confirmation practice, before Cedar
+  assessment: raised only the development cumulative cap from $110 to $115 under the
+  user's newer $150 joint development/evaluation allowance. Full-context reservations
+  had serialized calls despite low actual cost. Final remains $110; no charges or request
+  records reset. Relative to pre-audit $178.940503, the combined $225 ceilings permit at
+  most $46.059497 new spending, conservatively within $150. The ledger's authorized-limit
+  audit and corrected-confirmation-v1/budget_allocation.json preserve the change and
+  before/after balances. Scientific protocol, cohort and models remain unchanged.
+- 2026-11-17: Completed and independently verified all 40 practice and 16 Cedar
+  assessments. Mean R .433510638 with reports vs .236702128 without, paired gain
+  +.196808511, bootstrap CI [.095744681,.305851064], exact two-sided sign-flip
+  p=.03125: prespecified confirmation passes. Six positive pairs, two ties. All 56
+  agreed; no below-walk-away, schedule or annotation failures. Target errors did not
+  improve (3/16 opportunities control, 4/18 coached); full-session calibration and
+  six-control/human claims remain unproven. Cedar is now used, not a future untouched
+  holdout. This confirms ordinary reports vs no feedback in this simulator, not
+  personalized refinement vs ordinary reports, so the broader task remains open.
+  Cost $4.465473/392 calls; since audit approval $10.099096. Cumulative dev
+  $100.725421, final $88.314178; no unresolved calls. Report and cost summary updated.
+  Full offline suite passed 220 tests before assessment; focused inference/cost tests
+  passed 4/4 afterward, with lint/format and task checks clean.

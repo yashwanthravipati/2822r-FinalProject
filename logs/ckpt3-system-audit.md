@@ -148,3 +148,36 @@ Checkpoint-3 totals: development $96.924150, final $87.649976, combined $184.574
 no unresolved requests in either ledger, both $110 cumulative caps unchanged.
 The cost summary includes all new receipts and keeps historical uncertainty separate.
 All 218 offline tests pass; the expanded report includes every diagnostic and result.
+
+## Prospective Cedar confirmation
+
+Protocol and implementation were frozen at `80e7bb7` before Cedar assessment. Its
+original case-file hash matched and no prior Cedar outcomes were recorded. Eight
+fresh replicates of the same two profiles completed 40 Sim3 practices, then 16 paired
+Cedar assessments with no feedback versus five frozen ordinary reports. No test
+feedback, tuning, trait updates or outcome-dependent stopping occurred. Method
+invariance checks preserve the pilot actor and training implementation.
+
+Mean R was **0.433510638 with reports versus 0.236702128 without**, paired gain
+**0.196808511**; six positive pairs, two ties. The bootstrap 95% interval is
+[0.095744681, 0.305851064]; exact two-sided sign-flip p=0.03125. This passes the
+prospectively fixed positive-mean/p<=.05 criterion. It supports ordinary reports over
+no feedback in this fixed two-profile simulator on one fresh case, not personalized
+refinement over ordinary reports, human transfer, or six-control calibration.
+
+Target errors did not improve: 3 events/16 opportunities without feedback versus
+4/18 with reports; training had 15/80. Opportunities are endogenous, and these rates
+do not validate the nominal .9 trait. Cedar is now assessed and cannot be reused as
+an untouched confirmation case. All 56 episodes agreed, zero below-walk-away,
+schedule or missing-annotation failures. Independent enumeration, replay and frozen
+memory/source verification pass in `corrected-confirmation-v1/verification.json`.
+
+Cost: $4.465473 across 392 calls (practice $3.801271; assessment $0.664202).
+Since the latest audit authorization: $10.099096 of the authorized $150. Checkpoint-3
+cumulative known costs: dev $100.725421, final $88.314178; no unresolved calls.
+During practice, dev's cumulative cap rose from $110 to $115 under that newer joint
+authorization to accommodate conservative reservations; final remains $110. All old
+ledger entries were preserved, with the change recorded in `budget_allocation.json`.
+Separate historical uncertain charges remain reserved upper bounds, not known costs.
+The full offline suite passed 220 tests before assessment; the four focused inference
+and cost tests also pass after cost aggregation was extended to include this run.

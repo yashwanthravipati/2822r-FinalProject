@@ -1,0 +1,65 @@
+{
+  "paired_effect": {
+    "ci95": [
+      0.09574468085106383,
+      0.3058510638297872
+    ],
+    "confirmation_pass": true,
+    "exact_sign_flip_p_two_sided": 0.03125,
+    "mean": 0.19680851063829788,
+    "n": 8
+  },
+  "pairs": [
+    {
+      "difference": 0.23404255319148937,
+      "five_reports": 0.48936170212765956,
+      "no_feedback": 0.2553191489361702,
+      "user": 0
+    },
+    {
+      "difference": 0.23404255319148937,
+      "five_reports": 0.48936170212765956,
+      "no_feedback": 0.2553191489361702,
+      "user": 1
+    },
+    {
+      "difference": 0.3617021276595745,
+      "five_reports": 0.6170212765957447,
+      "no_feedback": 0.2553191489361702,
+      "user": 2
+    },
+    {
+      "difference": 0.44680851063829785,
+      "five_reports": 0.48936170212765956,
+      "no_feedback": 0.0425531914893617,
+      "user": 3
+    },
+    {
+      "difference": 0.06382978723404259,
+      "five_reports": 0.3191489361702128,
+      "no_feedback": 0.2553191489361702,
+      "user": 4
+    },
+    {
+      "difference": 0.0,
+      "five_reports": 0.3191489361702128,
+      "no_feedback": 0.3191489361702128,
+      "user": 5
+    },
+    {
+      "difference": 0.23404255319148937,
+      "five_reports": 0.48936170212765956,
+      "no_feedback": 0.2553191489361702,
+      "user": 6
+    },
+    {
+      "difference": 0.0,
+      "five_reports": 0.2553191489361702,
+      "no_feedback": 0.2553191489361702,
+      "user": 7
+    }
+  ],
+  "practice_episodes": 40,
+  "scope": "One fresh case, two prompt profiles; full-session calibration unproven; scripted economics and assumed utilities; no human or six-control claim",
+  "test_episodes": 16
+}

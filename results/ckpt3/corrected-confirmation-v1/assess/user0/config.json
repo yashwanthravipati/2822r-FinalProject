@@ -1,0 +1,127 @@
+{
+  "K": 5,
+  "arms": [
+    "no_feedback",
+    "five_reports"
+  ],
+  "case_sha256": "eb39ab7da3fd1f503a6738813b20d9b71e7914d67e5cdbd29a798bfaa1055df1",
+  "coach": "claude-opus-5-5",
+  "confirmation_rule": "Positive paired mean and exact sign-flip p <= .05; complete valid cohort",
+  "core_sha256": "2344e86d531d8ea3ccc9e60883eafd9ea8837a9a13c87f976da1fd78276fab31",
+  "counterpart": "rule-based economic controller and templated dialogue",
+  "effort": "low",
+  "expected_practice_episodes": 40,
+  "expected_test_episodes": 16,
+  "heldout_policy": "Cedar has no prior recorded outcomes; no test practice, feedback or tuning",
+  "learn_updates": false,
+  "learner": "claude-sonnet-5-5",
+  "limits": "One fresh case, two prompt profiles; full-session calibration unproven; scripted economics and assumed utilities; no human or six-control claim",
+  "original_case_file_sha256": "eff48d0a6692478be150c5675de508c45e85b7b2138c2a6661e702ebf3069ab3",
+  "persona": "Concrete enactment with private intent; only one concession weakness specified",
+  "phase": "assessment",
+  "primary": "Mean paired Cedar R(five_reports) - R(no_feedback), eight fresh replicates",
+  "probe_tiers": [
+    1,
+    3,
+    5
+  ],
+  "reward": "surplus_share",
+  "role": "owner",
+  "scoring": "declared numeric case utilities",
+  "seed": 2822122805,
+  "sources": {
+    "evaluate_fresh_confirmation.py": "4755bf6ceb2cc6f2e0c1b7a07f2fa425aaef69ae28d55210ea23b2ed98bd25cf",
+    "persona_decision.py": "785ffd781a5244ea00da089641cca08973de565c421cb93bd340076fcdc3b196",
+    "persona_instructions.py": "ed2f01eee35dc244505a327fe736925d86bcc6507d0c2e880424349b1f5ddc68",
+    "probe_isolated_personas.py": "28aa1dadb3b44f14ad31cac8e2e456034e45fe49cb16140dda1c1ec4478d6fa5"
+  },
+  "test_case_sha256": "eb39ab7da3fd1f503a6738813b20d9b71e7914d67e5cdbd29a798bfaa1055df1",
+  "test_role": "owner",
+  "test_tier": 3,
+  "training_case_sha256": "f1a6c1f43257775d8fa271d29faafb794b5c16d9744ff94afc6f8a11f4fd42b9",
+  "training_role": "officer",
+  "training_tiers": [
+    2,
+    2,
+    4,
+    4,
+    4
+  ],
+  "traits": {
+    "0": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "1": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "2": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "3": {
+      "awareness": 0.5,
+      "errors": {
+        "error:1": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "4": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "5": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "6": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    },
+    "7": {
+      "awareness": 0.5,
+      "errors": {
+        "error:2": 0.9
+      },
+      "rapport": 0.5,
+      "response": {}
+    }
+  },
+  "user": 0,
+  "users": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ]
+}
