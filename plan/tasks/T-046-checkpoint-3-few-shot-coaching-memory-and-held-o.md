@@ -1,7 +1,7 @@
 ---
 id: T-046
 title: Checkpoint 3 few-shot coaching memory and held-out Sim4 evaluation
-status: in-progress
+status: blocked
 milestone: M4
 workstream: analysis  # cases | counterpart | feedback | profiling | app | study | analysis | infra
 owner: codex
@@ -25,7 +25,7 @@ from Sim3 to the held-out Sim4 scenario under separate $100 development/final AP
 - [ ] Final paired Sim3-to-Sim4 evaluation completes within the final budget.
 - [x] Development results, costs, limitations, and reproduction instructions are logged.
 - [ ] Final results and uncertainty are logged after held-out assessment.
-- [ ] Implementation and artifacts are committed and pushed to ckpt3.
+- [x] Implementation and completed development artifacts are committed and pushed to ckpt3.
 
 ## Log
 - 2026-11-17: User authorized ckpt3 development and two separate $100 API caps; caching foundation pushed.
@@ -35,3 +35,5 @@ from Sim3 to the held-out Sim4 scenario under separate $100 development/final AP
 - 2026-11-17: Added analogical application and domain-neutral rules; full five-rehearsal synthetic development is running on two new personas. Sim4 locally frozen and all 729 numeric packages audited without API transmission. Final API content approval remains pending.
 
 - 2026-11-17: V2 development completed: 54 episodes, $7.503585, 77.90% input cache reads. Mean gains: reports +0.09936, reflection +0.04167, application -0.04808 (n=2, no population inference). Cumulative development $9.163600; final allowance untouched. No API process remains active. Added per-run accounting and corrected future-run metadata. Final class-content approval still pending.
+
+- 2026-11-17: Blocked audit confirmed the same unanswered external-payload approval across three consecutive goal turns. Remote ckpt3 matches completed development checkpoint 245ca8c; no evaluator process or held-out results exist. Remaining final evaluation requires explicit permission to send role-appropriate Sim3/Sim4 briefs to Anthropic. No additional spend; goal is incomplete.
