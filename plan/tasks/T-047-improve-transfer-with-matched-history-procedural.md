@@ -168,3 +168,21 @@ Sim4 has now been examined and is a revisited benchmark, not an untouched test s
   $100.725421, final $88.314178; no unresolved calls. Report and cost summary updated.
   Full offline suite passed 220 tests before assessment; focused inference/cost tests
   passed 4/4 afterward, with lint/format and task checks clean.
+- 2026-11-17: Preregister corrected-adaptive-memory-v1 to address the actual strong
+  baseline comparison. Reuse only the eight corrected learners' five Sim3 practices
+  from corrected-confirmation-v1; no Cedar or Sim4 test data enters coaching or
+  selection. Generate one short own-visible, evidence-cited plan per learner; retain
+  all five reports. Three arms: reports, reports+generic advice, reports+personal plan.
+  Eight replicates x two development cases (Harbor/Maple) x three arms =48 episodes.
+  Choose each user's highest mean arm, requiring >=.03 over reports, with conservative
+  ties (reports, generic, personalized). Freeze selection before 48 validation episodes
+  on Cloudline/Beacon. Evaluate all three arms even if not selected; no stopping based
+  on outcomes. Aggregate the two cases within each user before paired inference.
+  Advance only if selected memory beats BOTH reports and generic with positive means
+  and exact two-sided sign-flip p<=.05 for each. These are known development cases,
+  not fresh final holdouts; two-profile calibration limits remain. Sonnet learner,
+  Opus plan writer, low effort, fixed traits and rule-based economic controller.
+  Estimate $10 including eight plans and 96 negotiations; development ledger has
+  $14.274579 headroom under $115, final cap $110 unchanged, latest $150 joint new-work
+  allowance retained. No new practice/API history regeneration. Tests cover own-sheet
+  isolation, citation integrity, exact five-report retention and conservative selection.
