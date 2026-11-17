@@ -49,15 +49,20 @@ def aggregate(case_rows, users, methods):
     return {"cases": len(case_rows), "rows": rows, "summary": summary}
 
 
-def audit_case(root, entry, protocol):
+def audit_case(root, entry, protocol, *, training=False):
     case = load_case(entry["path"])
     score, best = economics(case, entry["role"])
     expected = {}
+    offset = 0 if training else 900000 + 100000 * protocol["cases"].index(entry)
     for uid in protocol["users"]:
+        base = protocol["seed"] + 1009 * uid + offset
         for tier in protocol["probe_tiers"]:
-            expected[f"learner{uid}_baseline_t{tier}"] = tier
+            expected[f"learner{uid}_baseline_t{tier}"] = tier, base + tier
             for method in protocol["methods"]:
-                expected[f"learner{uid}_{method}_after_t{tier}"] = tier
+                expected[f"learner{uid}_{method}_after_t{tier}"] = tier, base + tier
+        if training:
+            for t, tier in enumerate(protocol["training_tiers"]):
+                expected[f"learner{uid}_reports_train{t}"] = tier, base + 100 + t
     scores, statuses, below = {}, {}, 0
     for path in sorted((root / "raw").glob("*.json")):
         data = read(path)
@@ -69,13 +74,19 @@ def audit_case(root, entry, protocol):
         check(data["complete"], "incomplete episode")
         check(s["case_id"] == case.id and s["user_role_id"] == entry["role"], "wrong case/role")
         check(s["counterpart_role_id"] == case.other_role(entry["role"]).id, "wrong counterpart")
-        check(s["counterpart_profile"]["tier"] == expected[key], "wrong tier")
+        check(s["counterpart_profile"]["tier"] == expected[key][0], "wrong tier")
+        check(s["seed"] == expected[key][1], "wrong counterpart seed")
+        check(s["counterpart_profile"].get("focus") is None, "unexpected focus")
         check(data["schedule_violations"] == 0, "counterpart schedule violation")
         scores[key] = score(s)
         statuses[s["status"]] = statuses.get(s["status"], 0) + 1
         below += scores[key] < 0
     check(scores.keys() == expected.keys(), "missing planned episodes")
-    rows = read(root / "assess_rows.json")
+    rows = (
+        [read(root / "raw" / f"learner{u}.training.json") for u in protocol["users"]]
+        if training
+        else read(root / "assess_rows.json")
+    )
     pairs = set(itertools.product(protocol["users"], protocol["methods"]))
     seen = set()
     for row in rows:
@@ -89,6 +100,16 @@ def audit_case(root, entry, protocol):
         )
         for k, value in (("baseline_G", before), ("final_G", after), ("gain", after - before)):
             check(math.isclose(row[k], value, abs_tol=1e-12), f"wrong {k}")
+        if training:
+            curve = [scores[f"learner{uid}_reports_train{t}"] for t in range(5)]
+            check(
+                len(row["training_R"]) == 5
+                and all(
+                    math.isclose(a, b, abs_tol=1e-12)
+                    for a, b in zip(curve, row["training_R"], strict=True)
+                ),
+                "wrong training curve",
+            )
     check(seen == pairs, "missing rows")
     return rows, {
         "episodes": len(scores),
@@ -203,6 +224,14 @@ def main():
             "negotiations per persona",
         }
     result["common_practice_episodes_verified"] = len(seen_training)
+    if (root / "training").exists():
+        training_rows, training_audit = audit_case(
+            root / "training",
+            {"path": str(args.training_case), "role": protocol["training_role"]},
+            {**protocol, "methods": ["reports"]},
+            training=True,
+        )
+        result["training"] = {**training_audit, "rows": training_rows}
     result["run_usage_by_phase"] = {
         str(p.relative_to(root)): run_usage(p)
         for p in sorted({p.parent for p in root.rglob("usage_*.json")})
