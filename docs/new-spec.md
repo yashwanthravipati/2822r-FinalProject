@@ -1,5 +1,5 @@
 > Historical bargaining specification. The current institutional rubric framework is
-> defined in `report.tex` Section 1, `architecture.md`, and decision 0009. This file
+> defined in `docs/checkpoint3/checkpoint3.tex` Section 1, `architecture.md`, and decision 0009. This file
 > remains the reference for reproducing the earlier experiments.
 
 # Checkpoint 2: Adaptive Negotiation Training Through Human-Centered RL

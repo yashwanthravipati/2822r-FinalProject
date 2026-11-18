@@ -95,7 +95,7 @@ use **Sources and context → Add source documents** in the panel (ZIPs work too
 Offline, saved chat and sources remain readable; choose Claude Code or an API key in
 Settings for new AI replies.
 
-The current rubric follows Section 1 of [`docs/report.tex`](docs/report.tex) and
+The current rubric follows Section 1 of [`docs/checkpoint3/checkpoint3.tex`](docs/checkpoint3/checkpoint3.tex) and
 [decision 0009](plan/decisions/0009-contextual-rubric-framework.md). The six skills cover
 rapport/shared values, interests/authority, facts/criteria, leverage, options, and commitments.
 New imports and saved cases selected with **Start training** use this framework. Choose the

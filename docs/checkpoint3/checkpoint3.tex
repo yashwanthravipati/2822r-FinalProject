@@ -1,0 +1,241 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[expansion=false]{microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[compact]{titlesec}
+\titleformat{\section}{\Large\bfseries}{\thesection}{0.7em}{}
+\titlespacing*{\section}{0pt}{12pt}{4pt}
+\setlist{nosep,leftmargin=1.4em}
+\setlist[itemize]{label=$\bullet$}
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{0pt}
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}{0.7ex \@plus 0.3ex}{-1em}{\normalfont\normalsize\bfseries}}
+\makeatother
+\setlength{\abovedisplayskip}{6pt}\setlength{\belowdisplayskip}{6pt}
+
+\newcommand{\E}{\mathbb{E}}
+% Placeholder for content we still need to write; remove all before submitting.
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO:} #1\textbf{]}}}
+
+\begin{document}
+
+\begin{center}
+{\LARGE Checkpoint 3: Adaptive Negotiation Training\\[2pt] Through Human-Centered RL}\\[8pt]
+{\large Yash Ravipati, Mahdi Nassereddine, Vincent Song}\\[2pt]
+CS2822r, Fall 2026
+\end{center}
+\vspace{-0.6em}
+
+% ===========================================================================
+\section{Research question}
+
+Our question has narrowed since Checkpoint~2: does practicing an upcoming negotiation
+against an LLM counterpart, with feedback after each round, help someone do better in
+that negotiation? The user uploads the case, the tool finds where they are weak in it,
+and it sets up practice rounds that target those moments. We focus on institutional
+conflict and coordination, as in class Simulations~3 and~4.
+
+Following the Checkpoint~2 feedback, we replaced our job-offer bargaining errors with
+skills taught in class, such as building rapport and finding the interests behind a
+position, and we no longer use LLM-simulated trainees as evidence that training works.
+We ask:
+\begin{itemize}
+\item \textbf{Q1, diagnosis:} does the tool spot a user's weaknesses as well as a human
+annotator?
+\item \textbf{Q2, steering:} does focusing the counterpart on a skill create chances to
+practice it, without breaking the case?
+\item \textbf{Q3, preparation:} do people who prepare with the tool improve more on the
+case than those who prepare without it?
+\end{itemize}
+
+\paragraph{Model:}
+A case $c$ includes each side's private materials, the constraints and approvals a deal
+needs, and a rubric of $J=6$ skills (Table~\ref{tab:rubric}). For each user message in a
+practice round, we score every skill it gave a chance to use, $q\in[0,1]$, from $0$
+(missed) to $1$ (effective). A round's score $Q_j(\tau_t)$ is the average over its
+$n_{t,j}$ scored chances, or blank if there were none. Before each round, the coach picks
+a difficulty $\mu_t\in\{1,\dots,5\}$ and a focus skill $f_t$, or none. It tracks the
+user's hidden skill level $s_{t,j}$ with a Beta distribution, where a score $q$ counts as
+$q$ successes and $1-q$ failures and older evidence fades by $\lambda\in(0,1]$:
+\[
+\alpha_{t+1,j}=\alpha_{0,j}+\lambda(\alpha_{t,j}-\alpha_{0,j})+v_{t,j},\qquad
+\beta_{t+1,j}=\beta_{0,j}+\lambda(\beta_{t,j}-\beta_{0,j})+n_{t,j}-v_{t,j},
+\]
+with $v_{t,j}=\sum_w q_{w,j}$. The next round targets the skill that looks weakest,
+favoring skills with little evidence. Success means case performance, the expected score
+on $c$ at a fixed difficulty $\mu_0$ with no focus or feedback, $G_j(s;c)=\E[Q_j(\tau)]$;
+we want it to rise more with the tool than without.
+
+\begin{table}[t]
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\begin{tabular}{*{5}{>{\raggedright\arraybackslash}p{0.172\linewidth}}}
+\hline
+\textbf{Skill} & \textbf{Opportunity arises when} & \textbf{Missed (0)} &
+\textbf{Partial ($\approx$0.5)} & \textbf{Effective (1)} \\
+\hline
+Rapport and shared values &
+A concern, tension, or stated value gives a reason for constructive engagement. &
+Dismisses the concern, or uses a mission statement as an unsupported accusation. &
+Acknowledges the concern or value without connecting it to the discussion. &
+Responds respectfully and connects the concern or value to a shared purpose. \\
+Interests, constraints, and decision-making &
+A demand, ambiguous restriction, or pending approval needs clarification. &
+Treats a demand as a fixed constraint, or overlooks who must approve. &
+Asks a generic question without probing the relevant motivation or approval. &
+Explores and checks the underlying interest, constraint, or decision dependency. \\
+Facts and shared criteria &
+A claim is disputed, a fact is unknown, or a standard must be chosen. &
+Treats an uncertain claim as established, or ignores relevant evidence. &
+Notes the uncertainty or a criterion without resolving or applying it. &
+Checks the evidence, or agrees how to apply a suitable criterion. \\
+Leverage &
+A request or obstacle makes the learner's contribution or alternative consequential. &
+Misses supported leverage, or exaggerates a dependency or alternative. &
+Recognizes the contribution but does not tie it to a proposal or request. &
+Accurately connects the contribution or alternative to a relevant proposal. \\
+Options for multiple interests &
+Expressed interests or an impasse allow another arrangement to be explored. &
+Repeats a position, or proposes an option that ignores known constraints. &
+Suggests an alternative without linking it to interests or checking feasibility. &
+Develops and tests a feasible option that addresses several expressed interests. \\
+Commitments and follow-through &
+A tentative understanding or promise needs clarifying before action or closure. &
+Treats an unsupported assurance as settled, or leaves a key dependency unexamined. &
+Records a next step but leaves the owner, approval, deadline, or contingency unclear. &
+Clarifies who does what, by when, with which approvals, or records why approval is pending. \\
+\hline
+\end{tabular}
+\caption{Scoring rubric for institutional conflict and coordination. Scores can be any
+value from 0 to 1; the columns are reference points.}
+\label{tab:rubric}
+\end{table}
+
+\paragraph{How a transcript is scored:}
+After a round, the scorer reviews each user message seeing only the user's own materials
+and the conversation so far, so each move is judged on what the user knew then. For each
+skill, it notes whether there was a chance to use it, scores it with
+Table~\ref{tab:rubric}, and quotes the exact words it relied on; code checks the quotes
+are real. Skipping a skill counts as a miss only if the moment called for it. For
+example, if in Simulation~4 the other side says a referral needs headquarters' approval,
+``Then we will proceed without you'' scores near 0 on interests and decision-making,
+while ``What would headquarters need to see to approve this?'' scores near 1. Claude does
+the scoring in the tool; human annotators use the same rubric and format, so the two can
+be compared directly.
+
+% ===========================================================================
+\section{What we have completed}
+
+The app covers the whole preparation loop: upload the case, read a prep brief, practice,
+get feedback, and see a skill profile that picks the next round. Since Checkpoint~2 we
+have rebuilt it around the rubric.
+\begin{itemize}
+\item \textbf{Cases from uploads:} uploaded materials become a case with its negotiation
+type, constraints, required approvals, and the six-skill rubric. Point tables are
+optional. A conversion script sets up Simulations~3 and~4 this way.
+\item \textbf{A steerable counterpart:} Claude plays the other side using only that
+side's materials. Each skill has instructions for creating practice chances, such as
+raising an unsettled approval to practice interests and decision-making. The counterpart
+sticks to the case's facts, and being friendly never earns a free concession.
+\item \textbf{Scoring and feedback:} the message-by-message scoring above, plus a report
+organized by skill that shows what the user said, why it mattered, and a better option.
+\item \textbf{Profile and next round:} a Beta estimate for each skill, shown with how
+much evidence backs it, used to choose the next focus.
+\item \textbf{Evaluation tools:} import and export of human annotations, and code that
+compares the system with them, measures steering, and summarizes feedback ratings.
+\end{itemize}
+The counterpart never sees the user's confidential materials, and the user doesn't see
+the counterpart's until the debrief. The system has 165 automated tests.
+
+% ===========================================================================
+\section{How the tool has done}
+
+So far we have the stress tests from Checkpoint~2 and one real use in class. Our main
+focus is the evaluations with human judges and real participants that follow, which have
+not run yet.
+
+\paragraph{Algorithmic stress testing:}
+For Checkpoint~2 we ran 450 offline negotiations between our rule-based counterpart,
+which follows the same concession rules as the LLM counterpart, and scripted users with
+three styles. The counterpart never accepted a deal below its walk-away point, and harder
+levels consistently cost users points (Spearman $\rho=-0.82$). These tests show the
+mechanics work, not that the tool helps anyone prepare.
+
+\paragraph{In-class Simulation 4:}
+One of us used the tool to prepare for Simulation~4. The biggest problem was time: the
+class gave us 15 minutes, which isn't enough to practice, get feedback, and practice
+again, and that cycle is where the training happens. Even so, the tool helped in two
+ways. First, it laid out the main issues, the options for each, and how many points each
+option was worth, which made it clear what to prioritize. These numbers come from code
+working on the user's own sheet, not from the LLM. Second, the built-in assistant was
+very useful for quick questions while preparing. It answers only from the user's own
+materials, so it can clear up facts without giving away the other side's information.
+Working through the case this way also kept the details fresh going into the negotiation.
+We haven't yet tried a longer preparation window; the study below will.
+
+\paragraph{Weakness identification (Q1, planned):}
+Two of us will separately label 20--30 transcripts from Simulations~3 and~4 in the
+system's format, never labeling a transcript we played. We will measure how often the
+system finds the same chances and weaknesses as we do (precision and recall) and how far
+its scores are from ours. We will compare it with a keyword detector, with a
+general-purpose model that doesn't use our rubric, and with how well our two labelers
+agree, which is about the best we can expect. We will also remove one skill from single
+messages and check that only that skill's score drops.
+
+\paragraph{Steering (Q2, planned):}
+We will take about ten conversations stopped partway through and generate the
+counterpart's next message under each focus and with none. Raters who don't know the
+focus will judge which practice chances each message creates and whether it stays true to
+the case. Steering works if each focus creates more chances for its own skill than no
+focus does. We will also check whether adversarial messages can make the counterpart leak
+its confidential information.
+
+\paragraph{Preparation (Q3, planned):}
+Scores from the practice rounds can't show on their own that preparation worked: the
+focus and difficulty change between rounds, people improve with any practice, and the
+system would be grading itself. Our real test compares before and after on the same
+case. Each participant first negotiates a new case at a fixed difficulty, with no focus
+and no feedback. We then randomly split them into two groups with the same preparation
+time. One group uses our tool. The other gets the same case files and a general-purpose
+chatbot like ChatGPT. Then everyone negotiates the case again under the same conditions
+and, when possible, against a real person. Claude scores every transcript with
+Table~\ref{tab:rubric}. Because the tool trains people against that same scorer, a team
+member or TA also scores a random 20--30\% blind to group and order, to check the gains
+hold up for a human. We will also record the outcome (agreement, constraints respected,
+clear commitments) and, after negotiations against people, how the other side rated trust
+and fairness. With 6--10 participants, this will be early evidence, not proof.
+
+% ===========================================================================
+\section{What we keep and what we change}
+
+\paragraph{Keep:}
+Practicing the user's own upcoming case, a counterpart that only knows its own side's
+materials, and feedback after the session rather than during it, so users build skill
+instead of leaning on the tool. We also keep the Beta estimate for each skill, which now
+takes partial scores instead of just right or wrong. Simulation~4 gave us reason to keep
+the prep brief and the assistant, the most useful parts under time pressure.
+
+\paragraph{Change:}
+\begin{itemize}
+\item \textbf{Skills from class:} the six-skill rubric replaces the bargaining errors.
+\item \textbf{A case-specific goal:} we measure improvement on the case being prepared,
+not negotiation skill in general.
+\item \textbf{Evaluation with people:} human labels and a before-and-after study replace
+LLM-simulated trainees.
+\item \textbf{Short preparation windows:} when time is short, the tool should lead with
+the prep brief and assistant. When there's more time, it should push users to start
+early enough for several practice rounds.
+\end{itemize}
+
+\paragraph{Next steps:}
+We will run the diagnosis and steering evaluations first, then the before-and-after
+study. Alongside that, we will improve the interface, make preparation smoother when time
+is short, and ask the instructor or a TA to review the rubric.
+
+\end{document}
