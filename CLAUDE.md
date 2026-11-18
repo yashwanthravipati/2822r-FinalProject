@@ -66,6 +66,7 @@ src/negotrain/
   config.py         env settings (NEGOTRAIN_MODEL, NEGOTRAIN_EFFORT, NEGOTRAIN_SESSIONS_DIR)
   assistant.py      personal assistant context, source retrieval, private conversation models
   app/assistant_panel.py  persistent right-hand chat (Streamlit fragment)
+  app/style.py      UI design system (components; CSS in app/assets/style.css; see docs/ui.md)
   cases/            load_case, scoring.py (deterministic), parser.py (T-004)
   counterpart/      agent.py (CounterpartAgent), profiles.py (tiers, dials, sampling)
   feedback/         counterfactual credit assignment and coaching (T-020 to T-023)

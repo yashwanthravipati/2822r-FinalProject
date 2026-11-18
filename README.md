@@ -159,7 +159,7 @@ src/negotrain/        Python package
   curriculum/         tailored scenario selection
   simulation.py       simulated negotiators and the agent-vs-agent episode runner
   sessions.py         session, artifact, and participant persistence
-  app/                Streamlit app (main.py entry, views.py pages)
+  app/                Streamlit app (main.py entry, views.py pages, style.py design system; see docs/ui.md)
   cli.py              `negotrain` command
 data/cases/           synthetic cases (safe to commit); private/ holds licensed class cases (gitignored)
 data/sessions/        session logs and feedback (gitignored, may contain participant data)
