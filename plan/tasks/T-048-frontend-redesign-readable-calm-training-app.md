@@ -1,7 +1,7 @@
 ---
 id: T-048
 title: Frontend redesign: readable, calm training app
-status: review          # todo | in-progress | review | blocked | done
+status: done
 milestone: M1
 workstream: app  # cases | counterpart | feedback | profiling | app | study | analysis | infra
 owner: yash
@@ -63,3 +63,4 @@ work (decision 0009 on main). Guide for future UI work: `docs/ui.md`.
   suggestion (changing difficulty keeps the suggested focus; the old "choose difficulty"
   mode silently dropped it); Prepare's Up next card has Customize. Checked at 1440x820 and
   390x844 on the real-data copy. 175 tests pass offline (2 new).
+- 2026-11-17: Merged into main at Yash's request. Still open: a live check with the API and team review (Mahdi, Vincent).
