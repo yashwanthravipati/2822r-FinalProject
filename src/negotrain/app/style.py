@@ -1,128 +1,28 @@
-"""Visual layer for the app: injected CSS and small HTML components.
+"""Visual layer: design tokens, injected CSS, and small HTML components.
 
-Colors, fonts, and radii live in .streamlit/config.toml (the theme). This module adds what
-the theme can't: a hero banner, page headers, cards, chips, offer cards, and chat-bubble
-styling. Every dynamic string is HTML-escaped here, so callers pass plain text.
+Colors, fonts, and radii for Streamlit's own widgets live in .streamlit/config.toml. This
+module styles everything the theme can't reach and provides the page vocabulary (headers,
+sections, stat rows, callouts, offer cards, chat bubbles, skill meters). The look is calm
+and editorial: warm off-white surfaces, near-black text, one deep-green accent, and no
+decorative gradients or emoji, so long case material stays readable.
+
+Every dynamic string is HTML-escaped here, so callers pass plain text. For prose rendered
+through st.markdown, use ``md`` instead: a pair of "$" would otherwise render as LaTeX.
 """
 
 from __future__ import annotations
 
+import re
+from functools import lru_cache
 from html import escape
 from pathlib import Path
 
 import streamlit as st
 
-CSS = """
-<style>
-.block-container {max-width: 1640px; padding-top: 2.2rem; padding-bottom: 4rem;}
-.st-key-personal_assistant {
-  background: rgba(255,255,255,.88); border-radius: 18px; padding: 1.1rem;
-  box-shadow: 0 5px 25px rgba(16,24,40,.05);
-  max-height: calc(100dvh - 6rem); overflow-y: auto;
-}
-[data-testid="stColumn"]:has(.st-key-personal_assistant) {
-  position: sticky; top: 4.5rem; align-self: flex-start;
-}
-.st-key-personal_assistant [data-testid="stChatMessage"] {
-  padding: .6rem .7rem; border: 0; background: #F5F6FB;
-}
-.st-key-personal_assistant h3 {font-size: 1.2rem; padding-top: 0;}
-@media (max-width: 1100px) {
-  [data-testid="stHorizontalBlock"]:has(> [data-testid="stColumn"] .st-key-personal_assistant) {
-    flex-wrap: wrap;
-  }
-  [data-testid="stColumn"]:has(.st-key-personal_assistant),
-  [data-testid="stColumn"]:has(> [data-testid="stVerticalBlock"] .st-key-main_page) {
-    position: static; width: 100%; flex: 1 1 100%; min-width: 0;
-  }
-}
-h1, h2, h3 {letter-spacing: -0.015em;}
+ASSETS = Path(__file__).parent / "assets"
 
-.nt-hero {
-  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 55%, #0EA5E9 100%);
-  color: #fff; border-radius: 20px; padding: 2.4rem 2.6rem; margin-bottom: 1.6rem;
-  box-shadow: 0 12px 32px rgba(79, 70, 229, .25);
-}
-.nt-hero h1 {color: #fff; font-size: 2.4rem; margin: 0 0 .5rem 0; padding: 0;}
-.nt-hero p {color: rgba(255, 255, 255, .92); font-size: 1.08rem; margin: 0; max-width: 760px;
-  line-height: 1.55;}
-.nt-eyebrow {text-transform: uppercase; letter-spacing: .09em; font-size: .74rem;
-  font-weight: 650; color: #6366F1; margin-bottom: .25rem;}
-.nt-hero .nt-eyebrow {color: rgba(255, 255, 255, .78);}
-
-.nt-header {margin-bottom: 1.3rem;}
-.nt-header h1 {margin: 0; padding: 0; font-size: 2.05rem;}
-.nt-header p {color: #6B7280; margin: .35rem 0 0 0; font-size: 1.02rem; max-width: 820px;}
-
-.nt-card {background: #fff; border: 1px solid #E3E6F0; border-radius: 16px;
-  padding: 1.15rem 1.25rem; height: 100%; box-shadow: 0 1px 3px rgba(16, 24, 40, .05);}
-.nt-card h4 {margin: .45rem 0 .3rem 0; font-size: 1.02rem; padding: 0;}
-.nt-card p {color: #6B7280; font-size: .92rem; margin: 0; line-height: 1.5;}
-.nt-icon {font-size: 1.45rem; width: 2.6rem; height: 2.6rem; border-radius: 12px;
-  background: #EEF0FA; display: flex; align-items: center; justify-content: center;}
-
-.nt-step {display: flex; gap: .85rem; align-items: flex-start; padding: .5rem 0;}
-.nt-step-num {flex: 0 0 1.9rem; height: 1.9rem; border-radius: 999px; background: #EEF0FA;
-  color: #4F46E5; font-weight: 700; display: flex; align-items: center;
-  justify-content: center; font-size: .88rem;}
-.nt-step b {display: block; font-size: .98rem;}
-.nt-step span {color: #6B7280; font-size: .9rem;}
-
-.nt-chips {margin: .1rem 0 .9rem 0;}
-.nt-chip {display: inline-block; padding: .2rem .65rem; border-radius: 999px; font-size: .78rem;
-  font-weight: 600; margin: 0 .35rem .35rem 0; background: #EEF0FA; color: #4338CA;
-  border: 1px solid #E0E3F7;}
-.nt-chip.green {background: #ECFDF5; color: #047857; border-color: #D1FAE5;}
-.nt-chip.amber {background: #FFFBEB; color: #B45309; border-color: #FDE68A;}
-.nt-chip.red {background: #FEF2F2; color: #B91C1C; border-color: #FECACA;}
-.nt-chip.gray {background: #F3F4F6; color: #374151; border-color: #E5E7EB;}
-
-.nt-offer {border: 1px solid #C7D2FE; background: #F5F7FF; border-radius: 12px;
-  padding: .7rem .9rem .45rem; margin-top: .5rem;}
-.nt-offer-head {display: flex; justify-content: space-between; align-items: center;
-  font-size: .74rem; font-weight: 650; color: #4338CA; text-transform: uppercase;
-  letter-spacing: .06em; margin-bottom: .5rem;}
-.nt-points {background: #4F46E5; color: #fff; border-radius: 999px; padding: .16rem .65rem;
-  font-size: .78rem; text-transform: none; letter-spacing: 0;}
-.nt-term {display: inline-block; background: #fff; border: 1px solid #E0E3F7;
-  border-radius: 8px; padding: .22rem .55rem; margin: 0 .35rem .35rem 0; font-size: .86rem;}
-.nt-term b {color: #6B7280; font-weight: 500;}
-.nt-issue {margin: 0 0 .55rem 0;}
-.nt-issue-name {font-weight: 600; font-size: .86rem; margin-bottom: .25rem; color: #374151;}
-.nt-pt {display: inline-block; border: 1px solid #E3E6F0; background: #fff; border-radius: 8px;
-  padding: .16rem .5rem; margin: 0 .3rem .3rem 0; font-size: .82rem;}
-.nt-pt strong {color: #4338CA; margin-left: .25rem;}
-.nt-pt.best {background: #ECFDF5; border-color: #A7F3D0;}
-.nt-pt.best strong {color: #047857;}
-.nt-stats {display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: .7rem; margin: .4rem 0 1rem;}
-.nt-stat {background: #fff; border: 1px solid #E3E6F0; border-radius: 14px; padding: .8rem 1rem;
-  box-shadow: 0 1px 3px rgba(16, 24, 40, .04);}
-.nt-stat-label {font-size: .78rem; color: #6B7280; font-weight: 500;}
-.nt-stat-value {font-size: 1.55rem; font-weight: 700; color: #111827; line-height: 1.25;}
-.nt-stat-sub {font-size: .78rem; font-weight: 600; margin-top: .15rem;}
-.nt-stat-sub.green {color: #047857;} .nt-stat-sub.red {color: #B91C1C;}
-.nt-stat-sub.gray {color: #6B7280;}
-.nt-empty {color: #9CA3AF; font-size: .9rem; font-style: italic;}
-
-.nt-banner {border-radius: 14px; padding: 1rem 1.2rem; margin: .4rem 0 1rem;
-  font-weight: 500; line-height: 1.5;}
-.nt-banner.good {background: #ECFDF5; border: 1px solid #A7F3D0; color: #065F46;}
-.nt-banner.bad {background: #FEF2F2; border: 1px solid #FECACA; color: #991B1B;}
-.nt-banner.info {background: #EEF2FF; border: 1px solid #C7D2FE; color: #3730A3;}
-
-.nt-user {border: 1px solid rgba(165, 180, 252, .25); background: rgba(99, 102, 241, .12);
-  border-radius: 12px; padding: .6rem .8rem; font-size: .88rem; margin-bottom: .5rem;}
-.nt-user b {font-size: 1rem;}
-
-div[data-testid="stMetric"] {background: #fff; border: 1px solid #E3E6F0;
-  border-radius: 14px; padding: .85rem 1rem; box-shadow: 0 1px 3px rgba(16, 24, 40, .04);}
-div[data-testid="stChatMessage"] {background: #fff; border: 1px solid #E3E6F0;
-  border-radius: 16px; padding: .85rem 1rem; margin-bottom: .7rem;}
-div[data-testid="stChatMessage"]:has(.nt-me) {background: #EEF2FF; border-color: #C7D2FE;}
-div[data-testid="stForm"] {background: #fff; border-radius: 16px;}
-</style>
-"""
+# Tones shared by badges, callouts, stats and meters.
+TONES = ("neutral", "accent", "good", "warn", "bad")
 
 
 def md(text: object) -> str:
@@ -131,106 +31,313 @@ def md(text: object) -> str:
     return str(text).replace("$", "\\$")
 
 
+def esc(text: object) -> str:
+    """HTML-escape text content. Quotes stay literal: they are never placed in attributes,
+    and keeping them readable means rendered text matches the source (tests rely on it)."""
+    return escape(str(text), quote=False)
+
+
+def paragraphs(text: str) -> str:
+    """Plain text to escaped <p> blocks, keeping the author's paragraph breaks."""
+    blocks = [b.strip() for b in str(text).replace("\r\n", "\n").split("\n\n") if b.strip()]
+    return "".join("<p>" + esc(b).replace("\n", "<br>") + "</p>" for b in blocks)
+
+
+@lru_cache(maxsize=1)
+def _css() -> str:
+    return "<style>\n" + (ASSETS / "style.css").read_text(encoding="utf-8") + "</style>"
+
+
 def inject() -> None:
-    st.markdown(CSS, unsafe_allow_html=True)
-
-
-def _html(markup: str) -> None:
-    st.markdown(markup, unsafe_allow_html=True)
-
-
-def hero(eyebrow: str, title: str, text: str) -> None:
-    _html(
-        f'<div class="nt-hero"><div class="nt-eyebrow">{escape(eyebrow)}</div>'
-        f"<h1>{escape(title)}</h1><p>{escape(text)}</p></div>"
-    )
-
-
-def page_header(title: str, subtitle: str = "", eyebrow: str = "") -> None:
-    eb = f'<div class="nt-eyebrow">{escape(eyebrow)}</div>' if eyebrow else ""
-    sub = f"<p>{escape(subtitle)}</p>" if subtitle else ""
-    _html(f'<div class="nt-header">{eb}<h1>{escape(title)}</h1>{sub}</div>')
-
-
-def cards(items: list[tuple[str, str, str]]) -> None:
-    """A row of (icon, title, text) cards."""
-    for col, (icon, title, text) in zip(st.columns(len(items)), items, strict=True):
-        with col:
-            _html(
-                f'<div class="nt-card"><div class="nt-icon">{escape(icon)}</div>'
-                f"<h4>{escape(title)}</h4><p>{escape(text)}</p></div>"
-            )
-
-
-def steps(items: list[tuple[str, str]]) -> None:
-    _html(
-        "".join(
-            f'<div class="nt-step"><div class="nt-step-num">{n}</div>'
-            f"<div><b>{escape(title)}</b><span>{escape(text)}</span></div></div>"
-            for n, (title, text) in enumerate(items, start=1)
-        )
-    )
-
-
-def chips(items: list[tuple[str, str]]) -> None:
-    """Inline pills; tone is one of '', 'green', 'amber', 'red', 'gray'."""
-    _html(
-        '<div class="nt-chips">'
-        + "".join(f'<span class="nt-chip {tone}">{escape(text)}</span>' for text, tone in items)
-        + "</div>"
-    )
-
-
-def offer_card(title: str, terms: list[tuple[str, str]], badge: str) -> str:
-    """HTML for a structured offer: issue/option pills and a points badge."""
-    body = "".join(
-        f'<span class="nt-term"><b>{escape(name)}:</b> {escape(label)}</span>'
-        for name, label in terms
-    )
-    return (
-        f'<div class="nt-offer"><div class="nt-offer-head"><span>{escape(title)}</span>'
-        f'<span class="nt-points">{escape(badge)}</span></div>{body}</div>'
-    )
-
-
-def points_block(rows: list[tuple[str, list[tuple[str, float]]]], walk_away: float) -> None:
-    """A role's point table as one line of option pills per issue; the best option is green."""
-    out = []
-    for name, options in rows:
-        top = max(pts for _, pts in options)
-        pills = "".join(
-            f'<span class="nt-pt{" best" if pts == top else ""}">{escape(label)}'
-            f"<strong>{pts:g}</strong></span>"
-            for label, pts in options
-        )
-        out.append(
-            f'<div class="nt-issue"><div class="nt-issue-name">{escape(name)}</div>{pills}</div>'
-        )
-    out.append(f'<span class="nt-chip amber">Walk-away (no deal): {walk_away:g} points</span>')
-    _html("".join(out))
-
-
-def stats(items: list[tuple[str, str, str, str]]) -> None:
-    """Responsive stat cards: (label, value, sub-text, tone of sub-text)."""
-    cells = "".join(
-        f'<div class="nt-stat"><div class="nt-stat-label">{escape(label)}</div>'
-        f'<div class="nt-stat-value">{escape(value)}</div>'
-        + (f'<div class="nt-stat-sub {tone}">{escape(sub)}</div>' if sub else "")
-        + "</div>"
-        for label, value, sub, tone in items
-    )
-    _html(f'<div class="nt-stats">{cells}</div>')
+    st.markdown(_css(), unsafe_allow_html=True)
 
 
 def html(markup: str) -> None:
-    _html(markup)
+    st.markdown(markup, unsafe_allow_html=True)
 
 
-def banner(text: str, tone: str = "info") -> None:
-    _html(f'<div class="nt-banner {tone}">{escape(text)}</div>')
+def _tone(tone: str) -> str:
+    return tone if tone in TONES else "neutral"
 
 
-ASSETS = Path(__file__).parent / "assets"
+# --------------------------------------------------------------------------- page structure
+
+
+def steps_html(current: int) -> str:
+    """The practice loop as three small pills; ``current`` is 1, 2 or 3 (0 for none)."""
+    names = ("Prepare", "Rehearse", "Feedback")
+    parts = [
+        f'<span class="{"on" if n == current else ""}">{n} · {name}</span>'
+        for n, name in enumerate(names, start=1)
+    ]
+    return '<span class="nt-steps">' + "<i></i>".join(parts) + "</span>"
+
+
+def page_header(title: str, subtitle: str = "", *, kicker: str = "", step: int = 0) -> None:
+    top = ""
+    if kicker or step:
+        top = (
+            '<div class="nt-kicker">'
+            + (steps_html(step) if step else "")
+            + (esc(kicker) if kicker else "")
+            + "</div>"
+        )
+    sub = f'<p class="nt-sub">{esc(subtitle)}</p>' if subtitle else ""
+    html(f'<div class="nt-header">{top}<h1>{esc(title)}</h1>{sub}</div>')
+
+
+def section(title: str, subtitle: str = "") -> None:
+    sub = f"<p>{esc(subtitle)}</p>" if subtitle else ""
+    html(f'<div class="nt-section"><h2>{esc(title)}</h2>{sub}</div>')
+
+
+def lead(text: str) -> None:
+    html(f'<div class="nt-lead">{esc(text)}</div>')
+
+
+def muted(text: str) -> None:
+    html(f'<p class="nt-muted">{esc(text)}</p>')
+
+
+def card(name: str, *, accent: bool = False, border: bool = False):
+    """A white panel around native widgets. ``name`` must be unique on the page."""
+    return st.container(key=f"card-{'accent-' if accent else ''}{name}", border=border)
+
+
+# --------------------------------------------------------------------------- small pieces
+
+
+def badge_html(text: str, tone: str = "neutral", *, dot: bool = False) -> str:
+    d = '<span class="nt-dot"></span>' if dot else ""
+    return f'<span class="nt-badge {_tone(tone)}">{d}{esc(text)}</span>'
+
+
+def badges(items: list[tuple[str, str]]) -> None:
+    """Inline pills: (text, tone)."""
+    html('<div class="nt-badges">' + "".join(badge_html(t, tone) for t, tone in items) + "</div>")
+
+
+def callout(text: str, tone: str = "neutral", *, title: str = "") -> None:
+    t = f'<b class="t">{esc(title)}</b>' if title else ""
+    html(f'<div class="nt-callout {_tone(tone)}">{t}{esc(text)}</div>')
+
+
+def stats(items: list[tuple[str, str, str, str]]) -> None:
+    """Stat tiles: (label, value, note, tone of the note)."""
+    cells = "".join(
+        f'<div class="nt-stat"><div class="l">{esc(label)}</div><div class="v">{esc(value)}</div>'
+        + (f'<div class="n {_tone(tone)}">{esc(note)}</div>' if note else "")
+        + "</div>"
+        for label, value, note, tone in items
+    )
+    html(f'<div class="nt-stats">{cells}</div>')
+
+
+# " - " between words marks an inline sub-list in model-written items ("Stakes: - A. - B.").
+_INLINE_BULLET = re.compile(r"\s+-\s+(?=\S)")
+
+
+def split_item(item: str) -> tuple[str, list[str]]:
+    """Split "Heading: - first - second" into ("Heading:", ["first", "second"]).
+
+    Briefs written by the model sometimes pack a whole list into one string; showing it
+    as nested bullets is far easier to read. A single spaced dash is treated as prose.
+    """
+    parts = [p.strip() for p in _INLINE_BULLET.split(str(item)) if p.strip()]
+    if len(parts) < 3 and not (len(parts) == 2 and parts[0].endswith(":")):
+        return str(item), []
+    return parts[0], parts[1:]
+
+
+def _li(item: str) -> str:
+    head, subs = split_item(item)
+    if not subs:
+        return f"<li>{esc(head)}</li>"
+    return f"<li>{esc(head)}<ul>" + "".join(f"<li>{esc(s)}</li>" for s in subs) + "</ul></li>"
+
+
+def list_card_html(title: str, items: list[str], *, checks: bool = False, tone: str = "") -> str:
+    if items:
+        body = (
+            f'<ul class="{"nt-checks" if checks else ""}">'
+            + "".join(_li(i) for i in items)
+            + "</ul>"
+        )
+    else:
+        body = '<p class="nt-muted">Nothing noted.</p>'
+    return f'<div class="nt-card {esc(tone)}"><h3>{esc(title)}</h3>{body}</div>'
+
+
+def is_long(lists: list[list[str]], limit: int = 110) -> bool:
+    """True when list items are long enough that side-by-side cards would be cramped."""
+    items = [str(i) for group in lists for i in group]
+    return bool(items) and sum(len(i) for i in items) / len(items) > limit
+
+
+def card_grid(cards_html: list[str], *, single: bool = False) -> None:
+    html(f'<div class="nt-grid{" one" if single else ""}">' + "".join(cards_html) + "</div>")
+
+
+def text_card(title: str, text: str, *, tone: str = "") -> None:
+    html(f'<div class="nt-card {esc(tone)}"><h3>{esc(title)}</h3>{paragraphs(text)}</div>')
+
+
+def empty(title: str, text: str = "") -> None:
+    html(f'<div class="nt-empty"><b>{esc(title)}</b><span>{esc(text)}</span></div>')
+
+
+def how_it_works(items: list[tuple[str, str]]) -> None:
+    html(
+        '<div class="nt-howto">'
+        + "".join(
+            f'<div><div class="nt-num">{n}</div>'
+            f"<div><b>{esc(t)}</b><span>{esc(d)}</span></div></div>"
+            for n, (t, d) in enumerate(items, start=1)
+        )
+        + "</div>"
+    )
+
+
+def numbered(n: int | str, title: str, text: str = "", *, state: str = "", extra: str = "") -> None:
+    """A row with a number disc; state is '', 'on' (current) or 'done'."""
+    body = f'<p class="nt-row-text">{esc(text)}</p>' if text else ""
+    disc = "✓" if state == "done" else esc(n)
+    html(
+        f'<div class="nt-row"><div class="nt-num {esc(state)}">{disc}</div><div>'
+        f'<div class="nt-row-title">{esc(title)}</div>{extra}{body}</div></div>'
+    )
+
+
+def progress(label: str, fraction: float) -> None:
+    pct = max(0.0, min(1.0, fraction)) * 100
+    html(
+        f'<div class="nt-progress"><span>{esc(label)}</span>'
+        f'<div class="nt-track"><div style="width:{pct:.0f}%"></div></div></div>'
+    )
+
+
+def details_html(summary: str, body: str) -> str:
+    return (
+        f'<details class="nt-more"><summary>{esc(summary)}</summary>'
+        f"<div>{esc(body)}</div></details>"
+    )
+
+
+# --------------------------------------------------------------------------- domain pieces
+
+
+def priorities(rows: list[tuple[int, str, str, str, float, float]]) -> None:
+    """Issue priorities: (rank, issue, best option, worst option, points at stake, share)."""
+    out = []
+    for rank, name, best, worst, spread, share in rows:
+        out.append(
+            f'<div class="nt-prio"><div class="r">{rank}</div><div class="name">{esc(name)}</div>'
+            f'<div class="bar">{spread:g} pts at stake<div class="nt-track">'
+            f'<div style="width:{max(0.0, min(1.0, share)) * 100:.0f}%"></div></div></div>'
+            f'<div class="det">Best for you: {esc(best)} · Worst: {esc(worst)}</div></div>'
+        )
+    html('<div class="nt-card">' + "".join(out) + "</div>")
+
+
+def offer_card(
+    title: str, rows: list[tuple[str, str]], note: str = "", *, accent: bool = False
+) -> str:
+    """HTML for a structured offer: a header line and one row per issue."""
+    body = "".join(f"<tr><td>{esc(issue)}</td><td>{esc(term)}</td></tr>" for issue, term in rows)
+    w = f'<span class="w">{esc(note)}</span>' if note else ""
+    return (
+        f'<div class="nt-offer {"accent" if accent else ""}"><div class="nt-offer-head">'
+        f"<span>{esc(title)}</span>{w}</div><table>{body}</table></div>"
+    )
+
+
+def empty_offer(text: str) -> str:
+    return f'<div class="nt-offer empty">{esc(text)}</div>'
+
+
+def points_table(rows: list[tuple[str, list[tuple[str, float]]]], walk_away: float) -> None:
+    """A role's point table: every option of every issue, best option highlighted."""
+    body = []
+    for name, options in rows:
+        top = max((pts for _, pts in options), default=0)
+        for n, (label, pts) in enumerate(options):
+            issue = f'<td class="issue">{esc(name)}</td>' if n == 0 else "<td></td>"
+            best = ' class="best"' if pts == top else ""
+            body.append(f'<tr{best}>{issue}<td>{esc(label)}</td><td class="num">{pts:g}</td></tr>')
+    html(
+        '<div class="nt-pts"><table class="nt-table"><thead><tr><th>Issue</th><th>Option</th>'
+        '<th style="text-align:right">Points</th></tr></thead><tbody>'
+        + "".join(body)
+        + "</tbody></table></div>"
+    )
+    badges([(f"Walk-away (no deal): {walk_away:g} points", "warn")])
+
+
+def table(headers: list[str], rows: list[list[str]], numeric: set[int] | None = None) -> None:
+    """A light read-only table for short lists (use st.dataframe for data people sort)."""
+    numeric = numeric or set()
+    head = "".join(
+        f'<th style="text-align:{"right" if i in numeric else "left"}">{esc(h)}</th>'
+        for i, h in enumerate(headers)
+    )
+    body = "".join(
+        "<tr>"
+        + "".join(
+            f'<td class="{"num" if i in numeric else ""}">{esc(c)}</td>' for i, c in enumerate(r)
+        )
+        + "</tr>"
+        for r in rows
+    )
+    html(f'<table class="nt-table"><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>')
+
+
+def bubble(name: str, meta: str, text: str, *, mine: bool, extra: str = "") -> None:
+    """One chat message. ``extra`` is trusted HTML built by this module (offer, events)."""
+    say = f'<div class="nt-say">{paragraphs(text)}</div>' if text else ""
+    html(
+        f'<div class="nt-msg {"me" if mine else ""}"><div class="nt-bubble">'
+        f'<div class="nt-who">{esc(name)}<span>{esc(meta)}</span></div>{say}{extra}</div></div>'
+    )
+
+
+def event_html(text: str, tone: str) -> str:
+    return f'<div class="nt-event {_tone(tone)}">{esc(text)}</div>'
+
+
+def meter(
+    label: str,
+    value: float | None,
+    lo: float,
+    hi: float,
+    meta: str,
+    *,
+    tone: str = "accent",
+    value_text: str = "",
+) -> str:
+    """A 0-1 estimate with its uncertainty band, as HTML (stack several in one card)."""
+    if value is None:
+        bar = ""
+        shown = value_text or "Not enough evidence"
+    else:
+        lo_p, hi_p = max(0.0, lo) * 100, min(1.0, hi) * 100
+        bar = (
+            f'<div class="band" style="left:{lo_p:.1f}%;width:{max(0.0, hi_p - lo_p):.1f}%"></div>'
+            f'<div class="pt" style="left:{max(0.0, min(1.0, value)) * 100:.1f}%"></div>'
+        )
+        shown = value_text or f"{value:.0%}"
+    return (
+        f'<div class="nt-meter {_tone(tone)}"><div class="top">'
+        f'<span class="lbl">{esc(label)}</span>'
+        f'<span class="val">{esc(shown)}</span></div><div class="rail">{bar}</div>'
+        f'<div class="meta">{esc(meta)}</div></div>'
+    )
+
+
+def meters(items: list[str]) -> None:
+    html('<div class="nt-card">' + "".join(items) + "</div>")
+
+
+# --------------------------------------------------------------------------- chrome
 
 
 def brand() -> None:
@@ -238,8 +345,9 @@ def brand() -> None:
     st.logo(str(ASSETS / "logo.svg"), size="large", icon_image=str(ASSETS / "icon.svg"))
 
 
-def scenario_badge(title: str, role: str) -> None:
-    _html(
-        f'<div class="nt-user">Current scenario<br><b>{escape(title)}</b><br>'
-        f"You: {escape(role)}</div>"
+def scenario_card(title: str, role: str, kind: str = "") -> None:
+    k = f'<div class="r">{esc(kind)}</div>' if kind else ""
+    html(
+        f'<div class="nt-scenario"><div class="k">Current scenario</div>'
+        f'<div class="t">{esc(title)}</div><div class="r">You play: {esc(role)}</div>{k}</div>'
     )

@@ -132,9 +132,12 @@ step 1), and a Settings expander:
 | Usage and cost tracking, thread-safe | `llm.py` (`Usage.cost`, `PRICE_PER_MTOK`) | — |
 | App: navigation and gating | `app/main.py` | T-014 |
 | App: pages, active scenario, counterpart factory | `app/views.py` | T-014, T-028, T-045 |
-| App: CSS and HTML components, `md()` escaping | `app/style.py`, `app/assets/*.svg`, `.streamlit/config.toml` | T-014 |
+| App: CSS and HTML components, `md()` escaping | `app/style.py`, `app/assets/style.css`, `app/assets/*.svg`, `.streamlit/config.toml` (redesigned in T-048; see `docs/ui.md`) | T-014, T-048 |
 
 ## Conventions to keep
+
+The look and page structure were rebuilt in T-048 (2026-11-17); `docs/ui.md` is the
+current UI guide. The conventions below still hold.
 
 - **Use `style.md()` for any case or chat text passed to `st.markdown`, `st.write`,
   `st.caption`, `st.success`, and so on.** Streamlit renders a pair of `$` as LaTeX, and

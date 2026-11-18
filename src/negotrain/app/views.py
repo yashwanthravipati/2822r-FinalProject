@@ -1,10 +1,15 @@
-"""Pages of the NegoTrain app (MVP of the five workflow stages). main.py wires them up.
+"""Pages of the NegoTrain app. main.py wires them into navigation.
 
 The app runs locally for one person, so there is no sign-in: sessions are stored under one
-implicit participant id. The first and only screen until a scenario exists is the upload
-page (page_setup): case files -> parsed case -> role -> "active scenario". Then Prepare
-(brief + training plan), Rehearse, Feedback (post-session only), My profile, and Real
-negotiation all work on that scenario; "New scenario" in the sidebar goes back to upload.
+implicit participant id. The only screen until a scenario exists is setup (page_setup):
+case files -> parsed case -> role -> "active scenario". Then Prepare (brief + training plan),
+Rehearse, Feedback (post-session only), Progress, and Real negotiation all work on that
+scenario; "Switch scenario" in the sidebar goes back to setup.
+
+Presentation rules: plain language first (difficulty, share of the possible gains), research
+detail (rollout counts, intervals, raw features) one click away in expanders or tabs; one
+primary action per screen; long case prose rendered through ``style.md`` so dollar amounts
+don't turn into LaTeX.
 
 Information hiding: the counterpart's sheet is never rendered before a session ends, and the
 counterpart agent never receives the user's sheet. Without an API key (or with
@@ -16,7 +21,7 @@ from __future__ import annotations
 import hashlib
 import os
 import random
-from html import escape
+from pathlib import Path
 
 import streamlit as st
 from pydantic import BaseModel
@@ -56,15 +61,67 @@ from negotrain.sessions import SessionStore
 PAGES: dict[str, st.Page] = {}
 
 EST_COST_PER_CALL = 0.03  # USD, conservative for claude-opus-5-5 at low effort
+
+# How participants rate the real counterpart, mapped onto the same 0-1 dials the AI uses.
 DIAL_QUESTIONS = {
     "anchoring": "How extreme was their opening position?",
     "concession_rate": "How readily did they give ground?",
-    "cooperativeness": "How open were they to trades / joint problem-solving?",
+    "cooperativeness": "How open were they to trades and joint problem-solving?",
     "aggression": "How forceful or aggressive were they?",
     "disclosure": "How much did they share about their priorities?",
     "bluffing": "How much did they seem to exaggerate or bluff?",
-    "concession_floor": "How much value did they ultimately insist on keeping?",
+    "concession_floor": "How much value did they insist on keeping in the end?",
 }
+RATING_SCALE = {"Not at all": 0.0, "A little": 0.25, "Somewhat": 0.5, "Quite": 0.75, "Very": 1.0}
+
+# Plain names for the counterpart tiers (counterpart.profiles uses internal slugs).
+DIFFICULTY_NAMES = {
+    1: "Open and cooperative",
+    2: "Collaborative but firm",
+    3: "Guarded realist",
+    4: "Tough anchorer",
+    5: "Hardball",
+}
+STATUS = {
+    "agreed": ("Deal reached", "good"),
+    "impasse": ("No deal", "bad"),
+    "active": ("In progress", "warn"),
+    "abandoned": ("Abandoned", "neutral"),
+}
+SHORT_STATUS = {"agreed": "Deal", "impasse": "No deal", "active": "Ongoing", "abandoned": "Stopped"}
+COMMITMENT_STATUS = {
+    "proposed": "Proposed",
+    "agreed": "Agreed",
+    "pending_approval": "Waiting for approval",
+    "completed": "Completed",
+    "unverified": "Not yet verified",
+}
+
+
+def difficulty(tier: int | None) -> str:
+    if tier is None:
+        return "Difficulty not recorded"
+    return f"Difficulty {tier} of 5 · {DIFFICULTY_NAMES.get(tier, TIERS[tier].name)}"
+
+
+def session_label(session: Session) -> str:
+    tier = session.counterpart_profile.tier if session.counterpart_profile else None
+    level = f"Difficulty {tier}" if tier else session.kind.capitalize()
+    return f"{session.created_at:%b %d, %H:%M} · {level} · {STATUS[session.status][0]}"
+
+
+def percent(value: float | None) -> str:
+    return "—" if value is None else f"{value:.0%}"
+
+
+def issue_columns(case: Case) -> int:
+    """Two columns of issue dropdowns only when every option is short.
+
+    Dropdown menus are exactly as wide as their box, so long options (class cases have
+    whole clauses) would be cut off in a half-width column.
+    """
+    longest = max((len(o.label) for i in case.issues for o in i.options), default=0)
+    return 2 if longest <= 30 and len(case.issues) > 1 else 1
 
 
 # --------------------------------------------------------------------------- resources
@@ -76,7 +133,7 @@ def _key_fingerprint() -> str:
 
 
 BACKENDS = {
-    "claude-code": "Claude Code (your plan, no API key)",
+    "claude-code": "Claude Code (your Claude plan)",
     "api": "Anthropic API key",
     "offline": "Offline (no AI)",
 }
@@ -130,7 +187,7 @@ def participant() -> Participant:
 
 
 class ActiveScenario(BaseModel):
-    """The case and role everything after the upload step works on (persisted locally)."""
+    """The case and role everything after the setup step works on (persisted locally)."""
 
     case_id: str
     role_id: str
@@ -198,6 +255,17 @@ def current_profile(pid: str, hist: list[tuple[Session, Case]]):
     return build_profile(pid, hist, reports=reports, context=context, calibration=calibration)
 
 
+def finished_rehearsals(pid: str, case: Case, role_id: str) -> list[Session]:
+    return [
+        s
+        for s in SessionStore().for_participant(pid)
+        if s.kind == "rehearsal"
+        and s.case_id == case.id
+        and s.user_role_id == role_id
+        and s.status in ("agreed", "impasse")
+    ]
+
+
 def go(page: str) -> None:
     """Switch page (falls back to a rerun when pages aren't registered, as in tests)."""
     if page in PAGES:
@@ -205,34 +273,43 @@ def go(page: str) -> None:
     st.rerun()
 
 
-# --------------------------------------------------------------------------- rendering
+# --------------------------------------------------------------------------- shared rendering
 
 
 def render_sheet(case: Case, role_id: str, *, title: str) -> None:
+    """A role's confidential sheet: brief, point table (if scored), and constraints."""
     role = case.role(role_id)
-    st.markdown(f"**{title}: {md(role.name)}**")
+    st.markdown(f"**{md(title)}: {md(role.name)}**")
     if role.inferred:
-        st.caption("This sheet was estimated by the parser, not taken from the case materials.")
-    st.write(md(role.confidential_brief))
+        style.callout(
+            "This sheet was estimated from the other materials; it wasn't in the case files.",
+            "warn",
+        )
+    st.markdown(md(role.confidential_brief))
     if case.is_scored:
-        style.points_block(
+        style.points_table(
             [
                 (i.name, [(o.label, role.points[i.id][o.id]) for o in i.options])
                 for i in case.issues
             ],
             role.reservation_value,
         )
-    for c in role.constraints:
-        st.caption(f"Constraint: {md(c.description)}")
+    if role.constraints:
+        st.markdown("**Constraints**")
+        for c in role.constraints:
+            st.markdown(f"- {md(c.description)}")
 
 
 def offer_html(case: Case, offer: Offer, role_id: str, title: str = "Formal offer") -> str:
     result = score_offer(case, role_id, offer)
-    terms = [(i.name, label) for i in case.issues if (label := offer.label(i))]
-    badge = "Not point-scored" if result.points is None else f"{result.points:g} pts to you"
+    rows = [(i.name, label) for i in case.issues if (label := offer.label(i))]
+    if result.points is None:
+        note = "Custom terms · not point-scored" if case.is_scored else ""
+    else:
+        note = f"{result.points:g} points to you"
     if not offer.is_complete(case):
-        badge += " · partial"
-    return style.offer_card(title, terms, badge)
+        note = (note + " · " if note else "") + "partial"
+    return style.offer_card(title, rows, note)
 
 
 def describe_offer(case: Case, offer: Offer, role_id: str) -> str:
@@ -246,58 +323,61 @@ def describe_offer(case: Case, offer: Offer, role_id: str) -> str:
 def render_turn(case: Case, session: Session, turn: Turn) -> None:
     is_user = turn.speaker == "user"
     name = "You" if is_user else case.role(session.counterpart_role_id).name
-    with st.chat_message("user" if is_user else "assistant", avatar="🧑" if is_user else "🎭"):
-        marker = '<span class="nt-me"></span>' if is_user else ""
-        turn_no = f"<span class='nt-empty'>· turn {turn.index}</span>"
-        style.html(f"{marker}<b>{escape(name)}</b> {turn_no}")
-        if turn.text:
-            st.write(md(turn.text))
-        if turn.offer:
-            style.html(offer_html(case, turn.offer, session.user_role_id))
-        if turn.accept:
-            style.banner("✅ Accepts the latest offer.", "good")
-        if turn.walk_away:
-            style.banner("🚪 Walks away.", "bad")
+    extra = ""
+    if turn.offer:
+        extra += offer_html(case, turn.offer, session.user_role_id)
+    if turn.accept:
+        extra += style.event_html("Accepted the offer on the table", "good")
+    if turn.walk_away:
+        extra += style.event_html("Walked away", "bad")
+    style.bubble(name, f"#{turn.index}", turn.text, mine=is_user, extra=extra)
 
 
 def outcome_metrics(session: Session, case: Case) -> None:
-    if case.uses_rubric:
-        summary = rubric_summary(session, case)
-        st.caption("Skill effectiveness, constraints, and commitments are assessed separately.")
-        st.dataframe(summary["skills"], hide_index=True, width="stretch")
-        if summary["assessment_source"] is None:
-            st.caption("No current assessment. Missing scores are not failures.")
+    if case.uses_rubric and not case.is_scored:
+        assessed = rubric_summary(session, case)["assessment_source"] is not None
+        style.stats(
+            [
+                ("Result", SHORT_STATUS[session.status], "", ""),
+                ("Your moves", str(session.user_turns), f"of {session.max_user_turns}", ""),
+                ("Next steps recorded", str(len(session.commitments)), "", ""),
+                (
+                    "Skill assessment",
+                    "Done" if assessed else "Not yet",
+                    "by a person" if assessed and _human(session, case) else "",
+                    "",
+                ),
+            ]
+        )
         return
     o = outcome_summary(session, case)
-    style.stats(
-        [
-            (
-                "Result",
-                {"agreed": "Deal", "impasse": "No deal"}.get(o.status, o.status),
-                "",
-                "",
-            ),
-            (
-                "Your points",
-                "Not scored" if o.points is None else f"{o.points:g}",
-                "Custom terms" if o.surplus is None else f"{o.surplus:+g} vs walk-away",
-                "gray"
-                if o.surplus is None
-                else "green"
-                if o.surplus > 0
-                else "red"
-                if o.surplus < 0
-                else "gray",
-            ),
-            ("Best listed outcome for you", f"{o.best_possible:g}", "", ""),
-            (
-                "Joint efficiency",
-                f"{o.efficiency:.0%}" if o.efficiency is not None else "—",
-                "among listed options",
-                "gray",
-            ),
-        ]
-    )
+    if o.surplus is None:
+        note, tone = ("Custom terms", "neutral") if o.points is None else ("", "neutral")
+    else:
+        note = f"{o.surplus:+g} vs walking away"
+        tone = "good" if o.surplus > 0 else "bad" if o.surplus < 0 else "neutral"
+    share = None
+    if o.points is not None:
+        share = surplus_share(case, session.user_role_id, o.points)
+    tiles = [
+        ("Result", SHORT_STATUS[session.status], "", ""),
+        ("Your points", "Not scored" if o.points is None else f"{o.points:g}", note, tone),
+        (
+            "Share of the possible gains",
+            percent(share) if session.status == "agreed" else "0%",
+            f"best possible: {o.best_possible:g} points",
+            "neutral",
+        ),
+    ]
+    if o.efficiency is not None:  # only meaningful for a scored deal
+        tiles.append(
+            ("Joint efficiency", percent(o.efficiency), "value both sides kept", "neutral")
+        )
+    style.stats(tiles)
+
+
+def _human(session: Session, case: Case) -> bool:
+    return rubric_summary(session, case)["assessment_source"] == "human"
 
 
 # --------------------------------------------------------------------------- sidebar
@@ -310,18 +390,28 @@ def sidebar() -> None:
         current = active_scenario()
         if current:
             case, role_id = current
-            style.scenario_badge(case.title, case.role(role_id).name)
-            if st.button("📂 New scenario", width="stretch"):
+            style.scenario_card(
+                case.title,
+                case.role(role_id).name,
+                TYPE_LABELS.get(case.negotiation_type, "") if case.uses_rubric else "",
+            )
+            if st.button("Switch scenario", icon=":material/swap_horiz:", width="stretch"):
                 clear_active_scenario()
                 st.rerun()
-        with st.expander("⚙️ Settings"):
+            st.session_state.setdefault("show_assistant", True)
+            st.toggle(
+                "Show assistant",
+                key="show_assistant",
+                help="A side panel that answers questions about your case and materials.",
+            )
+        with st.expander("Settings", icon=":material/settings:"):
             _settings()
 
 
 def _settings() -> None:
     st.session_state.setdefault("backend", default_backend())
     st.radio(
-        "Connect to Claude via",
+        "AI connection",
         list(BACKENDS),
         format_func=BACKENDS.get,
         key="backend",
@@ -333,30 +423,29 @@ def _settings() -> None:
     if choice == "api":
         _api_key_input()
     if choice == "claude-code" and not config.claude_bin():
-        st.warning("Claude Code CLI not found on this machine; running offline.")
+        st.warning("Claude Code isn't installed on this machine, so the app is running offline.")
     if online():
         where = "plan usage" if backend() == "claude-code" else "API usage"
-        st.caption(f"Claude: `{config.model()}` · chat effort `{config.chat_effort()}`")
+        st.caption(f"Model `{config.model()}` · chat effort `{config.chat_effort()}`")
         st.caption(
             f"{where.capitalize()} this run: {_total_calls()} calls "
-            f"(≈ ${_total_cost():.2f} at API prices)"
+            f"(about ${_total_cost():.2f} at API prices)"
         )
     else:
-        st.caption("Running offline: rule-based counterpart, template feedback.")
+        st.caption("Offline: a rule-based counterpart and template feedback.")
+    st.divider()
+    st.caption("Research options")
     st.toggle(
         "Facilitator mode",
         key="facilitator",
-        help="Shows full case files, including confidential sheets. Off for participants.",
+        help="Shows full case files, including confidential sheets. Keep off for participants.",
     )
     st.checkbox(
         "Enforce concession schedule in code",
         value=True,
         key="enforce_schedule",
-        help="Off = prompt-only counterpart (for the T-017 comparison).",
+        help="Off gives the prompt-only counterpart (for the T-017 comparison).",
     )
-
-
-# --------------------------------------------------------------------------- pages
 
 
 def _apply_key(widget_key: str) -> None:
@@ -402,33 +491,68 @@ def _api_key_input(where: str = "settings") -> None:
         st.rerun()
 
 
+# --------------------------------------------------------------------------- setup
+
+
 def page_setup() -> None:
-    style.hero(
-        "Negotiation rehearsal studio",
-        "Start with your case.",
-        "Upload everything you were given for the negotiation: general instructions, your "
-        "confidential role sheet, score tables. We'll turn it into a practice scenario with a "
-        "preparation brief, AI counterparts to rehearse against, and a debrief after each "
-        "round.",
+    style.page_header(
+        "Practice your next negotiation",
+        "Bring the materials for a negotiation you're preparing for. You'll get a preparation "
+        "brief, AI counterparts to rehearse against, and feedback after every round.",
+        kicker="Set up your scenario",
     )
-    left, right = st.columns([3, 2], gap="large")
-    with left, st.container(border=True):
-        st.markdown("#### 📂 Upload your case files")
+    lib = library()
+    case_id = st.session_state.get("setup_case_id")
+    if case_id in lib:
+        # A case is chosen: confirming it is the only thing left to do on this screen.
+        for warning in st.session_state.get("setup_warnings", []):
+            st.warning(warning)
+        _confirm_scenario(lib[case_id][0])
+        if st.button("Choose a different case", type="tertiary", icon=":material/arrow_back:"):
+            st.session_state.pop("setup_case_id", None)
+            st.session_state.pop("setup_warnings", None)
+            st.rerun()
+        return
+    style.how_it_works(
+        [
+            (
+                "Prepare",
+                "Read a brief built from your own role sheet: your limits, "
+                "priorities, and questions to ask.",
+            ),
+            (
+                "Rehearse",
+                "Negotiate in chat against an AI counterpart whose difficulty "
+                "you can raise as you improve.",
+            ),
+            (
+                "Get feedback",
+                "After each round, see what worked, the moments that mattered, "
+                "and what to practise next.",
+            ),
+        ]
+    )
+    st.space("medium")
+    upload_col, saved_col = st.columns([1, 1], gap="medium")
+    with upload_col, style.card("upload"):
+        st.markdown("#### Upload your case materials")
+        st.caption(
+            "General instructions, your confidential role sheet, score tables. PDF, Word, "
+            "text, or a ZIP of them."
+        )
         if not online():
-            style.banner(
-                "Reading your files needs Claude: sign in to Claude Code on this machine, or "
-                "paste an Anthropic API key below. Saved cases on the right work offline.",
-                "info",
+            style.callout(
+                "Reading files needs Claude. Sign in to Claude Code on this machine, or paste "
+                "an Anthropic API key below. Saved cases work offline.",
+                "warn",
             )
             _api_key_input("setup")
-        elif backend() == "claude-code":
-            st.caption("Using Claude Code with your Claude plan (no API key needed).")
         files = st.file_uploader(
             "Case materials",
             type=list(UPLOAD_TYPES),
             accept_multiple_files=True,
-            help="PDF, Word, text, or a ZIP containing these files. "
-            "Scanned PDFs without a text layer can't be read.",
+            label_visibility="collapsed",
+            help="Scanned PDFs without a text layer can't be read.",
         )
         infer = st.checkbox(
             "If the other side's instructions aren't included, estimate them", value=True
@@ -437,103 +561,76 @@ def page_setup() -> None:
             "Build scenario", type="primary", disabled=not files or not online(), width="stretch"
         ):
             _build_scenario(participant(), files, infer)
-    with right, st.container(border=True):
-        st.markdown("#### 📚 Or use a saved case")
-        lib = library()
-        ids = sorted(lib)
+    with saved_col, style.card("saved"):
+        st.markdown("#### Or use a saved case")
+        st.caption("Cases you've uploaded before, plus the sample case.")
+        ids = sorted(lib, key=lambda c: lib[c][0].title.lower())
         if ids:
-            chosen = st.selectbox("Case", ids, format_func=lambda c: lib[c][0].title)
+            # A list shows long case titles in full; a dropdown would cut them off.
+            picker = st.radio if len(ids) <= 8 else st.selectbox
+            chosen = picker(
+                "Saved cases",
+                ids,
+                format_func=lambda c: lib[c][0].title,
+                label_visibility="collapsed",
+                key="setup_saved_case",
+            )
             if st.button("Use this case", width="stretch"):
                 st.session_state["setup_case_id"] = chosen
+                st.session_state.pop("setup_warnings", None)
+                st.rerun()
         else:
             st.caption("No saved cases yet.")
 
-    lib = library()
-    case_id = st.session_state.get("setup_case_id")
-    if case_id not in lib:
-        return
-    case = lib[case_id][0]
-    st.write("")
-    with st.container(border=True):
+
+def _confirm_scenario(case: Case) -> None:
+    style.section("Confirm your scenario", "Check the case, choose your role, and start.")
+    with style.card("confirm", accent=True):
         st.markdown(f"### {md(case.title)}")
-        st.caption(md(case.public_brief))
-        style.chips([(i.name, "gray") for i in case.issues])
+        style.badges([(i.name, "neutral") for i in case.issues])
+        brief = case.public_brief.strip()
+        if len(brief) > 420:
+            st.markdown(md(brief[:420].rsplit(" ", 1)[0] + "…"))
+            with st.expander("Read the full background"):
+                st.markdown(md(brief))
+        else:
+            st.markdown(md(brief))
         role_ids = [r.id for r in case.roles]
         provided = [r.id for r in case.roles if not r.inferred]
-        role_id = st.radio(
-            "Which role are you playing?",
-            role_ids,
-            index=role_ids.index(provided[0]) if len(provided) == 1 else 0,
-            format_func=lambda r: case.role(r).name,
-            horizontal=True,
-            key=f"setup_role_{case_id}",
-        )
+        left, right = st.columns(2, gap="medium")
+        with left:
+            role_id = st.radio(
+                "Which role are you playing?",
+                role_ids,
+                index=role_ids.index(provided[0]) if len(provided) == 1 else 0,
+                format_func=lambda r: case.role(r).name,
+                key=f"setup_role_{case.id}",
+            )
+        with right:
+            kind = st.selectbox(
+                "Type of negotiation",
+                list(TYPE_LABELS),
+                index=list(TYPE_LABELS).index(case.negotiation_type),
+                format_func=lambda key: TYPE_LABELS[key],
+                key=f"type_{case.id}",
+                help="Sets which skills feedback focuses on. Institutional cases (like the "
+                "class simulations) are judged on skills, not point scores.",
+            )
         if case.role(role_id).inferred:
-            st.warning("This role's instructions were estimated, not uploaded. Is this your role?")
+            style.callout(
+                "This role's instructions were estimated, not uploaded. Is this really your role?",
+                "warn",
+            )
         elif case.other_role(role_id).inferred:
-            st.caption(
+            style.callout(
                 "The other side's instructions weren't uploaded, so the AI counterpart plays an "
                 "estimated version of them. Each rehearsal varies its style to cover the range "
                 "of opponents you might meet."
             )
-        kind = st.selectbox(
-            "Negotiation type",
-            list(TYPE_LABELS),
-            index=list(TYPE_LABELS).index(case.negotiation_type),
-            format_func=lambda key: TYPE_LABELS[key],
-            key=f"type_{case.id}",
-        )
-        st.caption(
-            "Practice uses a case-specific skill rubric. Institutional cases "
-            "do not use point scores."
-        )
-        if st.button("Start training →", type="primary", width="stretch"):
+        if st.button("Start training", type="primary", icon=":material/arrow_forward:"):
             save_private_case(enable_rubric(case, kind))
             set_active_scenario(case.id, role_id)
             st.rerun()
-
-
-TRAINING_PLAN = [
-    (2, "Warm-up", "Practice your opening and ask about the other side's interests."),
-    (2, "Consolidate", "Apply the last report's advice in another moderate rehearsal."),
-    (4, "Stretch", "Practice packaging trades against a firmer counterpart."),
-    (4, "Repeat under pressure", "Hold your ground and check reciprocity before conceding."),
-]
-
-
-def page_prepare() -> None:
-    case, role_id = active_scenario()
-    p = participant()
-    style.page_header(
-        "Prepare",
-        f"{case.title}: you are the {case.role(role_id).name}. Read your brief, then work "
-        "through the training plan below.",
-        "Step 1 · Get ready",
-    )
-    store = SessionStore()
-    key = prep_key(p.id, case.id, role_id)
-    prep = store.load_artifact(key, "prep", Prep)
-    if prep is None or (case.uses_rubric and prep.framework_version != case.framework_version):
-        with st.spinner("Writing your preparation brief…"):
-            prep = build_prep(case, role_id, llm() if online() else None)
-            store.save_artifact(key, "prep", prep)
-    _render_prep(case, prep)
-    if case.uses_rubric:
-        with st.expander("Skills for this scenario"):
-            st.caption(
-                "Rubric reviewed by an instructor."
-                if case.rubric_reviewed
-                else "Default rubric: instructor review is still pending."
-            )
-            for skill in case_rubric(case):
-                st.markdown(f"**{md(skill.label)}**")
-                st.write(md(skill.description))
-                st.caption("Practice: " + md(skill.practice))
-    if st.button("↻ Regenerate brief"):
-        with st.spinner("Writing your preparation brief…"):
-            store.save_artifact(key, "prep", build_prep(case, role_id, llm() if online() else None))
-        st.rerun()
-    _training_plan(p, case, role_id)
 
 
 def _build_scenario(p: Participant, files: list, infer: bool) -> None:
@@ -558,84 +655,147 @@ def _build_scenario(p: Participant, files: list, infer: bool) -> None:
             return
     save_private_case(case)
     st.session_state["setup_case_id"] = case.id
-    st.success(f"Built **{md(case.title)}** with {len(case.issues)} issues.")
+    st.session_state["setup_warnings"] = warnings
+    st.rerun()
+
+
+# --------------------------------------------------------------------------- prepare
+
+TRAINING_PLAN = [
+    (2, "Warm-up", "Practise your opening and ask about the other side's interests."),
+    (2, "Consolidate", "Apply the last report's advice in another moderate rehearsal."),
+    (4, "Stretch", "Practise packaging trades against a firmer counterpart."),
+    (4, "Repeat under pressure", "Hold your ground and check reciprocity before conceding."),
+]
+RUBRIC_PLAN = [
+    (2, "Warm-up", "Explore aims and values."),
+    (2, "Consolidate", "Use your feedback at the same difficulty."),
+    (4, "Stretch", "Clarify interests and authority under pressure."),
+    (4, "Follow through", "Develop options and credible next steps."),
+]
+
+
+def page_prepare() -> None:
+    case, role_id = active_scenario()
+    p = participant()
+    style.page_header(
+        "Prepare",
+        f"{case.title} · You play the {case.role(role_id).name}",
+        step=1,
+    )
+    store = SessionStore()
+    key = prep_key(p.id, case.id, role_id)
+    prep = store.load_artifact(key, "prep", Prep)
+    if prep is None or (case.uses_rubric and prep.framework_version != case.framework_version):
+        with st.spinner("Writing your preparation brief…"):
+            prep = build_prep(case, role_id, llm() if online() else None)
+            store.save_artifact(key, "prep", prep)
+
+    plan, done = _plan_steps(p, case, role_id)
+    next_index = min(done, len(plan) - 1)
+    _next_up(p, case, role_id, plan, next_index)
+
+    tab_names = ["Your brief", "Training plan"] + (["Skills"] if case.uses_rubric else [])
+    tabs = st.tabs(tab_names)
+    with tabs[0]:
+        _render_prep(case, prep)
+        if st.button("Rewrite brief", icon=":material/refresh:", type="tertiary"):
+            with st.spinner("Writing your preparation brief…"):
+                store.save_artifact(
+                    key, "prep", build_prep(case, role_id, llm() if online() else None)
+                )
+            st.rerun()
+    with tabs[1]:
+        _training_plan(p, case, role_id, plan, done)
+    if case.uses_rubric:
+        with tabs[2]:
+            _skills_list(case)
+
+
+def _next_up(p: Participant, case: Case, role_id: str, plan, next_index: int) -> None:
+    step = plan[next_index]
+    title, _, why = step.rationale.partition(": ")
+    with style.card("next", accent=True):
+        left, right = st.columns([3, 1], vertical_alignment="center")
+        with left:
+            style.html(
+                '<div class="nt-kicker">Up next in your training plan</div>'
+                f'<div class="nt-row-title">{style.esc(title)} · '
+                f"{style.esc(difficulty(step.tier))}</div>"
+                f'<p class="nt-row-text">{style.esc(why)}</p>'
+            )
+        with right:
+            if st.button("Start rehearsal", key="next_up", type="primary", width="stretch"):
+                start_rehearsal(p, case, role_id, step, counterpart_opens=False)
+                go("rehearse")
+            if st.button(
+                "Customize",
+                key="next_up_custom",
+                icon=":material/tune:",
+                width="stretch",
+                help="Change the difficulty or who speaks first before starting.",
+            ):
+                st.session_state["preset"] = step
+                st.session_state.pop("session", None)
+                go("rehearse")
 
 
 def _render_prep(case: Case, prep: Prep) -> None:
     n, b = prep.numbers, prep.brief
-    st.subheader("Your preparation brief")
-    style.banner(b.overview, "info")
+    style.section("The situation")
+    style.lead(b.overview)
     if n is not None:
         style.stats(
             [
-                ("Walk-away value", f"{n.walk_away:g}", "never accept less", "red"),
-                ("Ambitious target", f"{n.target:g}", "aim here", "green"),
-                ("Best possible", f"{n.best_possible:g}", "everything goes your way", "gray"),
+                ("Walk-away value", f"{n.walk_away:g}", "Don't accept less than this", "bad"),
+                ("Ambitious target", f"{n.target:g}", "Aim for this", "good"),
+                ("Best possible", f"{n.best_possible:g}", "If everything goes your way", ""),
             ]
         )
-        st.caption(f"Your best possible deal: {md(n.best_deal)}")
-        st.markdown("**What's at stake for you, by issue**")
-        st.dataframe(
-            [
-                {
-                    "Priority": pr.rank,
-                    "Issue": pr.name,
-                    "You want": pr.best_option,
-                    "Worst for you": pr.worst_option,
-                    "Points at stake": pr.spread,
-                    "Share": f"{pr.share:.0%}",
-                }
-                for pr in n.priorities
-            ],
-            hide_index=True,
-            width="stretch",
+        style.section(
+            "What matters most to you",
+            "Issues ranked by how many of your points they move.",
         )
-
-    def bullets(title: str, items: list[str]) -> None:
-        st.markdown(f"**{title}**")
-        for item in items:
-            st.markdown(f"- {md(item)}")
-
-    left, right = st.columns(2)
-    with left:
-        bullets("Key facts", b.key_facts)
-        bullets("Your interests", b.your_interests)
-        bullets("Where to hold and where to give", b.tradeoffs)
-    with right:
-        bullets("The other side (hypotheses to test)", b.their_likely_interests)
-        bullets("Questions to ask", b.questions_to_ask)
-        bullets("Pitfalls to avoid", b.pitfalls)
-    with st.container(border=True):
-        st.markdown("**🎯 Opening plan**")
-        st.write(md(b.opening_plan))
-    with st.container(border=True):
-        bullets("✅ Checklist", b.checklist)
-    with st.expander("Your confidential sheet"):
+        style.priorities(
+            [
+                (pr.rank, pr.name, pr.best_option, pr.worst_option, pr.spread, pr.share)
+                for pr in n.priorities
+            ]
+        )
+    style.section("Your brief")
+    lists = [
+        ("Key facts", b.key_facts),
+        ("Your interests", b.your_interests),
+        ("The other side (hypotheses to test)", b.their_likely_interests),
+        ("Questions to ask", b.questions_to_ask),
+        ("Where to hold and where to give", b.tradeoffs),
+        ("Pitfalls to avoid", b.pitfalls),
+    ]
+    # Long, detailed briefs read better as one column than as narrow side-by-side cards.
+    single = style.is_long([items for _, items in lists])
+    style.card_grid([style.list_card_html(t, items) for t, items in lists], single=single)
+    style.card_grid(
+        [
+            f'<div class="nt-card accent"><h3>Opening plan</h3>{style.paragraphs(b.opening_plan)}'
+            "</div>",
+            style.list_card_html("Checklist", b.checklist, checks=True),
+        ],
+        single=single or style.is_long([b.checklist, [b.opening_plan]]),
+    )
+    with st.expander("Your confidential sheet", icon=":material/lock:"):
         render_sheet(case, prep.role_id, title="Your role")
     if b.source == "template":
-        st.caption("Template brief (offline or the model was unavailable).")
+        style.muted("Template brief: written offline or while the AI was unavailable.")
 
 
-def _training_plan(p: Participant, case: Case, role_id: str) -> None:
-    st.subheader("Training plan for this scenario")
-    st.caption(
-        "Rehearse this exact case against counterparts of increasing difficulty, then check "
-        "the Feedback page after each one. This five-session plan updates its focus from "
-        "your profile; the final step also adapts the difficulty."
-    )
+def _plan_steps(p: Participant, case: Case, role_id: str) -> tuple[list[ScenarioSpec], int]:
+    """The five-session plan for this scenario and how many sessions are finished.
+
+    Session k of the plan is the k-th finished rehearsal of this case and role, whatever
+    difficulty it was played at; the last step adapts from the profile.
+    """
     hist = history(p.id)
-    done: dict[int, int] = {}
-    for s, _ in hist:
-        if (
-            s.kind == "rehearsal"
-            and s.case_id == case.id
-            and s.user_role_id == role_id
-            and s.status in ("agreed", "impasse")
-            and s.counterpart_profile
-        ):
-            done[s.counterpart_profile.tier] = done.get(s.counterpart_profile.tier, 0) + 1
     spec = next_scenario(current_profile(p.id, hist), hist, [case.id])
-    st.info("Practice focus: " + focus_callout(spec.focus))
     steps = [
         ScenarioSpec(
             tier=t,
@@ -645,32 +805,74 @@ def _training_plan(p: Participant, case: Case, role_id: str) -> None:
             dial_overrides=spec.dial_overrides,
             rationale=f"{title}: {why}",
         )
-        for t, title, why in (
-            [
-                (2, "Warm-up", "Explore aims and values."),
-                (2, "Consolidate", "Use feedback at the same difficulty."),
-                (4, "Stretch", "Clarify interests and authority under pressure."),
-                (4, "Follow through", "Develop options and credible next steps."),
-            ]
-            if case.uses_rubric
-            else TRAINING_PLAN
-        )
+        for t, title, why in (RUBRIC_PLAN if case.uses_rubric else TRAINING_PLAN)
     ]
     steps.append(spec.model_copy(update={"rationale": f"Recommended for you: {spec.rationale}"}))
+    return steps, len(finished_rehearsals(p.id, case, role_id))
+
+
+def _training_plan(
+    p: Participant, case: Case, role_id: str, steps: list[ScenarioSpec], done: int
+) -> None:
+    next_index = min(done, len(steps) - 1)
+    style.section(
+        "Training plan",
+        "Five rehearsals of this case against counterparts that get firmer. Check Feedback "
+        "after each one; the last session adapts to what you need most.",
+    )
+    style.callout(focus_callout(steps[-1].focus), "accent", title="Practice focus")
     for n, step in enumerate(steps):
-        with st.container(border=True):
-            left, right = st.columns([5, 1])
-            title, _, why = step.rationale.partition(": ")
+        title, _, why = step.rationale.partition(": ")
+        state = "done" if n < done and n < len(steps) - 1 else "on" if n == next_index else ""
+        with style.card(f"plan-{n}"):
+            left, right = st.columns([5, 1], vertical_alignment="center")
             with left:
-                st.markdown(f"**{n + 1}. {title}**")
-                chips = [(f"Tier {step.tier} · {TIERS[step.tier].name}", "")]
-                if done.get(step.tier):
-                    chips.append((f"{done[step.tier]} prior sessions at this tier", "green"))
-                style.chips(chips)
-                st.caption(md(why))
-            if right.button("Start", key=f"plan_{n}", width="stretch", type="primary"):
+                tag = (
+                    style.badge_html("Done", "good")
+                    if state == "done"
+                    else style.badge_html("Up next", "accent")
+                    if state == "on"
+                    else ""
+                )
+                style.numbered(
+                    n + 1,
+                    title,
+                    why,
+                    state=state,
+                    extra=f'<div class="nt-badges">{style.badge_html(difficulty(step.tier))}'
+                    f"{tag}</div>",
+                )
+            if right.button(
+                "Start",
+                key=f"plan_{n}",
+                width="stretch",
+                type="primary" if state == "on" else "secondary",
+            ):
                 start_rehearsal(p, case, role_id, step, counterpart_opens=False)
                 go("rehearse")
+
+
+def _skills_list(case: Case) -> None:
+    style.section(
+        "Skills you'll practise",
+        "Feedback for this scenario looks for these skills in what you say. "
+        + (
+            "An instructor has reviewed this rubric."
+            if case.rubric_reviewed
+            else "This is the default rubric; instructor review is still pending."
+        ),
+    )
+    style.card_grid(
+        [
+            f'<div class="nt-card"><h3>{style.esc(skill.label)}</h3>'
+            f"<p>{style.esc(skill.description)}</p>"
+            f'<p style="margin-top:.6rem"><b>Try:</b> {style.esc(skill.practice)}</p></div>'
+            for skill in case_rubric(case)
+        ]
+    )
+
+
+# --------------------------------------------------------------------------- rehearse
 
 
 def _require_participant() -> Participant:
@@ -678,34 +880,43 @@ def _require_participant() -> Participant:
 
 
 def _setup_rehearsal(p: Participant) -> None:
+    """Every choice is visible and pre-set to the suggestion; the user decides."""
     case, role_id = active_scenario()
-    st.subheader("Set up a rehearsal")
-    st.caption("Tip: the training plan on the Prepare page starts rehearsals in one click.")
-    hist = history(p.id)
-    profile = current_profile(p.id, hist)
-    spec = next_scenario(profile, hist, [case.id])
     preset: ScenarioSpec | None = st.session_state.get("preset")
-    mode = st.radio(
-        "Counterpart",
-        ["Recommended for me", "I'll choose the difficulty"],
-        index=0,
-        horizontal=True,
-    )
-    if mode == "Recommended for me":
-        chosen = preset or spec
-        style.banner(f"Tier {chosen.tier} counterpart. {chosen.rationale}", "info")
-    else:
-        tier = st.select_slider(
-            "Difficulty tier",
-            options=list(TIERS),
-            value=3,
-            format_func=lambda t: f"{t} · {TIERS[t].name}",
+    if preset is None:
+        hist = history(p.id)
+        preset = next_scenario(current_profile(p.id, hist), hist, [case.id])
+    with style.card("start"):
+        st.markdown("#### Start a rehearsal")
+        st.caption(
+            f"You negotiate {case.title} as the {case.role(role_id).name}, against "
+            f"{case.other_role(role_id).name}."
         )
-        chosen = ScenarioSpec(tier=tier, rationale=f"Chosen by you: tier {tier}.")
-    opener = st.radio("Who opens?", ["Me", "The counterpart"], horizontal=True)
-    if st.button("Start rehearsal", type="primary"):
-        start_rehearsal(p, case, role_id, chosen, counterpart_opens=opener == "The counterpart")
-        st.rerun()
+        style.callout(preset.rationale, "accent", title=f"Suggested: {difficulty(preset.tier)}")
+        left, right = st.columns([3, 2], gap="medium")
+        with left:
+            tier = st.select_slider(
+                "Difficulty",
+                options=list(TIERS),
+                value=preset.tier,
+                format_func=lambda t: f"{t} · {DIFFICULTY_NAMES[t]}",
+                key="setup_tier",
+                help="1 is open and cooperative; 5 is hardball. The counterpart's limits are "
+                "enforced in code at every level.",
+            )
+        with right:
+            opener = st.segmented_control(
+                "Who speaks first?", ["I do", "They do"], default="I do", key="setup_opener"
+            )
+        style.muted("Practice focus: " + focus_callout(preset.focus))
+        chosen = preset
+        if tier != preset.tier:  # keep the suggested focus; only the difficulty changes
+            chosen = preset.model_copy(
+                update={"tier": tier, "rationale": f"{preset.rationale} Difficulty set to {tier}."}
+            )
+        if st.button("Start rehearsal", type="primary", icon=":material/play_arrow:"):
+            start_rehearsal(p, case, role_id, chosen, counterpart_opens=opener == "They do")
+            st.rerun()
 
 
 def start_rehearsal(
@@ -746,7 +957,7 @@ def _counterpart_reply(session: Session, case: Case) -> None:
         except LLMRefusal:
             st.error("The model declined to respond to that. Rephrase your message and retry.")
         except Exception as e:  # noqa: BLE001 - surface API errors without losing the session
-            st.error(f"Counterpart error: {md(e)}. Use **Retry counterpart** below.")
+            st.error(f"Counterpart error: {md(e)}. Use **Retry** below.")
     SessionStore().save(session)
 
 
@@ -762,45 +973,51 @@ def _user_move(session: Session, case: Case, turn: Turn) -> None:
     st.rerun()
 
 
-def _move_controls(session: Session, case: Case) -> None:
+def _composer(session: Session, case: Case) -> None:
     last = session.turns[-1] if session.turns else None
     if last is not None and last.speaker == "user":
-        st.warning("The counterpart hasn't replied yet.")
-        if st.button("Retry counterpart"):
+        style.callout(
+            "The counterpart hasn't replied yet. This usually means the AI call failed.", "warn"
+        )
+        if st.button("Retry", icon=":material/refresh:"):
             _counterpart_reply(session, case)
             st.rerun()
         return
 
-    with st.form("move", clear_on_submit=True):
-        text = st.text_area("Your message", placeholder="Say what you'd say across the table…")
-        attach = st.checkbox("Attach a formal offer")
-        st.caption(
-            "Choose a suggestion or type your own solution and press Enter. "
-            "Leave undecided issues blank."
+    with st.form("move", clear_on_submit=True, border=True):
+        text = st.text_area(
+            "Your message",
+            placeholder="Say what you'd say across the table…",
+            key="move_text",
+            height=110,
         )
-        if not online():
+        with st.expander("Make a formal offer", icon=":material/description:"):
             st.caption(
-                "The offline counterpart only evaluates listed options. "
-                "Use the AI counterpart to negotiate custom solutions."
+                "Pick a term for each issue you want to include, or type your own and press "
+                "Enter. Leave the rest blank. Sent with your message as a formal offer."
             )
-        cols = st.columns(max(1, min(2, len(case.issues))))
-        picks = {}
-        for n, issue in enumerate(case.issues):
-            picks[issue.id] = cols[n % len(cols)].selectbox(
-                issue.name,
-                [o.label for o in issue.options],
-                index=None,
-                placeholder="Choose or type a solution",
-                accept_new_options=True,
-                help="Suggestions are optional. Type any proposal for this issue and press Enter.",
-                key=f"o_{issue.id}",
-            )
-        if st.form_submit_button("Send", type="primary"):
-            offer = Offer.from_labels(case, picks) if attach else None
-            if offer is not None and not (offer.terms or offer.custom_terms):
+            if not online():
+                st.caption(
+                    "The offline counterpart only understands listed options; custom terms "
+                    "need the AI counterpart."
+                )
+            cols = st.columns(issue_columns(case))
+            picks = {}
+            for n, issue in enumerate(case.issues):
+                picks[issue.id] = cols[n % len(cols)].selectbox(
+                    issue.name,
+                    [o.label for o in issue.options],
+                    index=None,
+                    placeholder="Leave open",
+                    accept_new_options=True,
+                    key=f"o_{issue.id}",
+                )
+        if st.form_submit_button("Send", type="primary", icon=":material/send:"):
+            offer = Offer.from_labels(case, picks)
+            if not (offer.terms or offer.custom_terms):
                 offer = None
             if not text.strip() and offer is None:
-                st.error("Write a message or attach an offer.")
+                st.error("Write a message or include an offer.")
             else:
                 _user_move(
                     session,
@@ -809,11 +1026,12 @@ def _move_controls(session: Session, case: Case) -> None:
                 )
 
     theirs = session.latest_offer_from("counterpart")
-    c1, c2 = st.columns(2)
-    with c1:
-        can_accept = theirs is not None and theirs.is_complete(case)
+    can_accept = theirs is not None and theirs.is_complete(case)
+    a, b, c = st.columns([1.3, 1, 1], gap="small")
+    with a:
         if st.button(
-            "✅ Accept their latest offer",
+            "Accept their offer",
+            icon=":material/check:",
             disabled=not can_accept,
             help=None if can_accept else "They haven't made a complete offer yet.",
             width="stretch",
@@ -823,9 +1041,9 @@ def _move_controls(session: Session, case: Case) -> None:
                 case,
                 Turn(index=len(session.turns), speaker="user", text="I accept.", accept=True),
             )
-    with c2:
-        sure = st.checkbox("I'm sure I want to walk away")
-        if st.button("🚪 Walk away", disabled=not sure, width="stretch"):
+    with b, st.popover("Walk away", icon=":material/logout:", width="stretch"):
+        st.markdown("End the negotiation without a deal? You'll get your walk-away value.")
+        if st.button("Yes, walk away", type="primary", width="stretch"):
             _user_move(
                 session,
                 case,
@@ -836,168 +1054,204 @@ def _move_controls(session: Session, case: Case) -> None:
                     walk_away=True,
                 ),
             )
+    with c, st.popover("More", icon=":material/more_horiz:", width="stretch"):
+        st.caption("Stop without an outcome. The session won't count toward feedback.")
+        if st.button("Abandon rehearsal", width="stretch"):
+            session.status = "abandoned"
+            SessionStore().save(session)
+            st.session_state.pop("session", None)
+            st.rerun()
 
     if case.uses_rubric:
-        with st.expander("Record next steps or conditional commitments"):
-            with st.form("commitment"):
-                description = st.text_area("Commitment or unresolved next step")
-                owner = st.text_input("Responsible party")
-                deadline = st.text_input("Timing")
-                approvals = st.text_input("Required approvals (comma separated)")
-                contingency = st.text_input("If this cannot proceed")
-                state = st.selectbox(
-                    "Commitment status", ["proposed", "agreed", "pending_approval", "unverified"]
+        _commitments(session)
+
+
+def _commitments(session: Session) -> None:
+    with st.expander("Record next steps or conditional commitments", icon=":material/task_alt:"):
+        st.caption(
+            "Institutional negotiations often end with next steps rather than a final deal. "
+            "Record what was agreed, who owns it, and what it depends on."
+        )
+        for c in session.commitments:
+            style.html(
+                f'<div class="nt-quote"><b>{style.esc(c.description)}</b><br>'
+                f"{style.esc(COMMITMENT_STATUS.get(c.status, c.status))}"
+                + (f" · {style.esc(c.responsible_party)}" if c.responsible_party else "")
+                + "</div>"
+            )
+        with st.form("commitment"):
+            description = st.text_area("Commitment or unresolved next step", height=80)
+            left, right = st.columns(2)
+            owner = left.text_input("Responsible party")
+            deadline = right.text_input("Timing")
+            approvals = left.text_input("Required approvals (comma separated)")
+            contingency = right.text_input("If this cannot proceed")
+            state = st.selectbox(
+                "Commitment status",
+                ["proposed", "agreed", "pending_approval", "unverified"],
+                format_func=COMMITMENT_STATUS.get,
+            )
+            save = st.form_submit_button("Save next step")
+        if save and description.strip():
+            session.commitments.append(
+                Commitment(
+                    description=description,
+                    responsible_party=owner,
+                    deadline=deadline,
+                    required_approvals=[x.strip() for x in approvals.split(",") if x.strip()],
+                    contingency=contingency,
+                    status=state,
+                    source="participant record; delivery unverified",
                 )
-                save = st.form_submit_button("Save next step")
-            if save and description.strip():
-                session.commitments.append(
-                    Commitment(
-                        description=description,
-                        responsible_party=owner,
-                        deadline=deadline,
-                        required_approvals=[x.strip() for x in approvals.split(",") if x.strip()],
-                        contingency=contingency,
-                        status=state,
-                        source="participant record; delivery unverified",
-                    )
-                )
-                SessionStore().save(session)
-                st.success("Next step recorded.")
-            if st.button("Finish with recorded next steps"):
-                session.status = "impasse"
-                SessionStore().save(session)
-                st.session_state["feedback_session"] = session.id
-                go("feedback")
+            )
+            SessionStore().save(session)
+            st.success("Next step recorded.")
+        if st.button("Finish with recorded next steps", icon=":material/flag:"):
+            session.status = "impasse"
+            SessionStore().save(session)
+            st.session_state["feedback_session"] = session.id
+            go("feedback")
 
 
 def page_rehearse() -> None:
-    style.page_header(
-        "Rehearse",
-        "Negotiate as you would for real. Feedback comes afterwards.",
-        "Step 2 · Practice",
-    )
     p = _require_participant()
     session: Session | None = st.session_state.get("session")
     case: Case | None = st.session_state.get("case")
     current, _ = active_scenario()
     if session is None or case is None or session.case_id != current.id:
-        _setup_rehearsal(p)
+        with st.container(key="page_narrow"):
+            style.page_header(
+                "Rehearse",
+                "Negotiate as you would for real. Feedback comes after the session, never "
+                "during it.",
+                step=2,
+            )
+            _setup_rehearsal(p)
         return
 
     them = case.role(session.counterpart_role_id)
-    st.markdown(f"### {md(case.title)}")
     tier = session.counterpart_profile.tier if session.counterpart_profile else None
-    status = {
-        "active": ("● In progress", "amber"),
-        "agreed": ("✓ Deal", "green"),
-        "impasse": ("✕ No deal", "red"),
-        "abandoned": ("Abandoned", "gray"),
-    }
-    style.chips(
-        [
-            (f"You: {case.role(session.user_role_id).name}", ""),
-            (f"Counterpart: {them.name}", "gray"),
-            (f"Tier {tier} · {TIERS[tier].name}" if tier else "Tier ?", "gray"),
-            (f"{len(session.turns)} turn{'' if len(session.turns) == 1 else 's'}", "gray"),
-            status[session.status],
-        ]
+    label, tone = STATUS[session.status]
+    # A compact workspace header: the conversation, not the title, should own the screen.
+    style.html(
+        '<div class="nt-work">'
+        f'<div class="nt-work-title">{style.esc(case.title)}</div>'
+        f'<div class="nt-work-meta">You: {style.esc(case.role(session.user_role_id).name)}'
+        f" · Them: {style.esc(them.name)}</div></div>"
     )
+    left = session.max_user_turns - session.user_turns
+    tags = [(label, tone), (difficulty(tier), "neutral")]
+    if session.status == "active":
+        tags.append((f"{left} of {session.max_user_turns} moves left", "neutral"))
+    style.badges(tags)
 
-    st.caption(f"Deadline: {session.max_user_turns - session.user_turns} user moves remaining.")
-    chat, side = st.columns([3, 2], gap="large")
-    with side:
-        mine, theirs = session.latest_offer_from("user"), session.latest_offer_from("counterpart")
-        st.markdown("**On the table**")
-        empty = "<div class='nt-offer'><span class='nt-empty'>{} none yet</span></div>"
-        style.html(
-            offer_html(case, theirs, session.user_role_id, "Their latest offer")
-            if theirs
-            else empty.format("Their latest offer:")
-        )
-        style.html(
-            offer_html(case, mine, session.user_role_id, "Your latest offer")
-            if mine
-            else empty.format("Your latest offer:")
-        )
-        st.write("")
-        with st.expander("Your confidential sheet", expanded=True):
-            render_sheet(case, session.user_role_id, title="Your role")
-        prep = SessionStore().load_artifact(
-            prep_key(session.participant_id, case.id, session.user_role_id), "prep", Prep
-        )
-        if prep is not None:
-            with st.expander("Your prep checklist"):
-                for item in prep.brief.checklist:
-                    st.markdown(f"- {md(item)}")
-        with st.expander("Public information", expanded=False):
-            st.write(md(case.public_brief))
+    chat, side = st.columns([1.7, 1], gap="large")
     with chat:
         if not session.turns:
-            style.banner(
-                "You open. Introduce yourself, ask questions, or put an offer on the table.",
-                "info",
+            style.empty(
+                "You speak first",
+                "Introduce yourself, ask a question, or put an offer on the table.",
             )
         for turn in session.turns:
             render_turn(case, session, turn)
         if session.status == "active":
-            _move_controls(session, case)
-            with st.expander("End without an outcome"):
-                if st.button("Abandon this rehearsal"):
-                    session.status = "abandoned"
-                    SessionStore().save(session)
-                    st.session_state.pop("session", None)
-                    st.rerun()
+            _composer(session, case)
         else:
             _finished(session, case)
+    with side, st.container(key="side_panel"):
+        _side_panel(session, case)
+
+
+def _side_panel(session: Session, case: Case) -> None:
+    from negotrain.app import assistant_panel
+
+    finished = session.status != "active"
+    names = ["Offers", "Your sheet", "Notes", "Ask"]
+    if finished:
+        names.insert(2, "Their sheet")
+    tabs = dict(zip(names, st.tabs(names), strict=True))
+    with tabs["Offers"]:
+        mine, theirs = session.latest_offer_from("user"), session.latest_offer_from("counterpart")
+        style.html(
+            offer_html(case, theirs, session.user_role_id, "Their latest offer")
+            if theirs
+            else style.empty_offer("They haven't made an offer yet.")
+        )
+        style.html(
+            offer_html(case, mine, session.user_role_id, "Your latest offer")
+            if mine
+            else style.empty_offer("You haven't made an offer yet.")
+        )
+    with tabs["Your sheet"]:
+        render_sheet(case, session.user_role_id, title="Your role")
+    if finished:
+        with tabs["Their sheet"]:
+            render_sheet(case, session.counterpart_role_id, title="Their role")
+    with tabs["Notes"]:
+        prep = SessionStore().load_artifact(
+            prep_key(session.participant_id, case.id, session.user_role_id), "prep", Prep
+        )
+        if prep is not None:
+            style.html(style.list_card_html("Your checklist", prep.brief.checklist, checks=True))
+        st.markdown("**Public information**")
+        st.markdown(md(case.public_brief))
+    with tabs["Ask"]:
+        st.caption(
+            "Ask about facts in your materials. During a rehearsal it won't suggest moves; "
+            "coaching comes afterwards."
+        )
+        assistant_panel.render("Rehearse")
 
 
 def _finished(session: Session, case: Case) -> None:
-    st.divider()
-    if session.status == "agreed" and session.agreement:
-        style.banner("🎉 Deal reached.", "good")
-        style.html(offer_html(case, session.agreement, session.user_role_id, "Final agreement"))
-        st.write("")
-    else:
-        if case.uses_rubric:
-            style.banner(
-                (
-                    "Session finished without a full agreement. Review skills "
-                    "and next steps in the debrief."
-                ),
-                "info",
-            )
+    st.space("small")
+    with style.card("result", accent=True):
+        if session.status == "agreed" and session.agreement:
+            st.markdown("#### Deal reached")
+            style.html(offer_html(case, session.agreement, session.user_role_id, "Final agreement"))
+        elif case.uses_rubric:
+            st.markdown("#### Session finished")
+            st.caption("Review your skills and recorded next steps in the feedback.")
         else:
-            style.banner(
-                "No deal this time. The debrief will show what might have changed that.", "bad"
-            )
-    outcome_metrics(session, case)
-    with st.expander("Debrief: the counterpart's confidential sheet"):
-        render_sheet(case, session.counterpart_role_id, title="Their role")
-    c1, c2 = st.columns(2)
-    if c1.button("Get my feedback →", type="primary", width="stretch"):
-        st.session_state["feedback_session"] = session.id
-        go("feedback")
-    if c2.button("New rehearsal", width="stretch"):
-        st.session_state.pop("session", None)
-        st.rerun()
+            st.markdown("#### No deal this time")
+            st.caption("Your feedback shows what might have changed the outcome.")
+        outcome_metrics(session, case)
+        a, b = st.columns(2)
+        if a.button("See my feedback", type="primary", width="stretch", icon=":material/insights:"):
+            st.session_state["feedback_session"] = session.id
+            go("feedback")
+        if b.button("Practise again", width="stretch", icon=":material/replay:"):
+            st.session_state.pop("session", None)
+            st.rerun()
+
+
+# --------------------------------------------------------------------------- feedback
 
 
 def page_feedback() -> None:
     style.page_header(
         "Feedback",
-        "Your debrief: the outcome, a coaching report, and the moments that mattered.",
-        "Step 3 · Debrief",
+        "How the rehearsal went, the moments that mattered, and what to practise next.",
+        step=3,
     )
     p = _require_participant()
     store = SessionStore()
     lib = library()
+    current, role_id = active_scenario()
     done = [
         s
         for s in reversed(store.for_participant(p.id))
-        if s.kind == "rehearsal" and s.status in ("agreed", "impasse") and s.case_id in lib
+        if s.kind == "rehearsal"
+        and s.status in ("agreed", "impasse")
+        and s.case_id == current.id
+        and s.user_role_id == role_id
     ]
     if not done:
-        st.info("Finish a rehearsal first; feedback appears here afterwards.")
+        style.empty(
+            "No finished rehearsals of this scenario yet",
+            "Finish a rehearsal (reach a deal, walk away, or record next steps) and your "
+            "feedback appears here.",
+        )
         return
     wanted = st.session_state.get("feedback_session")
     ids = [s.id for s in done]
@@ -1006,10 +1260,7 @@ def page_feedback() -> None:
         "Rehearsal",
         ids,
         index=ids.index(wanted) if wanted in ids else 0,
-        format_func=lambda i: (
-            f"{by_id[i].created_at:%b %d %H:%M} · {lib[by_id[i].case_id][0].title}"
-            f" · {by_id[i].status}"
-        ),
+        format_func=lambda i: session_label(by_id[i]),
     )
     session = by_id[sid]
     st.session_state["assistant_feedback_session"] = sid
@@ -1023,105 +1274,42 @@ def page_feedback() -> None:
 
     debrief = store.load_artifact(session.id, "feedback", Debrief)
     if debrief and debrief.counterfactuals and debrief.counterfactuals.reward != "surplus_share":
-        st.info("Regenerate this older debrief to use the current surplus-share reward.")
+        style.callout("This debrief is from an older version. Generate it again.", "warn")
         debrief = None
-    if session.has_custom_terms:
-        use_llm, cap, k, n = False, 3, 2, 4
-        st.caption(
-            "Custom proposals receive qualitative coaching. Point-based simulations "
-            "are unavailable because these terms have no defined point values."
-        )
-    else:
-        with st.expander("Feedback settings", expanded=debrief is None):
-            on_plan = backend() == "claude-code"
-            sim_choice = st.radio(
-                "Simulate alternatives against",
-                [
-                    "Same AI counterpart (slower, uses " + ("your plan)" if on_plan else "API)"),
-                    "Fast rule-based simulator (free)",
-                ],
-                # On a plan, ~30 rollout calls eat into rate limits: opt in, don't default.
-                index=1,
-                disabled=not online(),
-            )
-            use_llm = online() and sim_choice.startswith("Same")
-            c = st.columns(3)
-            cap = c[0].number_input("Moments to analyze", 1, 5, 3)
-            k = c[1].number_input("Alternatives each", 1, 4, 2)
-            n = c[2].number_input("Rollouts per batch", 4, 5, 4)
-            if use_llm:
-                calls = estimate_calls(int(cap), int(k), int(n), session.max_user_turns) + 1
-                if on_plan:
-                    st.caption(
-                        f"Up to ~{calls} Claude Code calls against your plan's limits, "
-                        "typically 2–5 min."
-                    )
-                else:
-                    st.caption(
-                        f"Up to ~{calls} API calls (≈ ${calls * EST_COST_PER_CALL:.2f}), "
-                        "typically 1–3 min."
-                    )
-    if st.button("Generate feedback" if debrief is None else "Regenerate feedback", type="primary"):
-        with st.spinner(
-            "Writing your debrief…"
-            if session.has_custom_terms
-            else "Simulating alternatives and writing your debrief…"
-        ):
-            calls_before = _total_calls()
-            cost_before = _total_cost()
-            if online():
-                tag_session(session, case, llm("low"))
-                store.save(session)
-            counterfactuals = analyze_session(
-                session,
-                case,
-                counterpart_factory(session, case, use_llm=use_llm, effort="low"),
-                opponent="llm" if use_llm else "rule-based",
-                cap=int(cap),
-                k=int(k),
-                n=int(n),
-                max_workers=3 if backend() == "claude-code" else 8,
-            )
-            report = build_report(session, case, counterfactuals, llm() if online() else None)
-            debrief = Debrief(
-                counterfactuals=counterfactuals,
-                report=report,
-                llm_calls=_total_calls() - calls_before,
-                est_cost=_total_cost() - cost_before,
-            )
-            store.save_artifact(session.id, "feedback", debrief)
-
     if debrief is None:
+        if session.has_custom_terms:  # nothing to tune; say why up front
+            cap, k, n, use_llm = _feedback_options(session)
+        else:
+            with st.expander("Feedback settings", icon=":material/tune:"):
+                cap, k, n, use_llm = _feedback_options(session)
+        style.empty(
+            "Your debrief isn't written yet",
+            "We replay the key moments of your rehearsal with different moves to see what "
+            "would have changed, then write a coaching report.",
+        )
+        if st.button("Generate feedback", type="primary", icon=":material/auto_awesome:"):
+            _generate_debrief(session, case, store, cap, k, n, use_llm)
+            st.rerun()
         return
-    tabs = st.tabs(["Coaching", "Moments that mattered", "Transcript", "Both sheets", "Numbers"])
+
+    tabs = st.tabs(["Coaching", "What-if replays", "Transcript", "Both sheets", "Data"])
     with tabs[0]:
         _render_report(debrief.report)
-        st.divider()
-        rating = st.radio(
-            "How useful was this feedback? (1 = not at all, 5 = very)",
-            [1, 2, 3, 4, 5],
-            index=(debrief.usefulness - 1) if debrief.usefulness else None,
-            horizontal=True,
-        )
-        if rating and rating != debrief.usefulness:
-            debrief.usefulness = rating
-            store.save_artifact(session.id, "feedback", debrief)
-            st.toast("Thanks!")
+        _rate(debrief, session, store)
     with tabs[1]:
         _render_counterfactuals(debrief.counterfactuals, session, case)
     with tabs[2]:
         for turn in session.turns:
             render_turn(case, session, turn)
     with tabs[3]:
-        a, b = st.columns(2)
-        with a:
-            render_sheet(case, session.user_role_id, title="Your role")
-        with b:
-            render_sheet(case, session.counterpart_role_id, title="Their role")
+        render_sheet(case, session.user_role_id, title="Your role")
+        st.divider()
+        render_sheet(case, session.counterpart_role_id, title="Their role")
         o = outcome_summary(session, case)
-        st.caption(
-            f"Best joint deal among listed options: {md(o.max_joint_deal)} "
-            f"({o.max_joint:g} joint points)."
+        style.callout(
+            f"Best joint deal among the listed options: {o.max_joint_deal} "
+            f"({o.max_joint:g} points for both sides together).",
+            title="For reference",
         )
     with tabs[4]:
         f = extract_features(session, case)
@@ -1131,12 +1319,97 @@ def page_feedback() -> None:
                 "Counterpart dials: "
                 + ", ".join(f"{d}={getattr(session.counterpart_profile, d):.2f}" for d in DIALS)
             )
-        st.caption(
-            f"Feedback cost: {debrief.llm_calls} API calls (~${debrief.est_cost:.2f}); "
-            f"simulation took {debrief.counterfactuals.seconds:.0f}s"
-            if debrief.counterfactuals
-            else ""
+        if debrief.counterfactuals:
+            st.caption(
+                f"Feedback cost: {debrief.llm_calls} AI calls (about ${debrief.est_cost:.2f}); "
+                f"replays took {debrief.counterfactuals.seconds:.0f}s."
+            )
+    with st.expander("Regenerate this debrief", icon=":material/refresh:"):
+        cap, k, n, use_llm = _feedback_options(session)
+        if st.button("Regenerate feedback"):
+            _generate_debrief(session, case, store, cap, k, n, use_llm)
+            st.rerun()
+
+
+def _feedback_options(session: Session) -> tuple[int, int, int, bool]:
+    """How alternatives are replayed. Call inside a container (an expander on the page)."""
+    if session.has_custom_terms:
+        style.callout(
+            "This rehearsal used custom terms. You'll get written coaching, but no what-if "
+            "replays: custom terms have no defined point score."
         )
+        return 3, 2, 4, False
+    on_plan = backend() == "claude-code"
+    sim_choice = st.radio(
+        "Replay alternatives against",
+        [
+            "Fast rule-based simulator (free)",
+            "The same AI counterpart (slower, uses " + ("your plan)" if on_plan else "API)"),
+        ],
+        # On a plan, ~30 rollout calls eat into rate limits: opt in, don't default.
+        index=0,
+        disabled=not online(),
+    )
+    use_llm = online() and sim_choice.startswith("The same")
+    c = st.columns(3)
+    cap = c[0].number_input("Moments to analyse", 1, 5, 3)
+    k = c[1].number_input("Alternatives each", 1, 4, 2)
+    n = c[2].number_input("Replays per batch", 4, 5, 4)
+    if use_llm:
+        calls = estimate_calls(int(cap), int(k), int(n), session.max_user_turns) + 1
+        if on_plan:
+            st.caption(f"Up to about {calls} Claude Code calls; typically 2–5 minutes.")
+        else:
+            st.caption(
+                f"Up to about {calls} API calls (about ${calls * EST_COST_PER_CALL:.2f}); "
+                "typically 1–3 minutes."
+            )
+    return int(cap), int(k), int(n), use_llm
+
+
+def _generate_debrief(
+    session: Session, case: Case, store: SessionStore, cap: int, k: int, n: int, use_llm: bool
+) -> Debrief:
+    with st.spinner(
+        "Writing your debrief…"
+        if session.has_custom_terms
+        else "Replaying key moments and writing your debrief…"
+    ):
+        calls_before = _total_calls()
+        cost_before = _total_cost()
+        if online():
+            tag_session(session, case, llm("low"))
+            store.save(session)
+        counterfactuals = analyze_session(
+            session,
+            case,
+            counterpart_factory(session, case, use_llm=use_llm, effort="low"),
+            opponent="llm" if use_llm else "rule-based",
+            cap=cap,
+            k=k,
+            n=n,
+            max_workers=3 if backend() == "claude-code" else 8,
+        )
+        report = build_report(session, case, counterfactuals, llm() if online() else None)
+        debrief = Debrief(
+            counterfactuals=counterfactuals,
+            report=report,
+            llm_calls=_total_calls() - calls_before,
+            est_cost=_total_cost() - cost_before,
+        )
+        store.save_artifact(session.id, "feedback", debrief)
+    return debrief
+
+
+def _rate(debrief: Debrief, session: Session, store: SessionStore) -> None:
+    style.section("Was this feedback useful?", "Your rating helps us improve the coach.")
+    rating = st.feedback("stars", key=f"rate_{session.id}")
+    if rating is not None and rating + 1 != debrief.usefulness:
+        debrief.usefulness = rating + 1
+        store.save_artifact(session.id, "feedback", debrief)
+        st.toast("Thanks for the rating.")
+    elif debrief.usefulness and rating is None:
+        style.muted(f"You rated this {debrief.usefulness} out of 5.")
 
 
 def _total_calls() -> int:
@@ -1154,54 +1427,74 @@ def _total_cost() -> float:
 
 
 def _render_report(report: CoachingReport) -> None:
-    style.banner(report.headline, "info")
-    a, b = st.columns(2)
-    with a, st.container(border=True):
-        st.markdown("**💪 What went well**")
-        for s in report.strengths:
-            st.markdown(f"- {md(s)}")
-    with b, st.container(border=True):
-        st.markdown("**🎯 What to work on**")
-        for s in report.improvements:
-            st.markdown(f"- {md(s)}")
+    style.lead(report.headline)
+    style.card_grid(
+        [
+            style.list_card_html("What went well", report.strengths),
+            style.list_card_html("What to work on", report.improvements),
+        ]
+    )
     if report.moments:
-        st.markdown("**Moments that mattered**")
-        for m in report.moments:
-            with st.container(border=True):
-                st.markdown(f"**Turn {m.turn_index}: {md(m.title)}**")
-                st.write(md(m.what_happened))
-                st.markdown(f"*Try:* {md(m.what_to_try)}")
-                st.caption(md(m.evidence))
-    style.banner(f"Next focus: {report.next_focus}", "good")
+        style.section("Moments that mattered")
+        for n, m in enumerate(report.moments, start=1):
+            with style.card(f"moment-{n}"):
+                happened = m.what_happened
+                if happened.lower().startswith(m.title.lower()):
+                    happened = ""  # template reports repeat the title; don't say it twice
+                style.numbered(
+                    n,
+                    m.title,
+                    happened,
+                    extra=f'<div class="nt-badges">{style.badge_html(f"Turn {m.turn_index}")}'
+                    "</div>",
+                )
+                style.html(
+                    '<div style="margin-left:2.75rem">'
+                    f'<div class="nt-callout accent"><b class="t">Next time</b>'
+                    f"{style.esc(m.what_to_try)}</div>"
+                    + (style.details_html("Why we think so", m.evidence) if m.evidence else "")
+                    + "</div>"
+                )
+    focus = report.next_focus.strip()
+    style.callout(focus[:1].upper() + focus[1:], "good", title="Focus for your next rehearsal")
     if report.source == "template":
-        st.caption("Template feedback (offline or the coaching model was unavailable).")
+        style.muted("Template feedback: written offline or while the AI was unavailable.")
 
 
 def _render_counterfactuals(
     report: CounterfactualReport | None, session: Session, case: Case
 ) -> None:
     if report is not None and report.skipped_reason:
-        st.info(report.skipped_reason)
+        style.callout(report.skipped_reason)
         return
     if report is None or not report.estimates:
-        st.info("No offers, acceptances, or walk-aways to analyze in this session.")
+        style.empty(
+            "Nothing to replay",
+            "There were no offers, acceptances, or walk-aways to try alternatives for.",
+        )
         return
-    st.caption(
-        f"Each option was played forward {report.n_rollouts}× against "
-        f"{'the same AI counterpart' if report.opponent == 'llm' else 'a rule-based simulator'}"
-        " by a scripted user. Values are surplus share R. A separate fresh batch scores "
-        "the selected action and actual action; small-sample intervals are exploratory."
+    opponent = "the same AI counterpart" if report.opponent == "llm" else "a rule-based simulator"
+    style.callout(
+        f"At each key moment we swapped your move for an alternative and played the rest of the "
+        f"negotiation {report.n_rollouts} times against {opponent}. Outcomes are the share of "
+        "the possible gains you'd have captured (0% = your walk-away, 100% = the best deal they "
+        "could accept). Small samples, so treat these as rough guides.",
+        title="How to read this",
     )
     for e in report.estimates:
         turn = session.turns[e.turn_index]
-        with st.container(border=True):
+        with style.card(f"cf-{e.turn_index}"):
             delta = e.delta
-            head = f"**Turn {e.turn_index}: {md(e.description)}**"
+            tag = ""
             if delta is not None:
-                head += f" · selected action ΔR={delta:+.3f}"
-            st.markdown(head)
-            if turn.text:
-                st.caption(f"You said: “{md(turn.text)}”")
+                tone = "good" if delta > 0.005 else "bad" if delta < -0.005 else "neutral"
+                tag = style.badge_html(f"Alternative: {delta * 100:+.0f} points of gains", tone)
+            style.numbered(
+                e.turn_index,
+                e.description[:1].upper() + e.description[1:],
+                f"You said: “{turn.text}”" if turn.text else "",
+                extra=f'<div class="nt-badges">{tag}</div>' if tag else "",
+            )
             rows = []
             for v in [e.actual, e.best_alternative]:
                 if v is None:
@@ -1210,127 +1503,222 @@ def _render_counterfactuals(
                 what = (
                     a.offer.describe(case)
                     if a.offer
-                    else "accept"
+                    else "Accept"
                     if a.accept
-                    else "walk away"
+                    else "Walk away"
                     if a.walk_away
                     else f"“{a.text}”"
                 )
                 rows.append(
-                    {
-                        "Option": a.label + (" (hindsight)" if a.hindsight else ""),
-                        "Move": what,
-                        "Fresh mean R": round(v.mean, 3) if v.mean is not None else None,
-                        "Deals": f"{v.agreements}/{len(v.outcomes)}",
-                    }
+                    [
+                        a.label + (" (uses hindsight)" if a.hindsight else ""),
+                        what,
+                        percent(v.mean),
+                        f"{v.agreements} of {len(v.outcomes)}",
+                    ]
                 )
-            st.dataframe(rows, hide_index=True, width="stretch")
+            style.table(["Option", "Move", "Average outcome", "Deals"], rows, numeric={2, 3})
+            notes = []
             if e.delta_interval:
-                st.caption(f"95% paired bootstrap interval for ΔR: {e.delta_interval}")
+                lo, hi = e.delta_interval
+                notes.append(
+                    f"Plausible range for the difference: {lo * 100:+.0f} to {hi * 100:+.0f} points"
+                )
             errors = sum(v.errors for v in e.values)
             if errors:
-                st.caption(f"{errors} rollout(s) failed (API errors) and were skipped.")
+                notes.append(f"{errors} replay(s) failed and were skipped")
+            if notes:
+                style.muted(" · ".join(notes))
+
+
+# --------------------------------------------------------------------------- progress
 
 
 def page_profile() -> None:
-    style.page_header("My profile", "Strengths, weaknesses, and what to practice next.", "Progress")
+    style.page_header(
+        "Progress",
+        "What you do well, what to work on, and what to practise next.",
+    )
     p = _require_participant()
     hist = history(p.id)
     prof = current_profile(p.id, hist)
+    current, _ = active_scenario()
+    spec = next_scenario(prof, hist, [current.id])
+    _recommended(spec)
     if prof.skills is not None:
         from negotrain.app.rubric_views import render_profile
 
         render_profile(prof, hist)
-        return
-    st.caption(
-        f"Based on {prof.n_sessions} finished sessions. Estimates use opportunities "
-        "and occurrences, with older evidence discounted once per session."
-    )
-    rows = []
-    for key, posterior in prof.belief.components.items():
-        lo, hi = posterior.interval()
-        rows.append(
-            {
-                "Component": prof.labels[key],
-                "Probability": round(posterior.mean, 3),
-                "95% credible interval": f"{lo:.2f}–{hi:.2f}",
-                "Opportunities": posterior.opportunities,
-                "Meaning": "error rate" if key.startswith("error:") else "success rate",
-            }
-        )
-    st.dataframe(rows, hide_index=True, width="stretch")
-    if prof.untagged_user_turns:
-        st.caption(
-            f"{prof.untagged_user_turns} user turns lack fact/rapport annotations; "
-            "they are excluded from those estimates."
-        )
+    else:
+        _legacy_profile(prof)
+    _history(hist)
 
+
+def _recommended(spec: ScenarioSpec) -> None:
     lib = library()
-    current, _ = active_scenario()
-    spec = next_scenario(prof, hist, [current.id])
-    st.subheader("Recommended next rehearsal")
-    case_title = lib[spec.case_id][0].title if spec.case_id in lib else "any case"
-    st.info(f"**{md(case_title)}, tier {spec.tier}.** {md(spec.rationale)}")
-    if st.button("Start this rehearsal →", type="primary"):
-        st.session_state["preset"] = spec
-        st.session_state.pop("session", None)
-        go("rehearse")
+    case_title = lib[spec.case_id][0].title if spec.case_id in lib else "Any case"
+    with style.card("recommended", accent=True):
+        left, right = st.columns([2.6, 1], vertical_alignment="center")
+        with left:
+            style.html(
+                '<div class="nt-kicker">Recommended next rehearsal</div>'
+                f'<div class="nt-row-title">{style.esc(case_title)} · '
+                f"{style.esc(difficulty(spec.tier))}</div>"
+                f'<p class="nt-row-text">{style.esc(spec.rationale)}</p>'
+            )
+        with right:
+            if st.button(
+                "Start rehearsal", key="recommended_start", type="primary", width="stretch"
+            ):
+                st.session_state["preset"] = spec
+                st.session_state.pop("session", None)
+                go("rehearse")
 
-    if hist:
-        st.subheader("History")
+
+def _legacy_profile(prof) -> None:
+    sessions = f"{prof.n_sessions} finished session{'s' if prof.n_sessions != 1 else ''}"
+    habits, skills, unseen = [], [], []
+    for key, posterior in prof.belief.components.items():
+        chances = posterior.opportunities
+        if not chances:
+            unseen.append(prof.labels[key])
+            continue
+        lo, hi = posterior.interval()
+        meta = (
+            f"Based on {chances:g} chance{'s' if chances != 1 else ''} · likely between "
+            f"{lo:.0%} and {hi:.0%}"
+        )
+        error = key.startswith("error:")
+        item = style.meter(
+            prof.labels[key],
+            posterior.mean,
+            lo,
+            hi,
+            meta,
+            tone="warn" if error else "good",
+            value_text=f"{posterior.mean:.0%} of the time",
+        )
+        (habits if error else skills).append((posterior.mean, item))
+    style.section(
+        "Habits to watch",
+        "How often each mistake happens when you have the chance to make it. Lower is better. "
+        f"From {sessions}; older sessions count for less.",
+    )
+    if habits:
+        style.meters([m for _, m in sorted(habits, key=lambda x: -x[0])])
+    else:
+        style.empty("Nothing measured yet", "Finish a rehearsal to see your habits.")
+    style.section(
+        "Skills you're building",
+        "How often you use a key fact of the case or build rapport when the moment arises. "
+        "Higher is better.",
+    )
+    ranked = [m for _, m in sorted(skills, key=lambda x: x[0])]
+    if ranked:
+        style.meters(ranked[:6])
+    else:
+        style.empty(
+            "No evidence yet",
+            "These are measured from annotated messages, which needs the AI connection.",
+        )
+    if len(ranked) > 6:
+        with st.expander(f"{len(ranked) - 6} more case facts and skills"):
+            style.meters(ranked[6:])
+    if unseen:
+        with st.expander(f"Not seen yet ({len(unseen)})"):
+            st.caption("No chance to show these has come up in your sessions so far.")
+            for label in unseen:
+                st.markdown(f"- {md(label)}")
+    if prof.untagged_user_turns:
+        style.muted(
+            f"{prof.untagged_user_turns} of your messages haven't been annotated yet, so they "
+            "aren't counted in the facts and rapport estimates."
+        )
+    with st.expander("Detailed estimates", icon=":material/table:"):
         rows = []
-        for s, c in hist:
-            f = extract_features(s, c)
+        for key, posterior in prof.belief.components.items():
+            lo, hi = posterior.interval()
             rows.append(
                 {
-                    "When": f"{s.created_at:%b %d %H:%M}",
-                    "Kind": s.kind,
-                    "Case": c.title,
-                    "Tier": s.counterpart_profile.tier if s.counterpart_profile else None,
-                    "Result": s.status,
-                    "Points": f["points"],
-                    "Surplus share": None
-                    if f["surplus_share"] is None
-                    else round(f["surplus_share"], 2),
+                    "Component": prof.labels[key],
+                    "Probability": round(posterior.mean, 3),
+                    "95% credible interval": f"{lo:.2f}–{hi:.2f}",
+                    "Opportunities": posterior.opportunities,
+                    "Meaning": "error rate" if key.startswith("error:") else "success rate",
                 }
             )
         st.dataframe(rows, hide_index=True, width="stretch")
 
 
+def _history(hist: list[tuple[Session, Case]]) -> None:
+    if not hist:
+        return
+    style.section("History", "Every rehearsal and real negotiation you've logged.")
+    rows = []
+    for s, c in reversed(hist):
+        if s.status == "active":
+            continue  # unfinished or abandoned mid-way: nothing to report
+        f = extract_features(s, c)
+        rows.append(
+            {
+                "When": f"{s.created_at:%b %d, %H:%M}",
+                "Type": "Real" if s.kind == "real" else "Rehearsal",
+                "Case": c.title,
+                "Difficulty": str(s.counterpart_profile.tier) if s.counterpart_profile else "—",
+                "Result": STATUS[s.status][0],
+                "Points": "—" if f["points"] is None else f"{f['points']:g}",
+                "Share of gains": percent(f["surplus_share"]),
+            }
+        )
+    if len({r["Case"] for r in rows}) == 1:
+        for r in rows:
+            r.pop("Case")
+    st.dataframe(rows, hide_index=True, width="stretch")
+
+
+# --------------------------------------------------------------------------- real negotiation
+
+
 def page_real() -> None:
     style.page_header(
         "Real negotiation",
-        "After the real negotiation (for example, the class simulation), log the outcome. "
-        "We compare it with your rehearsals of the same case to see what rehearsal got "
-        "right and wrong.",
-        "Progress",
+        "After the real thing (for example, the class simulation), log how it went. We compare "
+        "it with your rehearsals of the same case to see what practice got right and wrong.",
     )
     p = _require_participant()
     case, role_id = active_scenario()
-    style.chips([(case.title, ""), (f"You: {case.role(role_id).name}", "gray")])
-    with st.form("real"):
+    style.badges([(case.title, "accent"), (f"You: {case.role(role_id).name}", "neutral")])
+    with st.form("real", border=True):
+        st.markdown("#### Outcome")
         status = st.radio(
             "Outcome",
             ["agreed", "impasse"],
             horizontal=True,
-            format_func=lambda s: "Deal" if s == "agreed" else "No deal",
+            format_func=lambda s: "We reached a deal" if s == "agreed" else "No deal",
+            label_visibility="collapsed",
         )
-        st.markdown("Agreed terms (if there was a deal):")
-        st.caption("Choose a suggestion or type the terms you agreed to and press Enter.")
+        st.markdown("#### Agreed terms")
+        st.caption("If there was a deal: choose a listed option or type the terms you agreed to.")
         picks = {}
-        cols = st.columns(min(3, len(case.issues)))
+        cols = st.columns(issue_columns(case))
         for n, issue in enumerate(case.issues):
             picks[issue.id] = cols[n % len(cols)].selectbox(
                 issue.name,
                 [o.label for o in issue.options],
+                index=None,
+                placeholder="Choose or type the agreed term",
                 key=f"real_{issue.id}",
                 accept_new_options=True,
             )
-        st.markdown("How did the other side behave? (0 = not at all, 1 = very)")
-        observed = {
-            d: st.slider(q, 0.0, 1.0, 0.5, 0.1, key=f"real_{d}") for d, q in DIAL_QUESTIONS.items()
-        }
-        notes = st.text_area("Notes or transcript (optional; no names, please)")
+        st.markdown("#### How did the other side behave?")
+        observed = {}
+        cols = st.columns(2)
+        for n, (d, q) in enumerate(DIAL_QUESTIONS.items()):
+            choice = cols[n % 2].select_slider(
+                q, options=list(RATING_SCALE), value="Somewhat", key=f"real_{d}"
+            )
+            observed[d] = RATING_SCALE[choice]
+        notes = st.text_area("Notes or transcript (optional; please leave out names)")
         if st.form_submit_button("Save real outcome", type="primary"):
             agreement = None
             if status == "agreed":
@@ -1371,42 +1759,59 @@ def _sim2real(p: Participant, case: Case, role_id: str) -> None:
     real_pts = outcome_summary(real, case).points
     rows = [
         {
-            "Session": f"Rehearsal {s.created_at:%b %d %H:%M}",
-            "Tier": s.counterpart_profile.tier if s.counterpart_profile else None,
-            "Result": s.status,
+            "Session": f"Rehearsal · {s.created_at:%b %d, %H:%M}",
+            "Difficulty": str(s.counterpart_profile.tier) if s.counterpart_profile else "—",
+            "Result": STATUS[s.status][0],
             "Your points": outcome_summary(s, case).points,
         }
         for s in rehearsals
     ]
-    rows.append({"Session": "Real", "Tier": None, "Result": real.status, "Your points": real_pts})
+    rows.append(
+        {
+            "Session": "Real negotiation",
+            "Difficulty": "—",
+            "Result": STATUS[real.status][0],
+            "Your points": real_pts,
+        }
+    )
     st.dataframe(rows, hide_index=True, width="stretch")
     if not rehearsals:
-        st.caption("No rehearsals of this case and role yet to compare against.")
+        style.muted("No rehearsals of this case and role yet to compare against.")
         return
     scored = [r["Your points"] for r in rows[:-1] if r["Your points"] is not None]
     if real_pts is not None and scored:
         mean_pts = sum(scored) / len(scored)
         share = surplus_share(case, role_id, real_pts) - surplus_share(case, role_id, mean_pts)
-        st.metric(
-            "Real outcome vs scored rehearsal average",
-            f"{real_pts:g} pts",
-            f"{real_pts - mean_pts:+.0f} pts ({share:+.0%} of your range)",
+        style.stats(
+            [
+                ("Real outcome", f"{real_pts:g} points", "", ""),
+                ("Rehearsal average", f"{mean_pts:.0f} points", "", ""),
+                (
+                    "Difference",
+                    f"{real_pts - mean_pts:+.0f} points",
+                    f"{share:+.0%} of your range",
+                    "good" if real_pts >= mean_pts else "bad",
+                ),
+            ]
         )
     if real_pts is None or len(scored) != len(rehearsals):
-        st.caption(
-            "Agreements with custom terms have no point score "
-            "and are excluded from numeric comparisons."
+        style.muted(
+            "Agreements with custom terms have no point score and are left out of the numbers."
         )
     profiles: list[CounterpartProfile] = [
         s.counterpart_profile for s in rehearsals if s.counterpart_profile
     ]
     if profiles and real.observed_counterpart:
-        st.markdown("**Counterpart behavior: rehearsal vs what you observed**")
+        style.section(
+            "The other side: rehearsal vs real",
+            "Large gaps show where rehearsal didn't match reality, for example a real "
+            "counterpart that gave far less ground than the AI one.",
+        )
         st.dataframe(
             [
                 {
-                    "Behavior": DIAL_QUESTIONS[d],
-                    "Rehearsal counterpart": round(
+                    "Behaviour": DIAL_QUESTIONS[d],
+                    "AI counterpart (average)": round(
                         sum(getattr(pr, d) for pr in profiles) / len(profiles), 2
                     ),
                     "Real counterpart (your rating)": real.observed_counterpart.get(d),
@@ -1416,44 +1821,53 @@ def _sim2real(p: Participant, case: Case, role_id: str) -> None:
             hide_index=True,
             width="stretch",
         )
-        st.caption(
-            "Large gaps show where rehearsal didn't match reality (RQ2): for example, a real "
-            "counterpart that conceded far less than the rehearsal one."
-        )
+
+
+# --------------------------------------------------------------------------- case library
 
 
 def page_cases() -> None:
     style.page_header(
-        "Case library",
-        "All scenarios available for rehearsal. Imported cases stay private to this machine.",
-        "Facilitator",
+        "Cases",
+        "Every scenario available for rehearsal. Cases you import stay private to this machine.",
     )
     lib = library()
     facilitator = st.session_state.get("facilitator", False)
-    for cid, (case, path) in sorted(lib.items()):
-        private = "private" in str(path)
-        with st.expander(f"{case.title} ({cid}){' · private' if private else ''}"):
-            st.write(md(case.public_brief))
-            for issue in case.issues:
-                st.markdown(md(f"- **{issue.name}**: " + ", ".join(o.label for o in issue.options)))
+    for cid, (case, path) in sorted(lib.items(), key=lambda kv: kv[1][0].title.lower()):
+        private = Path(path).parent.name == "private"
+        with style.card(f"case-{cid}"):
+            tags = (
+                [(TYPE_LABELS.get(case.negotiation_type, ""), "accent")] if case.uses_rubric else []
+            )
+            tags.append(("Private" if private else "Sample", "neutral"))
+            tags += [(f"{len(case.issues)} issues", "neutral")]
+            st.markdown(f"#### {md(case.title)}")
+            style.badges(tags)
+            brief = case.public_brief.strip()
+            st.markdown(md(brief[:260].rsplit(" ", 1)[0] + "…" if len(brief) > 260 else brief))
             st.caption(
                 "Roles: "
-                + ", ".join(r.name + (" (inferred)" if r.inferred else "") for r in case.roles)
+                + ", ".join(r.name + (" (estimated)" if r.inferred else "") for r in case.roles)
             )
-            if case.source:
-                st.caption(md(case.source))
-            if facilitator:
-                st.json(case.model_dump(), expanded=False)
+            with st.expander("Issues and options"):
+                for issue in case.issues:
+                    st.markdown(
+                        md(f"- **{issue.name}**: " + ", ".join(o.label for o in issue.options))
+                    )
+                if case.source:
+                    st.caption(md(case.source))
+                if facilitator:
+                    st.json(case.model_dump(), expanded=False)
 
-    st.subheader("Add a case")
-    st.caption(
-        "Imported cases are saved privately. Review role visibility, constraints, rubric anchors "
-        "and any supplied scoring tables before using a case in a study."
+    style.section(
+        "Add a case",
+        "Imported cases are saved privately. Check role visibility, constraints, and any "
+        "scoring tables before using a case in a study.",
     )
     paste, upload = st.tabs(["Paste case text (uses Claude)", "Upload JSON"])
     with paste:
         if not online():
-            st.info("Parsing needs Claude: choose Claude Code or an API key in Settings.")
+            style.callout("Parsing needs Claude: choose Claude Code or an API key in Settings.")
         with st.form("parse"):
             public = st.text_area("Public / general information", height=150)
             c1, c2 = st.columns(2)
@@ -1464,8 +1878,8 @@ def page_cases() -> None:
                 "Role 2 confidential sheet (leave empty if you don't have it)", height=200
             )
             infer = st.checkbox("Estimate the missing sheet if only one is given", value=True)
-            go = st.form_submit_button("Parse case", type="primary", disabled=not online())
-        if go:
+            submitted = st.form_submit_button("Parse case", type="primary", disabled=not online())
+        if submitted:
             roles = {name1: sheet1} | ({name2: sheet2} if sheet2.strip() else {})
             if not public.strip() or not sheet1.strip():
                 st.error("Need the public information and at least one confidential sheet.")

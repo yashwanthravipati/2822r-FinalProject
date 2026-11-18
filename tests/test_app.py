@@ -6,6 +6,7 @@ import pytest
 from streamlit.testing.v1 import AppTest
 
 from negotrain.cases import load_case
+from negotrain.feedback import Debrief
 from negotrain.sessions import SessionStore
 
 MAIN = Path(__file__).resolve().parents[1] / "src" / "negotrain" / "app" / "main.py"
@@ -59,19 +60,19 @@ def scenario():
 def test_app_opens_on_upload_and_unlocks_after_choosing_a_scenario():
     at = AppTest.from_file(str(MAIN), default_timeout=30).run()
     assert not at.exception
-    assert "Start with your case." in visible_text(at)
-    assert not [b for b in at.button if b.label == "📂 New scenario"]  # nothing unlocked yet
+    assert "Practice your next negotiation" in visible_text(at)
+    assert not [b for b in at.button if b.label == "Switch scenario"]  # nothing unlocked yet
 
     button(at, "Use this case").click().run()
-    button(at, "Start training →").click().run()
+    button(at, "Start training").click().run()
     assert not at.exception
     # Now on Prepare (the default page once a scenario is active), with the brief written.
     text = visible_text(at)
     assert "Prepare" in text and "Checklist" in text
     assert load_case(CASE).role("recruiter").confidential_brief not in text
 
-    button(at, "📂 New scenario").click().run()
-    assert "Start with your case." in visible_text(at)
+    button(at, "Switch scenario").click().run()
+    assert "Practice your next negotiation" in visible_text(at)
 
 
 def test_rehearsal_flow_hides_counterpart_sheet_until_the_end(scenario):
@@ -81,8 +82,7 @@ def test_rehearsal_flow_hides_counterpart_sheet_until_the_end(scenario):
     assert not at.exception
     button(at, "Start rehearsal").click().run()
     assert not at.exception
-    at.text_area[0].input("Hi! What matters most to you?")
-    next(c for c in at.checkbox if c.label == "Attach a formal offer").check()
+    at.text_area(key="move_text").input("Hi! What matters most to you?")
     for issue_id, label in [
         ("salary", "$150,000"),
         ("bonus", "$20,000"),
@@ -98,7 +98,7 @@ def test_rehearsal_flow_hides_counterpart_sheet_until_the_end(scenario):
     assert session.turns[1].offer is not None
     assert secret not in visible_text(at)
 
-    button(at, "✅ Accept their latest offer").click().run()
+    button(at, "Accept their offer").click().run()
     assert not at.exception
     assert at.session_state["session"].status == "agreed"
     assert SessionStore().load(session.id).status == "agreed"
@@ -108,8 +108,7 @@ def test_rehearsal_flow_hides_counterpart_sheet_until_the_end(scenario):
 def test_feedback_profile_real_and_cases_pages(scenario):
     at = page("page_rehearse")
     button(at, "Start rehearsal").click().run()
-    next(c for c in at.checkbox if c.label == "I'm sure I want to walk away").check().run()
-    button(at, "🚪 Walk away").click().run()
+    button(at, "Yes, walk away").click().run()
     assert at.session_state["session"].status == "impasse"
 
     fb = page("page_feedback")
@@ -123,6 +122,7 @@ def test_feedback_profile_real_and_cases_pages(scenario):
         assert not page(name).exception, name
 
     real = page("page_real")
+    next(r for r in real.radio if r.label == "Outcome").set_value("impasse")
     button(real, "Save real outcome").click().run()
     assert not real.exception
     assert any(s.kind == "real" for s in SessionStore().all())
@@ -133,7 +133,7 @@ def test_prepare_writes_brief_and_training_plan_starts_rehearsals(scenario):
     at = page("page_prepare")
     assert not at.exception
     text = visible_text(at)
-    assert "Checklist" in text and "Training plan" in " ".join(str(h.value) for h in at.subheader)
+    assert "Checklist" in text and "Training plan" in text
     case = load_case(CASE)
     assert case.role("recruiter").confidential_brief not in text
     button(at, "Start").click().run()  # first training step: warm-up, tier 2
@@ -193,7 +193,7 @@ def test_upload_builds_a_scenario(tmp_path, monkeypatch, bundled):
     assert at.session_state["setup_case_id"] == "uploaded_case"
     # The uploaded sheet's role is preselected; the other side is marked as estimated.
     assert "estimated version" in visible_text(at)
-    button(at, "Start training →").click().run()
+    button(at, "Start training").click().run()
     assert views.active_scenario()[0].id == "uploaded_case"
 
 
@@ -232,8 +232,7 @@ def test_custom_offer_can_be_sent_accepted_and_reviewed(scenario, monkeypatch):
     )
     at = page("page_rehearse")
     button(at, "Start rehearsal").click().run()
-    at.text_area[0].input("Could this arrangement work?")
-    next(c for c in at.checkbox if c.label == "Attach a formal offer").check()
+    at.text_area(key="move_text").input("Could this arrangement work?")
     for key, label in {
         "salary": "$140,000",
         "bonus": "None",
@@ -260,6 +259,13 @@ def test_real_negotiation_saves_custom_terms_without_numeric_comparison(scenario
     from test_custom_offers import CUSTOM
 
     at = page("page_real")
+    for key, label in {
+        "salary": "$140,000",
+        "bonus": "None",
+        "start": "In 4 weeks",
+        "vacation": "20 days",
+    }.items():
+        at.selectbox(key=f"real_{key}").select(label)
     submit_custom_terms(at, "Save real outcome", {"real_remote": CUSTOM})
     assert not at.exception
     saved = next(s for s in SessionStore().all() if s.kind == "real")
@@ -318,7 +324,7 @@ def test_institutional_workflow_uses_scores_and_records_conditional_commitments(
     at = page("page_rehearse")
     button(at, "Start rehearsal").click().run()
     assert not at.exception
-    at.text_area[0].input("What approvals do we need?")
+    at.text_area(key="move_text").input("What approvals do we need?")
     button(at, "Send").click().run()
     assert not at.exception
     assert "Offline practice" in visible_text(at)
@@ -337,8 +343,6 @@ def test_institutional_workflow_uses_scores_and_records_conditional_commitments(
     assert not fb.exception
     assert button(fb, "Assess skills").disabled
     assert "needs a rubric assessment" in visible_text(fb)
-    button(fb, "Generate feedback").click().run()
-    assert not fb.exception
     assert not page("page_profile").exception
     real = page("page_real")
     button(real, "Save real outcome").click().run()
@@ -392,15 +396,145 @@ def test_rubric_assessment_button_updates_saved_profile_and_next_focus(scenario,
     saved = SessionStore().load(session.id)
     assert len(scripted.calls) == 1
     assert len(saved.assessment.observations) == 6
-    button(fb, "Generate feedback").click().run()
-    assert not fb.exception
+    assert SessionStore().load_artifact(session.id, "feedback", Debrief) is not None
     prof = page("page_profile")
     assert not prof.exception
-    assert "1 assessed sessions" in visible_text(prof)
+    assert "1 assessed session" in visible_text(prof)
     rows = prof.dataframe[0].value
     leverage = rows[rows["Skill"].str.contains("leverage", case=False)].iloc[0]
     assert leverage["Estimated effectiveness"] == pytest.approx(1.25 / 3)
-    button(prof, "Start this rehearsal →").click().run()
+    button(prof, "Start rehearsal").click().run()
     assert not prof.exception
     assert prof.session_state["preset"].focus == "skill:leverage"
     assert prof.session_state["preset"].tier == 2
+
+
+def test_training_plan_advances_after_a_finished_rehearsal(scenario):
+    from negotrain.app import views
+    from negotrain.counterpart.profiles import TIERS
+    from negotrain.schemas import Session
+
+    at = page("page_prepare")
+    assert "Warm-up" in visible_text(at)  # first step is up next
+    SessionStore().save(
+        Session(
+            participant_id=views.participant().id,
+            case_id="cloudline_hiring",
+            user_role_id="candidate",
+            counterpart_role_id="recruiter",
+            counterpart_profile=TIERS[2],
+            status="agreed",
+        )
+    )
+    at = page("page_prepare")
+    assert not at.exception
+    next_up = next(m.value for m in at.markdown if "Up next in your training plan" in m.value)
+    assert "Consolidate" in next_up and "Warm-up" not in next_up
+    assert "Done" in visible_text(at)
+
+
+def test_profile_does_not_show_estimates_without_evidence(scenario):
+    at = page("page_profile")
+    assert not at.exception
+    assert any(e.label.startswith("Not seen yet") for e in at.expander)
+    assert "50% of the time" not in visible_text(at)  # a flat prior is not a measurement
+
+
+def test_rehearsal_layout_reveals_their_sheet_only_after_the_session(scenario):
+    case = load_case(CASE)
+    at = page("page_rehearse")
+    button(at, "Start rehearsal").click().run()
+    tabs = [t.label for t in at.tabs]
+    assert "Their sheet" not in tabs and "Your sheet" in tabs
+    button(at, "Yes, walk away").click().run()
+    assert at.session_state["session"].status == "impasse"
+    assert "Their sheet" in [t.label for t in at.tabs]
+    assert case.role("recruiter").confidential_brief in visible_text(at)
+
+
+def test_html_helpers_escape_markup_but_keep_quotes_readable():
+    from negotrain.app import style
+
+    assert style.esc('<b>it\'s "fine"</b>') == '&lt;b&gt;it\'s "fine"&lt;/b&gt;'
+    assert style.paragraphs("One\n\nTwo <i>") == "<p>One</p><p>Two &lt;i&gt;</p>"
+    card = style.offer_card("Their offer", [("Salary", "<$150k>")], "500 points to you")
+    assert "&lt;$150k&gt;" in card and "500 points to you" in card
+
+
+def test_feedback_shows_the_report_right_after_generating(scenario):
+    at = page("page_rehearse")
+    button(at, "Start rehearsal").click().run()
+    button(at, "Yes, walk away").click().run()
+    fb = page("page_feedback")
+    assert "Your debrief isn't written yet" in visible_text(fb)
+    button(fb, "Generate feedback").click().run()
+    assert not fb.exception
+    assert "Your debrief isn't written yet" not in visible_text(fb)  # no stale empty state
+    assert not [b for b in fb.button if b.label == "Generate feedback"]
+    assert "Regenerate feedback" in [b.label for b in fb.button]
+
+
+def test_feedback_lists_only_rehearsals_of_the_current_scenario(scenario):
+    from negotrain.app import views
+    from negotrain.counterpart.profiles import TIERS
+    from negotrain.schemas import Session
+
+    def finished(role, other):
+        s = Session(
+            participant_id=views.participant().id,
+            case_id="cloudline_hiring",
+            user_role_id=role,
+            counterpart_role_id=other,
+            counterpart_profile=TIERS[2],
+            status="impasse",
+        )
+        SessionStore().save(s)
+        return s
+
+    mine = finished("candidate", "recruiter")
+    other_role = finished("recruiter", "candidate")
+    fb = page("page_feedback")
+    options = fb.selectbox[0].options
+    assert len(options) == 1 and "Difficulty 2" in options[0]
+    assert fb.session_state["assistant_feedback_session"] == mine.id != other_role.id
+
+
+def test_long_option_labels_get_full_width_dropdowns():
+    from negotrain.app.views import issue_columns
+
+    case = load_case(CASE)
+    assert issue_columns(case) == 2  # short labels such as "$150,000"
+    case.issues[0].options[0].label = "RC-B nominations passed via GR; RC-A conducts its own review"
+    assert issue_columns(case) == 1
+
+
+def test_inline_sub_bullets_become_nested_lists():
+    from negotrain.app import style
+
+    head, subs = style.split_item("Issues by stake: - Selection: 30 points. - Data: 15.")
+    assert head == "Issues by stake:" and subs == ["Selection: 30 points.", "Data: 15."]
+    assert style.split_item("Hold firm on RC-A's role - it matters.") == (
+        "Hold firm on RC-A's role - it matters.",
+        [],
+    )
+    assert "<ul><li>Selection: 30 points.</li>" in style.list_card_html(
+        "Key facts", ["Issues by stake: - Selection: 30 points. - Data: 15."]
+    )
+
+
+def test_choosing_a_difficulty_keeps_the_suggested_focus(scenario):
+    at = page("page_rehearse")
+    at.select_slider(key="setup_tier").set_value(4).run()
+    button(at, "Start rehearsal").click().run()
+    assert not at.exception
+    profile = at.session_state["session"].counterpart_profile
+    assert profile.tier == 4 and profile.focus is not None
+
+
+def test_customize_opens_rehearsal_setup_without_starting(scenario):
+    at = page("page_prepare")
+    button(at, "Customize").click().run()
+    assert not at.exception
+    assert at.session_state["preset"].tier == 2  # the warm-up step, ready to adjust
+    assert "session" not in at.session_state
+    assert not SessionStore().all()
