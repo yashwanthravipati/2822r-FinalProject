@@ -60,6 +60,15 @@ so the assistant lives in its Ask tab there. Setup and Cases use a narrow readin
   assistant uses them to pick context. Display titles can change freely.
 - Never render the counterpart's sheet before `session.status != "active"`; the "Their
   sheet" tab only exists after the session ends (tested in `tests/test_app.py`).
+- **Dropdowns.** Streamlit's dropdown menu is exactly as wide as its box and its rows have a
+  fixed height, so long options get cut off in narrow columns. Keep dropdowns with long
+  option text full width (`views.issue_columns` decides for issue pickers), prefer a radio
+  list for a handful of long choices (saved cases on setup), and keep option labels short
+  (the Feedback picker shows date, difficulty and result only). `style.css` lets options
+  wrap to two lines as a safety net, not a licence for half-width boxes.
+- Model-written brief items sometimes pack a list into one string ("Stakes: - A. - B.");
+  `style.list_card_html` splits those into nested bullets, and `style.is_long` switches the
+  brief to one column when items are long.
 - After editing `style.css`, restart the server (it is cached per process); after editing
   Python files, Streamlit's "run on save" or a restart picks them up.
 

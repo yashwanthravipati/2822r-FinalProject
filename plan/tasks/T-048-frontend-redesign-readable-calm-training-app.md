@@ -47,3 +47,13 @@ work (decision 0009 on main). Guide for future UI work: `docs/ui.md`.
   tab on Rehearse. Tests: 169 passed offline (`tests/test_claude_code.py` needs
   CLAUDE_TMPDIR/CLAUDE_CONFIG_DIR unset when run inside Claude Code; fails the same way on
   main there, unrelated). No API calls were made. Open: live check with the API; team review.
+- 2026-11-17: Second pass after hands-on use (Yash: "dropdowns cut off, sizing weird").
+  Drove the app with Playwright on a copy of the real data (Sim4 case, long option labels)
+  at 1440x820, 1280x720 and 390x844, opening every dropdown, popover and tab. Fixed:
+  issue dropdowns full width when options are long and two-line menu rows; saved cases as
+  a list; Feedback refreshes after generating (stale "not written yet" box), lists only
+  this scenario with short labels, regenerate in an expander, sheets stacked; brief in one
+  column for long items with inline sub-bullets split; compact rehearsal header; side-panel
+  offers stacked and five tabs fit; assistant has no empty fixed-height box; setup shows the
+  confirm step first; narrow pages centred; history drops a redundant case column; primary
+  hover colour. 173 tests pass offline (4 new regression tests).

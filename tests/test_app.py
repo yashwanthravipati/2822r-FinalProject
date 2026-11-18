@@ -459,3 +459,64 @@ def test_html_helpers_escape_markup_but_keep_quotes_readable():
     assert style.paragraphs("One\n\nTwo <i>") == "<p>One</p><p>Two &lt;i&gt;</p>"
     card = style.offer_card("Their offer", [("Salary", "<$150k>")], "500 points to you")
     assert "&lt;$150k&gt;" in card and "500 points to you" in card
+
+
+def test_feedback_shows_the_report_right_after_generating(scenario):
+    at = page("page_rehearse")
+    button(at, "Start rehearsal").click().run()
+    button(at, "Yes, walk away").click().run()
+    fb = page("page_feedback")
+    assert "Your debrief isn't written yet" in visible_text(fb)
+    button(fb, "Generate feedback").click().run()
+    assert not fb.exception
+    assert "Your debrief isn't written yet" not in visible_text(fb)  # no stale empty state
+    assert not [b for b in fb.button if b.label == "Generate feedback"]
+    assert "Regenerate feedback" in [b.label for b in fb.button]
+
+
+def test_feedback_lists_only_rehearsals_of_the_current_scenario(scenario):
+    from negotrain.app import views
+    from negotrain.counterpart.profiles import TIERS
+    from negotrain.schemas import Session
+
+    def finished(role, other):
+        s = Session(
+            participant_id=views.participant().id,
+            case_id="cloudline_hiring",
+            user_role_id=role,
+            counterpart_role_id=other,
+            counterpart_profile=TIERS[2],
+            status="impasse",
+        )
+        SessionStore().save(s)
+        return s
+
+    mine = finished("candidate", "recruiter")
+    other_role = finished("recruiter", "candidate")
+    fb = page("page_feedback")
+    options = fb.selectbox[0].options
+    assert len(options) == 1 and "Difficulty 2" in options[0]
+    assert fb.session_state["assistant_feedback_session"] == mine.id != other_role.id
+
+
+def test_long_option_labels_get_full_width_dropdowns():
+    from negotrain.app.views import issue_columns
+
+    case = load_case(CASE)
+    assert issue_columns(case) == 2  # short labels such as "$150,000"
+    case.issues[0].options[0].label = "RC-B nominations passed via GR; RC-A conducts its own review"
+    assert issue_columns(case) == 1
+
+
+def test_inline_sub_bullets_become_nested_lists():
+    from negotrain.app import style
+
+    head, subs = style.split_item("Issues by stake: - Selection: 30 points. - Data: 15.")
+    assert head == "Issues by stake:" and subs == ["Selection: 30 points.", "Data: 15."]
+    assert style.split_item("Hold firm on RC-A's role - it matters.") == (
+        "Hold firm on RC-A's role - it matters.",
+        [],
+    )
+    assert "<ul><li>Selection: 30 points.</li>" in style.list_card_html(
+        "Key facts", ["Issues by stake: - Selection: 30 points. - Data: 15."]
+    )

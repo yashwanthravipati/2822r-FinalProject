@@ -31,7 +31,7 @@ h1, h2, h3, h4 {letter-spacing: -0.012em; color: var(--nt-text);}
 [data-testid="stCaptionContainer"] {color: var(--nt-text-3);}
 [data-testid="stMain"] h4 {font-size: 1.08rem; font-weight: 650; padding: .2rem 0 .1rem;}
 [data-testid="stMain"] h3 {font-size: 1.3rem; font-weight: 650;}
-.st-key-page_narrow {max-width: 920px;}
+.st-key-page_narrow {max-width: 920px; margin: 0 auto;}
 
 /* ---------- sidebar ---------- */
 [data-testid="stSidebar"] {border-right: 1px solid var(--nt-border);}
@@ -139,6 +139,9 @@ div[data-testid="stForm"] {border-color: var(--nt-border); border-radius: var(--
 .nt-card p {margin: 0; color: var(--nt-text-2); font-size: .94rem;}
 .nt-card ul {margin: 0; padding-left: 1.1rem;}
 .nt-card li {margin: .28rem 0; font-size: .95rem; color: var(--nt-text);}
+.nt-card li ul {margin: .25rem 0 .1rem; padding-left: 1rem; list-style: circle;}
+.nt-card li li {font-size: .92rem; color: var(--nt-text-2); margin: .15rem 0;}
+.nt-grid.one {grid-template-columns: 1fr;}
 .nt-card.accent {border-color: var(--nt-accent-line); background: var(--nt-accent-tint);}
 .nt-checks {list-style: none; padding: 0 !important;}
 .nt-checks li {position: relative; padding-left: 1.6rem;}
@@ -285,4 +288,48 @@ details.nt-more div {font-size: .84rem; color: var(--nt-text-3); margin-top: .3r
   .nt-bubble {max-width: 100%;}
   .nt-prio {grid-template-columns: 1.4rem 1fr;}
   .nt-prio .bar {grid-row: auto; grid-column: 2; text-align: left;}
+}
+
+/* ---------- rehearsal workspace ---------- */
+.nt-work {margin: 0 0 .5rem;}
+.nt-work-title {font-size: 1.4rem; font-weight: 650; line-height: 1.3; letter-spacing: -0.01em;
+  color: var(--nt-text);}
+.nt-work-meta {color: var(--nt-text-2); font-size: .92rem; margin-top: .2rem;}
+/* side panel is narrow: stack issue above term instead of two cramped columns */
+.st-key-side_panel .nt-offer table, .st-key-side_panel .nt-offer tbody {display: block;}
+.st-key-side_panel .nt-offer tr {display: block; padding: .45rem .75rem;
+  border-top: 1px solid var(--nt-border);}
+.st-key-side_panel .nt-offer tr:first-child {border-top: 0;}
+.st-key-side_panel .nt-offer td {display: block; width: auto !important; padding: 0; border: 0;}
+.st-key-side_panel .nt-offer td:first-child {font-size: .78rem; color: var(--nt-text-3);}
+.st-key-side_panel .nt-offer td:last-child {font-size: .9rem;}
+
+/* ---------- dropdown menus ---------- */
+/* Rows are virtualised at a fixed 40px, so long options can't grow; two smaller lines fit. */
+[data-testid="stSelectboxVirtualDropdown"] [role="option"] {height: 100% !important;
+  min-height: 0 !important; padding-top: 2px !important; padding-bottom: 2px !important;
+  display: flex !important; align-items: center !important;}
+[data-testid="stSelectboxVirtualDropdown"] [role="option"] > div {white-space: normal !important;
+  line-height: 1.12 !important; font-size: .8rem !important; display: -webkit-box !important;
+  margin: 0 !important; padding: 0 !important;
+  -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden !important;
+  text-overflow: ellipsis;}
+
+/* ---------- buttons ---------- */
+[data-testid="stBaseButton-primary"]:hover,
+[data-testid="stBaseButton-primaryFormSubmit"]:hover {
+  background: var(--nt-accent-hover); border-color: var(--nt-accent-hover); color: #fff;}
+[data-testid="stBaseButton-primary"]:focus:not(:active),
+[data-testid="stBaseButton-primaryFormSubmit"]:focus:not(:active) {
+  background: var(--nt-accent); border-color: var(--nt-accent); color: #fff;}
+/* five tabs must fit in the narrow rehearsal side panel */
+.st-key-side_panel [role="tablist"] {gap: .55rem;}
+.st-key-side_panel [role="tab"] {padding-left: 0; padding-right: 0;}
+.st-key-side_panel [role="tab"] p {font-size: .86rem;}
+@media (max-width: 640px) {
+  .nt-offer table, .nt-offer tbody {display: block;}
+  .nt-offer tr {display: block; padding: .4rem .75rem; border-top: 1px solid var(--nt-border);}
+  .nt-offer tr:first-child {border-top: 0;}
+  .nt-offer td {display: block; width: auto !important; padding: 0; border: 0;}
+  .nt-offer td:first-child {font-size: .78rem; color: var(--nt-text-3);}
 }

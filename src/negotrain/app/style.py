@@ -12,6 +12,7 @@ through st.markdown, use ``md`` instead: a pair of "$" would otherwise render as
 
 from __future__ import annotations
 
+import re
 from functools import lru_cache
 from html import escape
 from pathlib import Path
@@ -132,11 +133,34 @@ def stats(items: list[tuple[str, str, str, str]]) -> None:
     html(f'<div class="nt-stats">{cells}</div>')
 
 
+# " - " between words marks an inline sub-list in model-written items ("Stakes: - A. - B.").
+_INLINE_BULLET = re.compile(r"\s+-\s+(?=\S)")
+
+
+def split_item(item: str) -> tuple[str, list[str]]:
+    """Split "Heading: - first - second" into ("Heading:", ["first", "second"]).
+
+    Briefs written by the model sometimes pack a whole list into one string; showing it
+    as nested bullets is far easier to read. A single spaced dash is treated as prose.
+    """
+    parts = [p.strip() for p in _INLINE_BULLET.split(str(item)) if p.strip()]
+    if len(parts) < 3 and not (len(parts) == 2 and parts[0].endswith(":")):
+        return str(item), []
+    return parts[0], parts[1:]
+
+
+def _li(item: str) -> str:
+    head, subs = split_item(item)
+    if not subs:
+        return f"<li>{esc(head)}</li>"
+    return f"<li>{esc(head)}<ul>" + "".join(f"<li>{esc(s)}</li>" for s in subs) + "</ul></li>"
+
+
 def list_card_html(title: str, items: list[str], *, checks: bool = False, tone: str = "") -> str:
     if items:
         body = (
             f'<ul class="{"nt-checks" if checks else ""}">'
-            + "".join(f"<li>{esc(i)}</li>" for i in items)
+            + "".join(_li(i) for i in items)
             + "</ul>"
         )
     else:
@@ -144,8 +168,14 @@ def list_card_html(title: str, items: list[str], *, checks: bool = False, tone: 
     return f'<div class="nt-card {esc(tone)}"><h3>{esc(title)}</h3>{body}</div>'
 
 
-def card_grid(cards_html: list[str]) -> None:
-    html('<div class="nt-grid">' + "".join(cards_html) + "</div>")
+def is_long(lists: list[list[str]], limit: int = 110) -> bool:
+    """True when list items are long enough that side-by-side cards would be cramped."""
+    items = [str(i) for group in lists for i in group]
+    return bool(items) and sum(len(i) for i in items) / len(items) > limit
+
+
+def card_grid(cards_html: list[str], *, single: bool = False) -> None:
+    html(f'<div class="nt-grid{" one" if single else ""}">' + "".join(cards_html) + "</div>")
 
 
 def text_card(title: str, text: str, *, tone: str = "") -> None:

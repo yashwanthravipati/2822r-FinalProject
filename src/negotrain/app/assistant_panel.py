@@ -159,7 +159,14 @@ def render(page: str) -> None:
             conversation.pending_question = None
             store.save_artifact(key, "assistant", conversation)
 
-        with st.container(height=360, border=False, key="assistant_transcript", autoscroll=True):
+        # Fixed height (with scrolling) once there is a conversation; before that, just the hint.
+        has_chat = bool(conversation.messages or conversation.pending_question)
+        with st.container(
+            height=360 if has_chat else "content",
+            border=False,
+            key="assistant_transcript",
+            autoscroll=has_chat,
+        ):
             chat_slot = st.empty()
             _draw_chat(chat_slot, conversation, page)
         online = views.online()

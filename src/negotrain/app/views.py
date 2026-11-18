@@ -114,6 +114,16 @@ def percent(value: float | None) -> str:
     return "—" if value is None else f"{value:.0%}"
 
 
+def issue_columns(case: Case) -> int:
+    """Two columns of issue dropdowns only when every option is short.
+
+    Dropdown menus are exactly as wide as their box, so long options (class cases have
+    whole clauses) would be cut off in a half-width column.
+    """
+    longest = max((len(o.label) for i in case.issues for o in i.options), default=0)
+    return 2 if longest <= 30 and len(case.issues) > 1 else 1
+
+
 # --------------------------------------------------------------------------- resources
 
 
@@ -491,6 +501,18 @@ def page_setup() -> None:
         "brief, AI counterparts to rehearse against, and feedback after every round.",
         kicker="Set up your scenario",
     )
+    lib = library()
+    case_id = st.session_state.get("setup_case_id")
+    if case_id in lib:
+        # A case is chosen: confirming it is the only thing left to do on this screen.
+        for warning in st.session_state.get("setup_warnings", []):
+            st.warning(warning)
+        _confirm_scenario(lib[case_id][0])
+        if st.button("Choose a different case", type="tertiary", icon=":material/arrow_back:"):
+            st.session_state.pop("setup_case_id", None)
+            st.session_state.pop("setup_warnings", None)
+            st.rerun()
+        return
     style.how_it_works(
         [
             (
@@ -511,7 +533,7 @@ def page_setup() -> None:
         ]
     )
     st.space("medium")
-    upload_col, saved_col = st.columns([3, 2], gap="medium")
+    upload_col, saved_col = st.columns([1, 1], gap="medium")
     with upload_col, style.card("upload"):
         st.markdown("#### Upload your case materials")
         st.caption(
@@ -542,22 +564,23 @@ def page_setup() -> None:
     with saved_col, style.card("saved"):
         st.markdown("#### Or use a saved case")
         st.caption("Cases you've uploaded before, plus the sample case.")
-        lib = library()
         ids = sorted(lib, key=lambda c: lib[c][0].title.lower())
         if ids:
-            chosen = st.selectbox(
-                "Case", ids, format_func=lambda c: lib[c][0].title, label_visibility="collapsed"
+            # A list shows long case titles in full; a dropdown would cut them off.
+            picker = st.radio if len(ids) <= 8 else st.selectbox
+            chosen = picker(
+                "Saved cases",
+                ids,
+                format_func=lambda c: lib[c][0].title,
+                label_visibility="collapsed",
+                key="setup_saved_case",
             )
             if st.button("Use this case", width="stretch"):
                 st.session_state["setup_case_id"] = chosen
+                st.session_state.pop("setup_warnings", None)
+                st.rerun()
         else:
             st.caption("No saved cases yet.")
-
-    lib = library()
-    case_id = st.session_state.get("setup_case_id")
-    if case_id not in lib:
-        return
-    _confirm_scenario(lib[case_id][0])
 
 
 def _confirm_scenario(case: Case) -> None:
@@ -632,7 +655,8 @@ def _build_scenario(p: Participant, files: list, infer: bool) -> None:
             return
     save_private_case(case)
     st.session_state["setup_case_id"] = case.id
-    st.success(f"Built **{md(case.title)}** with {len(case.issues)} issues.")
+    st.session_state["setup_warnings"] = warnings
+    st.rerun()
 
 
 # --------------------------------------------------------------------------- prepare
@@ -729,22 +753,24 @@ def _render_prep(case: Case, prep: Prep) -> None:
             ]
         )
     style.section("Your brief")
-    style.card_grid(
-        [
-            style.list_card_html("Key facts", b.key_facts),
-            style.list_card_html("Your interests", b.your_interests),
-            style.list_card_html("The other side (hypotheses to test)", b.their_likely_interests),
-            style.list_card_html("Questions to ask", b.questions_to_ask),
-            style.list_card_html("Where to hold and where to give", b.tradeoffs),
-            style.list_card_html("Pitfalls to avoid", b.pitfalls),
-        ]
-    )
+    lists = [
+        ("Key facts", b.key_facts),
+        ("Your interests", b.your_interests),
+        ("The other side (hypotheses to test)", b.their_likely_interests),
+        ("Questions to ask", b.questions_to_ask),
+        ("Where to hold and where to give", b.tradeoffs),
+        ("Pitfalls to avoid", b.pitfalls),
+    ]
+    # Long, detailed briefs read better as one column than as narrow side-by-side cards.
+    single = style.is_long([items for _, items in lists])
+    style.card_grid([style.list_card_html(t, items) for t, items in lists], single=single)
     style.card_grid(
         [
             f'<div class="nt-card accent"><h3>Opening plan</h3>{style.paragraphs(b.opening_plan)}'
             "</div>",
             style.list_card_html("Checklist", b.checklist, checks=True),
-        ]
+        ],
+        single=single or style.is_long([b.checklist, [b.opening_plan]]),
     )
     with st.expander("Your confidential sheet", icon=":material/lock:"):
         render_sheet(case, prep.role_id, title="Your role")
@@ -963,10 +989,10 @@ def _composer(session: Session, case: Case) -> None:
                     "The offline counterpart only understands listed options; custom terms "
                     "need the AI counterpart."
                 )
-            cols = st.columns(2)
+            cols = st.columns(issue_columns(case))
             picks = {}
             for n, issue in enumerate(case.issues):
-                picks[issue.id] = cols[n % 2].selectbox(
+                picks[issue.id] = cols[n % len(cols)].selectbox(
                     issue.name,
                     [o.label for o in issue.options],
                     index=None,
@@ -1094,20 +1120,18 @@ def page_rehearse() -> None:
     them = case.role(session.counterpart_role_id)
     tier = session.counterpart_profile.tier if session.counterpart_profile else None
     label, tone = STATUS[session.status]
+    # A compact workspace header: the conversation, not the title, should own the screen.
     style.html(
-        '<div class="nt-header" style="margin-bottom:.6rem">'
-        f'<div class="nt-kicker">{style.steps_html(2)}</div>'
-        f"<h1>{style.esc(case.title)}</h1>"
-        f'<p class="nt-sub">You ({style.esc(case.role(session.user_role_id).name)}) and '
-        f"{style.esc(them.name)}</p></div>"
+        '<div class="nt-work">'
+        f'<div class="nt-work-title">{style.esc(case.title)}</div>'
+        f'<div class="nt-work-meta">You: {style.esc(case.role(session.user_role_id).name)}'
+        f" · Them: {style.esc(them.name)}</div></div>"
     )
-    style.badges([(label, tone), (difficulty(tier), "neutral")])
     left = session.max_user_turns - session.user_turns
+    tags = [(label, tone), (difficulty(tier), "neutral")]
     if session.status == "active":
-        style.progress(
-            f"{left} of {session.max_user_turns} moves left",
-            left / max(1, session.max_user_turns),
-        )
+        tags.append((f"{left} of {session.max_user_turns} moves left", "neutral"))
+    style.badges(tags)
 
     chat, side = st.columns([1.7, 1], gap="large")
     with chat:
@@ -1122,7 +1146,7 @@ def page_rehearse() -> None:
             _composer(session, case)
         else:
             _finished(session, case)
-    with side:
+    with side, st.container(key="side_panel"):
         _side_panel(session, case)
 
 
@@ -1201,14 +1225,18 @@ def page_feedback() -> None:
     p = _require_participant()
     store = SessionStore()
     lib = library()
+    current, role_id = active_scenario()
     done = [
         s
         for s in reversed(store.for_participant(p.id))
-        if s.kind == "rehearsal" and s.status in ("agreed", "impasse") and s.case_id in lib
+        if s.kind == "rehearsal"
+        and s.status in ("agreed", "impasse")
+        and s.case_id == current.id
+        and s.user_role_id == role_id
     ]
     if not done:
         style.empty(
-            "No finished rehearsals yet",
+            "No finished rehearsals of this scenario yet",
             "Finish a rehearsal (reach a deal, walk away, or record next steps) and your "
             "feedback appears here.",
         )
@@ -1220,7 +1248,7 @@ def page_feedback() -> None:
         "Rehearsal",
         ids,
         index=ids.index(wanted) if wanted in ids else 0,
-        format_func=lambda i: f"{session_label(by_id[i])} · {lib[by_id[i].case_id][0].title}",
+        format_func=lambda i: session_label(by_id[i]),
     )
     session = by_id[sid]
     st.session_state["assistant_feedback_session"] = sid
@@ -1236,22 +1264,22 @@ def page_feedback() -> None:
     if debrief and debrief.counterfactuals and debrief.counterfactuals.reward != "surplus_share":
         style.callout("This debrief is from an older version. Generate it again.", "warn")
         debrief = None
-    cap, k, n, use_llm = _feedback_settings(session, debrief)
     if debrief is None:
+        if session.has_custom_terms:  # nothing to tune; say why up front
+            cap, k, n, use_llm = _feedback_options(session)
+        else:
+            with st.expander("Feedback settings", icon=":material/tune:"):
+                cap, k, n, use_llm = _feedback_options(session)
         style.empty(
             "Your debrief isn't written yet",
             "We replay the key moments of your rehearsal with different moves to see what "
             "would have changed, then write a coaching report.",
         )
-    if st.button(
-        "Generate feedback" if debrief is None else "Regenerate feedback",
-        type="primary" if debrief is None else "secondary",
-        icon=":material/auto_awesome:" if debrief is None else ":material/refresh:",
-    ):
-        debrief = _generate_debrief(session, case, store, cap, k, n, use_llm)
-
-    if debrief is None:
+        if st.button("Generate feedback", type="primary", icon=":material/auto_awesome:"):
+            _generate_debrief(session, case, store, cap, k, n, use_llm)
+            st.rerun()
         return
+
     tabs = st.tabs(["Coaching", "What-if replays", "Transcript", "Both sheets", "Data"])
     with tabs[0]:
         _render_report(debrief.report)
@@ -1262,11 +1290,9 @@ def page_feedback() -> None:
         for turn in session.turns:
             render_turn(case, session, turn)
     with tabs[3]:
-        a, b = st.columns(2, gap="large")
-        with a:
-            render_sheet(case, session.user_role_id, title="Your role")
-        with b:
-            render_sheet(case, session.counterpart_role_id, title="Their role")
+        render_sheet(case, session.user_role_id, title="Your role")
+        st.divider()
+        render_sheet(case, session.counterpart_role_id, title="Their role")
         o = outcome_summary(session, case)
         style.callout(
             f"Best joint deal among the listed options: {o.max_joint_deal} "
@@ -1286,41 +1312,46 @@ def page_feedback() -> None:
                 f"Feedback cost: {debrief.llm_calls} AI calls (about ${debrief.est_cost:.2f}); "
                 f"replays took {debrief.counterfactuals.seconds:.0f}s."
             )
+    with st.expander("Regenerate this debrief", icon=":material/refresh:"):
+        cap, k, n, use_llm = _feedback_options(session)
+        if st.button("Regenerate feedback"):
+            _generate_debrief(session, case, store, cap, k, n, use_llm)
+            st.rerun()
 
 
-def _feedback_settings(session: Session, debrief: Debrief | None) -> tuple[int, int, int, bool]:
+def _feedback_options(session: Session) -> tuple[int, int, int, bool]:
+    """How alternatives are replayed. Call inside a container (an expander on the page)."""
     if session.has_custom_terms:
         style.callout(
             "This rehearsal used custom terms. You'll get written coaching, but no what-if "
             "replays: custom terms have no defined point score."
         )
         return 3, 2, 4, False
-    with st.expander("Feedback settings", icon=":material/tune:", expanded=False):
-        on_plan = backend() == "claude-code"
-        sim_choice = st.radio(
-            "Replay alternatives against",
-            [
-                "Fast rule-based simulator (free)",
-                "The same AI counterpart (slower, uses " + ("your plan)" if on_plan else "API)"),
-            ],
-            # On a plan, ~30 rollout calls eat into rate limits: opt in, don't default.
-            index=0,
-            disabled=not online(),
-        )
-        use_llm = online() and sim_choice.startswith("The same")
-        c = st.columns(3)
-        cap = c[0].number_input("Moments to analyse", 1, 5, 3)
-        k = c[1].number_input("Alternatives each", 1, 4, 2)
-        n = c[2].number_input("Replays per batch", 4, 5, 4)
-        if use_llm:
-            calls = estimate_calls(int(cap), int(k), int(n), session.max_user_turns) + 1
-            if on_plan:
-                st.caption(f"Up to about {calls} Claude Code calls; typically 2–5 minutes.")
-            else:
-                st.caption(
-                    f"Up to about {calls} API calls (about ${calls * EST_COST_PER_CALL:.2f}); "
-                    "typically 1–3 minutes."
-                )
+    on_plan = backend() == "claude-code"
+    sim_choice = st.radio(
+        "Replay alternatives against",
+        [
+            "Fast rule-based simulator (free)",
+            "The same AI counterpart (slower, uses " + ("your plan)" if on_plan else "API)"),
+        ],
+        # On a plan, ~30 rollout calls eat into rate limits: opt in, don't default.
+        index=0,
+        disabled=not online(),
+    )
+    use_llm = online() and sim_choice.startswith("The same")
+    c = st.columns(3)
+    cap = c[0].number_input("Moments to analyse", 1, 5, 3)
+    k = c[1].number_input("Alternatives each", 1, 4, 2)
+    n = c[2].number_input("Replays per batch", 4, 5, 4)
+    if use_llm:
+        calls = estimate_calls(int(cap), int(k), int(n), session.max_user_turns) + 1
+        if on_plan:
+            st.caption(f"Up to about {calls} Claude Code calls; typically 2–5 minutes.")
+        else:
+            st.caption(
+                f"Up to about {calls} API calls (about ${calls * EST_COST_PER_CALL:.2f}); "
+                "typically 1–3 minutes."
+            )
     return int(cap), int(k), int(n), use_llm
 
 
@@ -1412,7 +1443,8 @@ def _render_report(report: CoachingReport) -> None:
                     + (style.details_html("Why we think so", m.evidence) if m.evidence else "")
                     + "</div>"
                 )
-    style.callout(report.next_focus, "good", title="Focus for your next rehearsal")
+    focus = report.next_focus.strip()
+    style.callout(focus[:1].upper() + focus[1:], "good", title="Focus for your next rehearsal")
     if report.source == "template":
         style.muted("Template feedback: written offline or while the AI was unavailable.")
 
@@ -1626,6 +1658,9 @@ def _history(hist: list[tuple[Session, Case]]) -> None:
                 "Share of gains": percent(f["surplus_share"]),
             }
         )
+    if len({r["Case"] for r in rows}) == 1:
+        for r in rows:
+            r.pop("Case")
     st.dataframe(rows, hide_index=True, width="stretch")
 
 
@@ -1653,9 +1688,9 @@ def page_real() -> None:
         st.markdown("#### Agreed terms")
         st.caption("If there was a deal: choose a listed option or type the terms you agreed to.")
         picks = {}
-        cols = st.columns(2)
+        cols = st.columns(issue_columns(case))
         for n, issue in enumerate(case.issues):
-            picks[issue.id] = cols[n % 2].selectbox(
+            picks[issue.id] = cols[n % len(cols)].selectbox(
                 issue.name,
                 [o.label for o in issue.options],
                 index=None,
