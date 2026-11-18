@@ -20,3 +20,5 @@ profiles.py has tier presets, sample_profile() (domain randomization), and a fir
 - [ ] Dials documented in docs/architecture.md
 
 ## Log
+
+- 2026-11-18: Added six contextual focus instructions and conversational opportunities for rubric cases. Counterpart prompts project own-role sources, preserve authority, and omit invented numeric economics. Offline institutional counterpart is explicitly a placeholder. Scripted tests verify prompt isolation; empirical steering adherence remains pending.

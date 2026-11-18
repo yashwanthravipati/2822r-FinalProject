@@ -97,6 +97,8 @@ def episode_value(case: Case, session: Session) -> float:
 
 def episode_score(case: Case, session: Session) -> float | None:
     """The only rehearsal reward, R. Custom agreements are unscored; no deal is zero."""
+    if not case.is_scored:
+        return None
     if session.status != "agreed" or session.agreement is None:
         return 0.0
     if session.agreement.custom_terms:

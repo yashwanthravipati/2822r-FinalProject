@@ -1,8 +1,104 @@
 # Architecture
 
-The app reuses the upload → prepare → rehearse → feedback → profile → real-outcome flow.
-The formal model is specified in `new-spec.md` and `report.tex`; decision 0008 records
-where they differ and the chosen interpretation.
+The application reuses upload → prepare → rehearse → feedback → profile → real-outcome.
+Report Section 1 and decision 0009 define the current rubric framework. The earlier
+point-based implementation and experiments remain available for reproducibility; their
+contracts are documented below under “Legacy bargaining path”.
+
+## Current rubric framework
+
+`Case.framework_version="rubric-v1"` selects the current path. `negotiation_type` selects
+distributive, integrative, or institutional teaching priorities. New document imports use
+this path. Choosing “Start training” on a saved case enables it; legacy case files and
+sessions still load. `scripts/migrate_rubric.py` creates a separate private practice case
+when retaining the original case id is important for reproducing experiments.
+
+`rubrics.py` supplies the six shared skills, with profile-specific default priorities and
+editable applicability, importance, anchors, preparation guidance, and steering instructions.
+Defaults are explicitly unreviewed. `Case.rubric` is public instructional material;
+confidential examples belong in `RoleSheet.skill_notes`. `role_context` projects only the
+selected role, visible source documents, public issues, and rubric. The parser must not
+put private facts in shared issues, the public brief, or outcome criteria.
+
+Institutional cases disable numeric scoring. Other cases can retain it only with supplied
+point tables and reservation values. Role sheets allow missing numeric values; scoring
+returns null, never a fabricated zero, for unscored cases. Constraints retain provenance,
+uncertainty, and approval dependencies. Known option restrictions are checked in code;
+narrative constraints and outcome criteria are marked for review rather than automatically
+certified. `Session.commitments` records partial agreements, required approvals, timing,
+owners and contingencies. Participant-recorded commitments do not verify delivery. The
+existing `impasse` status means no full formal agreement and can coexist with next steps.
+
+## Assessment and Beta beliefs
+
+`profiling/skills.py` assesses each learner response using only its transcript prefix and
+role-visible information, at most one model call per learner turn. `SkillObservation`
+contains a skill id, opportunity window, present/absent/uncertain opportunity label,
+continuous effectiveness score in [0,1] or null, exact evidence quotations, rationale,
+practice suggestion, and subskill tags. Zero means missed; one means effective. Scores
+between them are partial effectiveness, not annotation confidence or a third category.
+Unassessable, absent and uncertain opportunities do not receive scores.
+
+Validation rejects unknown/duplicate skills, future evidence, unsupported quotations,
+wrong response turns, and stale case/role/transcript hashes. Formal actions have canonical
+visible evidence text even when the message is empty. A model batch covers every applicable
+skill at the requested response. Assessments are saved atomically only after every batch
+validates. Human annotations use the same contract and can be imported/exported on Feedback.
+Overlapping windows within a skill are counted once (earliest assessable observation);
+different skills may refer to the same response.
+
+`BetaBelief.update(v,n,lambda)` retains the prior and discounts old evidence, adding total
+score v to alpha and n-v to beta. Fractional evidence is an approximation, not an exact
+continuous-data conjugate likelihood. Effectiveness is alpha/(alpha+beta). Profiles keep
+case, role and difficulty separate; they do not infer learning from a shift to easier
+practice or claim cross-case transfer. Missing annotations add no success/failure evidence.
+The UI shows opportunity counts, effectiveness and model intervals, whose empirical
+calibration remains untested. No Dirichlet model or discrete three-level state is used.
+
+## Coaching and steering
+
+`curriculum.next_scenario` uses the relevant Beta skill beliefs, rubric importance and
+uncertainty to choose an applicable focus. Difficulty stays fixed unless the user chooses
+a different tier or a planned stretch session; no agreement does not automatically imply
+weak performance. Fixed-difficulty comparisons avoid conflating difficulty with learning.
+
+The AI counterpart receives its own role and focus instructions. It can converse without
+being forced to emit a numerical counteroffer. Difficulty adjusts how much probing is
+needed while preserving facts and authority. The six focus instructions exercise rapport,
+interests/authority, evidence, leverage, options, and commitments; there are no automatic
+concessions for rapport keywords. Specified numeric constraints still apply to scored cases.
+Offline institutional rehearsals are a clearly labeled placeholder, not a realistic actor
+or an assessor. AI behavior control and factual fidelity still require empirical testing.
+
+Rubric feedback presents validated observations, evidence and suggestions. Skill scores,
+mechanical constraint checks and recorded outcomes remain separate. It never substitutes
+old concession flags or numeric counterfactual gains. Cached point-based debriefs are not
+used for the new rubric view. The assistant retains its factual-only restriction during
+active rehearsal. Inferred point tables are excluded from unscored role prompts.
+
+## Component evaluation
+
+`rubric_evaluation.py` compares predictions with validated human reference annotations:
+opportunity and thresholded-weakness precision/recall, continuous-score MAE, and coverage.
+Missing predictions are abstentions, not zero scores. Conversation ids cannot cross dataset
+splits. `steering_responses` generates counterpart turns for unchanged dialogue prefixes;
+it does not simulate learner improvement. Human steering annotations measure opportunity
+creation, case adherence and unintended changes; separate human feedback ratings measure
+correctness, relevance, actionability and grounding.
+
+Run `python scripts/evaluate_rubric.py INPUT.json --output OUTPUT.json` to compute metrics
+without API calls. The input may contain `diagnosis` (ReferenceExample), `steering`
+(SteeringRating), and `feedback` (FeedbackRating) lists. ReferenceExample includes a case,
+session, human reference assessment and optional prediction. Keep cases/transcripts and
+annotation files in private data folders. Empty datasets return missing metrics, never a
+validation claim. Reference quality, annotator agreement, confidence calibration, steering
+quality and human learning remain unmeasured until real annotation/study data are collected.
+
+## Legacy bargaining path
+
+The following describes the pre-rubric implementation used by the historical experiments.
+It does not define the new institutional assessment path. `docs/new-spec.md` is retained as
+its historical specification; `evaluation.Experiment` requires a scored legacy case.
 
 ## Case, visibility, and reward
 
@@ -63,8 +159,7 @@ annotation. The app annotates a finished session before feedback, and annotates 
 user text only when the rapport hook needs it. No coaching is generated by the tagger.
 
 `profiling/belief.py` maintains Beta distributions, discounting evidence once per session
-while preserving the prior by default. `discount_prior=True` provides report.tex's
-alternative recursion for sensitivity analysis. Exact credible intervals use SciPy.
+while preserving the prior by default. `discount_prior=True` preserves the original proposal's alternative recursion for sensitivity analysis. Exact credible intervals use SciPy.
 `profile.py` rebuilds beliefs from persisted transcripts and estimates personal error
 costs from fresh-batch counterfactual deltas, falling back to population costs. Before
 calibration, fallback cost/opportunity values are unit priors, not measured estimates.

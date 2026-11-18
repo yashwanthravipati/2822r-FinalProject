@@ -61,7 +61,7 @@ def extract_features(session: Session, case: Case) -> Features:
         f["anchored_first"] = 1.0 if first_mine < first_theirs else 0.0
     # Custom wording cannot be assigned a point claim or compared numerically with
     # listed offers. Keep observable behavior without inventing concession scores.
-    if mine and not session.has_custom_terms:
+    if mine and not session.has_custom_terms and case.is_scored:
         claims = [claim(case, me, o) for _, o in mine]
         f["first_offer_claim"] = claims[0]
         drops = [
@@ -92,6 +92,8 @@ def extract_features(session: Session, case: Case) -> Features:
     if session.status in ("agreed", "impasse"):
         f["agreement"] = 1.0 if session.status == "agreed" else 0.0
         f["impasse"] = 1.0 - f["agreement"]
+        if not case.is_scored:
+            return f
         rv = case.role(me).reservation_value
         pts = rv
         if session.status == "agreed" and session.agreement is not None:
@@ -104,6 +106,8 @@ def extract_features(session: Session, case: Case) -> Features:
 
 def flags(session: Session, case: Case, f: Features | None = None) -> list[str]:
     """Error patterns from PLAN.md §7 (behavior change), as keys of FLAG_DESCRIPTIONS."""
+    if case.uses_rubric:
+        return []
     f = f or extract_features(session, case)
     out = []
     if f["first_offer_claim"] is not None and f["first_offer_claim"] < 0.7:

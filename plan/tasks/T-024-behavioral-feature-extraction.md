@@ -26,3 +26,7 @@ First-offer extremity, who anchored first, concession count, size, and timing, r
   discounted Beta beliefs, cost-weighted UCB/baselines, profile UI with credible intervals,
   and visible 20-user-move deadline. Replaces heuristic skill scores. Source-document
   discrepancies and remaining integration are recorded in decision 0008.
+
+- 2026-11-18: Added prefix-only opportunity assessment with continuous 0–1 scores, exact evidence validation, atomic persistence, stale-assessment rejection and overlap deduplication. Empty-text formal actions have canonical evidence text. Added diagnosis metrics against human reference annotations; no real annotation dataset has yet been evaluated.
+
+- 2026-11-18: Pre-push wiring audit verified setup, institutional rehearsal, persisted commitments, assessment, feedback, Beta profiles and curriculum. Added a scripted UI integration test that clicks Assess skills, persists all six scores, checks the fractional Beta mean and launches the recommended leverage-focused rehearsal. No live API or human-validation claims.

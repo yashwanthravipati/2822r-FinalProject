@@ -33,6 +33,8 @@ def points(case: Case, role_id: str, offer: Offer) -> float:
 
 
 def best_offer_for(case: Case, role_id: str) -> Offer:
+    if not case.is_scored:
+        raise ValueError("case has no numeric scoring model")
     role = case.role(role_id)
     terms = {}
     for issue in case.issues:
@@ -53,7 +55,7 @@ def claim(case: Case, role_id: str, offer: Offer) -> float | None:
 
     Comparable across partial and complete offers, which is what concession tracking needs.
     """
-    if offer.custom_terms:
+    if offer.custom_terms or not case.is_scored:
         return None
     role = case.role(role_id)
     got = top = low = 0.0
@@ -83,6 +85,8 @@ def feasible_best_points(case: Case, role_id: str) -> float:
     approximation is used in the reward denominator, even for large Cartesian spaces.
     Cache only immutable economics, so editing a point table invalidates the cache.
     """
+    if not case.is_scored:
+        raise ValueError("case has no numeric scoring model")
     own, other = case.role(role_id), case.other_role(role_id)
     tables = []
     for issue in case.issues:

@@ -24,84 +24,208 @@
 
 \section{Research question}
 
-In this project, we explore whether rehearsing for a negotiation using a LLM coach can improve human performance. We invert the traditional Reinforcement Learning (RL) paradigm and treat the human as the `model' to optimise. Informally then, the research question we pose is whether we can improve a user's negotiation performance over several rounds of LLM-synthesised negotiation rehearsals followed by feedback. A more formal statement follows.
+We study whether an LLM rehearsal environment can identify a human negotiator's
+weaknesses and create useful opportunities to practise them. The relevant skills and
+measures of success depend on the negotiation. In this work, we focus specifically on the negotiation type of \emph{institutional conflict and
+coordination}, where parties must reconcile their respective governments' interests, mandates, and
+implementation constraints, as illustrated by the in-class Simulations 3 and 4.
+The formalism below is a proposed revision; the preliminary results in Section 2 use the
+earlier bargaining-based implementation from Checkpoint 2.
 
 \paragraph{1. The case $c$.}
 The case is the negotiation the user uploads. Formally, a case is the tuple
 \begin{equation}
-c = \big( \mathcal{A},\; p^{\mathrm{U}},\; p^{\mathrm{C}},\; W^{\mathrm{U}},\; W^{\mathrm{C}} \big), \qquad \mathcal{A} = \mathcal{O}_1 \times \dots \times \mathcal{O}_L,
+c = \big(g,\; \mathcal{I},\; \mathcal{A},\; \mathcal{H},\; \mathcal{R}_c,\; \mathcal{M}_c\big),
 \end{equation}
-whose parts are as follows. The case has $L$ \emph{issues} to be agreed; in a job-offer negotiation between a candidate and an employer, the issues might be salary, start date, and whether remote work is allowed. Each issue $\ell$ has a set of options $\mathcal{O}_\ell$, which may be finite, such as $\mathcal{O}_3 = \{\text{yes}, \text{no}\}$ for remote work, or continuous, such as $\mathcal{O}_1 = [\$100\text{k}, \$150\text{k}]$ for salary. An \emph{agreement} $a \in \mathcal{A}$ picks one option for every issue, for example $a = (\$120\text{k}, \text{October start}, \text{yes})$. The functions $p^{\mathrm{U}}, p^{\mathrm{C}} : \mathcal{A} \to \mathbb{R}$ are the \emph{point tables} of the user and the counterpart: each says how many points that side earns from each agreement, and each side sees only its own. The candidate might earn $p^{\mathrm{U}}(a) = 4500$ points from the agreement above. Finally, $W^{\mathrm{U}}$ and $W^{\mathrm{C}}$ are the \emph{walk-away values}, the points each side receives if no agreement is reached; a candidate holding a competing offer might have $W^{\mathrm{U}} = 4000$.
+whose parts are as follows. The teaching profile $g$ identifies the negotiation type.
+The materials $\mathcal{I}$ contain the public information and each side's confidential
+instructions; each side sees only its own. The space $\mathcal{A}$ contains possible
+agreements, including partial or conditional commitments. The constraints $\mathcal{H}$
+record requirements and necessary approvals, with their sources and any uncertainty.
+For example, a referral arrangement in Simulation 4 must distinguish C.'s willingness
+to help from the approvals needed to proceed. Finally, $\mathcal{R}_c$ is the case-specific
+skill rubric and $\mathcal{M}_c$ specifies the outcome measures. Point tables and walk-away
+values remain useful when supplied for a bargaining case; they are not required for the
+institutional cases considered here.
+
+For institutional conflict and coordination, we use $J=6$ skill categories:
+\begin{enumerate}
+\item \textbf{Building rapport and appealing to shared values.} Acknowledge concerns,
+recognize the counterpart's aims and institutional identity, and use relevant values
+constructively. In Simulation 4, a learner can invoke the Red Cross's commitment to
+neutrality to frame access across communities as a shared purpose. Respectful small talk
+can also be appropriate; neither a greeting nor quoting a mission statement is sufficient
+by itself to establish effective rapport.
+\item \textbf{Understanding interests, constraints, and decision-making.} Explore why
+positions matter, check interpretations, and identify who can approve or obstruct an
+arrangement. In Simulation 4, distinguish RC-A's oversight concerns, communities' reasons
+for trusting RC-B, and decisions that C. must refer to headquarters. Interests and
+authority remain separate annotation tags within this combined category.
+\item \textbf{Establishing facts and shared criteria.} Distinguish evidence from
+assumptions, investigate contradictions, and identify standards for assessing proposals.
+In Simulation 3, explore the discrepancy between stated facility standards and reports
+of actual conditions. In Simulation 4, distinguish clinical eligibility, permission to
+travel, and protection during travel.
+\item \textbf{Recognizing and using leverage.} Identify one's consequential
+contributions, the counterpart's dependencies, and credible alternatives; communicate
+them accurately and connect them to a proposal. In the Simulation 4 class discussion,
+a successful strategy made explicit RC-A's dependence on Global Relief's specialist
+capacity to provide amputee rehabilitation. Recognition, factual grounding, and use are
+assessed separately; unsupported claims of indispensability or empty threats do not
+receive credit. Leverage can be used through an offer of cooperation.
+\item \textbf{Developing options that address multiple interests.} Use discovered
+interests to generate alternatives and test their compatibility with constraints.
+In Simulation 4, explore whether patient identification, clinical assessment, referral
+administration, and approval responsibilities can be arranged to satisfy the relevant
+parties, checking authorization rather than assuming such an arrangement is permitted.
+\item \textbf{Securing credible commitments and follow-through.} Establish who will do
+what, by when, with which approvals and contingencies. In Simulation 3, clarify capacity,
+transport, and funding responsibilities. In Simulation 4, identify who can authorize and
+implement protection assurances, and what remains unresolved before referrals proceed.
+\end{enumerate}
+The rubric evaluates the learner's conduct, not whether the counterpart cooperates.
+Categories can overlap: understanding a value supports category 2, while invoking it
+constructively can also support category 1. Case-specific examples require instructor review.
 
 \paragraph{2. The rehearsal and its score.}
-A rehearsal is one negotiation of the case between the user and an LLM counterpart, and it produces a transcript. Formally, the transcript is the tuple
+A rehearsal is one negotiation of the case between the user and an LLM counterpart,
+and it produces a transcript. Formally,
 \begin{equation}
-\tau = \big( y_1, \dots, y_N;\; a^{*} \big), \qquad N \le 20, \qquad a^{*} \in \mathcal{A} \cup \{\varnothing\},
+\tau = \big(y_1,\dots,y_N;\;a^*\big),\qquad a^*\in\mathcal{A}\cup\{\varnothing\},
 \end{equation}
-where $y_k$ is the $k$-th message (text, optionally with a formal offer of an agreement) and $a^{*}$ is the agreement reached, or $\varnothing$ if there was none. Messages alternate between the user and the counterpart. The counterpart's text is written by the language model, but its offers obey a \emph{concession schedule} $L(k)$, the lowest number of its own points it will accept at message $k$: it never offers or accepts an $a$ with $p^{\mathrm{C}}(a) < L(k)$. We score a rehearsal by the share of the available gains the user captured:
+where $y_k$ is the $k$-th message, optionally with a proposal, and $a^*$ records the
+agreement or commitments reached, or $\varnothing$ if there were none. Messages alternate
+between the user and the counterpart, with at most 20 user moves and their replies.
+The index $t=0,1,\dots,K-1$ counts rehearsals within one user's training run.
+
+For each skill $j$, the rubric identifies relevant opportunities $w$ and assigns an
+effectiveness score $q_{w,j}\in[0,1]$: $0$ means missed, $1$ means effective, and intermediate
+values reflect partial effectiveness. For example, recognizing Global Relief's leverage
+without clearly connecting it to a proposal can receive intermediate credit. Every score
+must cite evidence available to the learner at that point. Inapplicable or unassessable
+opportunities are excluded, and the same opportunity is not counted repeatedly. With
+$n_{t,j}$ assessed opportunities, the session's score for skill $j$ is
 \begin{equation}
-R(\tau) = \frac{p^{\mathrm{U}}(a^{*}) - W^{\mathrm{U}}}{P^{\star} - W^{\mathrm{U}}}, \qquad P^{\star} = \max \big\{ p^{\mathrm{U}}(a) : a \in \mathcal{A},\ p^{\mathrm{C}}(a) \ge W^{\mathrm{C}} \big\},
+Q_j(\tau_t)=\frac{1}{n_{t,j}}\sum_{w=1}^{n_{t,j}}q_{w,j},\qquad n_{t,j}>0.
 \end{equation}
-so the numerator is what the user gained over walking away, and $P^{\star}$ is the most the user could have obtained in any agreement the counterpart would accept. A rehearsal without a deal scores $R = 0$, and $R < 0$ if the user accepts a deal worse than walking away. The transcript $\tau$ is simply the full exchange, for instance ``Candidate: I was hoping for $\$130$k. Employer: We can do $\$115$k with an October start. \dots''. The index $t = 0, 1, \dots, K-1$ counts rehearsals within one user's training run, so $\tau_t$ is the transcript of the $t$-th rehearsal.
+No assessed opportunities means a missing score, not zero. We report these skill scores
+alongside constraint adherence and outcome quality, rather than combine them into one
+surplus score. In Simulation 4, identifying a missing approval can be good performance
+even without a final agreement; an assurance alone does not establish safe implementation.
 
 \paragraph{3. The setting $\sigma$.}
-The setting is everything the coach controls about one rehearsal. It has two parts: a difficulty tier, from 1 to 5, which sets how hard the counterpart bargains, and a \emph{focus}, which names the one mistake the rehearsal should train. A focus changes how the counterpart behaves, which moments the feedback leads with, and what the preparation notes stress. For example, the setting (tier 3, focus ``conceding first'') produces a moderately tough counterpart that holds its position until the user moves, so the user meets the situation they tend to mishandle. Formally,
+The setting is everything the coach controls about one rehearsal. It has two parts:
+a difficulty tier, from 1 to 5, and a \emph{focus}, which names the skill the rehearsal
+should train. A focus changes how the counterpart behaves, which moments the feedback
+leads with, and what the preparation notes stress. Formally,
 \begin{equation}
-\sigma = (\mu, f), \qquad \mu \in \{1, \dots, 5\}, \qquad f \in \{1, \dots, J\} \cup \{\varnothing\},
+\sigma=(\mu,f),\qquad \mu\in\{1,\dots,5\},\qquad
+f\in\{1,\dots,J\}\cup\{\varnothing\},
 \end{equation}
-where $\mu$ is the tier, $f$ is the index of the mistake to focus on (defined below), and $f = \varnothing$ means no focus. Each tier fixes a concession schedule $L_\mu$, with higher tiers opening higher and conceding more slowly. The example setting is $\sigma = (3, \text{conceding first})$.
+where $\mu$ is the tier, $f$ is the skill index, and $f=\varnothing$ means no focus.
+For example, (tier 3, focus ``using leverage'') in Simulation 4 creates an opportunity
+to explain Global Relief's contribution and connect it to a request. Higher tiers can
+require more probing to uncover interests or approval dependencies; difficulty is not
+limited to slower concessions. Settings preserve the case's facts and actual authority.
 
 \paragraph{4. The user's state $s$.}
-The coach needs a description of the user that names their mistakes and can be estimated from a few rehearsals. We therefore describe the user before rehearsal $t$ by a vector of probabilities,
+The coach needs a description of the user that names their weaknesses and can be
+estimated from a few rehearsals. We therefore describe the user before rehearsal $t$
+by a vector of expected effectiveness scores,
 \begin{equation}
-s_t = (s_{t,1}, \dots, s_{t,J}) \in [0,1]^J, \qquad s_{t,j} = \Pr(\text{user makes mistake } j \mid \text{a chance to make it arises}).
+s_t=(s_{t,1},\dots,s_{t,J})\in[0,1]^J,\qquad
+s_{t,j}=\E[q_j\mid\text{a relevant opportunity arises}].
 \end{equation}
-Each mistake is detected by code in the transcript, along with its chances. We target $J = 6$ mistakes. \emph{Conceding first} is making the first concession before the counterpart has made any; every concession by the user is a chance to make it. An \emph{unreciprocated concession} is conceding again when the counterpart has not conceded since the user's last concession. \emph{Anchoring on their number} is answering the counterpart's opening offer with a counteroffer closer to their number than to one's own best outcome. \emph{Accepting low} is accepting an agreement that captures little of the available gains, meaning a score $R$ (defined above) below a fixed threshold. \emph{Ignoring an issue} is never raising or varying an issue that one's own point table values; each such issue is a chance once per rehearsal. A \emph{dominated offer} is proposing an agreement when another agreement already on the table gives both sides at least as many points. Acting on key facts of the case and building rapport are tracked the same way. The state is hidden, and it changes as the user learns. A user is therefore the tuple
+We track the $J=6$ skills above, using comparable opportunities within a negotiation
+profile and difficulty level. The state is hidden, and it changes as the user learns.
+A user is therefore the tuple
 \begin{equation}
-u = \big( s_0,\; \mathrm{Learn}_u \big), \qquad \tau_t \sim \mathrm{Rehearse}(c, s_t, \sigma_t), \qquad s_{t+1} \sim \mathrm{Learn}_u(s_t, \sigma_t, F_t),
+u=(s_0,\mathrm{Learn}_u),\qquad
+\tau_t\sim\mathrm{Rehearse}(c,s_t,\sigma_t),\qquad
+s_{t+1}\sim\mathrm{Learn}_u(s_t,\sigma_t,F_t),
 \end{equation}
-where $s_0$ is the state before training, $F_t$ is the feedback shown after rehearsal $t$, Rehearse is the negotiation itself (the user's messages drawn so that mistake $j$ happens at rate $s_{t,j}$, the counterpart's from the language model and $L_\mu$), and $\mathrm{Learn}_u$ is how this user changes between rehearsals. $\mathrm{Learn}_u$ is unknown, and for real users it happens in their head.
+where $s_0$ is the state before training, $F_t$ is the feedback after rehearsal $t$,
+and $\mathrm{Learn}_u$ is how this user changes between rehearsals. This learning process
+is unknown, and for real users it happens in their head.
 
 \paragraph{5. The coach's belief $b$.}
-The coach sees only what the detectors count. For mistake $j$ in rehearsal $t$, it observes $n_{t,j}$ chances and $m_{t,j}$ mistakes, which follow
+For skill $j$ in rehearsal $t$, the coach observes $n_{t,j}$ opportunities and their total
+effectiveness $v_{t,j}=\sum_w q_{w,j}$. Its belief about $s_{t,j}$ is a Beta distribution.
+A Beta distribution describes an unknown value in $[0,1]$ through two numbers that act
+like counts of successes and failures: a score $q$ contributes $q$ to successes and
+$1-q$ to failures. Older evidence is shrunk by a factor $\lambda\in(0,1]$ before the new
+evidence is added, preserving the prior $(\alpha_{0,j},\beta_{0,j})$:
 \begin{equation}
-m_{t,j} \sim \mathrm{Binomial}(n_{t,j}, s_{t,j}).
+\begin{aligned}
+b_t&=\big(\operatorname{Beta}(\alpha_{t,j},\beta_{t,j})\big)_{j=1}^{J},\\
+\alpha_{t+1,j}&=\alpha_{0,j}+\lambda(\alpha_{t,j}-\alpha_{0,j})+v_{t,j},\\
+\beta_{t+1,j}&=\beta_{0,j}+\lambda(\beta_{t,j}-\beta_{0,j})+n_{t,j}-v_{t,j}.
+\end{aligned}
+\label{eq:skill-update}
 \end{equation}
-Its belief $b_t$ is a Beta distribution for each $s_{t,j}$. A Beta distribution describes an unknown probability through two numbers that act like counts of past mistakes and past successes, so updating it after a rehearsal means adding the new counts. Because the user is expected to improve, older counts are shrunk by a factor $\lambda \in (0, 1]$ before the new ones are added:
-\begin{equation}
-b_t = \big( \mathrm{Beta}(\alpha_{t,j}, \beta_{t,j}) \big)_{j=1}^{J}, \qquad
-\alpha_{t+1,j} = \lambda\, \alpha_{t,j} + m_{t,j}, \qquad
-\beta_{t+1,j} = \lambda\, \beta_{t,j} + (n_{t,j} - m_{t,j}).
-\label{eq:update}
-\end{equation}
+The estimated effectiveness is $\alpha_{t,j}/(\alpha_{t,j}+\beta_{t,j})$.
+Missing or inapplicable opportunities add no evidence. With fractional scores, this is
+an evidence-weighting approximation rather than an exact binary-observation model;
+annotation reliability and uncertainty calibration remain to be evaluated.
 
 \paragraph{6. The coach $\pi$.}
-The coach turns its belief into the next setting, and turns each transcript into feedback. Together with the belief update above, this makes the coach the tuple
+The coach turns its belief into the next setting, and turns each transcript into feedback.
+Together with the belief update above, this makes the coach the tuple
 \begin{equation}
-\mathcal{C} = \big( b_0,\; \mathrm{Update},\; \pi,\; \mathrm{Feedback} \big), \qquad
-\begin{aligned} \sigma_t &= \pi(b_t), & F_t &= \mathrm{Feedback}(\tau_t), \\ b_{t+1} &= \mathrm{Update}(b_t, n_t, m_t), \end{aligned}
+\mathcal{C}=(b_0,\mathrm{Update},\pi,\mathrm{Feedback}),\qquad
+\begin{aligned}
+\sigma_t&=\pi(b_t,c), & F_t&=\mathrm{Feedback}(\tau_t,\mathcal{R}_c),\\
+b_{t+1}&=\mathrm{Update}(b_t,n_t,v_t).
+\end{aligned}
 \end{equation}
-where $b_0$ is the starting belief, Update is equation~\eqref{eq:update}, $\pi$ is the \emph{policy} that picks the setting, and Feedback writes the report.
-Feedback works by replaying the negotiation from key turns with the user's move swapped for an alternative, and reporting how much each alternative would have changed $R$.
+Feedback identifies opportunities the user handled poorly, explains why they mattered,
+and suggests grounded alternatives. For example, it can highlight a missed opportunity
+to invoke RC-A's commitment to neutrality. Counterfactual rollouts can illustrate possible
+responses, but do not establish how a real counterpart would have responded.
 
-\paragraph{Implemented policy and comparison baselines.}
+\paragraph{Policy and comparison baselines.}
 We have several strategies for choosing the focus of the next negotiation rehearsal.
 Greedy selects the user's main estimated weakness; adaptive does the same but gives
-extra priority to areas we know less about.
-Random chooses uniformly, and no focus sets no target, but all four policies use the
-same difficulty schedule and receive feedback.
+extra priority to areas we know less about. Both consider which skills the case can
+exercise. Random chooses uniformly among applicable skills, and no focus sets no target,
+but all four policies use the same difficulty schedule and receive feedback.
 
-\paragraph{Learning objectives.}
-A user's \emph{competence} is their expected score on a fixed set $\mathcal{D}$ of held-out cases and tiers, played with no focus and no feedback. Formally,
+\paragraph{Evaluation and learning objectives.}
+Our primary evaluation measures weakness identification, counterpart steering, and
+feedback quality separately. Against human-annotated examples, we measure opportunity
+precision/recall and error in the predicted 0--1 skill scores. Fixed dialogue prefixes
+and learner responses test whether steering creates the intended practice opportunities
+while preserving the case. Blinded human ratings assess feedback correctness and usefulness.
+A small study with real people checks whether these measurements align with their
+experience; LLM trainees are not the primary evaluation population.
+
+A user's \emph{competence} in skill $j$ is their expected score on a fixed set $\mathcal{D}$
+of held-out cases and tiers, played with no focus and no feedback. Formally,
 \begin{equation}
-G(s) = \E_{(c,\,\mu) \sim \mathcal{D}} \big[ R(\tau) \big], \qquad \tau \sim \mathrm{Rehearse}\big(c, s, (\mu, \varnothing)\big).
+G_j(s)=\E_{(c,\mu)\sim\mathcal{D}}[Q_j(\tau)],\qquad
+\tau\sim\mathrm{Rehearse}(c,s,(\mu,\varnothing)).
 \end{equation}
-The coach's objective is the expected gain in competence over a training run of $K = 5$ rehearsals, averaged over users $u$. A coach that takes a typical user from $G = 0.25$ to $G = 0.40$ in five rehearsals contributes a gain of 0.15 for that user:
-\begin{equation}
-\max_\pi \; V(\pi) = \E_u \big[ G(s_K) - G(s_0) \big], \qquad s_K \text{ produced by running } \mathcal{C} \text{ with policy } \pi \text{ on user } u.
-\end{equation}
+The longer-term objective is the gain in competence over $K$ rehearsals, averaged over
+real users: $\E_u[G_j(s_K)-G_j(s_0)]$. We report gains by skill, with assessment coverage,
+constraints, and outcomes separately. Easier practice or missing opportunities must not
+be mistaken for improvement.
+
+% \paragraph{Required changes to the earlier formalism.}
+% The case must support open-ended and conditional commitments, sourced constraints, and
+% an instructor-reviewed rubric without mandatory point tables. Assessment must identify
+% contextual opportunities and graded, potentially overlapping skills rather than rely
+% only on offer arithmetic. The retained Beta model accepts fractional success/failure
+% evidence, with difficulty and annotation uncertainty examined.
+% Steering must control conversational opportunities as well as concessions, and evaluation
+% must separate diagnosis, steering, feedback, constraints, and outcomes. These are proposed
+% model and implementation changes, not features validated by the existing experiments.
 
 \section{Implementation and preliminary evaluation}
+
+This section records the earlier implementation and exploratory LLM-persona experiment;
+it does not evaluate the revised six-category rubric. Here $G$ retains its historical
+meaning: mean normalized user surplus over the no-focus assessment negotiations, using
+inferred point tables. It is distinct from the per-skill human competence $G_j$ above.
 
 \paragraph{Completed system.}
 We have built a working app where users rehearse a negotiation and receive feedback
@@ -111,7 +235,8 @@ session, the coach revisits key decisions and simulates alternative moves to est
 how they might have changed the outcome. It also tracks which mistakes recur and how
 many chances the user had to avoid them, building a profile that helps choose what to
 practise next.\footnote{The evaluated implementation preserves the Beta prior while
-discounting past evidence; equation~\eqref{eq:update} is retained as a sensitivity variant.
+discounting past evidence; discounting the prior as well was retained as a sensitivity
+variant of that earlier binary model.
 Sessions allow 20 user moves plus counterpart replies.}
 
 \paragraph{Evaluation design.}

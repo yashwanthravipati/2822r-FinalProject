@@ -12,10 +12,13 @@ everything said about the other side is a hypothesis to test. All numbers come f
 
 from __future__ import annotations
 
+import json
+
 from pydantic import BaseModel, Field
 
 from negotrain.cases.offers import best_offer_for, best_points
 from negotrain.llm import LLM
+from negotrain.rubrics import case_rubric, role_context
 from negotrain.schemas import Case
 
 TARGET_SHARE = 0.75  # ambitious-but-defensible target: 75% of the way from walk-away to best
@@ -60,7 +63,8 @@ class Prep(BaseModel):
 
     case_id: str
     role_id: str
-    numbers: PrepNumbers
+    numbers: PrepNumbers | None
+    framework_version: str = "legacy"
     brief: PrepBrief
 
 
@@ -188,6 +192,49 @@ def template_brief(case: Case, numbers: PrepNumbers) -> PrepBrief:
 
 
 def build_prep(case: Case, role_id: str, llm: LLM | None = None) -> Prep:
+    if case.uses_rubric:
+        role = case.role(role_id)
+        skills = case_rubric(case)
+        brief = PrepBrief(
+            overview=case.public_brief,
+            key_facts=[role.confidential_brief],
+            your_interests=[
+                "Identify your central aims, distinctive contribution, and constraints."
+            ],
+            their_likely_interests=["Treat motivations and authority as hypotheses to check."],
+            tradeoffs=[s.practice for s in skills if s.id in ("skill:leverage", "skill:options")],
+            questions_to_ask=[
+                "What matters most about that requirement?",
+                "Who must approve this?",
+                "What can each of us contribute to a workable arrangement?",
+            ],
+            opening_plan=(
+                "Acknowledge their aims and establish a shared purpose before exploring positions."
+            ),
+            pitfalls=[
+                "Treating an assurance as authorization or delivery.",
+                "Making unsupported claims about leverage or constraints.",
+            ],
+            checklist=[s.practice for s in skills],
+        )
+        if llm is not None:
+            try:
+                brief = llm.parse(
+                    SYSTEM + " Use the supplied process rubric. Do not infer point "
+                    "tables or fixed errors such as conceding first. Include role-grounded values, "
+                    "leverage, approval dependencies and follow-through.",
+                    [{"role": "user", "content": json.dumps(role_context(case, role_id))}],
+                    PrepBrief,
+                ).model_copy(update={"source": "llm"})
+            except Exception:
+                pass
+        return Prep(
+            case_id=case.id,
+            role_id=role_id,
+            numbers=prep_numbers(case, role_id) if case.is_scored else None,
+            brief=brief,
+            framework_version=case.framework_version,
+        )
     numbers = prep_numbers(case, role_id)
     brief = None
     if llm is not None:

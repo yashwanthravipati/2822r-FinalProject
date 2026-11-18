@@ -86,6 +86,8 @@ class Observations(BaseModel):
 
 
 def observe(session: Session, case: Case) -> Observations:
+    if case.uses_rubric or not case.is_scored:
+        raise ValueError("Use profiling.skills for contextual rubric assessment")
     facts = case_facts(case, session.user_role_id)
     counts = {key: Count() for key in [*ERRORS, *(f.id for f in facts), "rapport"]}
     me, them = session.user_role_id, session.counterpart_role_id

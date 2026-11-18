@@ -52,8 +52,8 @@ The app runs locally for one person (no sign-in). Typical flow for a class simul
    Hidden/macOS metadata is ignored, and unreadable or unsupported files are reported.
    ZIPs are limited to 200 entries and 50 MB of uncompressed documents; password-protected
    files and ZIPs inside ZIPs aren't supported. Claude works out which file is which and
-   builds a scorable scenario, estimating the other side's instructions if you don't have
-   them (saved to `data/cases/private/`, gitignored). Pick your role and start training.
+   builds a scenario with a negotiation teaching profile, estimating the other side's
+   instructions if you don't have them (saved to `data/cases/private/`, gitignored). Pick your role and start training.
    Offline, or to reuse a case, pick a saved case instead.
 2. **Prepare**: your prep brief from your side only (overview, walk-away and target,
    what's at stake per issue, hypotheses about the other side, questions, opening plan,
@@ -63,11 +63,12 @@ The app runs locally for one person (no sign-in). Typical flow for a class simul
    away. For each issue, choose a suggestion or type your own solution and press Enter;
    leave undecided issues blank. The AI counterpart can discuss, counterpropose, or accept
    custom terms. They are saved exactly as proposed. Ask Your assistant for help when needed.
-4. **Feedback**: after each session: outcome vs walk-away and vs the best joint deal, a
-   coaching report, and "moments that mattered" from counterfactual rollouts. Both sheets
-   are revealed.
-5. **My profile**: Beta beliefs over six error rates, case-fact awareness, and rapport,
-   with credible intervals and a cost-weighted recommendation for the next rehearsal.
+4. **Feedback**: assess contextual skill opportunities, inspect transcript evidence, and
+   review coaching, constraints and commitments separately. Human annotations can also be
+   imported. Institutional cases have no inferred point score or point-based rollouts.
+5. **My profile**: Beta beliefs over continuous skill effectiveness (0 = missed, 1 = effective),
+   with opportunity counts and a recommendation for the next rehearsal. Case, role and
+   difficulty are kept separate; missing assessments do not count as failures.
 6. **Real negotiation**: after the real simulation, log the outcome (including custom
    agreed terms) and how the other side behaved, compared with your rehearsals (sim-to-real gap).
 
@@ -94,16 +95,41 @@ use **Sources and context → Add source documents** in the panel (ZIPs work too
 Offline, saved chat and sources remain readable; choose Claude Code or an API key in
 Settings for new AI replies.
 
-Counterfactual feedback uses four rollouts per candidate plus independent fresh batches
+The current rubric follows Section 1 of [`docs/report.tex`](docs/report.tex) and
+[decision 0009](plan/decisions/0009-contextual-rubric-framework.md). The six skills cover
+rapport/shared values, interests/authority, facts/criteria, leverage, options, and commitments.
+New imports and saved cases selected with **Start training** use this framework. Choose the
+negotiation type during setup. Institutional cases require no utility tables; other cases
+use numeric scoring only when the source supplies complete tables and reservation values.
+Default rubrics still need instructor review before a study.
+
+On Feedback, **Assess skills** uses one model call per learner response, up to 20. Scores
+are continuous in [0,1]; a score q adds q success evidence and 1-q failure evidence to the
+existing Beta filter. Offline mode leaves skills unassessed and offers only a placeholder
+counterpart for institutional cases. It does not fabricate assessments or approvals.
+
+To preserve an old case for the earlier experiments while creating a separate practice copy:
+
+```bash
+python scripts/migrate_rubric.py data/cases/private/sim3_inferred.json \
+  --type institutional --id sim3_institutional
+```
+
+The local Sim3 and Sim4 institutional copies include role-private examples and remain in
+`data/cases/private/`. Original inferred cases and their historical results are preserved.
+For evaluation, `scripts/evaluate_rubric.py` computes diagnosis, steering and feedback
+metrics from human reference annotations without API calls. See the architecture document
+for input models. A human benchmark and empirical calibration are still needed.
+
+The earlier point-based counterfactual path remains available for legacy cases. Counterfactual feedback uses four rollouts per candidate plus independent fresh batches
 for scoring. It reports surplus-share differences and uncertainty, labels hindsight
 alternatives, and runs after the session. The free rule-based simulator is the default;
 full LLM rollouts can be expensive, and the page estimates calls before running them.
 Data lands in `data/sessions/` (gitignored). A visible deadline ends rehearsals after
 20 user moves and the corresponding counterpart responses.
 
-The current reimplementation follows [`docs/new-spec.md`](docs/new-spec.md) and
-[`docs/report.tex`](docs/report.tex). See [decision 0008](plan/decisions/0008-opportunity-beliefs-and-evaluation-contract.md)
-for their differing belief/objective definitions. The persistent API ledger enforces a
+The historical point-based implementation follows [`docs/new-spec.md`](docs/new-spec.md)
+and [decision 0008](plan/decisions/0008-opportunity-beliefs-and-evaluation-contract.md). The persistent API ledger enforces a
 $200 user-authorized cumulative cap across calls and restarts (new ledgers default to $150).
 See [the sim3 evaluation](docs/results/sim3_evaluation.md) for results and limitations:
 7,960 primary offline and 280 live episodes completed. Tier control succeeds; adaptive

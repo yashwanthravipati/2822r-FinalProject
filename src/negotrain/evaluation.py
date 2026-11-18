@@ -86,6 +86,11 @@ class Experiment:
     def __init__(
         self, case: Case, role: str, root: Path, config: dict, counterpart_llm=None, user_llm=None
     ):
+        if case.uses_rubric or not case.is_scored:
+            raise ValueError(
+                "This is the legacy simulated-trainee experiment. "
+                "Use evaluate_rubric.py for contextual rubric evaluation."
+            )
         self.case, self.role, self.root = case, role, root
         self.counterpart_llm, self.user_llm = counterpart_llm, user_llm
         self.raw = root / "raw"

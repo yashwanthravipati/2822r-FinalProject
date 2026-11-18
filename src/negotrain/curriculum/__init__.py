@@ -15,6 +15,8 @@ from pydantic import BaseModel, Field
 from negotrain.counterpart.profiles import FOCUS_DIALS, sample_profile
 from negotrain.profiling import NegotiatorProfile, extract_features
 from negotrain.profiling.belief import choose_focus
+from negotrain.profiling.skills import choose_skill
+from negotrain.rubrics import default_rubric
 from negotrain.schemas import Case, CounterpartProfile, Session
 
 START_TIER = 2
@@ -33,6 +35,9 @@ FOCUS_PREP = {
 def focus_callout(focus: str | None) -> str:
     if focus is None:
         return "Use your preparation to negotiate without a targeted practice focus."
+    skill = next((s for s in default_rubric("institutional") if s.id == focus), None)
+    if skill:
+        return skill.practice
     return FOCUS_PREP.get(
         focus, "Identify the relevant case fact and plan how to use or ask about it."
     )
@@ -64,6 +69,30 @@ def next_scenario(
     history: list[tuple[Session, Case]],
     case_ids: list[str] | None = None,
 ) -> ScenarioSpec:
+    if profile.skills is not None and profile.active_case is not None:
+        case = profile.active_case
+        relevant = [
+            s
+            for s, c in history
+            if s.case_id == case.id
+            and s.kind == "rehearsal"
+            and s.status != "active"
+            and s.counterpart_profile
+        ]
+        tier = relevant[-1].counterpart_profile.tier if relevant else START_TIER
+        focus = choose_skill(profile.skills, case, tier, kappa=profile.planning_kappa)
+        return ScenarioSpec(
+            tier=tier,
+            focus=focus,
+            case_id=case.id,
+            rationale=(
+                f"Practise {profile.labels[focus].lower()}. " if focus else "No targeted focus. "
+            )
+            + (
+                "Keep difficulty fixed to compare similar opportunities; choose "
+                "a different tier when ready."
+            ),
+        )
     rehearsals = [
         (s, c)
         for s, c in history

@@ -122,7 +122,7 @@ def alternatives(session: Session, case: Case, turn_index: int, k: int = 3) -> l
     advice. "Trade across issues" uses both sheets: it is hindsight, shown only after the
     session when the other sheet is revealed anyway.
     """
-    if session.has_custom_terms:
+    if session.has_custom_terms or not case.is_scored or case.uses_rubric:
         return []
     me = session.user_role_id
     turn = session.turns[turn_index]
@@ -332,7 +332,7 @@ def analyze_session(
 ) -> CounterfactualReport:
     if session.status not in ("agreed", "impasse"):
         raise ValueError("counterfactual coaching is available only after the session")
-    if session.has_custom_terms:
+    if session.has_custom_terms or not case.is_scored or case.uses_rubric:
         return CounterfactualReport(
             session_id=session.id,
             opponent=opponent,
@@ -340,8 +340,10 @@ def analyze_session(
             reward="surplus_share",
             estimates=[],
             seconds=0.0,
-            skipped_reason="Point-based simulations are unavailable for custom terms. "
-            "Your full proposals are included in the qualitative coaching report.",
+            skipped_reason=(
+                "Point-based simulations are not used for rubric assessment or unscored terms. "
+            )
+            + "Your full proposals are included in the qualitative coaching report.",
         )
     start = time.monotonic()
     with ThreadPoolExecutor(max_workers=max_workers) as pool:

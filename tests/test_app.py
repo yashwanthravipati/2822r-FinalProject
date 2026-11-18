@@ -34,6 +34,12 @@ def button(at: AppTest, label: str):
 
 @pytest.fixture(autouse=True)
 def offline(tmp_path, monkeypatch):
+    import shutil
+
+    cases = tmp_path / "cases"
+    cases.mkdir(exist_ok=True)
+    shutil.copy(CASE, cases)
+    monkeypatch.setenv("NEGOTRAIN_CASES_DIR", str(cases))
     monkeypatch.setenv("NEGOTRAIN_OFFLINE", "1")
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     monkeypatch.delenv("ANTHROPIC_AUTH_TOKEN", raising=False)
@@ -146,7 +152,7 @@ def test_upload_builds_a_scenario(tmp_path, monkeypatch, bundled):
     from test_parser import parsed_from
 
     cases = tmp_path / "cases"
-    cases.mkdir()
+    cases.mkdir(exist_ok=True)
     shutil.copy(CASE, cases)
     monkeypatch.setenv("NEGOTRAIN_CASES_DIR", str(cases))
     uploaded = parsed_from(load_case(CASE)) | {"id": "uploaded_case", "title": "Uploaded"}
@@ -298,3 +304,103 @@ def test_default_backend_prefers_claude_code(monkeypatch):
     assert default_backend() == "api"
     monkeypatch.setenv("NEGOTRAIN_OFFLINE", "1")
     assert default_backend() == "offline"
+
+
+def test_institutional_workflow_uses_scores_and_records_conditional_commitments(scenario):
+    from negotrain.cases import save_private_case
+    from negotrain.rubrics import enable_rubric
+
+    case = enable_rubric(load_case(CASE), "institutional")
+    save_private_case(case)
+    prep = page("page_prepare")
+    assert not prep.exception
+    assert not any(m.label == "Walk-away value" for m in prep.metric)
+    at = page("page_rehearse")
+    button(at, "Start rehearsal").click().run()
+    assert not at.exception
+    at.text_area[0].input("What approvals do we need?")
+    button(at, "Send").click().run()
+    assert not at.exception
+    assert "Offline practice" in visible_text(at)
+    next(t for t in at.text_area if t.label == "Commitment or unresolved next step").input(
+        "Seek board approval"
+    )
+    next(t for t in at.text_input if t.label == "Responsible party").input("Agency")
+    next(t for t in at.selectbox if t.label == "Commitment status").select("pending_approval")
+    button(at, "Save next step").click().run()
+    assert not at.exception
+    button(at, "Finish with recorded next steps").click().run()
+    session = at.session_state["session"]
+    assert session.commitments[0].status == "pending_approval"
+    assert SessionStore().load(session.id).commitments[0].description == "Seek board approval"
+    fb = page("page_feedback")
+    assert not fb.exception
+    assert button(fb, "Assess skills").disabled
+    assert "needs a rubric assessment" in visible_text(fb)
+    button(fb, "Generate feedback").click().run()
+    assert not fb.exception
+    assert not page("page_profile").exception
+    real = page("page_real")
+    button(real, "Save real outcome").click().run()
+    assert not real.exception
+
+
+def test_rubric_assessment_button_updates_saved_profile_and_next_focus(scenario, monkeypatch):
+    from negotrain.app import views
+    from negotrain.cases import save_private_case
+    from negotrain.counterpart.profiles import TIERS
+    from negotrain.llm import ScriptedLLM
+    from negotrain.rubrics import case_rubric, enable_rubric
+    from negotrain.schemas import Session, Turn
+
+    case = enable_rubric(load_case(CASE), "institutional")
+    save_private_case(case)
+    session = Session(
+        participant_id=views.participant().id,
+        case_id=case.id,
+        user_role_id="candidate",
+        counterpart_role_id="recruiter",
+        counterpart_profile=TIERS[2],
+        status="impasse",
+        turns=[Turn(index=0, speaker="user", text="What approvals do we need?")],
+    )
+    SessionStore().save(session)
+    scripted = ScriptedLLM(
+        [
+            {
+                "observations": [
+                    dict(
+                        skill_id=skill.id,
+                        start_turn=0,
+                        response_turn=0,
+                        opportunity="present",
+                        score=0.25 if skill.id == "skill:leverage" else 0.9,
+                        evidence=[dict(turn_index=0, quote=session.turns[0].text)],
+                        rationale="Synthetic integration-test annotation.",
+                        suggestion="Connect your contribution to a request.",
+                    )
+                    for skill in case_rubric(case)
+                ]
+            }
+        ]
+    )
+    monkeypatch.setattr(views, "online", lambda: True)
+    monkeypatch.setattr(views, "llm", lambda *args, **kwargs: scripted)
+    fb = page("page_feedback")
+    button(fb, "Assess skills").click().run()
+    assert not fb.exception
+    saved = SessionStore().load(session.id)
+    assert len(scripted.calls) == 1
+    assert len(saved.assessment.observations) == 6
+    button(fb, "Generate feedback").click().run()
+    assert not fb.exception
+    prof = page("page_profile")
+    assert not prof.exception
+    assert "1 assessed sessions" in visible_text(prof)
+    rows = prof.dataframe[0].value
+    leverage = rows[rows["Skill"].str.contains("leverage", case=False)].iloc[0]
+    assert leverage["Estimated effectiveness"] == pytest.approx(1.25 / 3)
+    button(prof, "Start this rehearsal →").click().run()
+    assert not prof.exception
+    assert prof.session_state["preset"].focus == "skill:leverage"
+    assert prof.session_state["preset"].tier == 2

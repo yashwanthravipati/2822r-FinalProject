@@ -39,16 +39,28 @@ class CoachingReport(BaseModel):
 class OutcomeSummary(BaseModel):
     status: str
     points: float | None
-    reservation_value: float
-    best_possible: float
+    reservation_value: float | None
+    best_possible: float | None
     surplus: float | None
     efficiency: float | None
     their_points: float | None
-    max_joint: float
+    max_joint: float | None
     max_joint_deal: str
 
 
 def outcome_summary(session: Session, case: Case) -> OutcomeSummary:
+    if not case.is_scored:
+        return OutcomeSummary(
+            status=session.status,
+            points=None,
+            reservation_value=None,
+            best_possible=None,
+            surplus=None,
+            efficiency=None,
+            their_points=None,
+            max_joint=None,
+            max_joint_deal="",
+        )
     me = case.role(session.user_role_id)
     best_joint = max_joint_offer(case)
     pts, eff, theirs = me.reservation_value, None, None
@@ -324,6 +336,10 @@ def build_report(
 ) -> CoachingReport:
     if session.status not in ("agreed", "impasse"):
         raise ValueError("coaching is available only after the session")
+    if case.uses_rubric:
+        from negotrain.feedback.rubric import rubric_report
+
+        return rubric_report(session, case, llm)
     outcome = outcome_summary(session, case)
     features = extract_features(session, case)
     flag_keys = flags(session, case, features)

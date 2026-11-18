@@ -20,3 +20,5 @@ Decision 0002: feedback after the session only, no live move recommendations.
 
 ## Log
 - 2026-10-25: MVP branch: coaching.py, LLM report from code numbers + template fallback; usefulness rating stored. Live latency not measured.
+
+- 2026-11-18: Added post-session evidence-grounded rubric reports and UI annotation import/export, with skills, constraints and commitments shown separately. Missing assessments remain missing, and numeric counterfactual rollouts are skipped for rubric cases. Human feedback ratings remain pending.

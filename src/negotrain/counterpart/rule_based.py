@@ -116,6 +116,16 @@ class RuleBasedCounterpart:
         )
 
     def respond(self, session: Session) -> Turn:
+        if not self.case.is_scored:
+            return Turn(
+                index=len(session.turns),
+                speaker="counterpart",
+                text=(
+                    "Offline practice: please clarify the interests, "
+                    "constraints, and next steps you want to discuss. "
+                )
+                + "An AI connection is needed for a role-specific counterpart response.",
+            )
         index = len(session.turns)
         minimum = self.minimum(session)
         theirs = session.latest_offer_from("user")

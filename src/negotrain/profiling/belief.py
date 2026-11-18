@@ -33,8 +33,8 @@ class BetaBelief(BaseModel):
         lo, hi = beta.ppf([(1 - mass) / 2, (1 + mass) / 2], self.alpha, self.beta)
         return float(lo), float(hi)
 
-    def update(self, x: int, o: int, forgetting: float, *, discount_prior: bool = False) -> None:
-        if not 0 < forgetting <= 1 or not 0 <= x <= o:
+    def update(self, x: float, o: int, forgetting: float, *, discount_prior: bool = False) -> None:
+        if not math.isfinite(x) or not 0 < forgetting <= 1 or not 0 <= x <= o:
             raise ValueError("invalid forgetting factor or counts")
         # Default: new-spec.md's fixed prior + discounted evidence. The alternative
         # implements report.tex verbatim and is included in sensitivity experiments.

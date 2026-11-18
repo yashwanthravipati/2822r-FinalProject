@@ -24,6 +24,9 @@ def show(case: Case) -> None:
     for issue in case.issues:
         print(f"  {issue.id}: " + ", ".join(f"{o.id}={o.label}" for o in issue.options))
     print()
+    if not case.is_scored:
+        print("This case uses qualitative outcomes and rubric-based skill assessment.")
+        return
     for role in case.roles:
         print(f"Role {role.id} ({role.name}): reservation value {role.reservation_value:g}")
     best = max_joint_offer(case)
@@ -62,9 +65,11 @@ def play(case: Case, role_id: str, tier: int, seed: int | None, participant: str
     store = SessionStore()
     you = case.role(role_id)
     print(f"You are {you.name}.\n\n{you.confidential_brief}\n")
-    for issue_id, table in you.points.items():
-        print(f"  {issue_id}: " + ", ".join(f"{k}={v:g}" for k, v in table.items()))
-    print(f"  walk-away value: {you.reservation_value:g}\n\n{HELP}\n")
+    if case.is_scored:
+        for issue_id, table in you.points.items():
+            print(f"  {issue_id}: " + ", ".join(f"{k}={v:g}" for k, v in table.items()))
+        print(f"  walk-away value: {you.reservation_value:g}")
+    print(HELP)
 
     while session.status == "active":
         line = input("you> ").strip()

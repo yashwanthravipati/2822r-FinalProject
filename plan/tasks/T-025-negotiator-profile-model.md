@@ -26,3 +26,5 @@ For example, per-feature z-scores against a reference population (simulated user
   discounted Beta beliefs, cost-weighted UCB/baselines, profile UI with credible intervals,
   and visible 20-user-move deadline. Replaces heuristic skill scores. Source-document
   discrepancies and remaining integration are recorded in decision 0008.
+
+- 2026-11-18: Retained Beta beliefs at the user’s request: fractional success q and failure 1-q, prior-preserving discount, separate case/role/difficulty histories, and missing evidence excluded. Fractional updates are an evidence-weighting approximation; calibration and human validity remain unmeasured.

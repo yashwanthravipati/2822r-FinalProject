@@ -34,6 +34,8 @@ def parsed_from(case) -> dict:
             for r in case.roles
         ],
         scoring_notes="Copied from the case.",
+        numeric_scoring=case.is_scored,
+        negotiation_type=case.negotiation_type,
     ).model_dump()
 
 

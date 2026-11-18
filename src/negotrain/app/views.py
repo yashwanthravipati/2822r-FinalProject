@@ -41,11 +41,14 @@ from negotrain.feedback import (
     estimate_calls,
     outcome_summary,
 )
+from negotrain.feedback.rubric import rubric_summary
 from negotrain.llm import ClaudeCodeLLM, ClaudeLLM, LLMRefusal, check_api_key
 from negotrain.prep import Prep, build_prep, prep_key
 from negotrain.profiling import build_profile, extract_features
 from negotrain.profiling.profile import load_calibration
 from negotrain.profiling.tagging import tag_session
+from negotrain.rubric_models import Commitment
+from negotrain.rubrics import TYPE_LABELS, case_rubric, enable_rubric
 from negotrain.schemas import Case, CounterpartProfile, Offer, Participant, Session, Turn
 from negotrain.sessions import SessionStore
 
@@ -187,7 +190,11 @@ def current_profile(pid: str, hist: list[tuple[Session, Case]]):
         if debrief and debrief.counterfactuals:
             reports[session.id] = debrief.counterfactuals
     context = active_scenario()
-    calibration = load_calibration(*context, config.REPO_ROOT / "results" / "calibration")
+    calibration = (
+        load_calibration(*context, config.REPO_ROOT / "results" / "calibration")
+        if context and not context[0].uses_rubric
+        else None
+    )
     return build_profile(pid, hist, reports=reports, context=context, calibration=calibration)
 
 
@@ -207,10 +214,14 @@ def render_sheet(case: Case, role_id: str, *, title: str) -> None:
     if role.inferred:
         st.caption("This sheet was estimated by the parser, not taken from the case materials.")
     st.write(md(role.confidential_brief))
-    style.points_block(
-        [(i.name, [(o.label, role.points[i.id][o.id]) for o in i.options]) for i in case.issues],
-        role.reservation_value,
-    )
+    if case.is_scored:
+        style.points_block(
+            [
+                (i.name, [(o.label, role.points[i.id][o.id]) for o in i.options])
+                for i in case.issues
+            ],
+            role.reservation_value,
+        )
     for c in role.constraints:
         st.caption(f"Constraint: {md(c.description)}")
 
@@ -218,9 +229,7 @@ def render_sheet(case: Case, role_id: str, *, title: str) -> None:
 def offer_html(case: Case, offer: Offer, role_id: str, title: str = "Formal offer") -> str:
     result = score_offer(case, role_id, offer)
     terms = [(i.name, label) for i in case.issues if (label := offer.label(i))]
-    badge = (
-        "Custom terms · not scored" if result.points is None else f"{result.points:g} pts to you"
-    )
+    badge = "Not point-scored" if result.points is None else f"{result.points:g} pts to you"
     if not offer.is_complete(case):
         badge += " · partial"
     return style.offer_card(title, terms, badge)
@@ -228,11 +237,7 @@ def offer_html(case: Case, offer: Offer, role_id: str, title: str = "Formal offe
 
 def describe_offer(case: Case, offer: Offer, role_id: str) -> str:
     result = score_offer(case, role_id, offer)
-    worth = (
-        "custom terms, not scored"
-        if result.points is None
-        else f"worth **{result.points:g}** to you"
-    )
+    worth = "not point-scored" if result.points is None else f"worth **{result.points:g}** to you"
     if not offer.is_complete(case):
         worth += " on the issues it covers (partial offer)"
     return f"{offer.describe(case)} — {worth}"
@@ -256,6 +261,13 @@ def render_turn(case: Case, session: Session, turn: Turn) -> None:
 
 
 def outcome_metrics(session: Session, case: Case) -> None:
+    if case.uses_rubric:
+        summary = rubric_summary(session, case)
+        st.caption("Skill effectiveness, constraints, and commitments are assessed separately.")
+        st.dataframe(summary["skills"], hide_index=True, width="stretch")
+        if summary["assessment_source"] is None:
+            st.caption("No current assessment. Missing scores are not failures.")
+        return
     o = outcome_summary(session, case)
     style.stats(
         [
@@ -464,7 +476,19 @@ def page_setup() -> None:
                 "estimated version of them. Each rehearsal varies its style to cover the range "
                 "of opponents you might meet."
             )
+        kind = st.selectbox(
+            "Negotiation type",
+            list(TYPE_LABELS),
+            index=list(TYPE_LABELS).index(case.negotiation_type),
+            format_func=lambda key: TYPE_LABELS[key],
+            key=f"type_{case.id}",
+        )
+        st.caption(
+            "Practice uses a case-specific skill rubric. Institutional cases "
+            "do not use point scores."
+        )
         if st.button("Start training →", type="primary", width="stretch"):
+            save_private_case(enable_rubric(case, kind))
             set_active_scenario(case.id, role_id)
             st.rerun()
 
@@ -489,11 +513,22 @@ def page_prepare() -> None:
     store = SessionStore()
     key = prep_key(p.id, case.id, role_id)
     prep = store.load_artifact(key, "prep", Prep)
-    if prep is None:
+    if prep is None or (case.uses_rubric and prep.framework_version != case.framework_version):
         with st.spinner("Writing your preparation brief…"):
             prep = build_prep(case, role_id, llm() if online() else None)
             store.save_artifact(key, "prep", prep)
     _render_prep(case, prep)
+    if case.uses_rubric:
+        with st.expander("Skills for this scenario"):
+            st.caption(
+                "Rubric reviewed by an instructor."
+                if case.rubric_reviewed
+                else "Default rubric: instructor review is still pending."
+            )
+            for skill in case_rubric(case):
+                st.markdown(f"**{md(skill.label)}**")
+                st.write(md(skill.description))
+                st.caption("Practice: " + md(skill.practice))
     if st.button("↻ Regenerate brief"):
         with st.spinner("Writing your preparation brief…"):
             store.save_artifact(key, "prep", build_prep(case, role_id, llm() if online() else None))
@@ -530,30 +565,31 @@ def _render_prep(case: Case, prep: Prep) -> None:
     n, b = prep.numbers, prep.brief
     st.subheader("Your preparation brief")
     style.banner(b.overview, "info")
-    style.stats(
-        [
-            ("Walk-away value", f"{n.walk_away:g}", "never accept less", "red"),
-            ("Ambitious target", f"{n.target:g}", "aim here", "green"),
-            ("Best possible", f"{n.best_possible:g}", "everything goes your way", "gray"),
-        ]
-    )
-    st.caption(f"Your best possible deal: {md(n.best_deal)}")
-    st.markdown("**What's at stake for you, by issue**")
-    st.dataframe(
-        [
-            {
-                "Priority": pr.rank,
-                "Issue": pr.name,
-                "You want": pr.best_option,
-                "Worst for you": pr.worst_option,
-                "Points at stake": pr.spread,
-                "Share": f"{pr.share:.0%}",
-            }
-            for pr in n.priorities
-        ],
-        hide_index=True,
-        width="stretch",
-    )
+    if n is not None:
+        style.stats(
+            [
+                ("Walk-away value", f"{n.walk_away:g}", "never accept less", "red"),
+                ("Ambitious target", f"{n.target:g}", "aim here", "green"),
+                ("Best possible", f"{n.best_possible:g}", "everything goes your way", "gray"),
+            ]
+        )
+        st.caption(f"Your best possible deal: {md(n.best_deal)}")
+        st.markdown("**What's at stake for you, by issue**")
+        st.dataframe(
+            [
+                {
+                    "Priority": pr.rank,
+                    "Issue": pr.name,
+                    "You want": pr.best_option,
+                    "Worst for you": pr.worst_option,
+                    "Points at stake": pr.spread,
+                    "Share": f"{pr.share:.0%}",
+                }
+                for pr in n.priorities
+            ],
+            hide_index=True,
+            width="stretch",
+        )
 
     def bullets(title: str, items: list[str]) -> None:
         st.markdown(f"**{title}**")
@@ -609,7 +645,16 @@ def _training_plan(p: Participant, case: Case, role_id: str) -> None:
             dial_overrides=spec.dial_overrides,
             rationale=f"{title}: {why}",
         )
-        for t, title, why in TRAINING_PLAN
+        for t, title, why in (
+            [
+                (2, "Warm-up", "Explore aims and values."),
+                (2, "Consolidate", "Use feedback at the same difficulty."),
+                (4, "Stretch", "Clarify interests and authority under pressure."),
+                (4, "Follow through", "Develop options and credible next steps."),
+            ]
+            if case.uses_rubric
+            else TRAINING_PLAN
+        )
     ]
     steps.append(spec.model_copy(update={"rationale": f"Recommended for you: {spec.rationale}"}))
     for n, step in enumerate(steps):
@@ -738,7 +783,7 @@ def _move_controls(session: Session, case: Case) -> None:
                 "The offline counterpart only evaluates listed options. "
                 "Use the AI counterpart to negotiate custom solutions."
             )
-        cols = st.columns(min(2, len(case.issues)))
+        cols = st.columns(max(1, min(2, len(case.issues))))
         picks = {}
         for n, issue in enumerate(case.issues):
             picks[issue.id] = cols[n % len(cols)].selectbox(
@@ -791,6 +836,38 @@ def _move_controls(session: Session, case: Case) -> None:
                     walk_away=True,
                 ),
             )
+
+    if case.uses_rubric:
+        with st.expander("Record next steps or conditional commitments"):
+            with st.form("commitment"):
+                description = st.text_area("Commitment or unresolved next step")
+                owner = st.text_input("Responsible party")
+                deadline = st.text_input("Timing")
+                approvals = st.text_input("Required approvals (comma separated)")
+                contingency = st.text_input("If this cannot proceed")
+                state = st.selectbox(
+                    "Commitment status", ["proposed", "agreed", "pending_approval", "unverified"]
+                )
+                save = st.form_submit_button("Save next step")
+            if save and description.strip():
+                session.commitments.append(
+                    Commitment(
+                        description=description,
+                        responsible_party=owner,
+                        deadline=deadline,
+                        required_approvals=[x.strip() for x in approvals.split(",") if x.strip()],
+                        contingency=contingency,
+                        status=state,
+                        source="participant record; delivery unverified",
+                    )
+                )
+                SessionStore().save(session)
+                st.success("Next step recorded.")
+            if st.button("Finish with recorded next steps"):
+                session.status = "impasse"
+                SessionStore().save(session)
+                st.session_state["feedback_session"] = session.id
+                go("feedback")
 
 
 def page_rehearse() -> None:
@@ -881,9 +958,18 @@ def _finished(session: Session, case: Case) -> None:
         style.html(offer_html(case, session.agreement, session.user_role_id, "Final agreement"))
         st.write("")
     else:
-        style.banner(
-            "No deal this time. The debrief will show what might have changed that.", "bad"
-        )
+        if case.uses_rubric:
+            style.banner(
+                (
+                    "Session finished without a full agreement. Review skills "
+                    "and next steps in the debrief."
+                ),
+                "info",
+            )
+        else:
+            style.banner(
+                "No deal this time. The debrief will show what might have changed that.", "bad"
+            )
     outcome_metrics(session, case)
     with st.expander("Debrief: the counterpart's confidential sheet"):
         render_sheet(case, session.counterpart_role_id, title="Their role")
@@ -929,6 +1015,11 @@ def page_feedback() -> None:
     st.session_state["assistant_feedback_session"] = sid
     case = lib[session.case_id][0]
     outcome_metrics(session, case)
+    if case.uses_rubric:
+        from negotrain.app.rubric_views import render_feedback
+
+        render_feedback(session, case, store)
+        return
 
     debrief = store.load_artifact(session.id, "feedback", Debrief)
     if debrief and debrief.counterfactuals and debrief.counterfactuals.reward != "surplus_share":
@@ -1146,6 +1237,11 @@ def page_profile() -> None:
     p = _require_participant()
     hist = history(p.id)
     prof = current_profile(p.id, hist)
+    if prof.skills is not None:
+        from negotrain.app.rubric_views import render_profile
+
+        render_profile(prof, hist)
+        return
     st.caption(
         f"Based on {prof.n_sessions} finished sessions. Estimates use opportunities "
         "and occurrences, with older evidence discounted once per session."
@@ -1351,8 +1447,8 @@ def page_cases() -> None:
 
     st.subheader("Add a case")
     st.caption(
-        "Imported cases are saved to data/cases/private/ (never committed). Review the point "
-        "tables before using a case in the study."
+        "Imported cases are saved privately. Review role visibility, constraints, rubric anchors "
+        "and any supplied scoring tables before using a case in a study."
     )
     paste, upload = st.tabs(["Paste case text (uses Claude)", "Upload JSON"])
     with paste:

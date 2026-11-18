@@ -10,6 +10,8 @@ from pydantic import BaseModel, Field
 
 from negotrain.profiling.belief import BeliefState, BetaBelief, CostModel
 from negotrain.profiling.observations import ERRORS, case_facts, failure_turns, observe
+from negotrain.profiling.skills import SkillProfile, build_skill_profile
+from negotrain.rubrics import case_rubric
 from negotrain.schemas import Case, Session
 
 if TYPE_CHECKING:
@@ -25,6 +27,8 @@ class NegotiatorProfile(BaseModel):
     untagged_user_turns: int = 0
     planning_kappa: float = Field(default=1.0, ge=0)
     calibration_source: str | None = None
+    skills: SkillProfile | None = None
+    active_case: Case | None = Field(default=None, exclude=True)
 
 
 class CaseCalibration(BaseModel):
@@ -57,6 +61,18 @@ def build_profile(
     context: tuple[Case, str] | None = None,
     calibration: CaseCalibration | None = None,
 ) -> NegotiatorProfile:
+    if context and context[0].uses_rubric:
+        case, _ = context
+        skills = build_skill_profile(history, context, forgetting)
+        return NegotiatorProfile(
+            participant_id=participant_id,
+            n_sessions=skills.assessed_sessions,
+            belief=BeliefState(),
+            labels={s.id: s.label for s in case_rubric(case)},
+            skills=skills,
+            active_case=case,
+        )
+    history = [(s, c) for s, c in history if not c.uses_rubric and c.is_scored]
     if calibration:
         if (
             context is None

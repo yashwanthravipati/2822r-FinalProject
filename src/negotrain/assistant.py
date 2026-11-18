@@ -143,9 +143,17 @@ def context_sections(
     profile: dict | None = None,
 ) -> list[ContextSection]:
     role = case.role(role_id)
+
+    def sheet_data(sheet):
+        data = sheet.model_dump()
+        if not case.is_scored:
+            data.pop("points", None)
+            data.pop("reservation_value", None)
+        return json.dumps(data, indent=2)
+
     sections = [
         ContextSection(title="Public case", text=f"{case.title}\n{case.public_brief}"),
-        ContextSection(title="Your role sheet", text=role.model_dump_json(indent=2)),
+        ContextSection(title="Your role sheet", text=sheet_data(role)),
         ContextSection(
             title="Issues and suggestions", text=json.dumps([i.model_dump() for i in case.issues])
         ),
@@ -179,10 +187,19 @@ def context_sections(
             lines.append(f"Your observed behavior ratings: {session.observed_counterpart}")
         sections.append(ContextSection(title="Conversation", text="\n".join(lines)))
     if can_reveal(case, role_id, page, session):
+        if case.uses_rubric:
+            from negotrain.feedback.rubric import rubric_summary
+
+            sections.append(
+                ContextSection(
+                    title="Skill evidence and commitments",
+                    text=json.dumps(rubric_summary(session, case)),
+                )
+            )
         sections.append(
             ContextSection(
                 title="Revealed counterpart sheet",
-                text=case.other_role(role_id).model_dump_json(indent=2),
+                text=sheet_data(case.other_role(role_id)),
             )
         )
         sections.append(

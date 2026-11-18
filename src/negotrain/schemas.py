@@ -14,6 +14,8 @@ from uuid import uuid4
 
 from pydantic import BaseModel, Field, model_validator
 
+from negotrain.rubric_models import Commitment, NegotiationType, SkillAssessment, SkillRubric
+
 Speaker = Literal["user", "counterpart"]
 
 
@@ -44,6 +46,9 @@ class Constraint(BaseModel):
 
     description: str
     hard: bool = True
+    source: str = ""
+    certainty: Literal["stated", "verified", "uncertain"] = "stated"
+    approval_required: str = ""
     disallowed: dict[str, list[str]] = Field(
         default_factory=dict, description="issue_id -> option_ids this role cannot accept"
     )
@@ -55,8 +60,15 @@ class RoleSheet(BaseModel):
     id: str
     name: str
     confidential_brief: str
-    points: dict[str, dict[str, float]] = Field(description="issue_id -> option_id -> points")
-    reservation_value: float = Field(description="Points from walking away (BATNA)")
+    points: dict[str, dict[str, float]] = Field(
+        default_factory=dict, description="Optional supplied point table"
+    )
+    reservation_value: float | None = Field(
+        default=None, description="Supplied BATNA points, if any"
+    )
+    skill_notes: dict[str, str] = Field(
+        default_factory=dict, description="Role-private rubric examples"
+    )
     constraints: list[Constraint] = Field(default_factory=list)
     inferred: bool = Field(
         default=False,
@@ -81,9 +93,32 @@ class Case(BaseModel):
     source: str = Field(default="", description="Provenance / license note")
     source_documents: list[SourceDocument] = Field(default_factory=list)
 
+    framework_version: Literal["legacy", "rubric-v1"] = "legacy"
+    negotiation_type: NegotiationType = "integrative"
+    numeric_scoring: bool = True
+    rubric: list[SkillRubric] = Field(default_factory=list)
+    rubric_reviewed: bool = False
+    outcome_criteria: list[str] = Field(default_factory=list)
+
+    @property
+    def uses_rubric(self) -> bool:
+        return self.framework_version == "rubric-v1"
+
+    @property
+    def is_scored(self) -> bool:
+        return self.numeric_scoring and not (
+            self.uses_rubric and self.negotiation_type == "institutional"
+        )
+
     @model_validator(mode="after")
     def _check_points_cover_issues(self) -> Case:
+        if len({s.id for s in self.rubric}) != len(self.rubric):
+            raise ValueError("rubric skill ids must be unique")
+        if not self.is_scored:
+            return self
         for role in self.roles:
+            if role.reservation_value is None:
+                raise ValueError("numeric scoring requires supplied reservation values")
             for issue in self.issues:
                 table = role.points.get(issue.id)
                 if table is None:
@@ -220,6 +255,8 @@ class Session(BaseModel):
         description="rehearsal = vs the counterpart agent; real = a logged human negotiation",
     )
     notes: str = ""
+    commitments: list[Commitment] = Field(default_factory=list)
+    assessment: SkillAssessment | None = None
     observed_counterpart: dict[str, float] = Field(
         default_factory=dict,
         description="Real sessions: participant's ratings of the other side on the dials (0-1)",
