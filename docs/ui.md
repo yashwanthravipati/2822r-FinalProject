@@ -8,6 +8,9 @@ redesign is T-048; the behaviour underneath is unchanged from T-014/T-045.
 - **Plain language first.** Users see "Difficulty 3 of 5 · Guarded realist", "share of the
   possible gains", "what-if replays". Research detail (rollout counts, intervals, raw
   features, dials, raw JSON) stays one click away in an expander or a "Data"/"Research" tab.
+- **The user decides.** Suggestions are pre-selected, never imposed: the rehearsal setup
+  shows difficulty and who speaks first, pre-set to the plan's suggestion, and Prepare's
+  "Up next" card has a Customize button next to Start.
 - **One primary action per screen.** Primary (green) buttons are for the next step: Start
   rehearsal, Send, Generate feedback, Save. Everything else is secondary or tertiary.
 - **Readable prose.** Case text and briefs render through `st.markdown(style.md(...))` at
@@ -32,7 +35,9 @@ widgets) and the CSS variables at the top of `src/negotrain/app/assets/style.css
 | accent | `#1F5C4A` (tint `#EAF1ED`) | primary buttons, current step, your chat bubbles |
 | good / warn / bad | `#2D6A47` / `#8A5300` / `#A3271F` | outcomes, constraint status, habits |
 
-Type is Inter (400–700), base 16px, page titles 2rem/650, section titles 1.25rem/650.
+Type is Inter (400–700), base 15px (`baseFontSize`; Streamlit scales widgets from it), page
+titles 1.6rem/650, section titles 1.08rem/650. The layout is deliberately dense: a 252px
+sidebar and up to 1400px of content, so a laptop screen shows a whole step at once.
 
 ## Where things live
 

@@ -13,7 +13,7 @@ base = "light"
 font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap, sans-serif"
 headingFont = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap, sans-serif"
 headingFontWeights = [650, 650, 600, 600, 600, 600]
-baseFontSize = 16
+baseFontSize = 15
 primaryColor = "#1F5C4A"
 backgroundColor = "#FBFAF8"
 secondaryBackgroundColor = "#FFFFFF"
@@ -21,8 +21,8 @@ textColor = "#1C1B19"
 linkColor = "#1F5C4A"
 borderColor = "#E0DED7"
 showWidgetBorder = true
-baseRadius = "0.6rem"
-buttonRadius = "0.55rem"
+baseRadius = "0.5rem"
+buttonRadius = "0.5rem"
 metricValueFontWeight = 650
 dataframeHeaderBackgroundColor = "#F4F3EF"
 greenColor = "#2D6A47"

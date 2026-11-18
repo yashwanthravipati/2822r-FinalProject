@@ -520,3 +520,21 @@ def test_inline_sub_bullets_become_nested_lists():
     assert "<ul><li>Selection: 30 points.</li>" in style.list_card_html(
         "Key facts", ["Issues by stake: - Selection: 30 points. - Data: 15."]
     )
+
+
+def test_choosing_a_difficulty_keeps_the_suggested_focus(scenario):
+    at = page("page_rehearse")
+    at.select_slider(key="setup_tier").set_value(4).run()
+    button(at, "Start rehearsal").click().run()
+    assert not at.exception
+    profile = at.session_state["session"].counterpart_profile
+    assert profile.tier == 4 and profile.focus is not None
+
+
+def test_customize_opens_rehearsal_setup_without_starting(scenario):
+    at = page("page_prepare")
+    button(at, "Customize").click().run()
+    assert not at.exception
+    assert at.session_state["preset"].tier == 2  # the warm-up step, ready to adjust
+    assert "session" not in at.session_state
+    assert not SessionStore().all()

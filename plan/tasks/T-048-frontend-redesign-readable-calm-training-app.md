@@ -57,3 +57,9 @@ work (decision 0009 on main). Guide for future UI work: `docs/ui.md`.
   offers stacked and five tabs fit; assistant has no empty fixed-height box; setup shows the
   confirm step first; narrow pages centred; history drops a redundant case column; primary
   hover colour. 173 tests pass offline (4 new regression tests).
+- 2026-11-17: Zoomed out and gave users more control (Yash: "too zoomed in"). Base font
+  15px, smaller headings/stats/cards and tighter spacing, 252px sidebar, content up to
+  1400px. Rehearsal setup now always shows the difficulty slider and opener, pre-set to the
+  suggestion (changing difficulty keeps the suggested focus; the old "choose difficulty"
+  mode silently dropped it); Prepare's Up next card has Customize. Checked at 1440x820 and
+  390x844 on the real-data copy. 175 tests pass offline (2 new).

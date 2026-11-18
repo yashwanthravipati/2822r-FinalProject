@@ -67,7 +67,7 @@ show_rail = (
     and st.session_state.get("show_assistant", True)
 )
 if show_rail:
-    main_column, rail_column = st.columns([2.35, 1], gap="large")
+    main_column, rail_column = st.columns([2.8, 1], gap="large")
     with main_column, st.container(key="main_page"):
         current_page.run()
     with rail_column, st.container(key="assistant_rail"):

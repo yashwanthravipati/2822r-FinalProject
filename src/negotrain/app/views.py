@@ -728,6 +728,16 @@ def _next_up(p: Participant, case: Case, role_id: str, plan, next_index: int) ->
             if st.button("Start rehearsal", key="next_up", type="primary", width="stretch"):
                 start_rehearsal(p, case, role_id, step, counterpart_opens=False)
                 go("rehearse")
+            if st.button(
+                "Customize",
+                key="next_up_custom",
+                icon=":material/tune:",
+                width="stretch",
+                help="Change the difficulty or who speaks first before starting.",
+            ):
+                st.session_state["preset"] = step
+                st.session_state.pop("session", None)
+                go("rehearse")
 
 
 def _render_prep(case: Case, prep: Prep) -> None:
@@ -870,38 +880,40 @@ def _require_participant() -> Participant:
 
 
 def _setup_rehearsal(p: Participant) -> None:
+    """Every choice is visible and pre-set to the suggestion; the user decides."""
     case, role_id = active_scenario()
-    hist = history(p.id)
-    profile = current_profile(p.id, hist)
-    spec = next_scenario(profile, hist, [case.id])
     preset: ScenarioSpec | None = st.session_state.get("preset")
+    if preset is None:
+        hist = history(p.id)
+        preset = next_scenario(current_profile(p.id, hist), hist, [case.id])
     with style.card("start"):
         st.markdown("#### Start a rehearsal")
         st.caption(
-            f"You'll negotiate {case.title} as the {case.role(role_id).name} against "
-            f"{case.other_role(role_id).name}. Tip: the training plan on Prepare starts the "
-            "next session in one click."
+            f"You negotiate {case.title} as the {case.role(role_id).name}, against "
+            f"{case.other_role(role_id).name}."
         )
-        mode = st.segmented_control(
-            "Counterpart",
-            ["Recommended for me", "Choose the difficulty"],
-            default="Recommended for me",
-            key="setup_mode",
-        )
-        if mode == "Choose the difficulty":
+        style.callout(preset.rationale, "accent", title=f"Suggested: {difficulty(preset.tier)}")
+        left, right = st.columns([3, 2], gap="medium")
+        with left:
             tier = st.select_slider(
                 "Difficulty",
                 options=list(TIERS),
-                value=3,
+                value=preset.tier,
                 format_func=lambda t: f"{t} · {DIFFICULTY_NAMES[t]}",
+                key="setup_tier",
+                help="1 is open and cooperative; 5 is hardball. The counterpart's limits are "
+                "enforced in code at every level.",
             )
-            chosen = ScenarioSpec(tier=tier, rationale=f"Chosen by you: difficulty {tier}.")
-        else:
-            chosen = preset or spec
-            style.callout(chosen.rationale, "accent", title=difficulty(chosen.tier))
-        opener = st.segmented_control(
-            "Who speaks first?", ["I do", "They do"], default="I do", key="setup_opener"
-        )
+        with right:
+            opener = st.segmented_control(
+                "Who speaks first?", ["I do", "They do"], default="I do", key="setup_opener"
+            )
+        style.muted("Practice focus: " + focus_callout(preset.focus))
+        chosen = preset
+        if tier != preset.tier:  # keep the suggested focus; only the difficulty changes
+            chosen = preset.model_copy(
+                update={"tier": tier, "rationale": f"{preset.rationale} Difficulty set to {tier}."}
+            )
         if st.button("Start rehearsal", type="primary", icon=":material/play_arrow:"):
             start_rehearsal(p, case, role_id, chosen, counterpart_opens=opener == "They do")
             st.rerun()

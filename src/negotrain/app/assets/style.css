@@ -23,21 +23,23 @@
 }
 
 /* ---------- page frame ---------- */
-.block-container {max-width: 1280px; padding: 2.4rem 2.5rem 5rem;}
+.block-container {max-width: 1400px; padding: 1.5rem 2rem 4rem;}
 [data-testid="stHeader"] {background: transparent;}
 [data-testid="stMain"] p, [data-testid="stMain"] li {line-height: 1.6;}
 h1, h2, h3, h4 {letter-spacing: -0.012em; color: var(--nt-text);}
 [data-testid="stMarkdownContainer"] ul {padding-left: 1.2rem;}
 [data-testid="stCaptionContainer"] {color: var(--nt-text-3);}
-[data-testid="stMain"] h4 {font-size: 1.08rem; font-weight: 650; padding: .2rem 0 .1rem;}
-[data-testid="stMain"] h3 {font-size: 1.3rem; font-weight: 650;}
-.st-key-page_narrow {max-width: 920px; margin: 0 auto;}
+[data-testid="stMain"] h4 {font-size: 1rem; font-weight: 650; padding: .15rem 0 .05rem;}
+[data-testid="stMain"] h3 {font-size: 1.15rem; font-weight: 650;}
+.st-key-page_narrow {max-width: 980px; margin: 0 auto;}
 
 /* ---------- sidebar ---------- */
 [data-testid="stSidebar"] {border-right: 1px solid var(--nt-border);}
+[data-testid="stSidebar"][aria-expanded="true"] {width: 252px !important;
+  min-width: 252px !important; max-width: 252px !important;}
 [data-testid="stSidebarNavLink"] {border-radius: var(--nt-radius-sm); padding: .32rem .6rem;
   margin: 1px 0;}
-[data-testid="stSidebarNavLink"] p {font-size: .94rem; font-weight: 500; color: var(--nt-text-2);}
+[data-testid="stSidebarNavLink"] p {font-size: .92rem; font-weight: 500; color: var(--nt-text-2);}
 [data-testid="stSidebarNavLink"] [data-testid="stIconMaterial"] {color: var(--nt-text-3);}
 [data-testid="stSidebarNavLink"]:hover {background: rgba(28, 27, 25, .045);}
 [data-testid="stSidebarNavLink"][aria-current="page"] {background: var(--nt-surface);
@@ -59,7 +61,7 @@ div[data-testid="stForm"] {border-color: var(--nt-border); border-radius: var(--
   background: var(--nt-surface);}
 [data-testid="stBaseButton-primary"] p, [data-testid="stBaseButton-secondary"] p {font-weight: 550;}
 [data-testid="stVerticalBlock"][class*="st-key-card"] {background: var(--nt-surface);
-  border: 1px solid var(--nt-border); border-radius: var(--nt-radius); padding: 1.15rem 1.3rem;
+  border: 1px solid var(--nt-border); border-radius: var(--nt-radius); padding: .95rem 1.1rem;
   box-shadow: var(--nt-shadow);}
 [data-testid="stVerticalBlock"][class*="st-key-card-accent"] {border-color: var(--nt-accent-line);
   background: linear-gradient(var(--nt-accent-tint), var(--nt-accent-tint)) top / 100% 3px no-repeat,
@@ -68,16 +70,17 @@ div[data-testid="stForm"] {border-color: var(--nt-border); border-radius: var(--
 /* ---------- typography components ---------- */
 .nt-kicker {font-size: .78rem; font-weight: 600; color: var(--nt-text-3); letter-spacing: .02em;
   margin-bottom: .35rem; display: flex; gap: .5rem; align-items: center; flex-wrap: wrap;}
-.nt-header {margin: 0 0 1.6rem;}
-.nt-header h1 {font-size: 2rem; line-height: 1.2; font-weight: 650; margin: 0; padding: 0;}
-.nt-header .nt-sub {color: var(--nt-text-2); font-size: 1.05rem; margin: .45rem 0 0;
+.nt-header {margin: 0 0 1.1rem;}
+.nt-header h1 {font-size: 1.6rem; line-height: 1.2; font-weight: 650; margin: 0; padding: 0;}
+.nt-header .nt-sub {color: var(--nt-text-2); font-size: .97rem; margin: .3rem 0 0;
   max-width: 760px; line-height: 1.55;}
-.nt-section {margin: 1.9rem 0 .8rem;}
-.nt-section h2 {font-size: 1.25rem; font-weight: 650; margin: 0; padding: 0;}
-.nt-section p {color: var(--nt-text-2); margin: .3rem 0 0; font-size: .95rem; max-width: 760px;}
-.nt-lead {font-size: 1.08rem; line-height: 1.7; color: var(--nt-text); max-width: 780px;
-  margin: 0 0 1.2rem;}
-.nt-muted {color: var(--nt-text-3); font-size: .88rem;}
+.nt-section {margin: 1.4rem 0 .6rem;}
+.nt-section h2 {font-size: 1.08rem; font-weight: 650; margin: 0; padding: 0;}
+.nt-section p {color: var(--nt-text-2); margin: .2rem 0 0; font-size: .92rem; max-width: 760px;}
+.nt-lead {font-size: 1rem; line-height: 1.65; color: var(--nt-text); max-width: 780px;
+  margin: 0 0 1rem;}
+.nt-muted, [data-testid="stMarkdownContainer"] p.nt-muted {color: var(--nt-text-3);
+  font-size: .86rem;}
 
 /* steps: Prepare -> Rehearse -> Feedback */
 .nt-steps {display: inline-flex; gap: .35rem; align-items: center;}
@@ -119,26 +122,26 @@ div[data-testid="stForm"] {border-color: var(--nt-border); border-radius: var(--
 .nt-callout.bad b.t {color: var(--nt-bad);}
 
 /* ---------- stats ---------- */
-.nt-stats {display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: .75rem;
-  margin: .3rem 0 1.2rem;}
+.nt-stats {display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .6rem;
+  margin: .2rem 0 1rem;}
 .nt-stat {background: var(--nt-surface); border: 1px solid var(--nt-border);
-  border-radius: var(--nt-radius); padding: .85rem 1rem; box-shadow: var(--nt-shadow);}
+  border-radius: var(--nt-radius); padding: .65rem .85rem; box-shadow: var(--nt-shadow);}
 .nt-stat .l {font-size: .8rem; color: var(--nt-text-2); font-weight: 500;}
-.nt-stat .v {font-size: 1.6rem; font-weight: 650; line-height: 1.25; margin-top: .15rem;
+.nt-stat .v {font-size: 1.3rem; font-weight: 650; line-height: 1.25; margin-top: .1rem;
   font-variant-numeric: tabular-nums; color: var(--nt-text);}
 .nt-stat .n {font-size: .8rem; color: var(--nt-text-3); margin-top: .15rem;}
 .nt-stat .n.good {color: var(--nt-good);} .nt-stat .n.bad {color: var(--nt-bad);}
 .nt-stat .n.warn {color: var(--nt-warn);} .nt-stat .n.accent {color: var(--nt-accent);}
 
 /* ---------- cards with lists ---------- */
-.nt-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: .9rem;
-  margin: .2rem 0 1rem;}
+.nt-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: .7rem;
+  margin: .2rem 0 .9rem;}
 .nt-card {background: var(--nt-surface); border: 1px solid var(--nt-border);
-  border-radius: var(--nt-radius); padding: 1rem 1.15rem; box-shadow: var(--nt-shadow);}
-.nt-card h3 {font-size: .98rem; font-weight: 650; margin: 0 0 .5rem; padding: 0;}
+  border-radius: var(--nt-radius); padding: .8rem 1rem; box-shadow: var(--nt-shadow);}
+.nt-card h3 {font-size: .94rem; font-weight: 650; margin: 0 0 .4rem; padding: 0;}
 .nt-card p {margin: 0; color: var(--nt-text-2); font-size: .94rem;}
 .nt-card ul {margin: 0; padding-left: 1.1rem;}
-.nt-card li {margin: .28rem 0; font-size: .95rem; color: var(--nt-text);}
+.nt-card li {margin: .22rem 0; font-size: .93rem; color: var(--nt-text);}
 .nt-card li ul {margin: .25rem 0 .1rem; padding-left: 1rem; list-style: circle;}
 .nt-card li li {font-size: .92rem; color: var(--nt-text-2); margin: .15rem 0;}
 .nt-grid.one {grid-template-columns: 1fr;}
@@ -160,7 +163,8 @@ div[data-testid="stForm"] {border-color: var(--nt-border); border-radius: var(--
 .nt-howto b {display: block; font-size: .95rem; margin-bottom: .1rem;}
 .nt-howto span {color: var(--nt-text-2); font-size: .9rem; line-height: 1.5;}
 .nt-row-title {font-weight: 650; font-size: 1rem; margin: 0 0 .15rem;}
-.nt-row-text {color: var(--nt-text-2); font-size: .92rem; margin: .2rem 0 0; line-height: 1.5;}
+.nt-row-text, [data-testid="stMarkdownContainer"] p.nt-row-text {color: var(--nt-text-2);
+  font-size: .9rem; margin: .2rem 0 0; line-height: 1.5;}
 .nt-row {display: flex; gap: .85rem; align-items: flex-start;}
 
 /* priorities */
@@ -203,10 +207,10 @@ div[data-testid="stForm"] {border-color: var(--nt-border); border-radius: var(--
 .nt-pts {margin: .3rem 0 .6rem;}
 
 /* ---------- chat ---------- */
-.nt-msg {display: flex; margin: .8rem 0;}
+.nt-msg {display: flex; margin: .6rem 0;}
 .nt-msg.me {justify-content: flex-end;}
 .nt-bubble {max-width: 86%; border: 1px solid var(--nt-border); background: var(--nt-surface);
-  border-radius: 14px; padding: .7rem .95rem .75rem; box-shadow: var(--nt-shadow);}
+  border-radius: 12px; padding: .6rem .85rem .65rem; box-shadow: var(--nt-shadow);}
 .nt-msg.me .nt-bubble {background: var(--nt-accent-tint); border-color: var(--nt-accent-line);}
 .nt-who {font-size: .78rem; font-weight: 650; color: var(--nt-text-2); margin-bottom: .2rem;
   display: flex; gap: .4rem; align-items: baseline;}
@@ -220,7 +224,7 @@ div[data-testid="stForm"] {border-color: var(--nt-border); border-radius: var(--
 .nt-progress .nt-track {flex: 1; max-width: 220px; margin: 0;}
 
 /* ---------- meters (skill estimates) ---------- */
-.nt-meter {padding: .8rem 0; border-top: 1px solid var(--nt-border);}
+.nt-meter {padding: .6rem 0; border-top: 1px solid var(--nt-border);}
 .nt-meter:first-child {border-top: 0; padding-top: .2rem;}
 .nt-meter .top {display: flex; justify-content: space-between; gap: 1rem; align-items: baseline;}
 .nt-meter .lbl {font-weight: 600; font-size: .95rem;}
@@ -249,7 +253,7 @@ details.nt-more div {font-size: .84rem; color: var(--nt-text-3); margin-top: .3r
 
 /* ---------- empty state ---------- */
 .nt-empty {border: 1px dashed var(--nt-border-strong); border-radius: var(--nt-radius);
-  padding: 1.6rem 1.4rem; text-align: center; background: var(--nt-surface); margin: .5rem 0 1rem;}
+  padding: 1.1rem 1.2rem; text-align: center; background: var(--nt-surface); margin: .5rem 0 1rem;}
 .nt-empty b {display: block; font-size: 1rem; margin-bottom: .25rem;}
 .nt-empty span {color: var(--nt-text-2); font-size: .93rem;}
 
@@ -292,7 +296,7 @@ details.nt-more div {font-size: .84rem; color: var(--nt-text-3); margin-top: .3r
 
 /* ---------- rehearsal workspace ---------- */
 .nt-work {margin: 0 0 .5rem;}
-.nt-work-title {font-size: 1.4rem; font-weight: 650; line-height: 1.3; letter-spacing: -0.01em;
+.nt-work-title {font-size: 1.22rem; font-weight: 650; line-height: 1.3; letter-spacing: -0.01em;
   color: var(--nt-text);}
 .nt-work-meta {color: var(--nt-text-2); font-size: .92rem; margin-top: .2rem;}
 /* side panel is narrow: stack issue above term instead of two cramped columns */
